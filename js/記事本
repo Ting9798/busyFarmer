@@ -1,0 +1,15 @@
+導覽列-白
+headerClassName = "whiteTopbar"
+logoImg = "./images/shared/logo-01.png"
+textColor = "brown"
+
+導覽列-綠
+headerClassName = "greenTopbar"
+logoImg = "./images/shared/logo-02.svg"
+textColor = "green"
+
+有箭頭的按鈕
+<ButtonArrow textColor="" btnName="" arrowColor="" />
+textColor="textBrown" "textWhite"
+btnName="關於我們" "查看活動"
+stroke="#514535" "#F1F1F1;"

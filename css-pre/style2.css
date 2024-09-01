@@ -143,11 +143,9 @@ address {
     justify-content: space-between;
     align-items: center;
 
-    /* 動畫 */
-    transition: opacity 0.35s ease-in-out;
 }
 
-.witheTopbar {
+.whiteTopbar {
     /* 背景 */
     background: var(--gradient-w);
 }
@@ -693,7 +691,7 @@ footer {
 @keyframes herologo {
     0% {
         width: 100%;
-        
+
     }
 
     20% {
@@ -848,31 +846,63 @@ footer {
     margin-right: 1.5%;
 }
 
-.farm-details-button-container {
+.buttonArrow-box {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    z-index: 99;
 }
 
-.farm-details-button {
+#news .buttonArrow-box {
+    justify-content: flex-end;
+}
+
+.buttonArrow {
     display: flex;
+    justify-content: center;
     align-items: center;
-    letter-spacing: .5rem;
+    border-radius: 45px;
+
     font-family: var(--GenSenRounded-M);
     font-size: 24px;
+    letter-spacing: .5rem;
     line-height: 3rem;
-    padding: 10px 30px;
-    background-color: var(--white);
+
     transition: all .35s;
-    border-radius: 99px;
     cursor: pointer;
+
+    padding: 10px 30px;
     margin: 3% 0;
 }
 
-.farm-details-button:hover {
+.textBrown {
+    color: var(--text);
+    background-color: var(--white);
+}
+
+.textWhite {
+    color: var(--white);
+    background-color: var(--white-40);
+
+    transform: translate(-100%, 60%);
+}
+
+.buttonArrow-text {
+    padding-right: 5px;
+
+}
+
+#farm-details .buttonArrow:hover {
     background-color: var(--white-80);
     padding: 12px 35px;
+}
+
+#news .buttonArrow:hover {
+    background-color: var(--white-80);
+    padding: 12px 35px;
+    color: var(--text);
+    --arrow-color: #514535;
 }
 
 .farm-details-ornament {
@@ -950,14 +980,14 @@ footer {
     position: absolute;
 }
 
-.news-text-box1 {
+.news-text-content {
     display: inline-block;
     width: 37%;
     margin-bottom: 1%;
 
 }
 
-.news-text-box1 h2 {
+.news-text-content h2 {
     letter-spacing: .2rem;
     color: var(--white);
     font-size: 40px;
@@ -965,45 +995,12 @@ footer {
     font-weight: 500;
 }
 
-.news-text-box1 p {
+.news-text-content p {
     color: var(--white);
     font-family: var(--GenSenRounded-R);
     font-size: 16px;
     letter-spacing: .3rem;
     margin-top: .8rem;
-}
-
-.news-text-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-    padding: 14px 38px;
-    background-color: var(--white-40);
-
-    border-radius: 45px;
-    color: var(--white);
-    transition: 0.5s;
-    margin: 5% 11% 0 0;
-    cursor: pointer;
-
-    font-family: var(--GenSenRounded-M);
-    font-size: 24px;
-    letter-spacing: .2rem;
-
-}
-
-.news-text-btn:hover {
-    background-color: var(--white-80);
-    color: var(--text);
-}
-
-.news-text-btn:hover .farm-details-button-arrow {
-    stroke: var(--text);
-}
-
-.news-text-btn div {
-    margin-right: 10px;
 }
 
 .news-ornament {
