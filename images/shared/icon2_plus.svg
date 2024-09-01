@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <defs>
+    <!-- <style>
+      .cls-1 {
+        fill: currentColor;
+        stroke-width: 0px;
+      }
+    </style> -->
+  </defs>
+  <g id="_圖層_3" data-name="圖層 3">
+    <rect class="cls-1" x="23.25" y="6.45" width="3" height="35" rx="1.5" ry="1.5"/>
+    <rect class="cls-1" x="23.25" y="6.45" width="3" height="35" rx="1.5" ry="1.5" transform="translate(48.7 -.8) rotate(90)"/>
+  </g>
+</svg>

@@ -1,0 +1,187 @@
+.tit-Name {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    font-family: var(--NotoSans);
+    font-weight: 500;
+    font-size: 40px;
+    letter-spacing: .2rem;
+    color: var(--primaryG);
+}
+
+.detailed-introduction {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.introduction-container {
+    width: 90%;
+    height: 100%;
+    display: flex;
+}
+
+.planting-images {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1;
+}
+
+.planting-images img {
+    border-radius: 45px;
+}
+
+.main-product-image {
+    position: relative;
+    width: 100%;
+    height: 56%;
+    margin-bottom: 3%;
+}
+
+.main-product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-gallery {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+}
+
+.thumbnail {
+    margin-right: 2%;
+    width: 40%;
+
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.planting-content {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    flex: 1;
+    margin-left: 3%;
+}
+
+.planting-philosophy {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-title {
+    font-family: var(--GenSenRounded-M);
+    font-size: 24px;
+    letter-spacing: .2rem;
+    width: auto;
+    text-wrap:nowrap;
+    margin: 0;
+}
+
+.description {
+    display: block;
+    width: 80%;
+
+    font-family: var(--GenSenRounded-R);
+    font-size: 16px;
+    letter-spacing: .15rem;
+
+    margin: 1% 0;
+}
+
+.products-gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    margin: 1% 0;
+
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 99px;
+    border: 2px solid var(--primaryO);
+
+    padding-right: 0.5rem;
+}
+
+.product-image {
+    padding: 3%;
+    width: clamp(33px, 4rem, 56px);
+    height: clamp(33px, 4rem, 56px);
+
+}
+
+.product-image img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--primaryO);
+}
+
+.product-name {
+    font-family: var(--GenSenRounded-R);
+    font-size: 14px;
+    letter-spacing: .05rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-details {
+    font-family: var(--GenSenRounded-R);
+    font-size: 14px;
+}
+
+.social-media-links {
+    display: flex;
+    align-items: center;
+}
+
+.social-media-icons {
+    display: flex;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    gap: 1%;
+}
+.social-media-icons a{
+    display: inline-flex;
+    align-items: center;
+}
+.social-media-icons img{
+    width: 3rem;
+    height: auto;
+}
+.pagination {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+}
+.planting-philosophy,
+.agricultural-products,
+.contact-info,
+.social-media-links{
+    padding: 2% 0 3% 0;
+}
