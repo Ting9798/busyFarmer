@@ -9,11 +9,13 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
     <link rel="stylesheet" href="./css-pre/cards.css">
     <link rel="stylesheet" href="./css-pre/style2.css">
+    <link rel="stylesheet" href="./css/style.min.css">
     <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
     <script type="text/babel" src="./js/ButtonArrow.js"></script>
-
 
 </head>
 
@@ -22,8 +24,45 @@
 
     <div id="root"></div>
     <script type="text/babel">
-        const { useState, useEffect } = React;
-        function App() {
+        const { useState, useEffect, useRef } = React;
+        function CooperationCard(props) {
+            const cardInnerStyle = {
+                '--clr': props.cardInnerStyle,
+            };
+            return (
+                <>
+                    <div className="cooperation-card">
+                        <div className="card-inner" style={cardInnerStyle}>
+                            <div className="box">
+                                <div className="imgBox">
+                                    <img src={props.cooperationImg} alt={props.cooperationAlt} />
+                                </div>
+                                <div className="icon">
+                                    <a href="./planting.html" className="iconBox">
+                                        <span className="material-symbols-outlined">{props.cooperationItem}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="content">
+                            <h3>{props.cooperationTitle}</h3>
+                            <p>{props.cooperationDetail}</p>
+                        </div>
+                    </div>
+                </>
+            )
+        }
+        function App(props) {
+
+            const mountain1Ref = useRef(null);
+            const mountain2Ref = useRef(null);
+            const ornamentRef = useRef(null);
+            const [initialPosition, setInitialPosition] = useState({
+                mountain1: 0,
+                mountain2: 0,
+                ornament: 0,
+            });
+
             const [navProps, setNavProps] = useState({
                 headerClassName: 'whiteTopbar',
                 logoImg: './images/shared/logo-01.png',
@@ -31,6 +70,59 @@
             });
 
             useEffect(() => {
+                // 获取初始位置
+                const getInitialPosition = (ref) => {
+                    if (ref.current) {
+                        return ref.current.getBoundingClientRect().top + window.scrollY;
+                    }
+                    return 0;
+                };
+
+                // 设置初始位置
+                setInitialPosition({
+                    mountain1: getInitialPosition(mountain1Ref),
+                    mountain2: getInitialPosition(mountain2Ref),
+                    ornament: getInitialPosition(ornamentRef),
+                });
+
+                // 创建 basicScroll 实例
+                const scrollEffectMountain1 = basicScroll.create({
+                    elem: mountain1Ref.current,
+                    from: 0,
+                    to: 519, // 根据需要调整
+                    props: {
+                        '--translateY-1': {
+                            from: 50,
+                           to: `${100 * parseFloat(mountain1Ref.current.getAttribute('data-modifier'))}%`
+                        }
+                    }
+                }).start();
+
+                const scrollEffectMountain2 = basicScroll.create({
+                    elem: mountain2Ref.current,
+                    from: 0,
+                    to: 519, // 根据需要调整
+                    props: {
+                        '--translateY-2': {
+                            from: -30,
+                            to: `${0 * parseFloat(mountain2Ref.current.getAttribute('data-modifier'))}%`
+                        }
+                    }
+                }).start();
+
+                const scrollEffectOrnament = basicScroll.create({
+                    elem: ornamentRef.current,
+                    from: 0,
+                    to: 519, // 根据需要调整
+                    props: {
+                        '--translateY-3': {
+                            from: 0,
+                            to: `${30 * parseFloat(ornamentRef.current.getAttribute('data-modifier'))}%`
+                        }
+                    }
+                }).start();
+
+                // 滚动事件处理
                 const handleScroll = () => {
                     const anchor = document.getElementById('anchor');
                     const offset = window.innerHeight * 1;
@@ -56,9 +148,12 @@
 
                 window.addEventListener('scroll', handleScroll);
 
-                // 清理事件監聽
+                // 清理事件监听和 basicScroll 实例
                 return () => {
                     window.removeEventListener('scroll', handleScroll);
+                    scrollEffectMountain1.stop();
+                    scrollEffectMountain2.stop();
+                    scrollEffectOrnament.stop();
                 };
             }, []);
 
@@ -70,31 +165,249 @@
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
+                    <main>
+                        <section id="hero">
+                            <div className="heroBg"></div>
+                            <figure className="mountain-1" ref={mountain1Ref} data-modifier="1" ><img src="./images/index/mountain-1.png" /></figure>
+                            <div className="heroLogo"><img src="./images/index/LOGO.svg" /></div>
+                            <div className="ornament" ref={ornamentRef} data-modifier="1">
+                                <div className="ornament-left-box">
+                                    <img className="ornament-left" src="./images/index/banner/banner-l-1.png" />
+                                    <img className="ornament-left" src="./images/index/banner/banner-l-2.png" />
+                                    <div className="ornament-left">
+                                        <img src="./images/index/banner/banner-l-3.png" />
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="5" strokeLinecap="round" />
+                                        </svg>
+                                    </div>
+                                    <img className="ornament-left" src="./images/index/banner/banner-l-4.png" />
+                                    <img className="ornament-left" src="./images/index/banner/banner-l-5.png" />
+                                    <div className="ornament-left">
+                                        <img src="./images/index/seed-twin-green.svg" />
+                                        <img src="./images/index/banner/banner-l-6.png" />
+                                    </div>
+                                    <div className="ornament-left">
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
+                                        </svg>
+                                        <img src="./images/index/banner/banner-l-7.png" />
+                                    </div>
+                                    <div className="ornament-left">
+                                        <img src="./images/index/banner/banner-l-8.png" />
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="13" strokeLinecap="round" />
+                                        </svg>
+                                    </div>
+                                    <div className="ornament-left"><img src="./images/index/cloud.svg" /></div>
+                                    <div className="ornament-left"><img src="./images/index/cloud.svg" /></div>
+                                </div>
+                                <div className="ornament-right-box">
+                                    <img className="ornament-right" src="./images/index/banner/banner-r-1.png" />
+                                    <div className="ornament-right">
+                                        <img src="./images/index/banner/banner-r-2.png" />
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
+                                        </svg>
+                                    </div>
+                                    <img className="ornament-right" src="./images/index/banner/banner-r-3.png" />
+                                    <img className="ornament-right" src="./images/index/banner/banner-r-4.png" />
+                                    <div className="ornament-right">
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="10" strokeLinecap="round" />
+                                        </svg>
+                                        <img src="./images/index/banner/banner-r-5.png" />
+                                    </div>
+                                    <div className="ornament-right">
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
+                                        </svg>
+                                        <img src="./images/index/banner/banner-r-6.png" />
+                                    </div>
+                                    <img className="ornament-right" src="./images/index/banner/banner-r-7.png" />
+                                    <div className="ornament-right"><img src="./images/index/banner/banner-r-8.png" /></div>
+                                    <div className="ornament-right">
+                                        <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                                stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
+                                        </svg>
+                                        <img src="./images/index/banner/banner-r-9.png" />
+                                        <img src="./images/index/seed-twin-green.svg" />
 
-                    <section id="hero">
-                        <div className="heroBg"></div>
-                        <figure className="mountain-1" data-modifier="1"><img src="./images/index/mountain-1.png" /></figure>
-                        <div className="heroLogo"><img src="./images/index/LOGO.svg" /></div>
-                        <div className="ornament" data-modifier="1">
-                            <div className="ornament-left-box">
-                                <img className="ornament-left" src="./images/index/banner/banner-l-1.png" />
-                                <img className="ornament-left" src="./images/index/banner/banner-l-2.png" />
-                                <div className="ornament-left">
-                                    <img src="./images/index/banner/banner-l-3.png" />
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="5" strokeLinecap="round" />
-                                    </svg>
+                                    </div>
+                                    <div className="ornament-right"><img src="./images/index/cloud.svg" /></div>
+
                                 </div>
-                                <img className="ornament-left" src="./images/index/banner/banner-l-4.png" />
-                                <img className="ornament-left" src="./images/index/banner/banner-l-5.png" />
-                                <div className="ornament-left">
-                                    <img src="./images/index/seed-twin-green.svg" />
-                                    <img src="./images/index/banner/banner-l-6.png" />
+                            </div>
+                            <div className="mountain-2" ref={mountain2Ref} data-modifier="1"><img src="./images/index/mountain-2.png" /></div>
+                        </section>
+
+                        <section id="farm-details">
+                            <div className="farm-details-header">
+                                <figure><img src="./images/index/seed-triplets-orange.svg" alt="" /></figure>
+                                <h3>小農與我們</h3>
+                            </div>
+                            <div className="farm-details-content">
+                                <div className="farm-details-group">
+                                    <div className="farm-details-item">
+                                        <figure><img src="./images/index/about_item-1.svg" alt="" /></figure>
+                                        <div className="farm-details-item-text">
+                                            <div className="farm-details-item-text-box">
+                                                <div className="farm-details-item-icon"></div>
+                                                <h2>積極公平貿易</h2>
+                                            </div>
+                                            <p>合理的價格、積極的合作，蒐購小農產水果</p>
+                                        </div>
+                                    </div>
+                                    <div className="farm-details-item">
+                                        <figure><img src="./images/index/about_item-3.svg" alt="" /></figure>
+                                        <div className="farm-details-item-text">
+                                            <div className="farm-details-item-text-box">
+                                                <div className="farm-details-item-icon"></div>
+                                                <h2>重新轉化新生</h2>
+                                            </div>
+                                            <p>加工生產過剩、賣相不佳的水果，延續二次生命</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="ornament-left">
+                                <div className="farm-details-group">
+                                    <div className="farm-details-item">
+                                        <figure><img src="./images/index/about_item-2.svg" alt="" /></figure>
+                                        <div className="farm-details-item-text">
+                                            <div className="farm-details-item-text-box">
+                                                <div className="farm-details-item-icon"></div>
+                                                <h2>平台實質回饋</h2>
+                                            </div>
+                                            <p>建立公平貿易平台，讓消費者的支持直接回饋小農</p>
+                                        </div>
+                                    </div>
+                                    <div className="farm-details-item">
+                                        <figure><img src="./images/index/about_item-4.svg" alt="" /></figure>
+                                        <div className="farm-details-item-text">
+                                            <div className="farm-details-item-text-box">
+                                                <div className="farm-details-item-icon"></div>
+                                                <h2>多元蓬勃發展</h2>
+                                            </div>
+                                            <p>協助農場多管道經營，發展精緻型觀光休閒體驗</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ButtonArrow textColor="arrowBtnWhite" btnName="關於我們" arrowColor="#514535" />
+                            <div className="farm-details-ornament">
+                                <img src="./images/index/about_picture-lift.png" />
+                                <img src="./images/index/about_picture-right.png" />
+                            </div>
+                        </section>
+
+
+                        <section id="news">
+                            {/* 換導覽列錨點 */}
+                            <div id="anchor"></div>
+                            <div className="news-text">
+                                <div className="news-text-box">
+                                    <div className="news-text-content">
+                                        <h2>在欉紅的美味</h2>
+                                        <h2>你還沒嚐過嗎？</h2>
+                                        <p>親自採摘水果，品嚐果乾茶，參與果醋、果酒製作，體驗小農生活的美好享受這段獨特的農場體驗！</p>
+                                    </div>
+
+                                    <ButtonArrow textColor="arrowBtnlight" btnName="查看活動" arrowColor="#F1F1F1" />
+                                </div>
+
+                            </div>
+                            <div className="news-ornament">
+                                <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                                <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
+                                </svg>
+                                <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
+                                </svg>
+                                <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                        </section>
+
+                        {/* 合作的小農 */}
+                        <section id="cooperation">
+                            {/* 標題 */}
+                            <div className="cooperation-tit">
+                                <svg width="114" height="84" viewBox="0 0 114 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.96652 8.0543C8.75088 3.9861 13.8378 1.46292 19.2834 0.953061C24.7289 0.443207 30.1632 1.98131 34.5775 5.28187C42.6592 11.3966 46.9538 31.2273 39.1699 61.1788C36.1254 72.8813 26.195 73.8465 20.4617 66.1875C8.36051 50.0326 -8.2611 22.4191 4.96652 8.0543Z"
+                                        fill="#EB9B28" />
+                                    <path
+                                        d="M95.0273 24.1187C100.405 25.2039 105.202 28.2659 108.529 32.7357C111.855 37.2055 113.484 42.779 113.113 48.4207C112.382 58.7876 98.3082 73.3067 69.4288 82.7988C58.1523 86.5049 52.0577 78.3745 55.3187 69.2171C62.1935 49.8833 76.1076 20.3924 95.0273 24.1187Z"
+                                        fill="#EB9B28" />
+                                </svg>
+                                合作的小農
+                                <svg width="68" height="55" viewBox="0 0 68 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.284324 18.5141C0.337761 18.0112 0.535279 17.5339 0.853186 17.1395C1.17109 16.7451 1.59588 16.4504 2.07656 16.2907L2.53909 16.1329L46.9781 0.99896C47.8654 0.70845 48.8302 0.777156 49.6651 1.19028C50.4999 1.6034 51.1381 2.32793 51.4422 3.20797L67.3387 48.1987L67.5846 48.8648C67.6625 49.0823 67.7035 49.3114 67.7059 49.5426C67.7117 50.1005 67.5416 50.6465 67.2197 51.1034C66.8977 51.5602 66.4402 51.9046 65.9122 52.0878L65.6222 52.1675C39.4042 59.5158 11.4273 45.7365 0.699852 20.2446L0.468512 19.6907C0.327911 19.3541 0.262442 18.9907 0.27663 18.6258L0.284324 18.5141ZM50.287 44.1617C50.3023 44.3313 50.7231 48.5434 55.0546 48.1662C59.3451 47.7926 58.2831 44.2838 58.2199 44.0818L58.2084 44.0661L54.058 20.5573C53.6165 18.0479 49.9475 18.3257 49.9796 20.8672L50.2749 44.1584L50.287 44.1617ZM37.5832 46.0372C45.1217 47.2851 44.924 39.6479 44.924 39.6479L46.4461 19.1727C46.6789 16.0515 42.4375 14.8438 41.1051 17.6491L32.3352 36.1236C30.3441 40.0114 30.0425 44.7861 37.5832 46.0372ZM17.589 34.4463C22.7817 38.3277 26.0054 32.4334 26.0054 32.4334L37.3567 16.2589C39.4811 13.2306 35.6933 9.4609 32.7076 11.63C25.4248 16.9257 18.0238 22.2549 16.0708 23.4823C11.9241 26.0842 12.3964 30.5648 17.589 34.4463Z"
+                                        fill="#EB9B28" />
+                                </svg>
+                            </div>
+                            {/* 內容 */}
+                            <div className="cooperation-container">
+                                <CooperationCard
+                                    cooperationImg="./images/index/farmer-BeiTouJhongJia.png"
+                                    cooperationAlt="北投鍾家"
+                                    cooperationItem="蘋果"
+                                    cooperationTitle="北投鍾家"
+                                    cooperationDetail="北投「高山蜜蘋果」鮮少人知，鍾家阿姐利用北投高山地區日夜溫差大的氣候特質，讓蘋果甜度增加，是既甜又多汁的品種，而且皮薄、肉質細緻。"
+                                />
+                                <CooperationCard
+                                    cooperationImg="./images/index/farmer-JhangMeiAYi.png"
+                                    cooperationAlt="張美阿姨"
+                                    cooperationItem="橘子"
+                                    cooperationTitle="張美阿姨"
+                                    cooperationDetail="呵護加上南投清新的氣候和豐富的土壤，造就了皮薄多汁、果肉香甜中帶有橘子特有的微酸，襯托出不同層次的口感與風味！"
+                                />
+                                <CooperationCard
+                                    cooperationImg="./images/index/farmer-SiangGuaSiang.png"
+                                    cooperationAlt="香瓜ㄉ鄉"
+                                    cooperationItem="香瓜"
+                                    cooperationTitle="香瓜ㄉ鄉"
+                                    cooperationDetail="高雄美濃地區在濁水溪的灌溉下，造就了營養的黑土土壤，與得天獨厚的氣候環境，讓香瓜香甜多汁、富有維他命Ｃ與多種營養，酸甜可口。"
+                                />
+                            </div>
+                            <div className="cooperation-ornament-box">
+                                <div className="cooperation-ornament">
                                     <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -103,194 +416,15 @@
                                     </svg>
                                     <img src="./images/index/banner/banner-l-7.png" />
                                 </div>
-                                <div className="ornament-left">
-                                    <img src="./images/index/banner/banner-l-8.png" />
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="13" strokeLinecap="round" />
-                                    </svg>
-                                </div>
-                                <div className="ornament-left"><img src="./images/index/cloud.svg" /></div>
-                                <div className="ornament-left"><img src="./images/index/cloud.svg" /></div>
-                            </div>
-                            <div className="ornament-right-box">
-                                <img className="ornament-right" src="./images/index/banner/banner-r-1.png" />
-                                <div className="ornament-right">
-                                    <img src="./images/index/banner/banner-r-2.png" />
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
-                                    </svg>
-                                </div>
-                                <img className="ornament-right" src="./images/index/banner/banner-r-3.png" />
-                                <img className="ornament-right" src="./images/index/banner/banner-r-4.png" />
-                                <div className="ornament-right">
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="10" strokeLinecap="round" />
-                                    </svg>
-                                    <img src="./images/index/banner/banner-r-5.png" />
-                                </div>
-                                <div className="ornament-right">
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
-                                    </svg>
-                                    <img src="./images/index/banner/banner-r-6.png" />
-                                </div>
-                                <img className="ornament-right" src="./images/index/banner/banner-r-7.png" />
-                                <div className="ornament-right"><img src="./images/index/banner/banner-r-8.png" /></div>
-                                <div className="ornament-right">
-                                    <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                            stroke="#6C8C42" strokeWidth="8" strokeLinecap="round" />
-                                    </svg>
-                                    <img src="./images/index/banner/banner-r-9.png" />
-                                    <img src="./images/index/seed-twin-green.svg" />
 
-                                </div>
-                                <div className="ornament-right"><img src="./images/index/cloud.svg" /></div>
-
-                            </div>
-                        </div>
-                        <div className="mountain-2" data-modifier="1"><img src="./images/index/mountain-2.png" /></div>
-                    </section>
-
-                    <section id="farm-details">
-                        <div className="farm-details-header">
-                            <figure><img src="./images/index/seed-triplets-orange.svg" alt="" /></figure>
-                            <h3>小農與我們</h3>
-                        </div>
-                        <div className="farm-details-content">
-                            <div className="farm-details-group">
-                                <div className="farm-details-item">
-                                    <figure><img src="./images/index/about_item-1.svg" alt="" /></figure>
-                                    <div className="farm-details-item-text">
-                                        <div className="farm-details-item-text-box">
-                                            <div className="farm-details-item-icon"></div>
-                                            <h2>積極公平貿易</h2>
-                                        </div>
-                                        <p>合理的價格、積極的合作，蒐購小農產水果</p>
-                                    </div>
-                                </div>
-                                <div className="farm-details-item">
-                                    <figure><img src="./images/index/about_item-3.svg" alt="" /></figure>
-                                    <div className="farm-details-item-text">
-                                        <div className="farm-details-item-text-box">
-                                            <div className="farm-details-item-icon"></div>
-                                            <h2>重新轉化新生</h2>
-                                        </div>
-                                        <p>加工生產過剩、賣相不佳的水果，延續二次生命</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="farm-details-group">
-                                <div className="farm-details-item">
-                                    <figure><img src="./images/index/about_item-2.svg" alt="" /></figure>
-                                    <div className="farm-details-item-text">
-                                        <div className="farm-details-item-text-box">
-                                            <div className="farm-details-item-icon"></div>
-                                            <h2>平台實質回饋</h2>
-                                        </div>
-                                        <p>建立公平貿易平台，讓消費者的支持直接回饋小農</p>
-                                    </div>
-                                </div>
-                                <div className="farm-details-item">
-                                    <figure><img src="./images/index/about_item-4.svg" alt="" /></figure>
-                                    <div className="farm-details-item-text">
-                                        <div className="farm-details-item-text-box">
-                                            <div className="farm-details-item-icon"></div>
-                                            <h2>多元蓬勃發展</h2>
-                                        </div>
-                                        <p>協助農場多管道經營，發展精緻型觀光休閒體驗</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <ButtonArrow textColor="textBrown" btnName="關於我們" arrowColor="#514535" />
-                        <div className="farm-details-ornament">
-                            <img src="./images/index/about_picture-lift.png" />
-                            <img src="./images/index/about_picture-right.png" />
-                        </div>
-                    </section>
-
-
-                    <section id="news">
-                        {/* 換導覽列錨點 */}
-                        <div id="anchor"></div>
-                        <div className="news-text">
-                            <div className="news-text-box">
-                                <div className="news-text-content">
-                                    <h2>在欉紅的美味</h2>
-                                    <h2>你還沒嚐過嗎？</h2>
-                                    <p>親自採摘水果，品嚐果乾茶，參與果醋、果酒製作，體驗小農生活的美好享受這段獨特的農場體驗！</p>
-                                </div>
-
-                                <ButtonArrow textColor="textWhite" btnName="查看活動" arrowColor="#F1F1F1" />
+                                <img className="cooperation-ornament" src="./images/index/cooperation-tree.svg" />
                             </div>
 
-                        </div>
-                        <div className="news-ornament">
-                            <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                    stroke="#F1F1F1" strokeWidth="2" strokeLinecap="round" />
-                            </svg>
-                            <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                    stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
-                            </svg>
-                            <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                    stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
-                            </svg>
-                            <svg data-ornament-left width="119" height="107" viewBox="0 0 119 107" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
-                                    stroke="#F1F1F1" strokeWidth="3" strokeLinecap="round" />
-                            </svg>
-                        </div>
-                    </section>
-
-                    {/* 合作的小農 */}
-                    <section id="cooperation">
-                        {/* 標題 */}
-                        <div className="cooperation-tit">
-                            <svg width="114" height="84" viewBox="0 0 114 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4.96652 8.0543C8.75088 3.9861 13.8378 1.46292 19.2834 0.953061C24.7289 0.443207 30.1632 1.98131 34.5775 5.28187C42.6592 11.3966 46.9538 31.2273 39.1699 61.1788C36.1254 72.8813 26.195 73.8465 20.4617 66.1875C8.36051 50.0326 -8.2611 22.4191 4.96652 8.0543Z"
-                                    fill="#EB9B28" />
-                                <path
-                                    d="M95.0273 24.1187C100.405 25.2039 105.202 28.2659 108.529 32.7357C111.855 37.2055 113.484 42.779 113.113 48.4207C112.382 58.7876 98.3082 73.3067 69.4288 82.7988C58.1523 86.5049 52.0577 78.3745 55.3187 69.2171C62.1935 49.8833 76.1076 20.3924 95.0273 24.1187Z"
-                                    fill="#EB9B28" />
-                            </svg>
-
-                            合作的小農
-                            <svg width="68" height="55" viewBox="0 0 68 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.284324 18.5141C0.337761 18.0112 0.535279 17.5339 0.853186 17.1395C1.17109 16.7451 1.59588 16.4504 2.07656 16.2907L2.53909 16.1329L46.9781 0.99896C47.8654 0.70845 48.8302 0.777156 49.6651 1.19028C50.4999 1.6034 51.1381 2.32793 51.4422 3.20797L67.3387 48.1987L67.5846 48.8648C67.6625 49.0823 67.7035 49.3114 67.7059 49.5426C67.7117 50.1005 67.5416 50.6465 67.2197 51.1034C66.8977 51.5602 66.4402 51.9046 65.9122 52.0878L65.6222 52.1675C39.4042 59.5158 11.4273 45.7365 0.699852 20.2446L0.468512 19.6907C0.327911 19.3541 0.262442 18.9907 0.27663 18.6258L0.284324 18.5141ZM50.287 44.1617C50.3023 44.3313 50.7231 48.5434 55.0546 48.1662C59.3451 47.7926 58.2831 44.2838 58.2199 44.0818L58.2084 44.0661L54.058 20.5573C53.6165 18.0479 49.9475 18.3257 49.9796 20.8672L50.2749 44.1584L50.287 44.1617ZM37.5832 46.0372C45.1217 47.2851 44.924 39.6479 44.924 39.6479L46.4461 19.1727C46.6789 16.0515 42.4375 14.8438 41.1051 17.6491L32.3352 36.1236C30.3441 40.0114 30.0425 44.7861 37.5832 46.0372ZM17.589 34.4463C22.7817 38.3277 26.0054 32.4334 26.0054 32.4334L37.3567 16.2589C39.4811 13.2306 35.6933 9.4609 32.7076 11.63C25.4248 16.9257 18.0238 22.2549 16.0708 23.4823C11.9241 26.0842 12.3964 30.5648 17.589 34.4463Z"
-                                    fill="#EB9B28" />
-                            </svg>
-                        </div>
-
-                        
-                    </section>
+                            {/* 按鈕 */}
+                            <ButtonArrow textColor="arrowBtnOrange" btnName="認識更多" arrowColor="#F1F1F1" />
+                        </section>
+                        <Footer />
+                    </main>
                 </>
             )
         }
@@ -299,7 +433,6 @@
             .render(<App />);
     </script>
     <script src="https://s.electerious.com/basicScroll/dist/basicScroll.min.js"></script>
-    <script src="./busyJs.js"></script>
 </body>
 
 </html>

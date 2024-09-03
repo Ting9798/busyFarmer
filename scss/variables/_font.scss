@@ -1,0 +1,35 @@
+// map-get( $font-family ,  );
+$NotoSans: 'Noto Sans TC', 'sans-serif';
+$GenSenRounded-L: 'GenSenRounded TW-L', sans-serif;
+$GenSenRounded-M: 'GenSenRounded TW-M', sans-serif;
+$GenSenRounded-R: 'GenSenRounded TW-R', sans-serif;
+
+$font-size: (
+    // map-get( $font-size ,  );
+    //40px
+    xxl:2.5rem,
+    //36px
+    xl: 2.3rem,
+    //32px
+    lg:2rem,
+    //28px
+    m: 1.8rem,
+    //24px
+    s: 1.5rem,
+    //16px
+    xs:1rem,
+    //14px
+    xxs:0.9rem,
+    //12.8px
+    xxxs: 0.8rem
+);
+
+$letter-spacing: (
+    // map-get( $letter-spacing ,  );
+    m:.2rem,
+    s:.1rem
+);
+
+$translateY-1: 50%;
+$translateY-2: -30%;
+$translateY-3: 0%;

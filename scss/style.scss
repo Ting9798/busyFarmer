@@ -1,0 +1,25 @@
+@use 'reset';
+@use 'variables' as *;
+@use 'Nav';
+@use 'Footer';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+
+@font-face {
+    font-family: 'GenSenRounded TW-L';
+    src: url(../webfonts/GenSenRounded2-L.ttc);
+}
+
+@font-face {
+    font-family: 'GenSenRounded TW-M';
+    src: url(../webfonts/GenSenRounded2-M.ttc);
+}
+
+@font-face {
+    font-family: 'GenSenRounded TW-R';
+    src: url(../webfonts/GenSenRounded2-R.ttc);
+}
+
+body.fixed {
+    position: fixed;
+    width: 100%;
+}

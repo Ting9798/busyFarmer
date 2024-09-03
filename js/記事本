@@ -13,3 +13,22 @@ textColor = "green"
 textColor="textBrown" "textWhite"
 btnName="關於我們" "查看活動"
 stroke="#514535" "#F1F1F1;"
+
+codepen
+cooperationImg="./images/index/farmer-BeiTouJhongJia.png"
+cooperationAlt="北投鍾家"
+cooperationItem="蘋果"
+cooperationTitle="北投鍾家"
+cooperationDetail="北投「高山蜜蘋果」鮮少人知，鍾家阿姐利用北投高山地區日夜溫差大的氣候特質，讓蘋果甜度增加，是既甜又多汁的品種，而且皮薄、肉質細緻。"
+
+cooperationImg="./images/index/farmer-JhangMeiAYi.png"
+cooperationAlt="張美阿姨"
+cooperationItem="橘子"
+cooperationTitle="張美阿姨"
+cooperationDetail="呵護加上南投清新的氣候和豐富的土壤，造就了皮薄多汁、果肉香甜中帶有橘子特有的微酸，襯托出不同層次的口感與風味！"
+
+cooperationImg="./images/index/farmer-SiangGuaSiang.png"
+cooperationAlt="香瓜ㄉ鄉"
+cooperationItem="香瓜"
+cooperationTitle="香瓜ㄉ鄉"
+cooperationDetail="高雄美濃地區在濁水溪的灌溉下，造就了營養的黑土土壤，與得天獨厚的氣候環境，讓香瓜香甜多汁、富有維他命Ｃ與多種營養，酸甜可口。"

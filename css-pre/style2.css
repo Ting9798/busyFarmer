@@ -104,7 +104,7 @@ address {
     /* 輔助 */
     --text: #514535;
     --white: #F1F1F1;
-    --red: rgb(235, 99, 40);
+    --red: #eb6328;
     --grey: #B1AAA1;
 
     /* 有透明度 */
@@ -129,211 +129,8 @@ address {
     --translateY-2: -30%;
     --translateY-3: 0%;
 
-}
-
-/* 導覽列*/
-.topbar {
-    /* 固定導覽列 */
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    top: 0;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-}
-
-.whiteTopbar {
-    /* 背景 */
-    background: var(--gradient-w);
-}
-
-.greenTopbar {
-    background: var(--gradient-g);
-}
-
-.logo {
-    width: 240px;
-    height: 100%;
-}
-
-.nav-content {
-    display: flex;
-}
-
-.hidden {
-    opacity: 0;
-    /* display: none; */
-}
-
-#anchor {
-    position: absolute;
-    top: 0;
-}
-
-/* 導覽列按鈕 */
-.nav-links {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.nav-links li {
-    padding: 10px;
-}
-
-.nav-links.brown a {
-    color: var(--text);
-}
-
-.nav-links.green a {
-    color: var(--white);
-}
-
-/* 小農商城按鈕 */
-.shopping-btn {
-    background-color: var(--primaryO);
-    border-radius: 0 0 0 45px;
-    padding: 10px 35px 10px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    /* 防止按鈕縮小 */
-    margin-left: 20px;
-    /* 在按鈕和鏈接之間添加間距 */
-}
-
-.shopping-btn a {
-    color: var(--white);
-    /* 按鈕文字顏色 */
-}
-
-.shopping-txt {
-    display: flex;
-    align-items: center;
-}
-
-.shopping-txt img {
-    width: 54px;
-    /* 調整圖片大小 */
-    margin-right: 10px;
-    /* 調整圖片和文字間的間距 */
-}
-
-.shopping-txt {
-    padding-left: 15px;
-}
-
-main {
-    flex: 1;
-    display: block;
-}
-
-/* footer */
-footer {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    bottom: 0;
-
-}
-
-.footer-pre {
-    position: absolute;
-    z-index: 100;
-    bottom: 0;
-    filter: var(--shadow);
-}
-
-.footer-back {
-    position: absolute;
-    z-index: 99;
-    bottom: 0;
-    filter: var(--shadow);
-}
-
-/* footer 資訊區*/
-#footer-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 101;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-
-
-    font-family: var(--GenSenRounded-L);
-    font-size: 16px;
-    letter-spacing: .1em;
-}
-
-.footer-content-box {
-    width: 50%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.footer-contact {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 60px;
-}
-
-.footer-map {
-    width: 100%;
-    height: auto;
-
-    display: flex;
-    justify-content: space-between;
-
-    margin-bottom: 60px;
-
-    font-family: var(--GenSenRounded-R);
-    font-size: 24px;
-    letter-spacing: .1em;
-}
-
-.copyright {
-    width: 100%;
-    height: auto;
-    margin-bottom: 60px;
-    display: flex;
-    justify-content: center;
-}
-
-.footer-contact-box {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.company {
-    margin-left: 40px;
-}
-
-.media {
-    display: flex;
-}
-
-.information {
-    display: flex;
-    flex-direction: column;
-}
-
-.media img {
-    padding: 0 15px 15px 0;
+    /* codepen */
+    --clr: #fff;
 }
 
 /* 搜尋 */
@@ -503,6 +300,7 @@ footer {
     &:nth-child(1) {
         width: 21%;
         transform: translateY(34%);
+        animation: rotateFruit1 2s ease-in-out 4;
     }
 
     &:nth-child(2) {
@@ -513,6 +311,7 @@ footer {
     &:nth-child(3) {
         width: 16%;
         transform: translateX(320%) translateY(25%);
+        animation: rotateFruit2 2s ease-in-out 4;
     }
 
     &:nth-child(3) svg {
@@ -557,6 +356,8 @@ footer {
     &:nth-child(8) {
         width: 22%;
         transform: translateX(95%) translateY(196%);
+        animation: rotateFruit3 2s ease-in-out 4;
+
     }
 
     &:nth-child(8) svg {
@@ -599,6 +400,7 @@ footer {
     &:nth-child(2) {
         width: 20%;
         transform: translateX(305%) translateY(68%);
+        animation: rotateFruit4 2s ease-in-out 4;
     }
 
     &:nth-child(2) svg {
@@ -615,6 +417,7 @@ footer {
     &:nth-child(4) {
         width: 18%;
         transform: translateY(226%) translateX(164%);
+        animation: rotateFruit5 2s ease-in-out 4;
 
     }
 
@@ -648,10 +451,12 @@ footer {
     &:nth-child(8) {
         width: 16%;
         transform: translateX(395%) translateY(411%);
+        
     }
 
     &:nth-child(9) {
         width: 30%;
+        animation: rotateFruit6 2s ease-in-out 4;
         transform: translateY(132%) translateX(99%);
     }
 
@@ -876,16 +681,21 @@ footer {
     margin: 3% 0;
 }
 
-.textBrown {
+.arrowBtnWhite {
     color: var(--text);
     background-color: var(--white);
 }
 
-.textWhite {
+.arrowBtnlight {
     color: var(--white);
     background-color: var(--white-40);
 
     transform: translate(-100%, 60%);
+}
+
+.arrowBtnOrange {
+    color: var(--white);
+    background-color: var(--primaryO);
 }
 
 .buttonArrow-text {
@@ -893,14 +703,18 @@ footer {
 
 }
 
-#farm-details .buttonArrow:hover {
+.buttonArrow:hover {
     background-color: var(--white-80);
     padding: 12px 35px;
 }
 
+#cooperation .buttonArrow:hover {
+    background-color: var(--red);
+    color: var(--white);
+}
+
 #news .buttonArrow:hover {
     background-color: var(--white-80);
-    padding: 12px 35px;
     color: var(--text);
     --arrow-color: #514535;
 }
@@ -1247,5 +1061,68 @@ footer {
 
     #joinUs-form {
         height: 140vh;
+    }
+}
+
+@keyframes rotateFruit1 {
+    50% {
+
+        transform: translateY(34%) rotate(30deg);
+    }
+
+    100% {
+        transform: translateY(34%) rotate(0deg);
+    }
+}
+
+@keyframes rotateFruit2 {
+    50% {
+        transform: translateX(320%) translateY(25%) rotate(-30deg);
+    }
+
+    100% {
+        transform: translateX(320%) translateY(25%) rotate(0deg);
+    }
+}
+
+@keyframes rotateFruit3 {
+    50% {
+        transform: translateX(95%) translateY(196%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(95%) translateY(196%) rotate(0deg);
+    }
+}
+
+@keyframes rotateFruit4 {
+    50% {
+
+        transform: translateX(305%) translateY(68%) rotate(-35deg);
+    }
+
+    100% {
+
+        transform: translateX(305%) translateY(68%) rotate(0deg);
+    }
+}
+
+@keyframes rotateFruit5 {
+    50% {
+        transform: translateY(226%) translateX(164%) rotate(30deg);
+    }
+
+    100% {
+        transform: translateY(226%) translateX(164%) rotate(0deg);
+    }
+}
+
+@keyframes rotateFruit6 {
+    50% {
+        transform:translateY(132%) translateX(99%) rotate(30deg);
+    }
+
+    100% {
+        transform:translateY(132%) translateX(99%) rotate(0deg);
     }
 }

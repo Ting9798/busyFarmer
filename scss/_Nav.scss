@@ -1,0 +1,274 @@
+@use 'variables' as *;
+
+
+.topbar {
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        width: 240px;
+        height: 100%;
+    }
+
+    .nav-content {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        align-items: center;
+
+        .nav-links {
+            display: flex;
+            flex: 1;
+            justify-content: flex-end;
+            align-items: center;
+
+
+            li {
+                padding: 10px;
+            }
+
+            &.brown a {
+                color: map-get($color, text);
+                transition: 0.35s ease-in-out all;
+
+                &:hover {
+                    font-size: 20px;
+                    border-bottom: 5px dashed map-get($color, text);
+                    transform: scale(1.1);
+                }
+            }
+
+            &.green a {
+                color: map-get($color, white);
+                transition: 0.35s ease-in-out all;
+                transform: scale(1.1);
+
+                &:hover {
+                    font-size: 20px;
+                    border-bottom: 5px dashed map-get($color, primaryO);
+                }
+            }
+
+        }
+
+        .shopping-btn-box {
+            display: flex;
+
+            .shopping-btn {
+                background-color: map-get($color, primaryO);
+                border-radius: 0 0 0 45px;
+                padding: 10px 35px 10px 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                margin-left: 20px;
+                transition: all .35s forwards;
+
+                &:hover {
+                    img {
+                        animation: shoppingBtnIn .35s forwards;
+                    }
+
+                    div {
+                        font-size: 28px;
+                    }
+                }
+
+                &:not(:hover) img {
+                    animation: shoppingBtnOut 0.35s forwards;
+
+                    div {
+                        font-size: 20px;
+                    }
+                }
+
+                a {
+                    color: map-get($color, white);
+                    display: flex;
+                    align-items: center;
+
+                    img {
+                        width: 54px;
+                        margin-right: 10px;
+                    }
+
+                    .shopping-txt {
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navMob {
+    display: none;
+}
+
+.whiteTopbar {
+    background: $gradient-w;
+}
+
+.greenTopbar {
+    background: $gradient-g;
+}
+
+
+@media(max-width:576px) {
+    .topbar {
+        display: none;
+    }
+
+    .navMob {
+        position: fixed;
+        z-index: 1000;
+        width: 100%;
+        height: 80px;
+        top: 0;
+
+        display: flex;
+        background: $gradient-w-M;
+
+        div {
+            width: 100%;
+            position: relative;
+
+            .hamburger {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                width: 48px;
+                z-index: 1003;
+                fill:#6c8c42;
+            }
+        }
+
+        .navMob-box {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: map-get($color , green-50);
+            backdrop-filter: blur(5px);
+
+            transition: transform 0.3s ease;
+            transform: translateX(120%);
+
+            &.show {
+                transform: translateX(0);
+            }
+
+            .navMob-box-list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 18%;
+                width: 100%;
+                height: 100%;
+                line-height: 2.5;
+
+                li {
+                    font-size: 20px;
+                    margin-bottom: 1rem;
+
+                    a {
+                        color: map-get($color , white);
+                    }
+                }
+            }
+
+            .navMob-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                transform: translateY(10%);
+                position: relative;
+
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    z-index: -1;
+                    width: 120%;
+                    height: 100%;
+                    bottom: 0%;
+                    background-image: url(../images/shared/mountain-mob.png);
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+
+                }
+
+                li {
+                    font-family: $GenSenRounded-L;
+                    font-size: 12px;
+                    letter-spacing: .1rem;
+                    line-height: 3;
+                    text-align: center;
+                    color: map-get($color , white);
+
+                    a {
+                        margin: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@keyframes shoppingBtnIn {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(15deg) scale(1.1);
+    }
+}
+
+@keyframes shoppingBtnOut {
+    0% {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,30 @@
+$color: (
+    // map-get( $color ,  );
+
+    //主色調
+    primaryG: #6c8c42,
+    primaryO: #eb9b28,
+
+    //輔助
+    text: #514535,
+    white: #F1F1F1,
+    red: #eb6328,
+    grey: #B1AAA1,
+
+    //透明
+    white-80: rgba(241, 241, 241, .8),
+    white-40: rgba(241, 241, 241, .4),
+    orange-50: rgba(235, 155, 40, .5),
+    green-50:rgba(108, 140, 66,.5),
+    text-80: rgba(81, 69, 53, .8),
+
+    //codepen
+    clr:#fff,
+);
+
+//漸層
+$gradient-w: linear-gradient(rgb(241, 241, 241) 0%, rgba(241, 241, 241, 0) 80%);
+$gradient-w-M: linear-gradient(rgb(241, 241, 241) 10%, rgba(108, 140, 66, 0) 100%);
+$gradient-g: linear-gradient(rgb(108, 140, 66) 80%, rgba(108, 140, 66, 0) 20%);
+//陰影 
+$shadow: drop-shadow(0 -6px 6px rgba(73, 96, 65, .25));

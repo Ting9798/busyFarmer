@@ -1,0 +1,201 @@
+@use 'variables' as *;
+footer {
+    position: relative;
+    width: 100%;
+    min-height: 70vh;
+    bottom: 0;
+    overflow-y: hidden;
+    z-index: 999;
+
+    #footer-content {
+        position: relative;
+        z-index: 101;
+        width: 100%;
+        bottom: 0;
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        font-family: $GenSenRounded-L;
+        font-size: 16px;
+        letter-spacing: .1em;
+
+        .footer-content-box {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+
+            .footer-contact,
+            .footer-map,
+            .copyright {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 3rem;
+            }
+
+            .footer-contact {
+                align-items: center;
+
+                .footer-contact-box {
+                    display: flex;
+                    flex-direction: column;
+
+                    .media {
+                        display: flex;
+
+                        img {
+                            padding: 0 15px 15px 0;
+                        }
+                    }
+
+                    .information {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+
+                .company {
+                    margin-left: 40px;
+
+                    img {
+                        min-width: 136px;
+                    }
+                }
+            }
+
+            .footer-map {
+                justify-content: space-between;
+                font-family: $GenSenRounded-R;
+                font-size: 24px;
+
+                a {
+                    border-bottom: none;
+                    transition: .35s ease-in-out;
+                }
+
+                a:hover {
+                    border-bottom: 1px solid map-get($color , text);
+                    transition: .35s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+.footer-pre,
+.footer-back {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    filter: $shadow;
+}
+
+.footer-pre {
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-back {
+    z-index: 99;
+}
+
+#footer2 {
+    display: none;
+}
+
+@media (max-width:1536px) {
+    footer #footer-content .footer-content-box {
+        width: 70%;
+    }
+
+    footer #footer-content .footer-content-box .footer-contact,
+    footer #footer-content .footer-content-box .footer-map,
+    footer #footer-content .footer-content-box .copyright {
+        margin: .9rem 0;
+    }
+}
+
+@media (max-width:1280px) {
+
+    footer #footer-content .footer-content-box .footer-contact,
+    footer #footer-content .footer-content-box .footer-map,
+    footer #footer-content .footer-content-box .copyright {
+        margin-bottom: 1rem;
+    }
+}
+
+@media(max-width:1024px) {
+    footer {
+        background-color: map-get($color , white);
+    }
+
+    footer #footer-content .footer-content-box .footer-contact,
+    footer #footer-content .footer-content-box .footer-map,
+    footer #footer-content .footer-content-box .copyright {
+        margin-bottom: 2rem;
+    }
+
+    .footerBg {
+        display: none;
+    }
+}
+
+@media(max-width:1024px) {
+    footer {
+        min-height: 4rem;
+        #footer1 {
+            animation: fadeOut .35s forwards;
+        }
+        #footer2 {
+            animation: fadeIn .35s forwards;
+            background-color: map-get($color , white);
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            .copyright {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem 0;
+                .media {
+                    position: absolute;
+                    right: 0;
+                    & a {
+                        margin-right: 24px;
+                    }
+                }
+            }
+        }
+        .copyright {
+            margin-bottom: 0px;
+        }
+    }
+}
+@media(min-width:1023px) {
+    #footer1 {
+        animation: fadeIn .35s forwards;
+    }
+    #footer2{
+        animation: fadeOut .35s forwards;
+    }
+}
+@media(max-width:425px) {
+    #footer2 {
+        .copyright {
+            .media {
+                display: none;
+            }
+        }
+    }
+}

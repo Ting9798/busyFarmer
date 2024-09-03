@@ -1,0 +1,78 @@
+@use 'variables' as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $GenSenRounded-R;
+    font-size: 100%;
+    line-height: 1.5;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+
+    position: relative;
+    color: map-get($color , text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: map-get($color , text);
+}
+
+input {
+    flex: 1;
+    border: none;
+    color: map-get($color , text);
+    font-family: $GenSenRounded-R;
+    font-size: map-get($font-size , s);
+}
+
+select {
+    outline: none;
+    box-shadow: none;
+}
+
+input::placeholder {
+    color: map-get($color , grey);
+}
+
+input:focus {
+    outline: none;
+}
+
+address {
+    display: none;
+    font-style: normal;
+}
+
+main {
+    flex: 1;
+    display: block;
+}
