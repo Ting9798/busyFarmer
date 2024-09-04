@@ -70,7 +70,7 @@
             });
 
             useEffect(() => {
-                // 获取初始位置
+                // 取得初始位置
                 const getInitialPosition = (ref) => {
                     if (ref.current) {
                         return ref.current.getBoundingClientRect().top + window.scrollY;
@@ -78,18 +78,18 @@
                     return 0;
                 };
 
-                // 设置初始位置
+                // 設置初始位置
                 setInitialPosition({
                     mountain1: getInitialPosition(mountain1Ref),
                     mountain2: getInitialPosition(mountain2Ref),
                     ornament: getInitialPosition(ornamentRef),
                 });
 
-                // 创建 basicScroll 实例
+                // 視差滾動
                 const scrollEffectMountain1 = basicScroll.create({
                     elem: mountain1Ref.current,
                     from: 0,
-                    to: 519, // 根据需要调整
+                    to: 519,
                     props: {
                         '--translateY-1': {
                             from: 50,
@@ -101,7 +101,7 @@
                 const scrollEffectMountain2 = basicScroll.create({
                     elem: mountain2Ref.current,
                     from: 0,
-                    to: 519, // 根据需要调整
+                    to: 519,
                     props: {
                         '--translateY-2': {
                             from: -30,
@@ -113,7 +113,7 @@
                 const scrollEffectOrnament = basicScroll.create({
                     elem: ornamentRef.current,
                     from: 0,
-                    to: 519, // 根据需要调整
+                    to: 519,
                     props: {
                         '--translateY-3': {
                             from: 0,
@@ -122,7 +122,7 @@
                     }
                 }).start();
 
-                // 滚动事件处理
+                // 滾動時
                 const handleScroll = () => {
                     const anchor = document.getElementById('anchor');
                     const offset = window.innerHeight * 1;
@@ -148,7 +148,7 @@
 
                 window.addEventListener('scroll', handleScroll);
 
-                // 清理事件监听和 basicScroll 实例
+                // 清理事件
                 return () => {
                     window.removeEventListener('scroll', handleScroll);
                     scrollEffectMountain1.stop();
