@@ -11,7 +11,6 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <link rel="stylesheet" href="./css-pre/cards.css">
-    <link rel="stylesheet" href="./css-pre/style2.css">
     <link rel="stylesheet" href="./css/style.min.css">
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
@@ -25,6 +24,22 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+        function FarmerDetail(props) {
+            return (
+                <>
+                    <div className="farm-details-item">
+                        <figure><img src={props.farmerImg} alt={props.farmerAlt} /></figure>
+                        <div className="farm-details-item-text">
+                            <div className="farm-details-item-text-box">
+                                <div className="farm-details-item-icon"></div>
+                                <h2>{props.farmerTitle}</h2>
+                            </div>
+                            <p>{props.farmerDescription}</p>
+                        </div>
+                    </div>
+                </>
+            )
+        }
         function CooperationCard(props) {
             const cardInnerStyle = {
                 '--clr': props.cardInnerStyle,
@@ -93,7 +108,7 @@
                     props: {
                         '--translateY-1': {
                             from: 50,
-                           to: `${100 * parseFloat(mountain1Ref.current.getAttribute('data-modifier'))}%`
+                            to: `${100 * parseFloat(mountain1Ref.current.getAttribute('data-modifier'))}%`
                         }
                     }
                 }).start();
@@ -125,10 +140,15 @@
                 // 滾動時
                 const handleScroll = () => {
                     const anchor = document.getElementById('anchor');
-                    const offset = window.innerHeight * 1;
+                    let offset = window.innerHeight * 1;
+
+                    if (window.matchMedia("(min-width: 768px) and (max-width: 1024px)").matches) {
+                        offset = window.innerHeight * 0.4; // 平板设备时调整偏移量
+                    }
                     if (anchor) {
                         const anchorTop = anchor.getBoundingClientRect().top + window.scrollY;
                         const scrollPosition = window.scrollY + window.innerHeight;
+
 
                         if (scrollPosition > anchorTop + offset) {
                             setNavProps({
@@ -268,48 +288,28 @@
                             </div>
                             <div className="farm-details-content">
                                 <div className="farm-details-group">
-                                    <div className="farm-details-item">
-                                        <figure><img src="./images/index/about_item-1.svg" alt="" /></figure>
-                                        <div className="farm-details-item-text">
-                                            <div className="farm-details-item-text-box">
-                                                <div className="farm-details-item-icon"></div>
-                                                <h2>積極公平貿易</h2>
-                                            </div>
-                                            <p>合理的價格、積極的合作，蒐購小農產水果</p>
-                                        </div>
-                                    </div>
-                                    <div className="farm-details-item">
-                                        <figure><img src="./images/index/about_item-3.svg" alt="" /></figure>
-                                        <div className="farm-details-item-text">
-                                            <div className="farm-details-item-text-box">
-                                                <div className="farm-details-item-icon"></div>
-                                                <h2>重新轉化新生</h2>
-                                            </div>
-                                            <p>加工生產過剩、賣相不佳的水果，延續二次生命</p>
-                                        </div>
-                                    </div>
+                                    <FarmerDetail
+                                        farmerImg="./images/index/about_item-1.svg"
+                                        farmerAlt="積極公平貿易"
+                                        farmerTitle="積極公平貿易"
+                                        farmerDescription="合理的價格、積極的合作，蒐購小農產水果" />
+                                    <FarmerDetail
+                                        farmerImg="./images/index/about_item-3.svg"
+                                        farmerAlt="重新轉化新生"
+                                        farmerTitle="重新轉化新生"
+                                        farmerDescription="加工生產過剩、賣相不佳的水果，延續二次生命" />
                                 </div>
                                 <div className="farm-details-group">
-                                    <div className="farm-details-item">
-                                        <figure><img src="./images/index/about_item-2.svg" alt="" /></figure>
-                                        <div className="farm-details-item-text">
-                                            <div className="farm-details-item-text-box">
-                                                <div className="farm-details-item-icon"></div>
-                                                <h2>平台實質回饋</h2>
-                                            </div>
-                                            <p>建立公平貿易平台，讓消費者的支持直接回饋小農</p>
-                                        </div>
-                                    </div>
-                                    <div className="farm-details-item">
-                                        <figure><img src="./images/index/about_item-4.svg" alt="" /></figure>
-                                        <div className="farm-details-item-text">
-                                            <div className="farm-details-item-text-box">
-                                                <div className="farm-details-item-icon"></div>
-                                                <h2>多元蓬勃發展</h2>
-                                            </div>
-                                            <p>協助農場多管道經營，發展精緻型觀光休閒體驗</p>
-                                        </div>
-                                    </div>
+                                    <FarmerDetail
+                                        farmerImg="./images/index/about_item-2.svg"
+                                        farmerAlt="平台實質回饋"
+                                        farmerTitle="平台實質回饋"
+                                        farmerDescription="建立公平貿易平台，讓消費者的支持直接回饋小農" />
+                                    <FarmerDetail
+                                        farmerImg="./images/index/about_item-4.svg"
+                                        farmerAlt="多元蓬勃發展"
+                                        farmerTitle="多元蓬勃發展"
+                                        farmerDescription="協助農場多管道經營，發展精緻型觀光休閒體驗" />
                                 </div>
                             </div>
                             <ButtonArrow textColor="arrowBtnWhite" btnName="關於我們" arrowColor="#514535" />

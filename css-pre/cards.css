@@ -18,12 +18,12 @@ a {
 
 .cooperation-card {
     &:nth-child(1) .box .icon .iconBox {
-        background: #eb9b28;
+        background: #eb6328;
     }
 
 
     &:nth-child(2) .box .icon .iconBox {
-        background: #eb6328;
+        background: #eb9b28;
     }
 
     &:nth-child(3) .box .icon .iconBox {

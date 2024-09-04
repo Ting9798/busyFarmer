@@ -1,4 +1,5 @@
 @use 'variables' as *;
+
 footer {
     position: relative;
     width: 100%;
@@ -127,9 +128,11 @@ footer {
     footer #footer-content .footer-content-box .footer-contact,
     footer #footer-content .footer-content-box .footer-map,
     footer #footer-content .footer-content-box .copyright {
-        margin-bottom: 1rem;
+        margin-bottom: .5rem;
+        scale: .8;
     }
 }
+
 
 @media(max-width:1024px) {
     footer {
@@ -150,9 +153,11 @@ footer {
 @media(max-width:1024px) {
     footer {
         min-height: 4rem;
+
         #footer1 {
             animation: fadeOut .35s forwards;
         }
+
         #footer2 {
             animation: fadeIn .35s forwards;
             background-color: map-get($color , white);
@@ -163,33 +168,40 @@ footer {
             justify-content: center;
             align-items: center;
             z-index: 999;
+
             .copyright {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 padding: 1rem 0;
+
                 .media {
                     position: absolute;
                     right: 0;
+
                     & a {
                         margin-right: 24px;
                     }
                 }
             }
         }
+
         .copyright {
             margin-bottom: 0px;
         }
     }
 }
+
 @media(min-width:1023px) {
     #footer1 {
         animation: fadeIn .35s forwards;
     }
-    #footer2{
+
+    #footer2 {
         animation: fadeOut .35s forwards;
     }
 }
+
 @media(max-width:425px) {
     #footer2 {
         .copyright {
