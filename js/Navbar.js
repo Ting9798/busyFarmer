@@ -1,7 +1,7 @@
-const [useState] = React;
+const [useEffect, useState] = React;
 function Nav(props) {
 
-    // 使用 React 的狀態來控制菜單的顯示
+    // 手機板icon
     const [isNavVisible, setNavVisible] = useState(false);
     const [imageSrc, setImageSrc] = useState('../images/shared/icon2_home.svg');
 
@@ -16,16 +16,24 @@ function Nav(props) {
 
     };
 
-    // 根據菜單的顯示狀態設定 body 的 class
-    React.useEffect(() => {
+    // 根據導覽列的顯示狀態設定 body 的 class
+    useEffect(() => {
+        const scrollPosition = window.scrollY;
+
         if (isNavVisible) {
-            document.body.classList.add('fixed');
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollPosition}px`;
         } else {
-            document.body.classList.remove('fixed');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition); // 恢復滾動位置
         }
+
         // 清理副作用
         return () => {
-            document.body.classList.remove('fixed');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, scrollPosition); // 恢復滾動位置
         };
     }, [isNavVisible]);
 

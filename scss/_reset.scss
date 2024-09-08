@@ -72,7 +72,20 @@ address {
     font-style: normal;
 }
 
-main {
-    flex: 1;
-    display: block;
+main{
+    position: relative;
+    z-index: -2;
+}
+#root{
+    position: relative;
+    z-index: -2;
+}
+body{
+    position: relative;
+    z-index: -2;
+}
+button{
+    border: 0px solid transparent;
+    cursor:pointer;
+    background-color: transparent;
 }

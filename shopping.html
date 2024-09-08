@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小農好忙-小農商城</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="./css/style.min.css">
+
+    <script type="text/babel" src="./js/search.js"></script>
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        function ProductBtn(props) {
+            const [imgSrc, setImgSrc] = useState(props.btnImg);
+
+            const handleMouseEnter = () => {
+                setImgSrc(props.btnImgHover);
+            };
+
+            const handleMouseLeave = () => {
+                setImgSrc(props.btnImg);
+            };
+
+            return (
+                <a
+                    href={props.btnHref}
+                    className="productList-item-box"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <figure className="productList-btn">
+                        <img
+                            src={imgSrc}
+                            alt={props.btnName}
+                        />
+                    </figure>
+                    <h3>{props.btnName}</h3>
+                </a>
+            );
+        }
+
+        function App(props) {
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            const [index, setIndex] = useState(0); // 初始化為 0，從第一張幻燈片開始
+            const slideRef = useRef(null);
+
+            useEffect(() => {
+                if (slideRef.current) {
+                    const slides = slideRef.current.children;
+                    const totalSlides = slides.length;
+
+                    // 如果到了最後一張幻燈片，重置過渡並跳回到第一張
+                    if (index === totalSlides) {
+                        slideRef.current.style.transition = 'none';
+                        slideRef.current.style.transform = `translateX(0%)`;
+
+                        // 立即設置索引為 0
+                        setTimeout(() => {
+                            setIndex(0);
+                        }, 0);
+                    } else {
+                        // 設置幻燈片的過渡效果和位置
+                        slideRef.current.style.transition = 'transform 0.5s ease';
+                        slideRef.current.style.transform = `translateX(-${index * 100}%)`;
+                    }
+                }
+            }, [index]);
+
+            useEffect(() => {
+                const intervalId = setInterval(() => {
+                    setIndex((prevIndex) => (prevIndex + 1) % (slideRef.current.children.length + 1));
+                }, 10000); // 每 3 秒切換一次幻燈片
+                return () => clearInterval(intervalId); // 清除定時器
+            }, []);
+
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <main>
+                        {/*banner*/}
+                        <section id="shoppingBanner">
+                            <div className="shoppingBanner-container">
+                                <div className="carousel-slide" ref={slideRef}>
+                                    <div className="shoppingBanner" style={{ backgroundImage: 'url(./images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png)' }}>
+                                        <div>
+                                            <div className="shoppingBanner-tit-box">
+                                                <h1>夏日風情果醬<br />口碑推出</h1>
+                                            </div>
+                                            <div className="shoppingBanner-tit-ornament-box">
+                                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168" stroke="#6C8C42" strokeWidth="1" strokeLinecap="round" />
+                                                </svg>
+                                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168" stroke="#6C8C42" strokeWidth="1.5" strokeLinecap="round" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="shoppingBanner" style={{ backgroundImage: 'url(./images/planting/unsplash_atzWFItRHy8.png)' }}>
+                                        <div>
+                                            <div className="shoppingBanner-tit-box">
+                                                <h1 className="white-text">獨家果乾<br />打造獨一無二的風味</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+
+                        {/*商城*/}
+                        <section id="productList">
+                            <div className="productList-tit">
+                                <div className="productList-tit-box">
+                                    <div>
+                                        <svg width="244" height="107" viewBox="0 0 244 107" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M111.809 18.5981C115.997 16.0504 120.962 15.1046 125.782 15.9364C130.603 16.7681 134.952 19.3209 138.022 23.1209C143.627 30.1386 142.866 47.8233 129.385 71.2294C124.115 80.3738 115.316 78.8868 112.089 71.1132C105.275 54.7147 97.1393 27.6253 111.809 18.5981Z"
+                                                fill="#EB9B28" />
+                                            <path
+                                                d="M24.0127 46.6764C25.1723 41.9138 28.0142 37.7344 32.011 34.9139C36.0078 32.0933 40.8882 30.8232 45.7462 31.3392C54.6714 32.3384 66.6383 45.3815 73.6565 71.4646C76.3961 81.657 69.123 86.8273 61.3443 83.6124C44.9307 76.8349 20.0228 63.4328 24.0127 46.6764Z"
+                                                fill="#EB9B28" />
+                                            <path
+                                                d="M219.876 46.6764C218.716 41.9138 215.874 37.7344 211.878 34.9139C207.881 32.0933 203.001 30.8232 198.143 31.3392C189.217 32.3384 177.25 45.3815 170.232 71.4646C167.493 81.657 174.766 86.8273 182.544 83.6124C198.958 76.8349 223.866 63.4328 219.876 46.6764Z"
+                                                fill="#EB9B28" />
+                                        </svg>
+
+                                        <h3>小農商城</h3>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="productList-item">
+                                <ProductBtn
+                                    btnHref="./shopping-season.html"
+                                    btnImg="./images/shopping/productList-btn-1.svg"
+                                    btnImgHover="./images/shopping/productList-btn-1-hover.svg"
+                                    btnName="季節商品" />
+                                <ProductBtn
+                                    btnHref="./shopping-season.html"
+                                    btnImg="./images/shopping/productList-btn-2.svg"
+                                    btnImgHover="./images/shopping/productList-btn-2-hover.svg"
+                                    btnName="客製果乾" />
+                                <ProductBtn
+                                    btnHref="./shopping-season.html"
+                                    btnImg="./images/shopping/productList-btn-3.svg"
+                                    btnImgHover="./images/shopping/productList-btn-3-hover.svg"
+                                    btnName="常態熱銷" />
+                                <ProductBtn
+                                    btnHref="./shopping-season.html"
+                                    btnImg="./images/shopping/productList-btn-4.svg"
+                                    btnImgHover="./images/shopping/productList-btn-4-hover.svg"
+                                    btnName="小農推薦" />
+                            </div>
+
+                            <Search />
+                        </section>
+
+                        {/*特色*/}
+                        <section id="features">
+                            <div className="features-tip">美味好吃的秘訣在於...</div>
+                            <div className="features-secret">
+                                <div className="features-secret-box">
+                                    <figure><img src="./images/index/about_item-3.svg" alt="水果新鮮" /></figure>
+                                    <h2>水果新鮮</h2>
+                                </div>
+                                <div className="features-secret-box">
+                                    <figure><img src="./images/index/about_item-4.svg" alt="工廠旁邊" /></figure>
+                                    <h2>工廠旁邊</h2>
+                                </div>
+                                <div className="features-secret-box">
+                                    <figure><img src="./images/index/about_item-2.svg" alt="合作無間" /></figure>
+                                    <h2>合作無間</h2>
+                                </div>
+                            </div>
+                            <div className="features-ornament-box">
+                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                        stroke="#F1F1F1" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                        </section>
+                    </main >
+                    <Footer />
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+
+</body>
+
+</html>
