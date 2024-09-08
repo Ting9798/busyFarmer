@@ -477,6 +477,124 @@ footer #footer-content .footer-content-box .footer-map a:hover {
     display: none;
   }
 }
+.floating-cart {
+  position: fixed;
+  right: 0;
+  top: 25%;
+  width: 484px;
+  display: flex;
+  z-index: 999;
+  transition: transform 0.3s ease;
+  transform: translateX(384px);
+}
+.floating-cart .cart-header {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: #eb9b28;
+  border-radius: 33px 0 0 33px;
+  filter: drop-shadow(0 -6px 6px rgba(73, 96, 65, 0.25));
+  z-index: 999;
+}
+.floating-cart .cart-header .cart-icon {
+  scale: 65%;
+  position: absolute;
+  right: -9px;
+  transform: translateY(-15%);
+}
+.floating-cart .cart-header .cart-title {
+  position: absolute;
+  left: 40px;
+  bottom: 0;
+  transform: translateY(-30%);
+  font-family: "GenSenRounded TW-R", sans-serif;
+  color: #F1F1F1;
+  font-size: 14px;
+  letter-spacing: 0.1rem;
+}
+.floating-cart .cart-content {
+  position: relative;
+  width: 100%;
+  max-width: 384px;
+  background-color: #F1F1F1;
+  filter: drop-shadow(0 -6px 6px rgba(73, 96, 65, 0.25));
+}
+.floating-cart .cart-content .cart-items-box .cart-items {
+  display: flex;
+  margin: 20px 20px 0 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #B1AAA1;
+}
+.floating-cart .cart-content .cart-items-box .cart-items figure {
+  flex: 0 0 auto;
+}
+.floating-cart .cart-content .cart-items-box .cart-items figure img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info {
+  padding-left: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .item-header {
+  display: flex;
+  justify-content: space-between;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .item-header .item-name {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1rem;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls .quantity-controls-price {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1rem;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls .quantity-controls-buttons {
+  display: flex;
+  align-items: center;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls .quantity-controls-buttons input {
+  width: 30px;
+  margin: 0 5px;
+  text-align: center;
+  border: 2px solid #6c8c42;
+}
+.floating-cart .cart-content .cart-total {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.floating-cart.open {
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+}
+
+.empty-cart {
+  position: absolute;
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  transform: translateY(37%);
+  height: 100%;
+  width: 100%;
+}
+
 @font-face {
   font-family: "GenSenRounded TW-L";
   src: url(../webfonts/GenSenRounded2-L.ttc);
@@ -556,6 +674,28 @@ body.fixed {
 .buttonArrow-box .arrowBtnOrange:hover {
   background-color: #eb6328;
   color: #F1F1F1;
+}
+
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.button-group .button {
+  color: #fff;
+  width: 12%;
+  border-radius: 24px;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  margin: 3rem 0;
+  font-family: "GenSenRounded TW-L", sans-serif;
+  letter-spacing: 0.2rem;
+  font-size: 20PX;
+}
+.button-group .button.account {
+  width: 100%;
+  margin: 0 20px 20px;
+  background-color: #6c8c42;
 }
 
 .productList-search form {

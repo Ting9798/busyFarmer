@@ -1,4 +1,4 @@
-const [useEffect, useState] = React;
+const {useEffect, useState} = React;
 function Nav(props) {
 
     // 手機板icon

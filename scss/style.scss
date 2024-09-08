@@ -2,6 +2,7 @@
 @use 'variables' as *;
 @use 'Nav';
 @use 'Footer';
+@use 'FloatCart';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 @font-face {
@@ -101,6 +102,32 @@ body.fixed {
             background-color: map-get($color , red);
             color: map-get($color , white);
         }
+    }
+}
+
+// 功能按鈕
+.button-group {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .button {
+        color: map-get($color , clr);
+        width: 12%;
+        border-radius: 24px;
+        padding: .5rem .8rem;
+        text-align: center;
+        margin: 3rem 0;
+
+        font-family: $GenSenRounded-L;
+        letter-spacing: .2rem;
+        font-size: 20PX;
+    }
+
+    .button.account {
+        width: 100%;
+        margin: 0 20px 20px;
+        background-color: map-get($color , primaryG);
     }
 }
 
@@ -1266,9 +1293,11 @@ body.fixed {
         height: 124%;
         bottom: 0%;
     }
+
     .productList-item {
         width: 90%;
     }
+
     #features {
         justify-content: center;
 
