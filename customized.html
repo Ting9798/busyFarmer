@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客製果乾-小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Features.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+    <link rel="stylesheet" href="./css-pre/style.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function FruitCard(props) {
+            const fruitData = {
+                default: {
+                    image: './images/index/banner/banner-l-1.png',
+                    description: '請選擇水果'
+                },
+                apple: {
+                    image: './images/customized/cus-3-unsplash.jpg',
+                    description: `梨山特產：<br> 脆甜清爽帶有淡淡的酸味。富維生素C，輕熟女最愛`
+                },
+                pitaya: {
+                    image: './images/customized/cus-1-unsplash.jpg',
+                    description: `彰化特產：<br>清甜多汁，香氣迷人。富含抗氧化劑，有助提升免疫力`
+                }
+                , strawberry: {
+                    image: './images/customized/cus-2-unsplash.jpg',
+                    description: `大湖特產：<br>香甜酸爽，果肉細緻多汁。使皮膚水潤，最高人氣！`
+                },
+                pear: {
+                    image: './images/customized/cus-4-unsplash.jpg',
+                    description: `關西特產：<br> 多汁清甜質地脆爽。有豐富維生素K，幫助潤肺止咳`
+                },
+                blueberry: {
+                    image: './images/customized/cus-5-unsplash.jpg',
+                    description: `阿里山特產：<br> 微酸甜，帶有濃郁迷人果香。保健眼睛，3Ｃ族首選！`
+                },
+                banana: {
+                    image: './images/customized/cus-6-unsplash.jpg',
+                    description: '旗山特產：<br> 甜度高，有助促進心血管健康，老人小孩的最愛'
+                },
+
+                orange: {
+                    image: './images/customized/cus-7-unsplash.jpg',
+                    description: '苗栗特產：<br>  酸甜滋味適中，果肉多汁。維生素C高，幫助美容美白'
+                },
+                lemon: {
+                    image: './images/customized/cus-8-unsplash.jpg',
+                    description: '九如特產：<br> 酸味強烈，果香新鮮濃郁。維生素C幫助具抗氧化'
+                },
+                pineapple: {
+                    image: './images/customized/cus-9-unsplash.jpg',
+                    description: '枋寮特產：<br>香甜多汁，酸甜均衡熱帶風味。人氣超高小農推薦～'
+                },
+            };
+
+            const [selectedFruit, setSelectedFruit] = useState('default');
+
+            const handleChange = (event) => {
+                setSelectedFruit(event.target.value);
+            };
+
+            const fruit = fruitData[selectedFruit] || {};
+
+            return (
+                <>
+                    <div className="fruitCard">
+                        {/*圖片資訊*/}
+                        <div>
+                            <img className="fruitImage" src={fruit.image || props.fruitImg} alt="水果圖" />
+                        </div>
+                        {/*文字資訊*/}
+                        <div className="fruitInf">
+                            <label htmlFor="fruitSelect">{props.fruitTitle}</label>
+                            <select id={`${props.cardId}`} onChange={handleChange} value={selectedFruit} className="fruitSelect">
+                                {/*選單*/}
+                                <option value="">請選擇</option>
+                                <option value="apple">蘋果</option>
+                                <option value="pitaya">火龍果</option>
+                                <option value="strawberry">草莓</option>
+                                <option value="pear">水梨</option>
+                                <option value="blueberry">藍莓</option>
+                                <option value="banana">香蕉</option>
+                                <option value="orange">橘子</option>
+                                <option value="lemon">檸檬</option>
+                                <option value="pineapple">鳳梨</option>
+                            </select>
+                            {/*介紹*/}
+                            <div className="fruitDescription" dangerouslySetInnerHTML={{ __html: fruit.description || props.fruitDescription }}></div>
+                        </div>
+                    </div>
+                </>
+            );
+        }
+        function App(props) {
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            const imageSources = {
+                img1: './images/customized/tabs-1-svitlana-unsplash.jpg',
+                img2: './images/customized/tabs-2-kathryn-aleksa-unsplash.jpg',
+                img3: './images/customized/tabs-3-unsplash.jpg',
+                img4: './images/customized/tabs-4-unsplash.jpg'
+            };
+            const altSources = {
+                alt1: '果乾商品圖1',
+                alt2: '果乾商品圖2',
+                alt3: '果乾商品圖3',
+                alt4: '果乾商品圖4'
+            };
+
+            const [productImg, setProductImg] = useState(imageSources.img1);
+            const [productAlt, setProductAlt] = useState(altSources.alt1);
+
+            const tagOnclick = (imgSrc, alt) => {
+                setProductImg(imgSrc);
+                setProductAlt(alt);
+            };
+
+            const [selectedFruits, setSelectedFruits] = useState({});
+
+            // 水果選擇
+            const handleFruitChange = (cardId, selectedFruit) => {
+                setSelectedFruits(prevState => ({
+                    ...prevState,
+                    [cardId]: selectedFruit
+                }));
+            };
+
+            // 是否都選了
+            const areAllFruitsSelected = () => {
+                const requiredSelections = ['base-1', 'base-2', 'base-3', 'flavor-1', 'flavor-2'];
+                return requiredSelections.every(id => selectedFruits[id]);
+            };
+
+            const handleAddToCart = () => {
+                if (areAllFruitsSelected()) {
+                    console.log('所有水果都已選擇', selectedFruits);
+                    // 添加到购物车的逻辑
+                } else {
+                    alert('請選擇所有水果');
+                }
+            };
+
+            // 下一步之前檢查包裝按鈕
+            const handleNextStepClick = (e) => {
+                e.preventDefault();
+
+                // 確認是否有選擇的 radio 按鈕
+                const selectedOption = document.querySelector('input[name="pack"]:checked');
+
+                if (selectedOption) {
+                    document.getElementById('introduce').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                } else {
+                    alert('請選擇一個包裝樣式');
+                }
+            };
+
+            return (
+                <>
+                    {/* 導覽列*/}
+                    < Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <FloatCart />
+                    <main>
+                        {/*商品說明*/}
+                        <section id="product">
+                            {/* 商品櫥窗 */}
+                            <div className="product-tabs">
+                                {/*商品預覽-大*/}
+                                <div className="product-tabs-window">
+                                    <div className="tabs-box"><img src={productImg} alt={productAlt} /></div>
+                                </div>
+                                {/*頁籤按鈕*/}
+                                <ul className="product-tabs-btn">
+                                    <li onClick={() => tagOnclick(imageSources.img1, altSources.alt1)}><img src={imageSources.img1} alt={altSources.alt1} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img2, altSources.alt2)}><img src={imageSources.img2} alt={altSources.alt2} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img3, altSources.alt3)}><img src={imageSources.img3} alt={altSources.alt3} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img2, altSources.alt4)}><img src={imageSources.img2} alt={altSources.alt4} /></li>
+                                </ul>
+                            </div>
+                            <div className="product-part">
+                                <div className="product-part-text">
+                                    <div>
+                                        <div className="titbox">
+                                            <h1>客製化果乾包</h1>
+                                            <h2>Customized dried fruits</h2>
+                                        </div>
+                                        <h6>NT$599</h6>
+                                        <p>
+                                            本產品為台灣小農精心種植的優質水果，採用無毒有機栽培方式，確保每一口都是天然、健康且美味的享受。
+                                        </p>
+                                        <details>
+                                            <pre>{`
+• 保存方式：為了保持水果的最佳風味和品質，請將水果置於陰涼乾燥處，避免陽光直射。
+• 食用建議：開封後請盡快食用，水果在切開後易氧化變質，建議當日食用完畢。
+• 季節性供應：由於水果的季節性在特定時期可能供應有限，敬請提前預訂。
+`}</pre>
+                                        </details>
+                                    </div>
+                                </div>
+                                <div className="product-part-ToBuy">
+                                    <div className="choose-box">
+                                        <div className="choose">請先挑選樣式 style</div>
+                                    </div>
+                                    <form name="form-pack" id="form-pack" title="組裝表單">
+                                        <fieldset>
+                                            <div className="choose1">
+                                                <input type="radio" name="pack" id="pack" value="分袋散裝" />
+                                                <label htmlFor="pack">分袋散裝</label>
+                                            </div>
+                                            <div>
+                                                <input type="radio" name="pack" id="pack-2" value="整袋合裝" />
+                                                <label htmlFor="pack-2">整袋合裝</label>
+                                            </div>
+                                        </fieldset>
+                                        <div className="button-group jcEnd"><div className="button nextStep" onClick={handleNextStepClick}>下一步</div></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/*搭配介紹*/}
+                        <section id="introduce">
+                            <div className="contact-titBox">
+                                <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="自由搭配區" /></figure>
+                                <h3>自由搭配</h3>
+                                <figure><img src="./images/philanthropy/spring-tit-2.svg" alt="自由搭配區" /></figure>
+                            </div>
+
+                            <p>您可以自由選擇<b>5種果乾</b>，先挑選<span>3種基底</span>果乾作為果乾包的基底，<br />
+                                再選擇<span>2種香氣</span>增添味蕾變化。搭配製成你喜歡的口味，<br />
+                                不同水果任你組合，變化出百種風味！</p>
+
+                            <div className="ornament-box">
+                                <figure><img src="./images/philanthropy/seed-o.svg" alt="" /></figure>
+                                <figure><img src="./images/philanthropy/seed-red.svg" alt="" /></figure>
+                            </div>
+                        </section>
+
+                        {/*果乾挑選*/}
+                        <section id="picking">
+                            <div className="picking-text">
+                                <h4>基調</h4>
+                                <p>先挑選3款果乾作為最主要口味，組合不同種類果乾味道更豐富！</p>
+                            </div>
+                            <div className="picking-cardlist line">
+                                {[1, 2, 3].map(num => (
+                                    <FruitCard
+                                        key={`base-${num}`}
+                                        cardId={`base-${num}`}
+                                        fruitTitle={`基底${num}`}
+                                        onFruitChange={handleFruitChange}
+                                    />
+                                ))}
+                            </div>
+                            <div className="picking-text fragrance">
+                                <h4>香味</h4>
+                                <p>選擇2款果乾作為提味，清爽宜人、濃郁陶醉各有滋味！</p>
+                            </div>
+                            <div className="picking-cardlist">
+                                {[1, 2].map(num => (
+                                    <FruitCard
+                                        key={`flavor-${num}`}
+                                        cardId={`flavor-${num}`}
+                                        fruitTitle={`香味${num}`}
+                                        onFruitChange={handleFruitChange}
+                                    />
+                                ))}
+                                {/*按鈕*/}
+                                <div className="button-group aiEng jcEnd">
+                                    <div className="button fruitCardBtn"
+                                        onClick={handleAddToCart}>
+                                        加入購物車
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/*特色*/}
+                        <Features />
+                        <Footer />
+                    </main >
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+</body>
+
+</html>

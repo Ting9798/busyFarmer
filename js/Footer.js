@@ -23,11 +23,11 @@ function Footer() {
                                 <div className="company"><img src="../images/shared/company-right.svg" alt="小農logo" /></div>
                             </div>
                             <div className="footer-map">
-                                <a href="#">首頁</a>
+                                <a href="./index.html">首頁</a>
                                 <a href="#">公益理念</a>
                                 <a href="#">關於小農</a>
-                                <a href="#">小農商城</a>
-                                <a href="#">客製果乾</a>
+                                <a href="./shopping.html">小農商城</a>
+                                <a href="./customized.html">客製果乾</a>
                                 <a href="#">GO遊趣</a>
                                 <a href="#">小農精選</a>
                             </div>

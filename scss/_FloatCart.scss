@@ -11,6 +11,26 @@
     transition: transform 0.3s ease;
     transform: translateX(384px);
 
+    .shoppingDot {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+        top: -5px;
+        left: 0;
+        width: 25px;
+        height: 25px;
+        background-color: map-get($color , red);
+        border-radius: 50%;
+        border: 2px solid map-get($color , clr);
+        text-align: center;
+
+        span {
+            display: block;
+            color: map-get($color , clr);
+            transform: translateY(-2px);
+        }
+    }
+
     .cart-header {
         cursor: pointer;
         width: 100%;
@@ -107,6 +127,7 @@
                                 margin: 0 5px;
                                 text-align: center;
                                 border: 2px solid map-get($color , primaryG);
+                                border-radius: 7px;
                             }
                         }
                     }
@@ -139,4 +160,9 @@
 
     height: 100%;
     width: 100%;
+}
+
+.delItem {
+    position: absolute;
+    right: 1rem;
 }

@@ -4,9 +4,37 @@ const { useState } = React;
 function FloatCart() {
     const [isOpen, setIsOpen] = useState(false);
     const [quantity, setQuantity] = useState(1);
-    const [items, setItems] = useState([
-        { id: 1, name: '夏日風情果醬', nameEg: 'Summer Jam', image: './images/shopping/1-elena-leya-unsplash.png', price: 399, quantity: 1 }
-    ]);
+    const [items, setItems] = useState([]);
+
+    // 讀取購物車
+    const getInitialItems = () => {
+        const savedItems = localStorage.getItem('cartItems');
+        return savedItems ? JSON.parse(savedItems) : [];
+    };
+
+    // 从 JSON 文件加载商品数据
+    useEffect(() => {
+        const loadItems = async () => {
+            try {
+                const response = await fetch('../public/item.json');
+                const data = await response.json();
+                const initialItems = getInitialItems();
+                // JSON 文件
+                setItems(data.map(item => {
+                    const savedItem = initialItems.find(i => i.id === item.id);
+                    return savedItem ? savedItem : item;
+                }));
+            } catch (error) {
+                console.error('Failed to load items:', error);
+            }
+        };
+        loadItems();
+    }, []);
+
+    // 更新 localStorage
+    useEffect(() => {
+        localStorage.setItem('cartItems', JSON.stringify(items));
+    }, [items]);
 
     // 購物車收合
     const toggleCart = () => {
@@ -40,8 +68,8 @@ function FloatCart() {
     const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
     return (
         <>
-            <div className={`floating-cart ${isOpen ? 'open' : ''}`}
-            >
+            <div className={`floating-cart ${isOpen ? 'open' : ''}`}>
+                <div className="shoppingDot"><span>{items.length}</span></div>
                 <div className="cart-header" onClick={toggleCart} >
                     <figure className="cart-icon">
                         <img src="./images/shared/icon2_cart-w.svg" alt="購物車" />

@@ -72,20 +72,28 @@ address {
     font-style: normal;
 }
 
-main{
+main {
     position: relative;
     z-index: -2;
 }
-#root{
+
+#root {
     position: relative;
     z-index: -2;
 }
-body{
+
+body {
     position: relative;
     z-index: -2;
 }
-button{
+
+button {
     border: 0px solid transparent;
-    cursor:pointer;
+    cursor: pointer;
     background-color: transparent;
+}
+
+pre {
+    white-space: pre-wrap;
+    /* 使文本在容器寬度內自動換行 */
 }

@@ -91,6 +91,11 @@ button {
   background-color: transparent;
 }
 
+pre {
+  white-space: pre-wrap;
+  /* 使文本在容器寬度內自動換行 */
+}
+
 .topbar {
   position: fixed;
   z-index: 999;
@@ -487,6 +492,24 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   transition: transform 0.3s ease;
   transform: translateX(384px);
 }
+.floating-cart .shoppingDot {
+  display: block;
+  position: absolute;
+  z-index: 1000;
+  top: -5px;
+  left: 0;
+  width: 25px;
+  height: 25px;
+  background-color: #eb6328;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  text-align: center;
+}
+.floating-cart .shoppingDot span {
+  display: block;
+  color: #fff;
+  transform: translateY(-2px);
+}
 .floating-cart .cart-header {
   cursor: pointer;
   width: 100%;
@@ -572,6 +595,7 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   margin: 0 5px;
   text-align: center;
   border: 2px solid #6c8c42;
+  border-radius: 7px;
 }
 .floating-cart .cart-content .cart-total {
   padding: 20px;
@@ -593,6 +617,11 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   transform: translateY(37%);
   height: 100%;
   width: 100%;
+}
+
+.delItem {
+  position: absolute;
+  right: 1rem;
 }
 
 @font-face {
@@ -679,7 +708,6 @@ body.fixed {
 .button-group {
   width: 100%;
   display: flex;
-  justify-content: center;
 }
 .button-group .button {
   color: #fff;
@@ -696,6 +724,37 @@ body.fixed {
   width: 100%;
   margin: 0 20px 20px;
   background-color: #6c8c42;
+}
+.button-group .button.nextStep {
+  width: auto;
+  margin: 0;
+  background-color: #6c8c42;
+  cursor: pointer;
+  transition: all 0.35s ease-in-out;
+}
+.button-group .button.nextStep::before {
+  content: ">>";
+}
+.button-group .button.nextStep:hover {
+  padding: 0.5rem 1.8rem;
+}
+.button-group .button.fruitCardBtn {
+  width: auto;
+  background-color: #eb9b28;
+  cursor: pointer;
+  margin: 0;
+  transition: all 0.35s ease-in-out;
+}
+.button-group .button.fruitCardBtn:hover {
+  padding: 0.5rem 1.8rem;
+}
+
+.jcEnd {
+  justify-content: flex-end;
+}
+
+.aiEng {
+  align-items: flex-end;
 }
 
 .productList-search form {
@@ -1044,152 +1103,6 @@ body.fixed {
   filter: drop-shadow(2px 2px 5px rgb(0, 0, 10));
 }
 
-#productList {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-#productList::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  background-image: url("../images/shopping/mountain-w.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: drop-shadow(0 -6px 6px rgba(73, 96, 65, 0.25));
-  z-index: -1;
-}
-#productList .productList-tit {
-  display: flex;
-}
-#productList .productList-tit .productList-tit-box {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-#productList .productList-tit .productList-tit-box h3 {
-  font-family: "Noto Sans TC", "sans-serif";
-  font-weight: 500;
-  font-size: clamp(38px, 2vw + 1rem, 40px);
-  letter-spacing: 0.2em;
-  color: #6c8c42;
-}
-
-.productList-item {
-  display: flex;
-  justify-content: space-around;
-  width: 60%;
-}
-.productList-item .productList-item-box {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-.productList-item .productList-item-box img {
-  width: clamp(96px, 10vw, 240px);
-  height: auto;
-}
-.productList-item .productList-item-box h3 {
-  margin-top: 20px;
-  font-family: "GenSenRounded TW-M", sans-serif;
-  font-size: clamp(16px, 2vw, 24px);
-  letter-spacing: 0.2em;
-  color: #514535;
-}
-
-#features {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-#features::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 150%;
-  background-image: url("../images/shopping/mountain-g-nomal.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
-#features .features-tip {
-  display: flex;
-  align-items: flex-end;
-  font-family: "GenSenRounded TW-M", sans-serif;
-  font-size: clamp(31px, 2vw + 1rem, 42px);
-  letter-spacing: 0.2em;
-  color: #F1F1F1;
-  height: 50%;
-}
-#features .features-secret {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 35%;
-  height: 100%;
-}
-#features .features-secret .features-secret-box {
-  display: flex;
-  padding: 10px;
-  align-items: center;
-  width: 65%;
-  border-radius: 99px;
-  padding: 0px 15px;
-}
-#features .features-secret .features-secret-box figure {
-  width: 80%;
-  padding: 0.7rem;
-}
-#features .features-secret .features-secret-box h2 {
-  font-family: "GenSenRounded TW-M", sans-serif;
-  font-size: clamp(24px, 2vw + 1rem, 28px);
-  letter-spacing: 0.2em;
-  color: #F1F1F1;
-  text-align: center;
-  width: 100%;
-  text-wrap: nowrap;
-}
-#features .features-secret .features-secret-box:nth-child(1) {
-  margin-bottom: 15px;
-  background-color: rgba(241, 241, 241, 0.3);
-}
-#features .features-secret .features-secret-box:nth-child(2) {
-  margin: 15px 0px;
-  background-color: rgba(235, 155, 40, 0.3);
-}
-#features .features-secret .features-secret-box:nth-child(3) {
-  margin: 15px 0px 50px 0px;
-  background-color: rgba(81, 69, 53, 0.3);
-}
-#features .features-ornament-box {
-  position: absolute;
-  width: 100%;
-}
-#features .features-ornament-box svg {
-  position: absolute;
-  width: 100%;
-}
-#features .features-ornament-box svg:nth-child(1) {
-  transform: translateX(-44%) translateY(49%) rotate(-15deg);
-}
-#features .features-ornament-box svg:nth-child(2) {
-  transform: translateX(-6%) translateY(187%) rotate(155deg);
-}
-
 @keyframes rotateFruit1 {
   50% {
     transform: translateY(34%) rotate(30deg);
@@ -1499,6 +1412,476 @@ body.fixed {
   scale: 0.8;
 }
 
+#productList {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#productList::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-image: url("../images/shopping/mountain-w.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 -6px 6px rgba(73, 96, 65, 0.25));
+  z-index: -1;
+}
+#productList .productList-tit {
+  display: flex;
+}
+#productList .productList-tit .productList-tit-box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+#productList .productList-tit .productList-tit-box h3 {
+  font-family: "Noto Sans TC", "sans-serif";
+  font-weight: 500;
+  font-size: clamp(38px, 2vw + 1rem, 40px);
+  letter-spacing: 0.2em;
+  color: #6c8c42;
+}
+
+.productList-item {
+  display: flex;
+  justify-content: space-around;
+  width: 60%;
+}
+.productList-item .productList-item-box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.productList-item .productList-item-box img {
+  width: clamp(96px, 10vw, 240px);
+  height: auto;
+}
+.productList-item .productList-item-box h3 {
+  margin-top: 20px;
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(16px, 2vw, 24px);
+  letter-spacing: 0.2em;
+  color: #514535;
+}
+
+#features {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#features::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-image: url("../images/shopping/mountain-g-nomal.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+#features .features-tip {
+  display: flex;
+  align-items: flex-end;
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(31px, 2vw + 1rem, 42px);
+  letter-spacing: 0.2em;
+  color: #F1F1F1;
+  height: 50%;
+}
+#features .features-secret {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 35%;
+  height: 100%;
+  margin-top: 10rem;
+}
+#features .features-secret .features-secret-box {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  width: 65%;
+  border-radius: 99px;
+  padding: 0px 15px;
+}
+#features .features-secret .features-secret-box figure {
+  width: 80%;
+  padding: 0.7rem;
+}
+#features .features-secret .features-secret-box h2 {
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(24px, 2vw + 1rem, 28px);
+  letter-spacing: 0.2em;
+  color: #F1F1F1;
+  text-align: center;
+  width: 100%;
+  text-wrap: nowrap;
+}
+#features .features-secret .features-secret-box:nth-child(1) {
+  margin-bottom: 15px;
+  background-color: rgba(241, 241, 241, 0.3);
+}
+#features .features-secret .features-secret-box:nth-child(2) {
+  margin: 15px 0px;
+  background-color: rgba(235, 155, 40, 0.3);
+}
+#features .features-secret .features-secret-box:nth-child(3) {
+  margin: 15px 0px 50px 0px;
+  background-color: rgba(81, 69, 53, 0.3);
+}
+#features .features-ornament-box {
+  position: absolute;
+  width: 100%;
+}
+#features .features-ornament-box svg {
+  position: absolute;
+  width: 100%;
+}
+#features .features-ornament-box svg:nth-child(1) {
+  transform: translateX(-44%) translateY(49%) rotate(-15deg);
+}
+#features .features-ornament-box svg:nth-child(2) {
+  transform: translateX(-6%) translateY(187%) rotate(155deg);
+}
+
+#product {
+  display: flex;
+  justify-content: center;
+  padding: 150px 10% 150px 10%;
+  height: auto;
+}
+#product .product-tabs {
+  display: grid;
+  grid-template-rows: 70% 1fr 30%;
+  width: 90%;
+}
+#product .product-tabs .product-tabs-window {
+  grid-row: 1/2;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#product .product-tabs .product-tabs-window .tabs-box {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#product .product-tabs .product-tabs-window .tabs-box img {
+  object-fit: cover;
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+}
+#product .product-tabs .product-tabs-btn {
+  grid-row: 3/4;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  max-width: 640px;
+}
+#product .product-tabs .product-tabs-btn li {
+  padding-right: 0.6rem;
+}
+#product .product-tabs .product-tabs-btn li:nth-child(4) {
+  padding-right: 0;
+}
+#product .product-tabs .product-tabs-btn li img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+#product .product-tabs .product-tabs-btn li img:hover {
+  border: 2px solid #6c8c42;
+}
+#product .product-part {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 4rem;
+}
+#product .product-part .product-part-text {
+  height: 26.25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1.4vw;
+}
+#product .product-part .product-part-text .titbox {
+  font-family: "GenSenRounded TW-M", sans-serif;
+  line-height: 1.2;
+  padding-bottom: 10px;
+}
+#product .product-part .product-part-text .titbox h1 {
+  font-size: clamp(22px, 1.5vw + 1rem, 26px);
+  letter-spacing: 0.3em;
+}
+#product .product-part .product-part-text .titbox h2 {
+  font-size: clamp(22px, 1.3vw + 1rem, 24px);
+  letter-spacing: 0.1em;
+}
+#product .product-part .product-part-text h6 {
+  font-size: clamp(28px, 1.5vw + 1rem, 32px);
+  letter-spacing: 0.1em;
+  color: #eb6328;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  background-color: #FAFFF1;
+  border-radius: 0.6vw;
+}
+#product .product-part .product-part-text p {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(12px, 1.2vw + 1rem, 16px);
+  margin-bottom: 17px;
+  letter-spacing: 0.1em;
+}
+#product .product-part .product-part-text details {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(10px, 1.2vw + 1rem, 14px);
+  color: #B1AAA1;
+}
+#product .product-part .product-part-text details pre {
+  font-size: clamp(6px, 1vw + 1rem, 10px);
+}
+#product .product-part .product-part-ToBuy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 7.5vw;
+}
+#product .product-part .product-part-ToBuy .choose-box {
+  display: flex;
+  justify-content: space-between;
+}
+#product .product-part .product-part-ToBuy .choose-box .choose {
+  position: relative;
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(20px, 1.3vw + 1rem, 22px);
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  width: 100%;
+}
+#product .product-part .product-part-ToBuy .choose-box .choose::after {
+  content: "";
+  display: block;
+  width: calc(100% - 15rem);
+  height: 2px;
+  border-bottom: 1px solid #514535;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+#product .product-part .product-part-ToBuy #form-pack {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#product .product-part .product-part-ToBuy #form-pack fieldset {
+  border: 0;
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(20px, 1.3vw + 1rem, 22px);
+  letter-spacing: 0.2em;
+  color: #eb9b28;
+  display: flex;
+}
+#product .product-part .product-part-ToBuy #form-pack fieldset div {
+  text-wrap: nowrap;
+}
+#product .product-part .product-part-ToBuy #form-pack fieldset div .choose1 {
+  padding-right: 3vw;
+}
+#product .product-part .product-part-ToBuy #form-pack fieldset div input {
+  padding: 10px;
+}
+#product .product-part .product-part-ToBuy #form-pack fieldset div label {
+  margin-left: 10px;
+}
+
+#introduce {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+#introduce .contact-titBox {
+  margin-top: 80px;
+}
+#introduce .contact-titBox h3 {
+  color: #856a45;
+}
+#introduce p {
+  margin-top: 20px;
+  line-height: 1.8;
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(16px, 1.3vw + 1rem, 20px);
+  letter-spacing: 0.2em;
+}
+#introduce p b {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-weight: 500;
+  color: #eb9b28;
+}
+#introduce p span {
+  position: relative;
+}
+#introduce p span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #514535;
+}
+#introduce .ornament-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+#introduce .ornament-box figure:nth-child(1) {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  height: 15%;
+  transform: translateX(485%) translateY(12%);
+}
+#introduce .ornament-box figure:nth-child(2) {
+  position: absolute;
+  z-index: 2;
+  width: 9%;
+  height: 9%;
+  transform: translateX(160%) translateY(100%) rotate(-35deg);
+}
+
+#picking {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#picking::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background-image: url("../images/philanthropy/mountain-w-XL.png");
+  background-size: cover;
+  filter: drop-shadow(0 -6px 6px rgba(73, 96, 65, 0.25));
+  z-index: -1;
+  transform: translateY(5%) rotateY(180deg);
+}
+#picking .picking-text {
+  display: flex;
+  align-items: center;
+  margin: 300px auto 0 auto;
+  width: 80%;
+}
+#picking .picking-text h4 {
+  position: relative;
+  margin: 0 25px;
+  font-size: clamp(26px, 1.3vw + 1rem, 28px);
+  font-family: "GenSenRounded TW-M", sans-serif;
+  letter-spacing: 0.3em;
+}
+#picking .picking-text h4::before {
+  left: -30px;
+}
+#picking .picking-text h4::after {
+  right: -21px;
+}
+#picking .picking-text h4::before, #picking .picking-text h4::after {
+  content: "";
+  position: absolute;
+  background-color: #eb9b28;
+  height: 25px;
+  width: 25px;
+  top: 8px;
+  border-radius: 50%;
+}
+#picking .picking-text p {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: clamp(16px, 1.3vw + 1rem, 20px);
+  letter-spacing: 0.1em;
+  padding-left: 10px;
+}
+#picking .picking-cardlist {
+  width: 80%;
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+#picking .picking-cardlist .fruitCard {
+  display: flex;
+}
+#picking .picking-cardlist .fruitCard > div .fruitImage {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+#picking .picking-cardlist .fruitCard .fruitInf {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  margin-left: 20px;
+}
+#picking .picking-cardlist .fruitCard .fruitInf label {
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(16px, 1.3vw + 1rem, 20px);
+  letter-spacing: 0.2em;
+  line-height: 1;
+  padding-bottom: 5px;
+}
+#picking .picking-cardlist .fruitCard .fruitInf .fruitSelect {
+  width: 110px;
+  border: 2px solid #6c8c42;
+  border-radius: 99px;
+  letter-spacing: 0.2rem;
+  padding: 0.3rem 1rem;
+  margin: 0.2rem 0;
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: 16px;
+  color: #6c8c42;
+}
+#picking .picking-cardlist .fruitCard .fruitInf .fruitDescription {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-weight: 100;
+  margin-top: 10px;
+  font-size: 16px;
+  letter-spacing: 0.05rem;
+  line-height: 1.35;
+}
+#picking .line {
+  border-bottom: 3px solid #6c8c42;
+}
+#picking .fragrance {
+  margin: 50px auto 0 auto;
+}
+
 @media (max-width: 1440px) {
   #news .news-ornament svg:nth-child(4) {
     width: 32%;
@@ -1642,6 +2025,7 @@ body.fixed {
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin: 0;
   }
   #features .features-secret .features-secret-box {
     margin: 0.7rem 0 !important;
