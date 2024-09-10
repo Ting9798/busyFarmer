@@ -93,6 +93,14 @@
                 return () => clearInterval(intervalId); // 清除定時器
             }, []);
 
+            // 讀取本地端內的資料
+            const [cartItems, setCartItems] = useState([]);
+
+            useEffect(() => {
+                // 讀取 localStorage 中的購物車資料
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                setCartItems(cart);
+            }, []);
             return (
                 <>
                     {/* 導覽列*/}
@@ -165,7 +173,7 @@
                                     btnImgHover="./images/shopping/productList-btn-1-hover.svg"
                                     btnName="季節商品" />
                                 <ProductBtn
-                                    btnHref="./shopping-season.html"
+                                    btnHref="./customized.html"
                                     btnImg="./images/shopping/productList-btn-2.svg"
                                     btnImgHover="./images/shopping/productList-btn-2-hover.svg"
                                     btnName="客製果乾" />

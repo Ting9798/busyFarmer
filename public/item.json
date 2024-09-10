@@ -6,13 +6,5 @@
         "image": "./images/shopping/1-elena-leya-unsplash.png",
         "price": 399,
         "quantity": 1
-    },
-    {
-        "id": 2,
-        "name": "客製化果乾包",
-        "nameEg": "Customized dried fruits",
-        "image": "./images/customized/tabs-1-svitlana-unsplash.jpg",
-        "price": 599,
-        "quantity": 1
     }
 ]

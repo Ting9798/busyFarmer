@@ -25,89 +25,97 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
-        function FruitCard(props) {
-            const fruitData = {
-                default: {
-                    image: './images/index/banner/banner-l-1.png',
-                    description: '請選擇水果'
-                },
-                apple: {
-                    image: './images/customized/cus-3-unsplash.jpg',
-                    description: `梨山特產：<br> 脆甜清爽帶有淡淡的酸味。富維生素C，輕熟女最愛`
-                },
-                pitaya: {
-                    image: './images/customized/cus-1-unsplash.jpg',
-                    description: `彰化特產：<br>清甜多汁，香氣迷人。富含抗氧化劑，有助提升免疫力`
-                }
-                , strawberry: {
-                    image: './images/customized/cus-2-unsplash.jpg',
-                    description: `大湖特產：<br>香甜酸爽，果肉細緻多汁。使皮膚水潤，最高人氣！`
-                },
-                pear: {
-                    image: './images/customized/cus-4-unsplash.jpg',
-                    description: `關西特產：<br> 多汁清甜質地脆爽。有豐富維生素K，幫助潤肺止咳`
-                },
-                blueberry: {
-                    image: './images/customized/cus-5-unsplash.jpg',
-                    description: `阿里山特產：<br> 微酸甜，帶有濃郁迷人果香。保健眼睛，3Ｃ族首選！`
-                },
-                banana: {
-                    image: './images/customized/cus-6-unsplash.jpg',
-                    description: '旗山特產：<br> 甜度高，有助促進心血管健康，老人小孩的最愛'
-                },
 
-                orange: {
-                    image: './images/customized/cus-7-unsplash.jpg',
-                    description: '苗栗特產：<br>  酸甜滋味適中，果肉多汁。維生素C高，幫助美容美白'
-                },
-                lemon: {
-                    image: './images/customized/cus-8-unsplash.jpg',
-                    description: '九如特產：<br> 酸味強烈，果香新鮮濃郁。維生素C幫助具抗氧化'
-                },
-                pineapple: {
-                    image: './images/customized/cus-9-unsplash.jpg',
-                    description: '枋寮特產：<br>香甜多汁，酸甜均衡熱帶風味。人氣超高小農推薦～'
-                },
-            };
+        const fruitData = {
+            default: {
+                image: './images/index/banner/banner-l-1.png',
+                description: '請選擇水果',
+                name: ''
+            },
+            apple: {
+                image: './images/customized/cus-3-unsplash.jpg',
+                description: `梨山特產：<br> 脆甜清爽帶有淡淡的酸味。富維生素C，輕熟女最愛`,
+                name: '蘋果'
+            },
+            pitaya: {
+                image: './images/customized/cus-1-unsplash.jpg',
+                description: `彰化特產：<br>清甜多汁，香氣迷人。富含抗氧化劑，有助提升免疫力`,
+                name: '火龍果'
+            },
+            strawberry: {
+                image: './images/customized/cus-2-unsplash.jpg',
+                description: `大湖特產：<br>香甜酸爽，果肉細緻多汁。使皮膚水潤，最高人氣！`,
+                name: '草莓'
+            },
+            pear: {
+                image: './images/customized/cus-4-unsplash.jpg',
+                description: `關西特產：<br> 多汁清甜質地脆爽。有豐富維生素K，幫助潤肺止咳`,
+                name: '水梨'
+            },
+            blueberry: {
+                image: './images/customized/cus-5-unsplash.jpg',
+                description: `阿里山特產：<br> 微酸甜，帶有濃郁迷人果香。保健眼睛，3Ｃ族首選！`,
+                name: '藍莓'
+            },
+            banana: {
+                image: './images/customized/cus-6-unsplash.jpg',
+                description: '旗山特產：<br> 甜度高，有助促進心血管健康，老人小孩的最愛',
+                name: '香蕉'
+            },
+            orange: {
+                image: './images/customized/cus-7-unsplash.jpg',
+                description: '苗栗特產：<br> 酸甜滋味適中，果肉多汁。維生素C高，幫助美容美白',
+                name: '橘子'
+            },
+            lemon: {
+                image: './images/customized/cus-8-unsplash.jpg',
+                description: '九如特產：<br> 酸味強烈，果香新鮮濃郁。維生素C幫助具抗氧化',
+                name: '檸檬'
+            },
+            pineapple: {
+                image: './images/customized/cus-9-unsplash.jpg',
+                description: '枋寮特產：<br>香甜多汁，酸甜均衡熱帶風味。人氣超高小農推薦～',
+                name: '鳳梨'
+            }
+        };
+
+        function FruitCard(props) {
 
             const [selectedFruit, setSelectedFruit] = useState('default');
 
-            const handleChange = (event) => {
-                setSelectedFruit(event.target.value);
+            const handleChange = (e) => {
+                setSelectedFruit(e.target.value);
+                props.onFruitChange(props.cardId, event.target.value); // Notify parent
             };
 
             const fruit = fruitData[selectedFruit] || {};
 
             return (
-                <>
-                    <div className="fruitCard">
-                        {/*圖片資訊*/}
-                        <div>
-                            <img className="fruitImage" src={fruit.image || props.fruitImg} alt="水果圖" />
-                        </div>
-                        {/*文字資訊*/}
-                        <div className="fruitInf">
-                            <label htmlFor="fruitSelect">{props.fruitTitle}</label>
-                            <select id={`${props.cardId}`} onChange={handleChange} value={selectedFruit} className="fruitSelect">
-                                {/*選單*/}
-                                <option value="">請選擇</option>
-                                <option value="apple">蘋果</option>
-                                <option value="pitaya">火龍果</option>
-                                <option value="strawberry">草莓</option>
-                                <option value="pear">水梨</option>
-                                <option value="blueberry">藍莓</option>
-                                <option value="banana">香蕉</option>
-                                <option value="orange">橘子</option>
-                                <option value="lemon">檸檬</option>
-                                <option value="pineapple">鳳梨</option>
-                            </select>
-                            {/*介紹*/}
-                            <div className="fruitDescription" dangerouslySetInnerHTML={{ __html: fruit.description || props.fruitDescription }}></div>
-                        </div>
+                <div className="fruitCard">
+                    <div>
+                        <img className="fruitImage" src={fruit.image || props.fruitImg} alt="水果圖" />
                     </div>
-                </>
+                    <div className="fruitInf">
+                        <label htmlFor="fruitSelect">{props.fruitTitle}</label>
+                        <select id={`${props.cardId}`} onChange={handleChange} value={selectedFruit} className="fruitSelect">
+                            <option value="">請選擇</option>
+                            <option value="apple">蘋果</option>
+                            <option value="pitaya">火龍果</option>
+                            <option value="strawberry">草莓</option>
+                            <option value="pear">水梨</option>
+                            <option value="blueberry">藍莓</option>
+                            <option value="banana">香蕉</option>
+                            <option value="orange">橘子</option>
+                            <option value="lemon">檸檬</option>
+                            <option value="pineapple">鳳梨</option>
+                        </select>
+                        <div className="fruitDescription" dangerouslySetInnerHTML={{ __html: fruit.description || props.fruitDescription }}></div>
+                    </div>
+                </div>
             );
         }
+
+        const CartContext = React.createContext();
         function App(props) {
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
@@ -136,8 +144,18 @@
                 setProductAlt(alt);
             };
 
+            const cartRef = useRef(null);
             const [selectedFruits, setSelectedFruits] = useState({});
 
+            useEffect(() => {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cartRef.current) {
+                    cart.forEach(item => {
+                        cartRef.current.addItemToCart(item);
+                    });
+                }
+            }, []);
+            
             // 水果選擇
             const handleFruitChange = (cardId, selectedFruit) => {
                 setSelectedFruits(prevState => ({
@@ -152,10 +170,36 @@
                 return requiredSelections.every(id => selectedFruits[id]);
             };
 
+            const getSelectedFruitNames = () => {
+                return Object.values(selectedFruits).map(fruitKey => {
+                    const fruit = fruitData[fruitKey];
+                    return fruit ? fruit.name : '';
+                }).join(', ');
+            };
+
             const handleAddToCart = () => {
                 if (areAllFruitsSelected()) {
-                    console.log('所有水果都已選擇', selectedFruits);
-                    // 添加到购物车的逻辑
+                    const itemsToAdd = [{
+                        id: 'custom-package',
+                        name: '客製化果乾包',
+                        image: './images/customized/tabs-1-svitlana-unsplash.jpg',
+                        price: 599,
+                        quantity: 1,
+                        notes: `${getSelectedFruitNames()}`
+                    }];
+
+                    // 本地端儲存
+                    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    itemsToAdd.forEach(item => {
+                        cart.push(item);
+                    });
+                    localStorage.setItem('cart', JSON.stringify(cart));
+
+                    itemsToAdd.forEach(item => {
+                        if (cartRef.current) {
+                            cartRef.current.addItemToCart(item);
+                        }
+                    });
                 } else {
                     alert('請選擇所有水果');
                 }
@@ -164,10 +208,7 @@
             // 下一步之前檢查包裝按鈕
             const handleNextStepClick = (e) => {
                 e.preventDefault();
-
-                // 確認是否有選擇的 radio 按鈕
                 const selectedOption = document.querySelector('input[name="pack"]:checked');
-
                 if (selectedOption) {
                     document.getElementById('introduce').scrollIntoView({
                         behavior: 'smooth'
@@ -185,7 +226,7 @@
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
-                    <FloatCart />
+                    <FloatCart ref={cartRef} />
                     <main>
                         {/*商品說明*/}
                         <section id="product">
@@ -193,7 +234,7 @@
                             <div className="product-tabs">
                                 {/*商品預覽-大*/}
                                 <div className="product-tabs-window">
-                                    <div className="tabs-box"><img src={productImg} alt={productAlt} /></div>
+                                    <figure className="tabs-box"><img src={productImg} alt={productAlt} /></figure>
                                 </div>
                                 {/*頁籤按鈕*/}
                                 <ul className="product-tabs-btn">

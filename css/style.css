@@ -1713,7 +1713,7 @@ body.fixed {
   padding: 10px;
 }
 #product .product-part .product-part-ToBuy #form-pack fieldset div label {
-  margin-left: 10px;
+  margin-left: 0 20px 0 10px;
 }
 
 #introduce {
