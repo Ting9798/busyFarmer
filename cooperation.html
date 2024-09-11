@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin .js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
     <script type="text/babel" src="./js/search.js"></script>
     <script type="text/babel" src="./js/FilterButton.js"></script>
@@ -30,30 +31,7 @@
                 textColor: 'green'
             });
 
-            function adjustMargin() {
-                const greenTopbar = document.querySelector(`.${navProps.headerClassName}`);
-                const title = document.getElementById('title');
-
-                if (greenTopbar && title) {
-                    // 取得導覽列高度
-                    let topHeight = greenTopbar.offsetHeight;
-                    // margin = 導覽列高度
-                    title.style.marginTop = `${topHeight}px`;
-                }
-            }
-            useEffect(() => {
-                // 调整 margin
-                adjustMargin();
-
-                // 調整尺寸
-                window.addEventListener('resize', adjustMargin);
-
-                // 清理監聽
-                return () => {
-                    window.removeEventListener('resize', adjustMargin);
-                };
-            }, [navProps]);
-
+            useAdjustMargin(navProps.headerClassName);
             return (
                 <>
                     {/* 導覽列*/}

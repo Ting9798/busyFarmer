@@ -114,7 +114,7 @@
 
                         .quantity-controls-price {
                             font-family: $GenSenRounded-R;
-                            font-size: 12px;
+                            font-size: 14px;
                             letter-spacing: .1rem;
                         }
 
@@ -130,6 +130,9 @@
                                 border-radius: 7px;
                             }
                         }
+                    }
+                    .item-notes{
+                        font-size: 12px;
                     }
                 }
             }

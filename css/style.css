@@ -583,7 +583,7 @@ footer #footer-content .footer-content-box .footer-map a:hover {
 }
 .floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls .quantity-controls-price {
   font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.1rem;
 }
 .floating-cart .cart-content .cart-items-box .cart-items .item-info .quantity-controls .quantity-controls-buttons {
@@ -596,6 +596,9 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   text-align: center;
   border: 2px solid #6c8c42;
   border-radius: 7px;
+}
+.floating-cart .cart-content .cart-items-box .cart-items .item-info .item-notes {
+  font-size: 12px;
 }
 .floating-cart .cart-content .cart-total {
   padding: 20px;
