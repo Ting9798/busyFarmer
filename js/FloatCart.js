@@ -21,7 +21,6 @@ const FloatCart = forwardRef((props, ref) => {
     useEffect(() => {
         const loadItems = async () => {
             try {
-                const response = await fetch('./item.json'); // 確保路徑正確
                 const data = await response.json();
                 setItems(prevItems => {
                     const newItems = [...prevItems, ...data];
@@ -33,7 +32,8 @@ const FloatCart = forwardRef((props, ref) => {
                     localStorage.setItem('cart', JSON.stringify(uniqueItems));
                     return uniqueItems;
                 });
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error('Failed to load items:', error);
             }
         };

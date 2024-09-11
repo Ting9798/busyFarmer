@@ -135,110 +135,6 @@ address {
     --GenSenRounded-R: 'GenSenRounded TW-R', sans-serif;
 }
 
-/* 導覽列*/
-.topbar {
-    /* 固定導覽列 */
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    top: 0;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    /* 動畫 */
-    transition: opacity 0.35s ease-in-out;
-}
-
-.witheTopbar {
-    /* 背景 */
-    background: var(--gradient-w);
-}
-
-.greenTopbar {
-    background: var(--gradient-g);
-}
-
-.logo {
-    width: 240px;
-    height: 100%;
-}
-
-.nav-content {
-    display: flex;
-}
-
-.hidden {
-    opacity: 0;
-    /* display: none; */
-}
-
-#anchor {
-    position: absolute;
-    top: 0;
-}
-
-/* 導覽列按鈕 */
-.nav-links {
-    display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.nav-links li {
-    padding: 10px;
-}
-
-.nav-links.brown a {
-    color: var(--text);
-}
-
-.nav-links.green a {
-    color: var(--white);
-}
-
-/* 小農商城按鈕 */
-.shopping-btn {
-    background-color: var(--primaryO);
-    border-radius: 0 0 0 45px;
-    padding: 10px 35px 10px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    /* 防止按鈕縮小 */
-    margin-left: 20px;
-    /* 在按鈕和鏈接之間添加間距 */
-}
-
-.shopping-btn a {
-    color: var(--white);
-    /* 按鈕文字顏色 */
-}
-
-.shopping-txt {
-    display: flex;
-    align-items: center;
-}
-
-.shopping-txt img {
-    width: 54px;
-    /* 調整圖片大小 */
-    margin-right: 10px;
-    /* 調整圖片和文字間的間距 */
-}
-
-.shopping-txt {
-    padding-left: 15px;
-}
-
-main {
-    flex: 1;
-    display: block;
-}
-
 /* footer */
 footer {
     position: relative;
@@ -574,7 +470,7 @@ footer {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-image: url('../images/shopping/productList-btn-1-transparent.svg');
+    background-image: url('../images/shopping/productList-btn-1.svg');
     background-size: 75%;
     background-repeat: no-repeat;
     background-position: center center;

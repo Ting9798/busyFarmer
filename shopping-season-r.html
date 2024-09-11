@@ -10,9 +10,13 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/Search.js"></script>
     <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Features.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
+    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -23,7 +27,6 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
         function App(props) {
-
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
@@ -38,8 +41,114 @@
                         textColor={navProps.textColor}
                     />
                     <main>
-                        <Footer />
+                        <section id="shoppingBanner">
+                            <div className="shoppingBanner-tit">
+                                <div className="shoppingBanner-tit-box">
+                                    <h1 className="s-title1">小農嚴選</h1><br />
+                                    <h1 className="s-title2">香甜美味</h1>
+                                </div>
+
+                                <div className="shoppingBanner-tit-ornament-box">
+                                    <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                            stroke="#6C8C42" strokeWidth="1" strokeLinecap="round" />
+                                    </svg>
+                                    <svg id="season-banner-spring" width="119" height="107" viewBox="0 0 119 107" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168"
+                                            stroke="#6C8C42" strokeWidth="1.5" strokeLinecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="season-productList">
+                            <div className="productList-tit">
+                                <div className="productList-tit-box">
+                                    <h3 className="season-productList-tit">季節商品</h3>
+                                </div>
+                            </div>
+
+                            <Search />
+                            <div className="season-productList">
+                                <div className="season-productList-item">
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/1-elena-leya-unsplash.png" alt="" /></figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="" />
+                                        </figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/3-elena-leya-unsplash.png" alt="" /></figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div className="season-productList-item">
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/4-elena-leya-unsplash.png" alt="" /></figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/1-elena-leya-unsplash.png" alt="" /></figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+
+                                    <a href="./product.html" className="season-productList-item-box">
+                                        <figure className="season-productList-btn"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="" /></figure>
+                                        <div className="season-productList-text">
+                                            <div className="season-productList-text-name">
+                                                <h4>夏日風情果醬</h4>
+                                                <h5>summer jam</h5>
+                                            </div>
+                                            <h3>299元</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        <FloatCart />
+                        <Features />
                     </main>
+                    <Footer />
                 </>
             )
         }
