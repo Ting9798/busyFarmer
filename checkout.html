@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+    <link rel="stylesheet" href="./css-pre/cart.css">
+    <link rel="stylesheet" href="./css-pre/style.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function App(props) {
+
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            function adjustMargin() {
+                const greenTopbar = document.querySelector(`.${navProps.headerClassName}`);
+                const title = document.getElementById('title');
+
+                if (greenTopbar && title) {
+                    // 取得導覽列高度
+                    let topHeight = greenTopbar.offsetHeight;
+                    // margin = 導覽列高度
+                    title.style.marginTop = `${topHeight}px`;
+                }
+            }
+            useEffect(() => {
+                // 调整 margin
+                adjustMargin();
+
+                // 調整尺寸
+                window.addEventListener('resize', adjustMargin);
+
+                // 清理監聽
+                return () => {
+                    window.removeEventListener('resize', adjustMargin);
+                };
+            }, [navProps]);
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <div id="title" class="cart-title">
+                        <div class="tit-box">
+                            <div class="tit-box-text">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M18.7695 41.56C20.4264 41.56 21.7695 40.2169 21.7695 38.56C21.7695 36.9031 20.4264 35.56 18.7695 35.56C17.1127 35.56 15.7695 36.9031 15.7695 38.56C15.7695 40.2169 17.1127 41.56 18.7695 41.56Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M38.3398 41.56C39.9967 41.56 41.3398 40.2169 41.3398 38.56C41.3398 36.9031 39.9967 35.56 38.3398 35.56C36.683 35.56 35.3398 36.9031 35.3398 38.56C35.3398 40.2169 36.683 41.56 38.3398 41.56Z"
+                                        fill="#6C8C42" />
+                                    <path d="M5.91992 10.83L8.92992 9.19C9.96992 8.63 11.2599 9.06 11.7499 10.13L14.0399 15.11"
+                                        stroke="#6C8C42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M17.8702 27.76L16.6602 30.75C16.1202 32.09 17.1002 33.56 18.5502 33.56H40.4302"
+                                        stroke="#6C8C42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M28.1198 19.29C27.5298 19.07 26.4198 20.02 26.3398 20.93C26.3398 20.97 26.3498 21.62 26.8598 21.96C27.0898 22.12 27.4998 22.25 27.8298 22.08C27.9698 22.01 28.1298 21.86 28.2698 21.45C28.4898 20.78 28.6498 19.49 28.1298 19.3L28.1198 19.29Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M30.3408 19.39C30.7308 19.14 31.6808 19.65 31.8708 20.29C31.8708 20.32 31.9708 20.78 31.6608 21.11C31.5208 21.26 31.2508 21.42 30.9908 21.35C30.8808 21.32 30.7408 21.24 30.5808 20.96C30.3108 20.51 30.0008 19.61 30.3408 19.39Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M18.0505 18.75C18.4005 22.84 22.7205 25.61 26.4405 26.29C27.0805 26.4 26.9205 27.38 26.2805 27.28C22.2905 26.33 17.8805 23.17 17.7305 18.76C17.7305 18.55 18.0505 18.55 18.0505 18.76V18.75Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M17.0107 15.58C16.7007 15.98 16.2707 16.64 16.0107 17.56C16.0107 17.56 15.6107 18.81 15.9307 20.28C16.4407 22.63 18.7507 25.77 22.2607 27.56C28.2707 30.61 34.3207 27.89 34.6507 27.74C37.9207 26.21 42.1907 22.62 42.1007 18.32C42.1007 17.89 42.0307 15.13 40.0407 13.71C38.4007 12.55 36.3707 12.93 35.9807 13.01C32.5207 13.73 32.0707 17.18 28.6407 17.53C27.5607 17.64 26.6907 17.39 26.3407 17.29C23.5407 16.47 22.9907 14.31 21.0407 13.95C20.1907 13.79 18.8807 13.95 17.0007 15.59L17.0107 15.58Z"
+                                        stroke="#6C8C42" stroke-width="2" stroke-miterlimit="10" />
+                                </svg>
+                                <h3>購物車</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <main>
+                        <section id="progressBar-box">
+                            <div class="progressBar-bg checkPage">
+                                <div class="progressBar checkPage"></div>
+                            </div>
+                            <div class="progressBar-text-box">
+                                <div class="progressBar-textbox">
+                                    <div class="progressBar-text">01商品確認</div>
+                                    <div class="progressBar-text checkPage">02填寫資料</div>
+                                    <div class="progressBar-text">03完成購買</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="product-section">
+                            <div id="closeProduct">
+                                <div>共<span>1</span>件商品</div>
+                                <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 1L3.5 5L1 1" stroke="#514535" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                            <table class="product-table">
+                                <tr class="product-header">
+                                    <td class="product-header-cell"></td>
+                                    <td class="product-header-cell">商品名稱</td>
+                                    <td class="product-header-cell">單件價格</td>
+                                    <td class="product-header-cell">數量</td>
+                                    <td class="product-header-cell">小計</td>
+                                </tr>
+                                <tr class="product-row">
+                                    <td class="product-cell">
+                                        <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
+                                    </td>
+                                    <td class="product-cell">
+                                        <a href="#">
+                                            <div>商品 / 夏日風情果醬<br />Summer Jam</div>
+                                        </a>
+                                    </td>
+                                    <td class="product-cell">NT.299</td>
+                                    <td class="product-cell">
+                                        <svg class="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                            <path
+                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+
+                                        <label for="quantity-input"></label>
+                                        <input type="text" class="quantity-input" name="quantity-input" value="1" />
+
+                                        <svg class="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                            <path
+                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
+                                                fill="#F1F1F1" />
+                                            <path
+                                                d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
+                                                fill="#F1F1F1" />
+                                        </svg>
+
+                                    </td>
+                                    <td class="product-cell">NT.299</td>
+                                </tr>
+                            </table>
+                        </section>
+
+                        <section id="order-form">
+                            <div class="order-form-box">
+                                <div class="order-info">
+                                    <ul>
+                                        <li class="payment-info-header">訂購人與收件人資訊填寫</li>
+                                        <li class="ordering-person">
+                                            <span>訂購人資訊</span>
+                                            <div class="gender-selection">
+                                                <label>訂購人姓名</label>
+                                                <label>
+                                                    <input type="radio" class="user-gender" name="userGender" value="male" />
+                                                    先生
+                                                </label>
+                                                <label>
+                                                    <input type="radio" class="user-gender" name="userGender" value="female" />
+                                                    女士
+                                                </label>
+                                            </div>
+                                            <input type="text" class="user-input" placeholder="姓名" />
+                                        </li>
+                                        <li class="user-email">
+                                            <label for="userEmail">電子信箱</label>
+                                            <input type="email" id="userEmail" class="user-input" placeholder="E-mail" />
+                                        </li>
+                                        <li class="user-mobile">
+                                            <label for="userMobile">手機號碼</label>
+                                            <input type="tel" id="userMobile" class="user-input" placeholder="0912345678" />
+                                        </li>
+                                        <li class="user-phone">
+                                            <label for="userPhone">室內電話</label>
+                                            <input type="tel" id="userPhone" class="user-input" placeholder="0222123456" />
+                                        </li>
+                                        <label class="recipient-address-header">收件地址</label>
+                                        <li class="recipient-address">
+                                            <select id="userAddress" name="userAddress" class="address-select">
+                                                <optgroup label=""></optgroup>
+                                                <option value="" disabled selected>縣市</option>
+                                                <optgroup label="北部">
+                                                    <option value="taipei">臺北市</option>
+                                                    <option value="new-taipei">新北市</option>
+                                                    <option value="keelung">基隆市</option>
+                                                    <option value="ilan">宜蘭縣</option>
+                                                    <option value="taoyuan">桃園市</option>
+                                                    <option value="hsinchu-county">新竹縣</option>
+                                                    <option value="hsinchu-city">新竹市</option>
+                                                </optgroup>
+                                                <optgroup label="中部">
+                                                    <option value="miaoli">苗栗縣</option>
+                                                    <option value="taichung">臺中市</option>
+                                                    <option value="changhua">彰化縣</option>
+                                                    <option value="nantou">南投縣</option>
+                                                    <option value="yunlin">雲林縣</option>
+                                                </optgroup>
+                                                <optgroup label="南部">
+                                                    <option value="chiayi-county">嘉義縣</option>
+                                                    <option value="chiayi-city">嘉義市</option>
+                                                    <option value="tainan">台南市</option>
+                                                    <option value="kaohsiung">高雄市</option>
+                                                    <option value="pingtung">屏東縣</option>
+                                                </optgroup>
+                                                <optgroup label="東部">
+                                                    <option value="hualien">花蓮縣</option>
+                                                    <option value="taitung">台東縣</option>
+                                                </optgroup>
+                                                <optgroup label="離島">
+                                                    <option value="penghu">澎湖縣</option>
+                                                    <option value="kinmen">金門縣</option>
+                                                    <option value="lienchiang">連江縣</option>
+                                                </optgroup>
+                                            </select>
+                                        </li>
+                                        <li class="address-details">
+                                            <input type="text" class="postal-code" placeholder="郵遞區號" />
+                                            <input type="text" class="address-detail" placeholder="收件地址" />
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li class="payment-info-header"></li>
+                                        <li class="ordering-person">
+                                            <span>收件人資訊</span>
+                                            <div>
+                                                <input type="checkbox" name="sameOrder" id="sameOrder" />
+                                                <label for="sameOrder">與訂購人相同</label>
+                                            </div>
+                                            <div class="gender-selection">
+                                                <label>收件人姓名</label>
+                                                <label>
+                                                    <input type="radio" class="user-gender" name="userGender" value="male" />
+                                                    先生
+                                                </label>
+                                                <label>
+                                                    <input type="radio" class="user-gender" name="userGender" value="female" />
+                                                    女士
+                                                </label>
+                                            </div>
+                                            <input type="text" class="user-input" placeholder="姓名" />
+                                        </li>
+                                        <li class="user-email">
+                                            <label for="userEmail">電子信箱</label>
+                                            <input type="email" id="userEmail" class="user-input" placeholder="E-mail" />
+                                        </li>
+                                        <li class="user-mobile">
+                                            <label for="userMobile">手機號碼</label>
+                                            <input type="tel" id="userMobile" class="user-input" placeholder="0912345678" />
+                                        </li>
+                                        <li class="user-phone">
+                                            <label for="userPhone">室內電話</label>
+                                            <input type="tel" id="userPhone" class="user-input" placeholder="0222123456" />
+                                        </li>
+                                        <label class="recipient-address-header">收件地址</label>
+                                        <li class="recipient-address">
+                                            <select id="userAddress" name="userAddress" class="address-select">
+                                                <optgroup label=""></optgroup>
+                                                <option value="" disabled selected>縣市</option>
+                                                <optgroup label="北部">
+                                                    <option value="taipei">臺北市</option>
+                                                    <option value="new-taipei">新北市</option>
+                                                    <option value="keelung">基隆市</option>
+                                                    <option value="ilan">宜蘭縣</option>
+                                                    <option value="taoyuan">桃園市</option>
+                                                    <option value="hsinchu-county">新竹縣</option>
+                                                    <option value="hsinchu-city">新竹市</option>
+                                                </optgroup>
+                                                <optgroup label="中部">
+                                                    <option value="miaoli">苗栗縣</option>
+                                                    <option value="taichung">臺中市</option>
+                                                    <option value="changhua">彰化縣</option>
+                                                    <option value="nantou">南投縣</option>
+                                                    <option value="yunlin">雲林縣</option>
+                                                </optgroup>
+                                                <optgroup label="南部">
+                                                    <option value="chiayi-county">嘉義縣</option>
+                                                    <option value="chiayi-city">嘉義市</option>
+                                                    <option value="tainan">台南市</option>
+                                                    <option value="kaohsiung">高雄市</option>
+                                                    <option value="pingtung">屏東縣</option>
+                                                </optgroup>
+                                                <optgroup label="東部">
+                                                    <option value="hualien">花蓮縣</option>
+                                                    <option value="taitung">台東縣</option>
+                                                </optgroup>
+                                                <optgroup label="離島">
+                                                    <option value="penghu">澎湖縣</option>
+                                                    <option value="kinmen">金門縣</option>
+                                                    <option value="lienchiang">連江縣</option>
+                                                </optgroup>
+                                            </select>
+                                        </li>
+                                        <li class="address-details">
+                                            <input type="text" class="postal-code" placeholder="郵遞區號" />
+                                            <input type="text" class="address-detail" placeholder="收件地址" />
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="payment-info">
+                                    <div class="payment-info-header">配送方式</div>
+                                    <ul class="payment-info-row">
+                                        <li class="payment-button">宅配</li>
+                                        <li class="payment-button">超商取貨</li>
+                                    </ul>
+                                    <div class="payment-info-header">付款方式</div>
+                                    <ul class="payment-info-row">
+                                        <li class="payment-button">貨到付款</li>
+                                        <li class="payment-button">信用卡</li>
+                                        <li class="payment-button">ATM付款</li>
+                                        <li class="payment-button">LINE PAY</li>
+                                    </ul>
+                                    <div class="payment-info-header">發票索取</div>
+                                    <ul class="invoice-info">
+                                        <li>
+                                            <select name="invoiceType" id="invoiceType" class="invoice-select">
+                                                <option value="" disabled selected>請選擇發票類型</option>
+                                                <option value="electronic">電子發票</option>
+                                                <option value="mobile-barcode">手機條碼</option>
+                                                <option value="donation">捐贈發票</option>
+                                                <option value="company">公司戶發票(統一發票)</option>
+                                            </select>
+                                        </li>
+                                        <li class="payment-info-col">
+                                            <label for="companyName">公司抬頭</label>
+                                            <input type="text" id="companyName" class="user-input" placeholder="小農好忙有限公司" />
+                                        </li>
+                                        <li class="payment-info-col">
+                                            <label for="taxId">統一編號</label>
+                                            <input type="text" id="taxId" class="user-input" placeholder="11322133" />
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="consent" class="consent-checkbox" />
+                                            <label for="consent">我同意辦理退/換貨時，由本公司代為處理銷售憑證(發票處理/銷售折讓)以加速作業流程</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                        <Footer />
+                    </main>
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+</body>
+
+</html>

@@ -749,6 +749,44 @@ body.fixed {
   padding: 0.5rem 1.8rem;
 }
 
+.filter-buttons-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  overflow-y: auto;
+}
+.filter-buttons-container .filter-button-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 5%;
+}
+.filter-buttons-container .filter-button-item .filter-button-title {
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(16px, 2vw, 24px);
+  letter-spacing: 0.2rem;
+  color: #6c8c42;
+  margin-bottom: 0.5rem;
+}
+.filter-buttons-container .filter-button-item .filter-buttons {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  letter-spacing: 0.05rem;
+  font-size: clamp(12px, 1rem, 14px);
+  color: #856a45;
+  border: 2px solid #eb9b28;
+  border-radius: 20px;
+  padding: 2px 10px;
+  margin: 0 5px 10px 0;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+.filter-buttons-container .filter-button-item .filter-buttons:hover {
+  background-color: rgba(235, 155, 40, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
 .jcEnd {
   justify-content: flex-end;
 }
@@ -765,10 +803,13 @@ body.fixed {
   border: 3.5px solid #6c8c42;
   border-radius: 99px;
   background-color: #fff;
+  max-width: 320px;
+  max-height: 40px;
 }
 .productList-search form .productList-search-input {
   background-color: transparent;
   padding: 8px 48px;
+  font-size: 0.9rem;
 }
 .productList-search form .search-suggestions {
   position: absolute;
@@ -795,6 +836,84 @@ body.fixed {
 }
 .productList-search form .search-suggestions .search-suggestion-item:hover {
   background-color: lightgrey;
+}
+.productList-search form .search-button {
+  min-width: 24px;
+  min-height: 24px;
+  transform: translateX(-24px);
+}
+
+.search-center {
+  margin: 0 auto;
+}
+
+.tit-box {
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 5% 1% 5%;
+}
+.tit-box .tit-box-text {
+  display: flex;
+  align-items: center;
+  color: #6c8c42;
+}
+.tit-box .tit-box-text svg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5px;
+}
+.tit-box .tit-box-text h3 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  font-family: "Noto Sans TC", "sans-serif";
+  font-weight: 500;
+  font-size: clamp(32px, 2.3rem, 36px);
+  letter-spacing: 0.2em;
+  color: #6c8c42;
+  white-space: nowrap;
+}
+.tit-box .tit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+.tit-box .tit-btn .tit-btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 25px;
+  border: 2px solid #6c8c42;
+  border-radius: 45px;
+  color: #6c8c42;
+}
+.tit-box .tit-btn .tit-btn-box:hover {
+  color: #F1F1F1;
+  background-color: #6c8c42;
+  transition: all 0.3s ease-in-out;
+}
+.tit-box .tit-btn .tit-btn-box:hover h3 {
+  color: #F1F1F1;
+  transition: all 0.3s ease-in-out;
+}
+.tit-box .tit-btn .tit-btn-box h3 {
+  font-family: "GenSenRounded TW-M", sans-serif;
+  font-size: clamp(14px, 1rem, 18px);
+  letter-spacing: 0.1em;
+  color: #6c8c42;
+  white-space: nowrap;
+}
+.tit-box .tit-btn .tit-btn-box .tit-btn-icon {
+  width: auto;
+  height: clamp(16px, 2vw, 20px);
 }
 
 #hero {
@@ -1882,6 +2001,80 @@ body.fixed {
   margin: 50px auto 0 auto;
 }
 
+#farmer-search {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+#farmer-search .farmer-search-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5%;
+}
+#farmer-search .farmer-search-container .farmer-search-buttons {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+#farmer-search .farmer-search-container .farmer-search-buttons .farmer-search-buttons-category {
+  width: 100%;
+  display: flex;
+  margin-bottom: 5%;
+}
+#farmer-search .farmer-search-container .farmer-search-buttons .farmer-search-buttons-category .search-options {
+  font-family: "GenSenRounded TW-L", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.2rem;
+  background-color: rgba(235, 155, 40, 0.5);
+  cursor: pointer;
+  color: #514535;
+  padding: 10px 20px;
+  border-radius: 45px;
+  margin: 0 10px;
+}
+#farmer-search .farmer-search-container .farmer-search-buttons .farmer-search-buttons-category .search-options:hover {
+  box-shadow: inset 0 0 0 3px #eb9b28;
+  transition: all 0.35s ease-in-out;
+}
+#farmer-search .farmer-search-container .farmer-search-buttons .farmer-search-buttons-category .search-options.active {
+  background-color: #eb9b28;
+  color: #F1F1F1;
+}
+#farmer-search .farmer-search-container .farmer-search-display {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg {
+  width: 100%;
+  height: 100%;
+  background-color: #6c8c42;
+  display: flex;
+  align-items: center;
+  border-radius: 36px;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .map-display {
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  z-index: 1;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .map-display.active {
+  display: none;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display {
+  width: 100%;
+  height: 90%;
+  background-color: #eb9b28;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display.active {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   #news .news-ornament svg:nth-child(4) {
     width: 32%;
@@ -1895,9 +2088,31 @@ body.fixed {
   #news .news-ornament svg:nth-child(4) {
     display: none;
   }
+  #farm-details .farm-details-content {
+    flex-direction: column;
+    margin: 1em 0 0 16%;
+  }
+  #farm-details .farm-details-content {
+    flex-direction: column;
+  }
+  .farm-details-ornament {
+    display: none;
+  }
+  #news .news-text {
+    height: 68vh;
+  }
+  #news .news-text .news-text-box .news-text-content h2 {
+    font-size: 24px;
+  }
+  #news .news-text .news-text-box .news-text-content p {
+    font-size: 12px;
+    margin: 1em 0;
+  }
   #cooperation::before {
     bottom: -38%;
     height: 169%;
+    background-size: cover;
+    background-position-x: 90%;
   }
 }
 @media (max-width: 1024px) {
@@ -2030,31 +2245,5 @@ body.fixed {
   #features .features-secret .features-secret-box {
     margin: 0.7rem 0 !important;
     padding: 0.6rem 1rem;
-  }
-}
-@media (max-width: 1280px) {
-  #farm-details .farm-details-content {
-    flex-direction: column;
-    margin: 1em 0 0 16%;
-  }
-  #farm-details .farm-details-content {
-    flex-direction: column;
-  }
-  .farm-details-ornament {
-    display: none;
-  }
-  #news .news-text {
-    height: 68vh;
-  }
-  #news .news-text .news-text-box .news-text-content h2 {
-    font-size: 24px;
-  }
-  #news .news-text .news-text-box .news-text-content p {
-    font-size: 12px;
-    margin: 1em 0;
-  }
-  #cooperation::before {
-    background-size: cover;
-    background-position-x: 90%;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+    <link rel="stylesheet" href="./css-pre/cart.css">
+    <link rel="stylesheet" href="./css-pre/style.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function App(props) {
+
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            function adjustMargin() {
+                const greenTopbar = document.querySelector(`.${navProps.headerClassName}`);
+                const title = document.getElementById('title');
+
+                if (greenTopbar && title) {
+                    // 取得導覽列高度
+                    let topHeight = greenTopbar.offsetHeight;
+                    // margin = 導覽列高度
+                    title.style.marginTop = `${topHeight}px`;
+                }
+            }
+            useEffect(() => {
+                // 调整 margin
+                adjustMargin();
+
+                // 調整尺寸
+                window.addEventListener('resize', adjustMargin);
+
+                // 清理監聽
+                return () => {
+                    window.removeEventListener('resize', adjustMargin);
+                };
+            }, [navProps]);
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+
+                    <div id="title" class="cart-title">
+                        <div class="tit-box">
+                            <div class="tit-box-text">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.2185 15.09C19.6285 14.68 18.5785 14.06 17.1285 13.79C16.5085 13.67 14.7085 13.35 12.6585 14.21C12.0485 14.47 10.5285 15.2 9.38846 16.88C7.86846 19.11 8.08846 21.44 8.16846 22.14C8.31846 23.51 8.81846 24.53 8.91846 24.74C9.25846 25.42 9.62846 25.89 9.85846 26.18C10.5385 27.03 11.1785 27.55 11.9885 28.19C12.9885 28.97 13.5485 29.38 14.9085 30.39C16.5885 31.64 17.4185 32.31 18.1985 33.22C18.9485 34.11 19.4385 34.95 19.7285 35.54C18.9785 33.01 18.1485 29.16 18.3785 24.45C18.5685 20.56 19.4185 17.36 20.2085 15.1L20.2185 15.09Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M10.5093 18.86C8.15931 25.46 14.1293 26.27 17.5793 30.27C18.0293 30.73 17.2993 31.44 16.8593 30.96C15.2693 29.02 13.2493 27.61 11.3693 25.94C10.3793 25.07 9.76931 23.79 9.65931 22.51C9.53931 21.22 9.83931 19.94 10.3093 18.78C10.3593 18.66 10.5593 18.73 10.5093 18.86Z"
+                                        fill="white" />
+                                    <path
+                                        d="M24.0019 2.92001C12.3619 2.92001 2.92188 12.36 2.92188 24C2.92188 35.64 12.3619 45.08 24.0019 45.08C35.6419 45.08 45.0819 35.64 45.0819 24C45.0819 12.36 35.6419 2.92001 24.0019 2.92001ZM38.9619 24.37C38.2719 25.41 37.4919 26.06 35.9619 27.31C34.1719 28.78 33.6619 28.94 31.4319 30.57C29.1619 32.23 28.0219 33.06 26.8119 34.41C25.2719 36.12 24.3319 37.76 23.8819 38.62C23.3419 39.66 22.9919 40.54 22.7519 41.27C22.2319 42.86 22.2319 43.55 21.9719 43.6C21.6019 43.67 20.8319 42.4 19.0119 36.21C18.8019 35.72 18.4419 34.97 17.8419 34.17C16.9319 32.93 15.9819 32.13 14.2919 30.94C13.0985 30.0933 11.9719 29.2733 10.9119 28.48C9.65187 27.53 8.85187 26.56 8.33187 25.71C7.40188 24.17 7.22187 22.67 7.18187 21.96C7.12187 21.1 6.74187 18.29 8.92188 15.74C9.45187 15.12 11.6819 13.08 14.3519 13.04C17.2219 13 19.0519 13.94 20.3319 14.91C21.0819 13.48 22.1119 12.01 23.3419 10.99C24.2819 10.21 27.9619 7.18001 32.4519 7.92001C35.7619 8.47001 37.8019 10.82 38.4419 11.62C41.0419 14.92 40.6419 18.67 40.5219 19.74C40.4219 20.63 40.2019 22.5 38.9619 24.37Z"
+                                        fill="#6C8C42" />
+                                </svg>
+                                <h3>完成購買</h3>
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.2185 15.09C19.6285 14.68 18.5785 14.06 17.1285 13.79C16.5085 13.67 14.7085 13.35 12.6585 14.21C12.0485 14.47 10.5285 15.2 9.38846 16.88C7.86846 19.11 8.08846 21.44 8.16846 22.14C8.31846 23.51 8.81846 24.53 8.91846 24.74C9.25846 25.42 9.62846 25.89 9.85846 26.18C10.5385 27.03 11.1785 27.55 11.9885 28.19C12.9885 28.97 13.5485 29.38 14.9085 30.39C16.5885 31.64 17.4185 32.31 18.1985 33.22C18.9485 34.11 19.4385 34.95 19.7285 35.54C18.9785 33.01 18.1485 29.16 18.3785 24.45C18.5685 20.56 19.4185 17.36 20.2085 15.1L20.2185 15.09Z"
+                                        fill="#6C8C42" />
+                                    <path
+                                        d="M10.5093 18.86C8.15931 25.46 14.1293 26.27 17.5793 30.27C18.0293 30.73 17.2993 31.44 16.8593 30.96C15.2693 29.02 13.2493 27.61 11.3693 25.94C10.3793 25.07 9.76931 23.79 9.65931 22.51C9.53931 21.22 9.83931 19.94 10.3093 18.78C10.3593 18.66 10.5593 18.73 10.5093 18.86Z"
+                                        fill="white" />
+                                    <path
+                                        d="M24.0019 2.92001C12.3619 2.92001 2.92188 12.36 2.92188 24C2.92188 35.64 12.3619 45.08 24.0019 45.08C35.6419 45.08 45.0819 35.64 45.0819 24C45.0819 12.36 35.6419 2.92001 24.0019 2.92001ZM38.9619 24.37C38.2719 25.41 37.4919 26.06 35.9619 27.31C34.1719 28.78 33.6619 28.94 31.4319 30.57C29.1619 32.23 28.0219 33.06 26.8119 34.41C25.2719 36.12 24.3319 37.76 23.8819 38.62C23.3419 39.66 22.9919 40.54 22.7519 41.27C22.2319 42.86 22.2319 43.55 21.9719 43.6C21.6019 43.67 20.8319 42.4 19.0119 36.21C18.8019 35.72 18.4419 34.97 17.8419 34.17C16.9319 32.93 15.9819 32.13 14.2919 30.94C13.0985 30.0933 11.9719 29.2733 10.9119 28.48C9.65187 27.53 8.85187 26.56 8.33187 25.71C7.40188 24.17 7.22187 22.67 7.18187 21.96C7.12187 21.1 6.74187 18.29 8.92188 15.74C9.45187 15.12 11.6819 13.08 14.3519 13.04C17.2219 13 19.0519 13.94 20.3319 14.91C21.0819 13.48 22.1119 12.01 23.3419 10.99C24.2819 10.21 27.9619 7.18001 32.4519 7.92001C35.7619 8.47001 37.8019 10.82 38.4419 11.62C41.0419 14.92 40.6419 18.67 40.5219 19.74C40.4219 20.63 40.2019 22.5 38.9619 24.37Z"
+                                        fill="#6C8C42" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <main>
+                        <section id="progressBar-box">
+                            <div class="progressBar-bg confirmation">
+                                <div class="progressBar confirmation"></div>
+                            </div>
+                            <div class="progressBar-text-box">
+                                <div class="progressBar-textbox">
+                                    <div class="progressBar-text">01商品確認</div>
+                                    <div class="progressBar-text checkPage">02填寫資料</div>
+                                    <div class="progressBar-text checkPage">03完成購買</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="confirmation-section">
+                            <div class="confirmation-message">
+                                <p>您的訂單已經成功完成了，我們真心感謝您的支持！</p>
+                                <p>這次<span class="order-amount">349</span>元的訂單中，有50%（<span class="farmer-contribution-amount">174</span>元）將會回饋給辛勤的小農們。</p>
+                                <p>他們的努力讓我們能夠為您提供這些優質的產品，而<span>您的支持正是他們繼續前行的動力。</span></p>
+                                <p>希望您對商品感到滿意！如果有任何問題或需要幫助，請隨時聯繫我們。</p>
+                                <p>我們一直在這裡為您服務！</p>
+                                <p>再次感謝您的支持，祝您每一天都快樂愉快！</p>
+                            </div>
+                            <div class="button-group">
+                                <div class="button-group-box">
+                                    <a href="./shopping.html" class="button nextStep">返回商城</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <Footer />
+                    </main>
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+</body>
+
+</html>

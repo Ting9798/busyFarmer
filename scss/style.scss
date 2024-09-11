@@ -158,6 +158,51 @@ body.fixed {
     }
 }
 
+// 篩選按鈕
+.filter-buttons-container {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    overflow-y: auto;
+
+    .filter-button-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 5%;
+
+        .filter-button-title {
+            font-family: $GenSenRounded-M;
+            font-size: clamp(16px, 2vw, 24px);
+            letter-spacing: .2rem;
+            color: map-get($color , primaryG);
+            margin-bottom: .5rem;
+        }
+
+        .filter-buttons {
+            font-family: $GenSenRounded-R;
+            letter-spacing: .05rem;
+            font-size: clamp(12px, 1rem, 14px);
+
+            color: map-get($color , lightText);
+            border: 2px solid map-get($color , primaryO);
+            border-radius: 20px;
+            padding: 2px 10px;
+            margin: 0 5px 10px 0;
+
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+
+            &:hover {
+                background-color: map-get($color , orange-50);
+                transition: all .2s ease-in-out;
+            }
+        }
+    }
+}
+
 .jcEnd {
     justify-content: flex-end;
 }
@@ -178,9 +223,13 @@ body.fixed {
         border-radius: 99px;
         background-color: map-get($color , clr);
 
+        max-width: 320px;
+        max-height: 40px;
+
         .productList-search-input {
             background-color: transparent;
             padding: 8px 48px;
+            font-size: 0.9rem;
         }
 
         // 建議框
@@ -214,10 +263,101 @@ body.fixed {
                 background-color: map-get($color , lightgrey);
             }
         }
+
+        .search-button {
+            min-width: 24px;
+            min-height: 24px;
+            transform: translateX(-24px);
+        }
     }
 }
 
+.search-center {
+    margin: 0 auto;
+}
 
+// 標題
+.tit-box {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 5% 1% 5%;
+
+    .tit-box-text {
+        display: flex;
+        align-items: center;
+        color: map-get($color , primaryG);
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 5px;
+        }
+
+        h3 {
+            width: 100%;
+            height: auto;
+
+            display: flex;
+            align-items: center;
+
+            font-family: $NotoSans;
+            font-weight: 500;
+            font-size: clamp(32px, 2.3rem, 36px);
+            letter-spacing: .2em;
+            color: map-get($color , primaryG);
+            white-space: nowrap;
+        }
+
+    }
+
+    .tit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto;
+        height: auto;
+
+        .tit-btn-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 25px;
+            border: 2px solid map-get($color , primaryG);
+            border-radius: 45px;
+            color: map-get($color , primaryG);
+
+            &:hover {
+                color: map-get($color , white);
+                background-color: map-get($color , primaryG);
+                transition: all .3s ease-in-out;
+
+                h3 {
+                    color: map-get($color , white);
+                    transition: all .3s ease-in-out;
+                }
+            }
+
+            h3 {
+                font-family: $GenSenRounded-M;
+                font-size: clamp(14px, 1rem, 18px);
+                letter-spacing: .1em;
+                color: map-get($color , primaryG);
+                white-space: nowrap;
+            }
+
+            .tit-btn-icon {
+                width: auto;
+                height: clamp(16px, 2vw, 20px);
+            }
+        }
+    }
+}
 
 //--首頁
 #hero {
@@ -1532,6 +1672,95 @@ body.fixed {
     }
 }
 
+// 關於小農
+#farmer-search {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    .farmer-search-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 5%;
+
+        .farmer-search-buttons {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+
+            .farmer-search-buttons-category {
+                width: 100%;
+                display: flex;
+                margin-bottom: 5%;
+
+                .search-options {
+                    font-family: $GenSenRounded-L;
+                    font-size: 20px;
+                    letter-spacing: .2rem;
+
+                    background-color: map-get($color , orange-50);
+                    cursor: pointer;
+                    color: map-get($color , text);
+
+                    padding: 10px 20px;
+                    border-radius: 45px;
+                    margin: 0 10px;
+
+                    &:hover {
+                        box-shadow: inset 0 0 0 3px map-get($color , primaryO);
+                        transition: all .35s ease-in-out;
+                    }
+                }
+
+                .search-options.active {
+                    background-color: map-get($color , primaryO);
+                    color: map-get($color , white);
+                }
+            }
+        }
+
+        .farmer-search-display {
+            position: relative;
+            width: 100%;
+            height: auto;
+
+            .map-display-bg {
+                width: 100%;
+                height: 100%;
+                background-color: map-get($color , primaryG);
+                display: flex;
+                align-items: center;
+                border-radius: 36px;
+
+                .map-display {
+                    position: absolute;
+                    width: 100%;
+                    height: 90%;
+                    z-index: 1;
+                }
+
+                .map-display.active {
+                    display: none;
+                }
+
+                .farmer-display {
+                    width: 100%;
+                    height: 90%;
+                    background-color: map-get($color , primaryO);
+                }
+
+                .farmer-display.active {
+                    display: none;
+                }
+            }
+        }
+
+    }
+}
 
 @media(max-width:1440px) {
     #news .news-ornament svg:nth-child(4) {
@@ -1551,9 +1780,37 @@ body.fixed {
         display: none;
     }
 
+    #farm-details .farm-details-content {
+        flex-direction: column;
+        margin: 1em 0 0 16%;
+    }
+
+    #farm-details .farm-details-content {
+        flex-direction: column;
+    }
+
+    .farm-details-ornament {
+        display: none;
+    }
+
+    #news .news-text {
+        height: 68vh;
+    }
+
+    #news .news-text .news-text-box .news-text-content h2 {
+        font-size: 24px;
+    }
+
+    #news .news-text .news-text-box .news-text-content p {
+        font-size: 12px;
+        margin: 1em 0;
+    }
+
     #cooperation::before {
         bottom: -38%;
         height: 169%;
+        background-size: cover;
+        background-position-x: 90%;
     }
 
 }
@@ -1749,39 +2006,5 @@ body.fixed {
 
     }
 
-
-}
-
-@media (max-width: 1280px) {
-    #farm-details .farm-details-content {
-        flex-direction: column;
-        margin: 1em 0 0 16%;
-    }
-
-    #farm-details .farm-details-content {
-        flex-direction: column;
-    }
-
-    .farm-details-ornament {
-        display: none;
-    }
-
-    #news .news-text {
-        height: 68vh;
-    }
-
-    #news .news-text .news-text-box .news-text-content h2 {
-        font-size: 24px;
-    }
-
-    #news .news-text .news-text-box .news-text-content p {
-        font-size: 12px;
-        margin: 1em 0;
-    }
-
-    #cooperation::before {
-        background-size: cover;
-        background-position-x: 90%;
-    }
 
 }
