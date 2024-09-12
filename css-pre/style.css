@@ -833,19 +833,8 @@ footer {
 /* .contact-titBox figure {
     width: 13%;
 } */
-.contact-titBox {
-    display: flex;
-    margin: 130px 0 20px 0;
-    align-items: center;
-}
 
-.contact-titBox h3 {
-    font-family: var(--NotoSans);
-    font-weight: 500;
-    font-size: clamp(38px, 2vw + 1rem, 40px);
-    letter-spacing: .2em;
-    color: var(--primaryG);
-}
+
 
 .responsibility-contact p {
     margin-left: 13.5%;

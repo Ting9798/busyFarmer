@@ -11,11 +11,10 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel" src="./js/Navbar.js"></script>
-    <script type="text/babel" src="./js/useAdjustMargin .js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/cart.css">
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -25,8 +24,34 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+        function Option(props) {
+            const { optionSrc, optionTitle, optionName, optionEgName, optionPrice, discountPrice } = props;
+            return (
+                <div className="gift-option">
+                    <div className="gift-option-Surrounding">
+                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
+                        <figure><img src={props.optionSrc} alt={props.optionTitle} /></figure>
+                    </div>
+                    <div>
+                        <div className="gift-option-text">{props.optionTitle} / {props.optionName}</div>
+                        <div className="gift-option-text">{props.optionEgName}</div>
+                        <div className="gift-option-text">
+                            {discountPrice ? (
+                                <div className="gift-option-price-discount">
+                                    <span className="discounted-price">NT.{props.discountPrice}</span>
+                                    <span className="original-price">NT.{props.optionPrice}</span>
+                                </div>
+                            ) : (
+                                <div className="gift-option-price-normal">
+                                    NT.{props.optionPrice}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )
+        }
         function App(props) {
-
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
@@ -74,6 +99,7 @@
                         </div>
                     </div>
                     <main>
+                        {/*進度條*/}
                         <section id="progressBar-box">
                             <div className="progressBar-bg">
                                 <div className="progressBar"></div>
@@ -86,72 +112,77 @@
                                 </div>
                             </div>
                         </section>
+                        {/*商品確認*/}
                         <section id="product-section">
                             <table className="product-table">
-                                <tr className="product-header">
-                                    <td className="product-header-cell"></td>
-                                    <td className="product-header-cell">商品名稱</td>
-                                    <td className="product-header-cell">單件價格</td>
-                                    <td className="product-header-cell">數量</td>
-                                    <td className="product-header-cell">小計</td>
-                                    <td className="product-header-cell"></td>
-                                </tr>
-                                <tr className="product-row">
-                                    <td className="product-cell">
-                                        <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
-                                    </td>
-                                    <td className="product-cell">
-                                        <a href="#">
-                                            <div>商品 / 夏日風情果醬<br />Summer Jam</div>
-                                        </a>
-                                    </td>
-                                    <td className="product-cell">NT.299</td>
-                                    <td className="product-cell">
-                                        <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                            <path
-                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                fill="#F1F1F1" />
-                                        </svg>
-
-                                        <label htmlFor="quantity-input"></label>
-                                        <input type="text" className="quantity-input" name="quantity-input" value="1" />
-
-                                        <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                            <path
-                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                fill="#F1F1F1" />
-                                            <path
-                                                d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
-                                                fill="#F1F1F1" />
-                                        </svg>
-
-                                    </td>
-                                    <td className="product-cell">NT.299</td>
-                                    <td className="product-cell">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clipPath="url(#clip0_1166_7209)">
-                                                <rect x="20" y="20" width="20" height="20" rx="10" transform="rotate(-180 20 20)"
-                                                    fill="#6C8C42" />
+                                <thead className="product-header">
+                                    <tr className="product-header-box">
+                                        <td className="product-header-cell"></td>
+                                        <td className="product-header-cell">商品名稱</td>
+                                        <td className="product-header-cell">單件價格</td>
+                                        <td className="product-header-cell">數量</td>
+                                        <td className="product-header-cell">小計</td>
+                                        <td className="product-header-cell"></td>
+                                    </tr>
+                                </thead>
+                                <tbody className="product-row">
+                                    <tr>
+                                        <td className="product-cell">
+                                            <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
+                                        </td>
+                                        <td className="product-cell">
+                                            <a href="#">
+                                                <div>商品 / 夏日風情果醬<br />Summer Jam</div>
+                                            </a>
+                                        </td>
+                                        <td className="product-cell">NT.299</td>
+                                        <td className="product-cell">
+                                            <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
                                                 <path
-                                                    d="M13.8125 7.12505C13.9851 6.95246 13.9851 6.67264 13.8125 6.50005C13.6399 6.32746 13.3601 6.32746 13.1875 6.50005L6.52077 13.1668C6.34818 13.3394 6.34818 13.6192 6.52077 13.7918C6.69336 13.9644 6.97319 13.9644 7.14578 13.7918L13.8125 7.12505Z"
+                                                    d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
+                                                    fill="#F1F1F1" />
+                                            </svg>
+
+                                            <label htmlFor="quantity-input"></label>
+                                            <input type="text" className="quantity-input" name="quantity-input" value="1" />
+
+                                            <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                                <path
+                                                    d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
                                                     fill="#F1F1F1" />
                                                 <path
-                                                    d="M13.1875 13.7918C13.3601 13.9644 13.6399 13.9644 13.8125 13.7918C13.9851 13.6192 13.9851 13.3394 13.8125 13.1668L7.14577 6.50005C6.97318 6.32746 6.69336 6.32746 6.52077 6.50005C6.34818 6.67264 6.34818 6.95247 6.52077 7.12506L13.1875 13.7918Z"
+                                                    d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
                                                     fill="#F1F1F1" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_1166_7209">
+                                            </svg>
+
+                                        </td>
+                                        <td className="product-cell">NT.299</td>
+                                        <td className="product-cell">
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g clipPath="url(#clip0_1166_7209)">
                                                     <rect x="20" y="20" width="20" height="20" rx="10" transform="rotate(-180 20 20)"
-                                                        fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </td>
-                                </tr>
+                                                        fill="#6C8C42" />
+                                                    <path
+                                                        d="M13.8125 7.12505C13.9851 6.95246 13.9851 6.67264 13.8125 6.50005C13.6399 6.32746 13.3601 6.32746 13.1875 6.50005L6.52077 13.1668C6.34818 13.3394 6.34818 13.6192 6.52077 13.7918C6.69336 13.9644 6.97319 13.9644 7.14578 13.7918L13.8125 7.12505Z"
+                                                        fill="#F1F1F1" />
+                                                    <path
+                                                        d="M13.1875 13.7918C13.3601 13.9644 13.6399 13.9644 13.8125 13.7918C13.9851 13.6192 13.9851 13.3394 13.8125 13.1668L7.14577 6.50005C6.97318 6.32746 6.69336 6.32746 6.52077 6.50005C6.34818 6.67264 6.34818 6.95247 6.52077 7.12506L13.1875 13.7918Z"
+                                                        fill="#F1F1F1" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_1166_7209">
+                                                        <rect x="20" y="20" width="20" height="20" rx="10" transform="rotate(-180 20 20)"
+                                                            fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </section>
                         <section id="gift-section">
@@ -187,28 +218,20 @@
                                 </div>
                             </div>
                             <div className="gift-options">
-                                <div className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/giftCard.jpeg" alt="暖心小卡" /></figure>
-                                    </div>
-                                    <div>
-                                        <div className="gift-option-text">送禮首選 / 暖心小卡</div>
-                                        <div className="gift-option-text">Heart-warming Card</div>
-                                        <div className="gift-option-text">NT.20</div>
-                                    </div>
-                                </div>
-                                <div className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/giftBag.jpeg" alt="精美提袋" /></figure>
-                                    </div>
-                                    <div>
-                                        <div className="gift-option-text">送禮首選 / 精美提袋</div>
-                                        <div className="gift-option-text">Exquisite bag</div>
-                                        <div className="gift-option-text">NT.10</div>
-                                    </div>
-                                </div>
+                                <Option
+                                    optionSrc="./images/cart/giftCard.jpeg"
+                                    optionTitle="送禮首選"
+                                    optionName="暖心小卡"
+                                    optionEgName="Heart-warming Card"
+                                    optionPrice={20}
+                                />
+                                <Option
+                                    optionSrc="./images/cart/giftBag.jpeg"
+                                    optionTitle="送禮首選"
+                                    optionName="精美提袋"
+                                    optionEgName="Exquisite Bag"
+                                    optionPrice={10}
+                                />
                                 <div className="gift-option content">
                                     <label htmlFor="card-content"></label>
                                     <input type="text" id="card-content" className="card-content" name="card-content" placeholder="暖心小卡內容" />
@@ -248,72 +271,47 @@
                                 </div>
                             </div>
                             <div className="extra-product-tip">再消費<span>NT.701</span>免運費</div>
-                            <div className="extra-product">
-                                <a href="#" className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg" alt="甜蜜紫漾" />
-                                        </figure>
-                                    </div>
-                                    <div>
-                                        <h2 className="gift-option-text">最新商品 / 甜蜜紫漾</h2>
-                                        <h2 className="gift-option-text">Purple Bliss</h2>
-                                        <div className="gift-option-text">NT.280</div>
-                                        <div className="gift-option-text">NT.399</div>
-                                    </div>
-                                </a>
-                                <a href="#" className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg" alt="甜蜜紫漾" />
-                                        </figure>
-                                    </div>
-                                    <div>
-                                        <h2 className="gift-option-text">最新商品 / 甜蜜紫漾</h2>
-                                        <h2 className="gift-option-text">Purple Bliss</h2>
-                                        <div className="gift-option-text">NT.280</div>
-                                        <div className="gift-option-text">NT.399</div>
-                                    </div>
-                                </a>
-                                <a href="#" className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg" alt="甜蜜紫漾" />
-                                        </figure>
-                                    </div>
-                                    <div>
-                                        <h2 className="gift-option-text">最新商品 / 甜蜜紫漾</h2>
-                                        <h2 className="gift-option-text">Purple Bliss</h2>
-                                        <div className="gift-option-text">NT.280</div>
-                                        <div className="gift-option-text">NT.399</div>
-                                    </div>
-                                </a>
-                                <a href="#" className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg" alt="甜蜜紫漾" />
-                                        </figure>
-                                    </div>
-                                    <div>
-                                        <h2 className="gift-option-text">最新商品 / 甜蜜紫漾</h2>
-                                        <h2 className="gift-option-text">Purple Bliss</h2>
-                                        <div className="gift-option-text">NT.280</div>
-                                        <div className="gift-option-text">NT.399</div>
-                                    </div>
-                                </a>
-                                <a href="#" className="gift-option">
-                                    <div className="gift-option-Surrounding">
-                                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                                        <figure><img src="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg" alt="甜蜜紫漾" />
-                                        </figure>
-                                    </div>
-                                    <div>
-                                        <h2 className="gift-option-text">最新商品 / 甜蜜紫漾</h2>
-                                        <h2 className="gift-option-text">Purple Bliss</h2>
-                                        <div className="gift-option-text">NT.280</div>
-                                        <div className="gift-option-text">NT.399</div>
-                                    </div>
-                                </a>
+                            <div className="gift-options">
+                                <Option
+                                    optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
+                                    optionTitle="最新商品"
+                                    optionName="甜蜜紫漾"
+                                    optionEgName="Purple Bliss"
+                                    optionPrice={10}
+                                    discountPrice={5}
+                                />
+                                <Option
+                                    optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
+                                    optionTitle="最新商品"
+                                    optionName="甜蜜紫漾"
+                                    optionEgName="Purple Bliss"
+                                    optionPrice={10}
+                                    discountPrice={5}
+                                />
+                                <Option
+                                    optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
+                                    optionTitle="最新商品"
+                                    optionName="甜蜜紫漾"
+                                    optionEgName="Purple Bliss"
+                                    optionPrice={10}
+                                    discountPrice={5}
+                                />
+                                <Option
+                                    optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
+                                    optionTitle="最新商品"
+                                    optionName="甜蜜紫漾"
+                                    optionEgName="Purple Bliss"
+                                    optionPrice={10}
+                                    discountPrice={5}
+                                />
+                                <Option
+                                    optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
+                                    optionTitle="最新商品"
+                                    optionName="甜蜜紫漾"
+                                    optionEgName="Purple Bliss"
+                                    optionPrice={10}
+                                    discountPrice={5}
+                                />
                             </div>
                         </section>
                         <section id="reminder-section">
@@ -347,25 +345,27 @@
                                         <td className="product-total-cell">產品金額</td>
                                         <td><span className="amount">NT.299</span></td>
                                     </tr>
-
                                     <tr className="summary-row">
                                         <td className="free-shipping-cell">消費滿 $1000 免運費，未滿則酌收50元運費。</td>
                                         <td className="shipping-total-cell">運費小計</td>
                                         <td><span className="amount">NT.50</span></td>
                                     </tr>
                                     <tr className="grand-total-row">
+                                        <td></td>
                                         <td className="grand-total-cell">總計</td>
                                         <td><span id="total-amount" className="total-amount">NT.349</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </section>
-                        <div className="button-group">
-                            <div className="button-group-box">
-                                <a href="./shopping.html" className="button continue-shopping">繼續購物</a>
-                                <a href="./checkout .html" className="button nextStep">下一步</a>
-                            </div>
-                        </div>
+                        <ButtonGroup
+                            preBtnSrc="./shopping.html"
+                            preBtnClass="continue-shopping"
+                            preBtnName="繼續購物"
+                            nextBtnSrc="./checkout.html"
+                            nextBtnClass="nextStep"
+                            nextbtnName="下一步"
+                        />
                         <Footer />
                     </main>
                 </>

@@ -1,5 +1,5 @@
+<script type="text/babel" src="./js/ButtonGroup.js"></script>
 const { useState, useEffect, forwardRef, useImperativeHandle } = React;
-
 
 const FloatCart = forwardRef((props, ref) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +32,7 @@ const FloatCart = forwardRef((props, ref) => {
                     localStorage.setItem('cart', JSON.stringify(uniqueItems));
                     return uniqueItems;
                 });
-            } 
+            }
             catch (error) {
                 console.error('Failed to load items:', error);
             }
@@ -177,9 +177,11 @@ const FloatCart = forwardRef((props, ref) => {
                         <div className="cart-total">
                             小計 <span id="total-price">NT.{totalPrice}</span>
                         </div>
-                        <div className="button-group">
-                            <a href="./cart.html" className="button account">結帳</a>
-                        </div>
+                        <ButtonGroup
+                            nextBtnClass="account"
+                            nextBtnSrc="./cart.html"
+                            nextbtnName="結帳"
+                        />
                     </>
                 )}
             </div>

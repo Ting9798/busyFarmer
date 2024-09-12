@@ -13,9 +13,9 @@
     <script type="text/babel" src="./js/FloatCart.js"></script>
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/Features.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -155,7 +155,7 @@
                     });
                 }
             }, []);
-            
+
             // 水果選擇
             const handleFruitChange = (cardId, selectedFruit) => {
                 setSelectedFruits(prevState => ({
@@ -177,7 +177,8 @@
                 }).join(', ');
             };
 
-            const handleAddToCart = () => {
+            const handleAddToCart = (e) => {
+                e.preventDefault();
                 if (areAllFruitsSelected()) {
                     const itemsToAdd = [{
                         id: 'custom-package',
@@ -279,7 +280,12 @@
                                                 <label htmlFor="pack-2">整袋合裝</label>
                                             </div>
                                         </fieldset>
-                                        <div className="button-group jcEnd"><div className="button nextStep" onClick={handleNextStepClick}>下一步</div></div>
+                                        <ButtonGroup
+                                            btnPosition="jcEnd"
+                                            nextBtnClass="nextStep"
+                                            nextbtnName="下一步"
+                                            onClick={handleNextStepClick}
+                                        />
                                     </form>
                                 </div>
                             </div>
@@ -333,12 +339,12 @@
                                     />
                                 ))}
                                 {/*按鈕*/}
-                                <div className="button-group aiEng jcEnd">
-                                    <div className="button fruitCardBtn"
-                                        onClick={handleAddToCart}>
-                                        加入購物車
-                                    </div>
-                                </div>
+                                <ButtonGroup
+                                    btnPosition="aiEng jcEnd"
+                                    nextBtnClass="fruitCardBtn"
+                                    nextbtnName="加入購物車"
+                                    onClick={handleAddToCart}
+                                />
                             </div>
                         </section>
 

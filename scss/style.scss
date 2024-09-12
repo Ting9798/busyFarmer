@@ -109,18 +109,35 @@ body.fixed {
 .button-group {
     width: 100%;
     display: flex;
+    justify-content: center;
 
-    .button {
-        color: map-get($color , clr);
-        width: 12%;
-        border-radius: 24px;
-        padding: .5rem .8rem;
-        text-align: center;
-        margin: 3rem 0;
+    .button-group-box {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        font-family: $GenSenRounded-L;
-        letter-spacing: .2rem;
-        font-size: 20PX;
+        .button {
+            color: map-get($color , clr);
+            width: 12%;
+            border-radius: 24px;
+            padding: .5rem .8rem;
+            text-align: center;
+            margin: 3rem 0;
+
+            font-family: $GenSenRounded-L;
+            letter-spacing: .2rem;
+            font-size: 20PX;
+        }
+
+        .continue-shopping {
+            background-color: map-get($color , green-50);
+            transition: ease-in-out .35s;
+
+            &:hover {
+                background-color: map-get($color , primaryG);
+            }
+        }
     }
 
     .button.account {
@@ -156,6 +173,10 @@ body.fixed {
             padding: .5rem 1.8rem;
         }
     }
+}
+
+#confirmation-section .button-group-box {
+    justify-content: center;
 }
 
 // 篩選按鈕
@@ -204,11 +225,11 @@ body.fixed {
 }
 
 .jcEnd {
-    justify-content: flex-end;
+    justify-content: flex-end !important;
 }
 
 .aiEng {
-    align-items: flex-end;
+    align-items: flex-end !important;
 }
 
 // 搜尋
@@ -277,87 +298,90 @@ body.fixed {
 }
 
 // 標題
-.tit-box {
-    width: auto;
-    height: auto;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin: 0 5% 1% 5%;
-
-    .tit-box-text {
-        display: flex;
-        align-items: center;
-        color: map-get($color , primaryG);
-
-        svg {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 5px;
-        }
-
-        h3 {
-            width: 100%;
-            height: auto;
-
-            display: flex;
-            align-items: center;
-
-            font-family: $NotoSans;
-            font-weight: 500;
-            font-size: clamp(32px, 2.3rem, 36px);
-            letter-spacing: .2em;
-            color: map-get($color , primaryG);
-            white-space: nowrap;
-        }
-
-    }
-
-    .tit-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+#title {
+    .tit-box {
         width: auto;
         height: auto;
 
-        .tit-btn-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin: 0 5% 1% 5%;
+
+        .tit-box-text {
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 5px 25px;
-            border: 2px solid map-get($color , primaryG);
-            border-radius: 45px;
             color: map-get($color , primaryG);
 
-            &:hover {
-                color: map-get($color , white);
-                background-color: map-get($color , primaryG);
-                transition: all .3s ease-in-out;
-
-                h3 {
-                    color: map-get($color , white);
-                    transition: all .3s ease-in-out;
-                }
+            svg {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: flex-end;
+                margin-right: 5px;
             }
 
             h3 {
-                font-family: $GenSenRounded-M;
-                font-size: clamp(14px, 1rem, 18px);
-                letter-spacing: .1em;
+                width: 100%;
+                height: auto;
+
+                display: flex;
+                align-items: center;
+
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(32px, 2.3rem, 36px);
+                letter-spacing: .2em;
                 color: map-get($color , primaryG);
                 white-space: nowrap;
             }
 
-            .tit-btn-icon {
-                width: auto;
-                height: clamp(16px, 2vw, 20px);
+        }
+
+        .tit-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            height: auto;
+
+            .tit-btn-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 25px;
+                border: 2px solid map-get($color , primaryG);
+                border-radius: 45px;
+                color: map-get($color , primaryG);
+
+                &:hover {
+                    color: map-get($color , white);
+                    background-color: map-get($color , primaryG);
+                    transition: all .3s ease-in-out;
+
+                    h3 {
+                        color: map-get($color , white);
+                        transition: all .3s ease-in-out;
+                    }
+                }
+
+                h3 {
+                    font-family: $GenSenRounded-M;
+                    font-size: clamp(14px, 1rem, 18px);
+                    letter-spacing: .1em;
+                    color: map-get($color , primaryG);
+                    white-space: nowrap;
+                }
+
+                .tit-btn-icon {
+                    width: auto;
+                    height: clamp(16px, 2vw, 20px);
+                }
             }
         }
     }
 }
+
 
 //--首頁
 #hero {
@@ -1451,6 +1475,7 @@ body.fixed {
 
                     div {
                         text-wrap: nowrap;
+                        margin-right: 10px;
 
                         .choose1 {
                             padding-right: 3vw;
@@ -1458,6 +1483,7 @@ body.fixed {
 
                         input {
                             padding: 10px;
+                            margin-right: 5px;
                         }
 
                         label {
@@ -1759,6 +1785,477 @@ body.fixed {
             }
         }
 
+    }
+}
+
+.cart-title {
+    display: flex;
+    justify-content: center;
+}
+
+#progressBar-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 3.5rem 0 .5rem 0;
+
+    .progressBar-bg {
+        background-color: map-get($color , grey);
+        height: 5px;
+        width: 45%;
+        position: relative;
+        overflow: visible;
+
+        &::before {
+            content: '';
+            position: absolute;
+            z-index: 10;
+            bottom: -.2rem;
+            left: 0;
+            width: 100%;
+            height: 3.5rem;
+            background-image: url(../images/cart/seed.svg), url(../images/cart/leaf.svg), url(../images/cart/tree-s.svg);
+            background-repeat: no-repeat;
+            background-position: 16% 85%, 49.5% 90%, 84.5% 60%;
+            background-size: 1rem, 2.5rem, 3.5rem;
+        }
+
+        .progressBar {
+            background-color: map-get($color , text);
+            height: 5px;
+            width: 33.3%;
+
+            &.checkPage {
+                width: 66.6%;
+
+                ::before {
+                    background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s.svg);
+                }
+            }
+
+            &.confirmation {
+                width: 100%;
+
+                ::before {
+                    background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s-g.svg);
+                }
+            }
+        }
+    }
+
+    .progressBar-text-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+
+        .progressBar-textbox {
+            display: flex;
+            width: 45%;
+            justify-content: space-around;
+
+            .progressBar-text {
+                font-family: $GenSenRounded-R;
+                line-height: 1.5;
+                letter-spacing: .1rem;
+                font-size: 16px;
+
+                &:nth-child(2),
+                &:nth-child(3) {
+                    color: map-get($color , grey);
+                }
+
+                &.checkPage {
+                    color: map-get($color , text);
+                }
+            }
+        }
+    }
+}
+
+#product-section {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: $GenSenRounded-R;
+    font-size: 16px;
+    letter-spacing: .1rem;
+
+    .product-table {
+        table-layout: fixed;
+        width: 80%;
+        border-spacing: 0 2rem;
+
+        .product-header {
+            display: table-header-group;
+            vertical-align: middle;
+
+            .product-header-box {
+                width: 100%;
+                position: relative;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -1rem;
+                    width: 100%;
+                    border-bottom: 3px solid map-get($color , primaryG);
+                }
+
+                .product-header-cell {
+                    width: 20%;
+                    text-align: center;
+
+                    &:nth-child(2) {
+                        text-align: left;
+                        padding-left: 2rem;
+                    }
+
+                    &:nth-child(6) {
+                        width: 10%;
+                    }
+                }
+            }
+        }
+
+        .product-row {
+            display: table-row-group;
+            vertical-align: middle;
+
+            .product-cell {
+                text-align: center;
+                vertical-align: middle;
+
+                &:nth-child(2) {
+                    text-align: left;
+                    padding-left: 2rem;
+                }
+
+                &:nth-child(4) {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 13rem;
+                }
+
+                &:nth-child(6) {
+                    width: 10%;
+                    cursor: pointer;
+                }
+
+                .quantity-input {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border: 2px solid map-get($color , primaryG);
+                    border-radius: 4px;
+                    overflow: hidden;
+                    max-width: 2rem;
+                    text-align: center;
+                    margin: 0 2%;
+                }
+
+                img {
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+}
+
+.gift-options {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2.5rem;
+
+    .gift-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 5%;
+
+        .gift-option-Surrounding {
+            position: relative;
+            margin-bottom: 5%;
+
+            .gift-option-Surrounding-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                right: -5%;
+                bottom: -5%;
+                width: 5rem;
+                height: 5rem;
+                background-color: map-get($color , primaryO);
+                border: 3px solid map-get($color , white);
+                border-radius: 50%;
+                text-align: center;
+
+                span {
+                    color: map-get($color , white);
+                }
+            }
+
+            img {
+                width: 15rem;
+                height: 15rem;
+                object-fit: cover;
+                object-position: left;
+                border-radius: 16px;
+            }
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        .gift-option-text {
+            text-align: center;
+            font-family: $GenSenRounded-R;
+            font-size: 16px;
+            letter-spacing: .2rem;
+            line-height: 2;
+
+            &:nth-child(2),
+            &:nth-child(3) {
+                font-size: 14px;
+            }
+
+            .gift-option-price-discount {
+                display: flex;
+                flex-direction: column;
+
+                .discounted-price {
+                    color: map-get($color , red);
+                }
+
+                .original-price {
+                    text-decoration: line-through;
+                    color: map-get($color , grey);
+                }
+            }
+
+        }
+    }
+
+    .gift-option.content {
+        flex: 1;
+        border: 3px solid map-get($color , primaryG);
+        border-radius: 16px;
+        margin-right: 0;
+
+        input {
+            width: 90%;
+            text-align: center;
+        }
+    }
+}
+
+#gift-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cart-title {
+        position: relative;
+        width: 80%;
+
+        ::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            width: 100%;
+            border-bottom: 3px solid map-get($color , primaryG);
+        }
+    }
+}
+
+#extra-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cart-title {
+        position: relative;
+        width: 80%;
+
+        ::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            width: 100%;
+            border-bottom: 3px solid map-get($color , primaryG);
+        }
+    }
+
+    .extra-product-tip {
+        font-family: $GenSenRounded-R;
+        font-size: 14px;
+        letter-spacing: .2rem;
+        margin-bottom: 1%;
+
+        span {
+            color: map-get($color , red);
+        }
+    }
+}
+
+#reminder-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .reminder-block-box {
+        position: relative;
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            width: 100%;
+            border-bottom: 3px solid map-get($color , primaryG);
+        }
+
+        .reminder-block {
+            font-family: $GenSenRounded-R;
+            font-size: 16px;
+            line-height: 1.5;
+            letter-spacing: .1rem;
+
+            label {
+                padding-right: 10px;
+            }
+
+            ul {
+                margin-bottom: 1rem;
+            }
+
+            h4:nth-child(1) {
+                position: relative;
+
+                &::before {
+                    content: '<';
+                }
+
+                &::after {
+                    content: '>';
+                }
+            }
+
+            input {
+                border: 1px solid map-get($color , text);
+                padding: .3rem;
+
+                &:last-child {
+                    background-color: map-get($color , text);
+                    color: map-get($color , white);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+#checkout-summary {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .summary-table {
+        position: relative;
+        width: 80%;
+        letter-spacing: .2rem;
+        font-family: $GenSenRounded-R;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            width: 100%;
+            border-bottom: 3px solid map-get($color , primaryG);
+        }
+
+        .summary-row {
+            text-align: end;
+            line-height: 3;
+
+            .product-total-cell {
+                span {
+                    padding-left: 15%;
+                }
+            }
+
+            &:nth-of-type(2) {
+                position: relative;
+
+                &::after {
+                    content: '';
+                    width: 50%;
+                    position: absolute;
+                    right: 0;
+                    bottom: -.5rem;
+                    width: 60%;
+                    border-bottom: 3px solid map-get($color , primaryG);
+                }
+            }
+        }
+    }
+}
+
+.grand-total-row {
+    width: 80%;
+    text-align: end;
+    position: relative;
+    line-height: 3;
+    font-family: $GenSenRounded-R;
+
+    .grand-total-cell {
+        font-size: 20px;
+    }
+
+    .total-amount {
+        font-size: 20px;
+        color: map-get($color , red);
+    }
+}
+
+.contact-titBox {
+    display: flex;
+    margin: 130px 0 20px 0;
+    align-items: center;
+
+    h3 {
+        font-family: $NotoSans;
+        font-weight: 500;
+        font-size: clamp(38px, 2vw + 1rem, 40px);
+        letter-spacing: .2em;
+        color: map-get($color , primaryG);
     }
 }
 
