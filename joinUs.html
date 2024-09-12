@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>加入我們 - 小農好忙</title>
+    <title>加入我們-小農好忙</title>
     <link rel="icon" href="./favicon.ico">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -14,7 +14,6 @@
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -27,18 +26,18 @@
         function App(props) {
 
             const [navProps, setNavProps] = useState({
-                headerclassName: 'greenTopbar',
+                headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
                 textColor: 'green'
             });
 
-            useAdjustMargin(navProps.headerclassName);
+            useAdjustMargin(navProps.headerClassName);
 
             return (
                 <>
                     {/* 導覽列*/}
                     <Nav
-                        headerclassName={navProps.headerclassName}
+                        headerClassName={navProps.headerClassName}
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
@@ -103,7 +102,7 @@
                                     <div className="promotion-item-details">
                                         <h4>產品推廣</h4>
                                         <p>在我們的網站上展示您的農產品，讓更多的人了解並購買您的產品。</p>
-                                        <svg className="promotion-item-details1" width="156" height="144" viewBox="0 0 156 144"
+                                        <svg className="promotion-item-details" width="156" height="144" viewBox="0 0 156 144"
                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M17.1717 5.00435C24.5482 1.008 33.0436 -0.149546 41.0813 1.7466C49.1189 3.64275 56.153 8.46382 60.878 15.315C69.4933 27.9611 66.0766 58.407 40.4971 97.5106C30.4981 112.787 15.8236 109.38 11.3131 95.6567C1.78724 66.7063 -8.68162 19.1805 17.1717 5.00435Z"
@@ -148,11 +147,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div className="joinUsBtn">
+                            <div className="tit-box jcCenter">
                                 <a href="./joinUsForm.html" className="tit-btn">
                                     <div className="tit-btn-box">
                                         <h3>加入我們</h3>
-
                                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
                                             className="tit-btn-icon">
                                             <path

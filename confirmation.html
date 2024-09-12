@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小農好忙</title>
+    <title>小農商城-小農好忙</title>
     <link rel="icon" href="./favicon.ico">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -12,10 +12,9 @@
 
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/cart.css">
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -72,6 +71,7 @@
                         </div>
                     </div>
                     <main>
+                        {/*進度條*/}
                         <section id="progressBar-box">
                             <div className="progressBar-bg confirmation">
                                 <div className="progressBar confirmation"></div>
@@ -94,11 +94,11 @@
                                 <p>我們一直在這裡為您服務！</p>
                                 <p>再次感謝您的支持，祝您每一天都快樂愉快！</p>
                             </div>
-                            <div className="button-group">
-                                <div className="button-group-box">
-                                    <a href="./shopping.html" className="button nextStep">返回商城</a>
-                                </div>
-                            </div>
+                            <ButtonGroup
+                                nextBtnSrc="./shopping.html"
+                                nextBtnClass="nextStep"
+                                nextbtnName="返回商城"
+                            />
                         </section>
 
                         <Footer />

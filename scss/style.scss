@@ -228,6 +228,10 @@ body.fixed {
     justify-content: flex-end !important;
 }
 
+.jcCenter {
+    justify-content: center !important;
+}
+
 .aiEng {
     align-items: flex-end !important;
 }
@@ -298,89 +302,99 @@ body.fixed {
 }
 
 // 標題
-#title {
-    .tit-box {
+.tit-box {
+    width: auto;
+    height: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0 5% 1% 5%;
+
+    .tit-Name {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+
+        font-family: $NotoSans;
+        font-weight: 500;
+        font-size: 40px;
+        letter-spacing: .2rem;
+        color: map-get($color , primaryG);
+    }
+
+    .tit-box-text {
+        display: flex;
+        align-items: center;
+        color: map-get($color , primaryG);
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 5px;
+        }
+
+        h3 {
+            width: 100%;
+            height: auto;
+
+            display: flex;
+            align-items: center;
+
+            font-family: $NotoSans;
+            font-weight: 500;
+            font-size: clamp(32px, 2.3rem, 36px);
+            letter-spacing: .2em;
+            color: map-get($color , primaryG);
+            white-space: nowrap;
+        }
+    }
+
+    .tit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: auto;
         height: auto;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        margin: 0 5% 1% 5%;
-
-        .tit-box-text {
+        .tit-btn-box {
             display: flex;
+            justify-content: center;
             align-items: center;
+            padding: 5px 25px;
+            border: 2px solid map-get($color , primaryG);
+            border-radius: 45px;
             color: map-get($color , primaryG);
 
-            svg {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: flex-end;
-                margin-right: 5px;
+            &:hover {
+                color: map-get($color , white);
+                background-color: map-get($color , primaryG);
+                transition: all .3s ease-in-out;
+
+                h3 {
+                    color: map-get($color , white);
+                    transition: all .3s ease-in-out;
+                }
             }
 
             h3 {
-                width: 100%;
-                height: auto;
-
-                display: flex;
-                align-items: center;
-
-                font-family: $NotoSans;
-                font-weight: 500;
-                font-size: clamp(32px, 2.3rem, 36px);
-                letter-spacing: .2em;
+                font-family: $GenSenRounded-M;
+                font-size: clamp(14px, 1rem, 18px);
+                letter-spacing: .1em;
                 color: map-get($color , primaryG);
                 white-space: nowrap;
             }
 
-        }
-
-        .tit-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: auto;
-            height: auto;
-
-            .tit-btn-box {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 5px 25px;
-                border: 2px solid map-get($color , primaryG);
-                border-radius: 45px;
-                color: map-get($color , primaryG);
-
-                &:hover {
-                    color: map-get($color , white);
-                    background-color: map-get($color , primaryG);
-                    transition: all .3s ease-in-out;
-
-                    h3 {
-                        color: map-get($color , white);
-                        transition: all .3s ease-in-out;
-                    }
-                }
-
-                h3 {
-                    font-family: $GenSenRounded-M;
-                    font-size: clamp(14px, 1rem, 18px);
-                    letter-spacing: .1em;
-                    color: map-get($color , primaryG);
-                    white-space: nowrap;
-                }
-
-                .tit-btn-icon {
-                    width: auto;
-                    height: clamp(16px, 2vw, 20px);
-                }
+            .tit-btn-icon {
+                width: auto;
+                height: clamp(16px, 2vw, 20px);
             }
         }
     }
 }
+
 
 
 //--首頁
@@ -1125,6 +1139,1014 @@ body.fixed {
     }
 }
 
+// --公益理念
+#philanthropyBanner {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    display: flex;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background-image: url('../images/philanthropy/concept-banner.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    .philanthropyBanner-tit {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .philanthropyBanner-tit-box {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
+
+            h1 {
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 56px);
+                letter-spacing: .2em;
+                color: map-get($color , white);
+            }
+        }
+
+        .philanthropyBanner-tit-ornament-box {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+
+            figure {
+                &:nth-child(1) {
+                    position: absolute;
+                    z-index: 2;
+                    width: 14%;
+                    height: 15%;
+                    transform: translateX(430%) translateY(100%);
+                }
+
+                &:nth-child(2) {
+                    position: absolute;
+                    z-index: 2;
+                    width: 12%;
+                    height: 14%;
+                    transform: translateX(470%) translateY(400%);
+                }
+
+                &:nth-child(3) {
+                    position: absolute;
+                    z-index: 2;
+                    width: 10%;
+                    height: 10%;
+                    transform: translateX(830%) translateY(850%);
+                }
+            }
+        }
+    }
+}
+
+#philanthropy-productList {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 150%;
+        background-image: url('../images/philanthropy/mountain-w-XL.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: $shadow;
+        z-index: -1;
+        transform: translateY(-5%);
+    }
+
+    .productList-tit {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+
+        .philanthropy-tit-box {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            margin-right: 28%;
+
+            h3 {
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 40px);
+                letter-spacing: .2em;
+            }
+        }
+    }
+
+    .helpFarmers {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        h6 {
+            text-align: center;
+            font-family: $GenSenRounded-R;
+            font-size: clamp(24px, 2.5vw + 1rem, 32px);
+            letter-spacing: .15em;
+            padding-top: 100px;
+            color: map-get($color , lightText);
+        }
+
+        .philanthropy-list {
+            display: flex;
+            justify-content: center;
+
+            li {
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                margin-right: 4%;
+
+                h4 {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    font-family: $NotoSans;
+                    font-size: clamp(100px, 10vw + 1rem, 136px);
+                    letter-spacing: -.03em;
+                    font-weight: 500;
+                    padding-top: 90px;
+                    color: map-get($color , primaryO);
+                    line-height: .9;
+                }
+
+                p {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    font-family: $NotoSans;
+                    font-size: clamp(16px, 2vw + 1rem, 20px);
+                    font-weight: 400;
+                    color: map-get($color , lightText);
+                    line-height: 1;
+                    padding-right: 6px;
+                }
+
+                h3 {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    font-family: $NotoSans;
+                    font-size: clamp(30px, 2.8vw + 1rem, 40px);
+                    letter-spacing: .2em;
+                    font-weight: 400;
+                    color: map-get($color , lightText);
+                    line-height: 1;
+                }
+
+                .philanthropy-list-right-top {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 0 0 30px 10px;
+                }
+
+                .philanthropy-list-right-botton {
+                    display: flex;
+                    align-items: flex-end;
+                }
+            }
+        }
+
+        .contact {
+            margin: 70px auto;
+            font-family: $GenSenRounded-L;
+            color: map-get($color , lightText);
+            line-height: 2em;
+            letter-spacing: .16em;
+        }
+    }
+
+    #responsibility {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+        .responsibility-contact {
+            width: 40%;
+            margin-right: 6%;
+
+            p {
+                margin-left: 13.5%;
+                display: flex;
+                font-family: $GenSenRounded-L;
+                color: map-get($color , text);
+                line-height: 1.6;
+                letter-spacing: .16em;
+                font-size: clamp(16px, 2vw + 1rem, 20px);
+            }
+
+            .responsibility-contact-tit-report {
+                .report {
+                    margin-left: 13.5%;
+                    display: block;
+
+                    li {
+                        display: flex;
+                        align-items: flex-end;
+
+                        .year {
+                            margin: 5px 5px 2px 0;
+                            padding: 2px 40px;
+                            font-family: $GenSenRounded-L;
+                            color: map-get($color , white);
+                            line-height: 1.6;
+                            letter-spacing: .16em;
+                            font-size: 10px;
+                            background-color: map-get($color , primaryG);
+                            border-radius: 99px;
+                            width: 130px;
+                        }
+
+                        a {
+                            font-family: $GenSenRounded-L;
+                            color: map-get($color , primaryG);
+                            line-height: 1.6;
+                            letter-spacing: .16em;
+                            font-size: 12px;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+
+        .responsibility-photo {
+            width: 34%;
+            position: relative;
+            background-image: url('../images/philanthropy/concept-score.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            h3 {
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 40px);
+                letter-spacing: .2em;
+                color: map-get($color , text);
+
+                b {
+                    color: map-get($color , primaryO);
+                    font-family: $NotoSans;
+                    font-weight: 500;
+                }
+            }
+
+            figure {
+                &:nth-child(2) {
+                    position: absolute;
+                    top: -128px;
+                    right: clamp(-50px, -10vw, -110px);
+                    transform: rotate(15deg);
+                    height: clamp(100px, 10vw, 180px);
+                    width: 180px;
+
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+
+                &:nth-child(3) {
+                    position: absolute;
+                    width: 200px;
+                    height: 120px;
+                    bottom: 111px;
+                    left: -100px;
+
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+
+#vision {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 150%;
+        background-image: url('../images/philanthropy/mountain-y.png');
+        background-size: cover;
+        /* background-position: center; 上方會被切掉*/
+        background-repeat: no-repeat;
+        filter: $shadow;
+        z-index: -1;
+        transform: translateY(5%);
+    }
+
+    .vision-title-box {
+        display: flex;
+        align-items: flex-end;
+        width: 90%;
+
+        .contact-titBox {
+            width: 83%;
+            margin: 100px 0px 0px 0px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+
+    .introduction {
+        width: 88%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+
+        p {
+            font-family: $GenSenRounded-R;
+            color: map-get($color , text);
+            line-height: 1.6;
+            letter-spacing: .16em;
+            font-size: clamp(26px, 1.8vw + 1rem, 28px);
+        }
+
+        b {
+            font-family: $GenSenRounded-R;
+            color: map-get($color , primaryO);
+            font-weight: 300;
+        }
+
+        img {
+            transform: rotate(10deg);
+        }
+    }
+
+    .card {
+        display: flex;
+        width: 70%;
+
+        li {
+            position: relative;
+            justify-content: center;
+            width: 250px;
+            height: 224px;
+            border-radius: 48px;
+            margin: 0 5%;
+
+
+            &:nth-child(1) {
+                background-color: map-get($color , primaryG);
+            }
+
+            &:nth-child(2) {
+                background-color: map-get($color , primaryO);
+            }
+
+            &:nth-child(3) {
+                background-color: map-get($color , lightText);
+            }
+
+            .card-top {
+                height: 94px;
+                padding-top: 27px;
+                position: relative;
+
+                h4 {
+                    font-size: 28px;
+                    letter-spacing: .16em;
+                    font-family: $GenSenRounded-R;
+                    text-align: center;
+                    color: map-get($color , white);
+                }
+
+                .card-introduction {
+                    padding-bottom: 6px;
+                    font-size: 16px;
+                    font-family: $GenSenRounded-R;
+                    text-align: center;
+                    margin: 0 22px;
+                    letter-spacing: .12em;
+                    border-bottom: 3px solid map-get($color , lightGreenwhite);
+                    color: map-get($color , white);
+                }
+            }
+
+            .item {
+                margin: 24px;
+                line-height: 1.6;
+                letter-spacing: .12em;
+                color: map-get($color , white);
+            }
+        }
+    }
+
+}
+
+// --關於小農
+#farmer-search {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    .farmer-search-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 5%;
+
+        .farmer-search-buttons {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+
+            .farmer-search-buttons-category {
+                width: 100%;
+                display: flex;
+                margin-bottom: 5%;
+
+                .search-options {
+                    font-family: $GenSenRounded-L;
+                    font-size: 20px;
+                    letter-spacing: .2rem;
+
+                    background-color: map-get($color , orange-50);
+                    cursor: pointer;
+                    color: map-get($color , text);
+
+                    padding: 10px 20px;
+                    border-radius: 45px;
+                    margin: 0 10px;
+
+                    &:hover {
+                        box-shadow: inset 0 0 0 3px map-get($color , primaryO);
+                        transition: all .35s ease-in-out;
+                    }
+                }
+
+                .search-options.active {
+                    background-color: map-get($color , primaryO);
+                    color: map-get($color , white);
+                }
+            }
+        }
+
+        .farmer-search-display {
+            position: relative;
+            width: 100%;
+            height: auto;
+
+            .map-display-bg {
+                width: 100%;
+                height: 100%;
+                background-color: map-get($color , primaryG);
+                display: flex;
+                align-items: center;
+                border-radius: 36px;
+
+                .map-display {
+                    position: absolute;
+                    width: 100%;
+                    height: 90%;
+                    z-index: 1;
+                }
+
+                .map-display.active {
+                    display: none;
+                }
+
+                .farmer-display {
+                    width: 100%;
+                    height: 90%;
+                    background-color: map-get($color , primaryO);
+                }
+
+                .farmer-display.active {
+                    display: none;
+                }
+            }
+        }
+
+    }
+}
+
+// --小農介紹
+.detailed-introduction {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .section-title {
+        font-family: $GenSenRounded-M;
+        font-size: 24px;
+        letter-spacing: .2rem;
+        width: auto;
+        text-wrap: nowrap;
+        margin: 0;
+    }
+
+    .description {
+        display: block;
+        width: 80%;
+        font-family: $GenSenRounded-R;
+        font-size: 16px;
+        letter-spacing: .15rem;
+        margin: 1% 0;
+    }
+
+    .introduction-container {
+        width: 90%;
+        height: 100%;
+        display: flex;
+
+        .planting-images {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            flex: 1;
+
+            img {
+                border-radius: 45px;
+            }
+
+            .main-product-image {
+                position: relative;
+                width: 100%;
+                height: 56%;
+                margin-bottom: 3%;
+
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .thumbnail-gallery {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                .thumbnail {
+                    margin-right: 2%;
+                    width: 40%;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
+        .planting-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            flex: 1;
+            margin-left: 3%;
+
+            .planting-philosophy {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .products-gallery {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-start;
+                margin: 1% 0;
+
+                .product-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border-radius: 99px;
+                    border: 2px solid map-get($color , primaryO);
+                    padding-right: 0.5rem;
+
+                    .product-image {
+                        padding: 3%;
+                        width: clamp(33px, 4rem, 56px);
+                        height: clamp(33px, 4rem, 56px);
+
+                        img {
+                            border-radius: 50%;
+                            object-fit: cover;
+                            width: 100%;
+                            height: 100%;
+                            border: 2px solid map-get($color , primaryO);
+                        }
+
+                        .product-name {
+                            font-family: $GenSenRounded-R;
+                            font-size: 14px;
+                            letter-spacing: .05rem;
+                        }
+                    }
+                }
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .social-media-links {
+                display: flex;
+                align-items: center;
+
+                .social-media-icons {
+                    display: flex;
+                    width: 100%;
+                    height: auto;
+                    align-items: center;
+                    gap: 1%;
+
+                    a {
+                        display: inline-flex;
+                        align-items: center;
+                    }
+
+                    img {
+                        width: 3rem;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    .pagination {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+
+    .planting-philosophy,
+    .agricultural-products,
+    .contact-info,
+    .social-media-links {
+        padding: 2% 0 3% 0;
+    }
+}
+
+// --加入我們
+#joinUs {
+    width: 100%;
+
+    .promotion-sections {
+        .promotion-item {
+            height: clamp(240px, 35vh, 320px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1%;
+
+            &:nth-child(1) {
+                .promotion-item-img {
+                    background-image: url(../images/joinUs/opportunity.jpg);
+                }
+            }
+
+            .Opportunity {
+                background-position: 0 60%;
+                border-radius: 99px 0 0 99px;
+                border-bottom: 10px solid map-get($color , primaryG);
+                border-left: 10px solid map-get($color , primaryG);
+            }
+
+            &:nth-child(2) {
+                .promotion-item-img {
+                    background-image: url(../images/joinUs/productPromotion.jpg);
+                }
+            }
+
+            .productPromotion {
+                background-position: bottom;
+                border-radius: 0 99px 99px 0;
+                border-bottom: 10px solid map-get($color , primaryG);
+                border-right: 10px solid map-get($color , primaryG);
+            }
+
+            &:nth-child(3) {
+                .promotion-item-img {
+                    background-image: url(../images/joinUs/craftWorkshop.jpg);
+                }
+            }
+
+            .craftWorkshop {
+                background-position: bottom;
+                border-radius: 99px 0 0 99px;
+                border-bottom: 10px solid map-get($color , primaryG);
+                border-left: 10px solid map-get($color , primaryG);
+            }
+
+            &:nth-child(4) {
+                .promotion-item-img {
+                    background-image: url(../images/joinUs/marketingPromotion.jpg);
+                }
+            }
+
+            .marketingPromotion {
+                background-position: 0 28%;
+                border-radius: 0 99px 99px 0;
+                border-bottom: 10px solid map-get($color , primaryG);
+                border-right: 10px solid map-get($color , primaryG);
+            }
+
+            .promotion-intro-text {
+                flex: 1;
+                display: block;
+                text-align: center;
+            }
+
+            .promotion-item-img {
+                flex: 1;
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 100%;
+            }
+
+            h4 {
+                font-family: $GenSenRounded-M;
+                font-size: 24px;
+                letter-spacing: .2rem;
+            }
+
+            .promotion-item-details {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                margin: 0 2%;
+
+                p {
+                    font-family: $GenSenRounded-R;
+                    font-size: 16px;
+                    letter-spacing: .1rem;
+                }
+            }
+        }
+    }
+}
+
+// --加入我們表單
+#joinUs-form {
+    .joinUs-form-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        .joinUs-form-container-box {
+            width: 100%;
+            height: auto;
+            margin: 0 6.25% 1% 6.25%;
+            display: flex;
+
+            .list-container {
+                display: flex;
+                flex-direction: column;
+
+                .list-container-box {
+                    border-left: 5px solid map-get($color , primaryG);
+                    padding-left: 10px;
+
+                    .form-list {
+                        width: 100%;
+                        height: auto;
+
+                        .list-title {
+                            font-family: $GenSenRounded-R;
+                            font-size: 1rem;
+                            letter-spacing: .2rem;
+                            padding-bottom: .3rem;
+                        }
+
+                        .list-content {
+                            h6 {
+                                font-family: $GenSenRounded-R;
+                                font-size: .9rem;
+                                letter-spacing: .2rem;
+                                color: map-get($color , grey);
+                                padding-bottom: .2rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .form {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .form-container {
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    .section-title {
+                        font-family: $GenSenRounded-M;
+                        font-size: 1.5rem;
+                        margin-bottom: 1rem;
+                    }
+
+                    .form-basic-info {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .form-group {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            .form-group-title {
+                                font-family: $GenSenRounded-R;
+                                font-size: 1rem;
+                                letter-spacing: .1rem;
+                                color: map-get($color , primaryG);
+                                margin-bottom: 1rem;
+                                display: block;
+                                text-align: center;
+                            }
+
+                            .form-group-box {
+                                border: 5px solid map-get($color , primaryG);
+                                ;
+                                border-radius: 99px;
+                                margin-bottom: 1rem;
+                                text-align: center;
+                                width: 100%;
+                                display: inline-block;
+
+                                input {
+                                    text-align: center;
+                                    background-color: transparent;
+                                }
+                            }
+
+                            .gender {
+                                border-radius: 0px 45px 45px 0px;
+                                background-color: map-get($color , primaryG);
+                                padding: 10px;
+                                position: relative;
+                                cursor: pointer;
+                                font-size: 16px;
+                                color: map-get($color , white);
+                            }
+                        }
+
+                        .form-group-sec {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            width: 100%;
+
+                            input {
+                                border: 5px solid map-get($color , primaryG);
+                                border-radius: 99px;
+                                margin-bottom: 1rem;
+                                text-align: center;
+                                padding: 5px 20px;
+                                width: 100%;
+                            }
+
+                            .contact-method,
+                            .farm-region {
+                                background-color: map-get($color , primaryG);
+                                border-radius: 99px;
+                                padding: 5px;
+                                position: relative;
+                                cursor: pointer;
+                                font-size: 16px;
+                                color: map-get($color , white);
+                                text-align: center;
+                                margin-bottom: 3%;
+                            }
+
+                            .contact-method {
+                                input {
+                                    margin-top: 50px;
+                                }
+                            }
+
+                            .product-type-box {
+                                color: map-get($color , primaryG);
+                                display: flex;
+                                align-items: center;
+                                width: 100%;
+                                height: 100%;
+                                justify-content: space-around;
+
+                                input {
+                                    display: flex;
+                                    align-items: center;
+                                    margin: 0 5px 0 0;
+                                }
+                            }
+                        }
+
+
+                        .form-group-other {
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            justify-content: center;
+                            align-items: center;
+
+                            .comments {
+                                border: 5px solid map-get($color , primaryG);
+                                border-radius: 45px;
+                                padding: 20%;
+                                text-align: center;
+                                margin: 3%;
+                            }
+
+                            .form-submit {
+                                padding: 10px 30px;
+                                cursor: pointer;
+                                margin-top: 3%;
+                                border: 5px solid map-get($color , primaryG);
+                                color: map-get($color , primaryG);
+                                border-radius: 45px;
+                                background-color: transparent;
+                                font-family: $GenSenRounded-M;
+                                font-size: 24px;
+                                letter-spacing: .2rem;
+
+                                &:hover {
+                                    background-color: map-get($color , primaryG);
+                                    color: map-get($color , white);
+                                    transition: 0.35s ease-in-out;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+optgroup {
+    label {
+        font-weight: 600;
+    }
+}
 
 // --小農商城
 #productList {
@@ -1302,6 +2324,220 @@ body.fixed {
                 transform: translateX(-6%) translateY(187%) rotate(155deg);
             }
 
+        }
+    }
+}
+
+// --季節商品
+#shoppingBanner {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    display: flex;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background-image: url('../images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    .shoppingBanner-tit {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 33%;
+        height: 100%;
+
+        .shoppingBanner-tit-box {
+            width: 100%;
+            position: absolute;
+            left: -31%;
+            top: 45%;
+            display: inline-block;
+
+            .s-title1 {
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 56px);
+                letter-spacing: .2em;
+                color: map-get($color , text);
+            }
+
+            .s-title2 {
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 56px);
+                letter-spacing: .2em;
+                color: map-get($color , text);
+                padding-left: 80px;
+            }
+        }
+
+        .shoppingBanner-tit-ornament-box {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+
+            svg {
+                &:nth-child(1) {
+                    position: absolute;
+                    z-index: 2;
+                    width: 21%;
+                    height: 100%;
+                    transform: translateX(-242%) translateY(-4%) rotate(-51deg);
+                }
+
+                &:nth-child(2) {
+                    position: absolute;
+                    z-index: 2;
+                    width: 13%;
+                    height: 100%;
+                    transform: translateX(-201%) translateY(22%) rotate(-22deg) scale(-1);
+                }
+
+            }
+        }
+    }
+}
+
+#season-productList {
+    width: 100%;
+    height: 120vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 150%;
+        background-image: url('../images/shopping/mountain-w.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        filter: $shadow;
+        z-index: -1;
+        transform: translateY(-5%);
+    }
+
+    .productList-tit {
+        display: flex;
+
+        .productList-tit-box {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            .season-productList-tit {
+                position: relative;
+                height: 180px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: map-get( $color , lightText);
+                margin-bottom: 16px;
+
+                font-family: $NotoSans;
+                font-weight: 500;
+                font-size: clamp(38px, 2vw + 1rem, 40px);
+                letter-spacing: .2em;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    background-image: url('../images/shopping/productList-btn-1.svg');
+                    width: 100%;
+                    height: 100%;
+                    opacity: .5;
+                }
+            }
+        }
+
+        .shoppingBanner-tit-ornament-box {
+            #season-banner-spring {
+                position: absolute;
+                z-index: 2;
+                width: 13%;
+                height: 100%;
+                transform: translateX(-140%) translateY(39%) rotate(-37deg) scale(-1);
+            }
+        }
+    }
+
+    .season-productList-item {
+        display: flex;
+        justify-content: space-around;
+        width: 65%;
+        margin: 60px 0;
+
+        .season-productList-item-box {
+            margin: auto 15px;
+
+            .season-productList-btn {
+                height: clamp(180px, 24vw, 250px);
+                width: clamp(180px, 24vw, 250px);
+
+                img {
+                    width: 250px;
+                    object-fit: cover;
+                    height: 100%;
+                    border-radius: 20px;
+                }
+            }
+
+            .season-productList-text {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+                margin-top: 22px;
+
+                .season-productList-text-name {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    h4 {
+                        font-family: 'GenSenRounded TW', 'sans-serif';
+                        font-size: clamp(16px, 2vw, 20px);
+                        font-weight: 400;
+                        letter-spacing: .1em;
+                        line-height: 20px;
+                        color: map-get( $color , text );
+                    }
+
+                    h5 {
+                        font-family: 'GenSenRounded TW', 'sans-serif';
+                        font-size: clamp(16px, 2vw, 20px);
+                        font-weight: 300;
+                        letter-spacing: .11em;
+                        color: map-get( $color , text );
+                    }
+                }
+
+                h3 {
+                    margin-top: 6px;
+                    font-family: 'GenSenRounded TW', 'sans-serif';
+                    font-size: clamp(20px, 3vw, 29px);
+                    letter-spacing: .12em;
+                    color: map-get( $color , lightText);
+                    font-weight: 500;
+                    transform: translateX(4px);
+                }
+            }
         }
     }
 }
@@ -1698,108 +2934,20 @@ body.fixed {
     }
 }
 
-// 關於小農
-#farmer-search {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-
-    .farmer-search-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 5%;
-
-        .farmer-search-buttons {
-            width: 100%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-
-            .farmer-search-buttons-category {
-                width: 100%;
-                display: flex;
-                margin-bottom: 5%;
-
-                .search-options {
-                    font-family: $GenSenRounded-L;
-                    font-size: 20px;
-                    letter-spacing: .2rem;
-
-                    background-color: map-get($color , orange-50);
-                    cursor: pointer;
-                    color: map-get($color , text);
-
-                    padding: 10px 20px;
-                    border-radius: 45px;
-                    margin: 0 10px;
-
-                    &:hover {
-                        box-shadow: inset 0 0 0 3px map-get($color , primaryO);
-                        transition: all .35s ease-in-out;
-                    }
-                }
-
-                .search-options.active {
-                    background-color: map-get($color , primaryO);
-                    color: map-get($color , white);
-                }
-            }
-        }
-
-        .farmer-search-display {
-            position: relative;
-            width: 100%;
-            height: auto;
-
-            .map-display-bg {
-                width: 100%;
-                height: 100%;
-                background-color: map-get($color , primaryG);
-                display: flex;
-                align-items: center;
-                border-radius: 36px;
-
-                .map-display {
-                    position: absolute;
-                    width: 100%;
-                    height: 90%;
-                    z-index: 1;
-                }
-
-                .map-display.active {
-                    display: none;
-                }
-
-                .farmer-display {
-                    width: 100%;
-                    height: 90%;
-                    background-color: map-get($color , primaryO);
-                }
-
-                .farmer-display.active {
-                    display: none;
-                }
-            }
-        }
-
-    }
-}
-
+// --購物車
 .cart-title {
     display: flex;
     justify-content: center;
 }
 
+// 進度條
 #progressBar-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 3.5rem 0 .5rem 0;
+    padding: 3.5rem 0 1rem 0;
 
     .progressBar-bg {
         background-color: map-get($color , grey);
@@ -1829,18 +2977,22 @@ body.fixed {
 
             &.checkPage {
                 width: 66.6%;
-
-                ::before {
-                    background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s.svg);
-                }
             }
 
             &.confirmation {
                 width: 100%;
+            }
+        }
 
-                ::before {
-                    background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s-g.svg);
-                }
+        &.checkPage {
+            &::before {
+                background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s.svg);
+            }
+        }
+
+        &.confirmation {
+            &::before {
+                background-image: url(../images/cart/seed.svg), url(../images/cart/leaf-g.svg), url(../images/cart/tree-s-g.svg);
             }
         }
     }
@@ -2205,6 +3357,10 @@ body.fixed {
             text-align: end;
             line-height: 3;
 
+            .free-shipping-cell {
+                font-size: 14px;
+            }
+
             .product-total-cell {
                 span {
                     padding-left: 15%;
@@ -2258,6 +3414,222 @@ body.fixed {
         color: map-get($color , primaryG);
     }
 }
+
+#closeProduct {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: .1rem;
+    line-height: 1.5;
+}
+
+#order-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    label {
+        font-family: $GenSenRounded-R;
+        font-size: 14px;
+        letter-spacing: .1rem;
+        margin-bottom: .3rem;
+    }
+
+    .order-form-box {
+        width: 80%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            width: 100%;
+            border-bottom: 3px solid map-get($color , primaryG);
+        }
+
+        .order-info {
+            width: 100%;
+            height: 100%;
+
+            ul {
+                padding-right: 2.5rem;
+
+                span {
+                    font-family: $GenSenRounded-R;
+                    font-size: 16px;
+                    letter-spacing: .1rem;
+                    line-height: 2;
+                    padding-right: .8rem;
+                }
+            }
+
+            li {
+                display: flex;
+                flex-direction: column;
+                padding-bottom: 1rem;
+            }
+
+            .recipient-address {
+                width: 15%;
+
+                .address-select {
+                    width: 100%;
+                    border-radius: 16px;
+                    letter-spacing: .2rem;
+                    padding: .5rem 1rem;
+                    margin: .2rem 0;
+
+                    font-family: $GenSenRounded-R;
+                    font-size: 14px;
+                    color: map-get($color , white);
+                    background-color: map-get($color , primaryG);
+                    background-image: url('../images/shared/arrow-w.svg');
+                    background-size: 15%;
+                }
+            }
+        }
+
+        .payment-info {
+            width: 70%;
+            height: 100%;
+
+            label {
+                font-family: $GenSenRounded-R;
+                font-size: 14px;
+                letter-spacing: .1rem;
+                margin-bottom: .3rem;
+            }
+
+            .payment-info-row {
+                display: flex;
+                align-items: center;
+
+                .payment-button {
+                    font-family: $GenSenRounded-R;
+                    font-size: 14px;
+                    letter-spacing: .1rem;
+                    color: map-get($color , primaryG);
+                    text-align: center;
+                    cursor: pointer;
+
+                    border: 3px solid map-get($color , primaryG);
+                    margin: 1rem 0;
+                    padding: .8rem 1rem;
+                    border-radius: 16px;
+                    margin: .5rem .8rem .5rem 0;
+                    text-wrap: nowrap;
+                }
+            }
+        }
+
+        .payment-info-header {
+            font-family: $GenSenRounded-M;
+            font-size: 24px;
+            letter-spacing: .2rem;
+
+            position: relative;
+
+            margin: .8rem 0;
+            padding-bottom: 1rem;
+
+            color: black;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: -.3rem;
+                width: 100%;
+                border-bottom: 3px solid map-get($color , primaryG);
+            }
+        }
+    }
+
+    .invoice-select {
+        width: 100%;
+        text-align: center;
+        border: 3px solid map-get($color , primaryG);
+        border-radius: 16px;
+        letter-spacing: .2rem;
+        padding: 1rem;
+        margin: .2rem 0;
+
+        option {
+            background-color: map-get($color , lightGreen);
+        }
+
+        font-family: $GenSenRounded-R;
+        font-size: 16px;
+        color: map-get($color , primaryG);
+    }
+
+    .payment-info-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-input,
+    .address-details input {
+        border: 3px solid map-get($color , primaryG);
+        border-radius: 16px;
+        padding: 0.5rem;
+        width: 100%;
+    }
+
+    .address-details {
+        flex-direction: row !important;
+        width: 100%;
+    }
+
+    .postal-code {
+        display: block;
+        margin-right: 1rem;
+        flex: 0 0 100px;
+    }
+}
+
+#confirmation-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .confirmation-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        span {
+            font-weight: 800;
+            color: map-get($color , primaryO);
+            background-color: transparent;
+        }
+
+        p {
+            font-family: $GenSenRounded-R;
+            letter-spacing: .2rem;
+            line-height: 3;
+        }
+
+        .order-amount,
+        .farmer-contribution-amount {
+            background-color: map-get($color , primaryO);
+            color: map-get($color , white);
+            padding: .1rem .3rem .2rem .5rem;
+            border-radius: 12px;
+            font-weight: 400;
+        }
+
+    }
+}
+
+
 
 @media(max-width:1440px) {
     #news .news-ornament svg:nth-child(4) {

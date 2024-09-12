@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小農好忙</title>
+    <title>小農商城-小農好忙</title>
     <link rel="icon" href="./favicon.ico">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -16,7 +16,6 @@
     <script type="text/babel" src="./js/Features.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -44,7 +43,7 @@
                         <section id="shoppingBanner">
                             <div className="shoppingBanner-tit">
                                 <div className="shoppingBanner-tit-box">
-                                    <h1 className="s-title1">小農嚴選</h1><br />
+                                    <h1 className="s-title1">小農嚴選</h1>
                                     <h1 className="s-title2">香甜美味</h1>
                                 </div>
 
@@ -71,7 +70,7 @@
                             </div>
 
                             <Search />
-                            <div className="season-productList">
+                            <div>
                                 <div className="season-productList-item">
                                     <a href="./product.html" className="season-productList-item-box">
                                         <figure className="season-productList-btn"><img src="./images/shopping/1-elena-leya-unsplash.png" alt="" /></figure>
@@ -142,13 +141,11 @@
                                     </a>
                                 </div>
                             </div>
-
                         </section>
-
                         <FloatCart />
                         <Features />
+                        <Footer />
                     </main>
-                    <Footer />
                 </>
             )
         }

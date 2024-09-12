@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>小農好忙</title>
+    <title>小農商城-小農好忙</title>
     <link rel="icon" href="./favicon.ico">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -12,10 +12,9 @@
 
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css-pre/cart.css">
-    <link rel="stylesheet" href="./css-pre/style.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -87,6 +86,7 @@
                             </div>
                         </section>
 
+                        {/*商品收合確認欄*/}
                         <section id="product-section">
                             <div id="closeProduct">
                                 <div>共<span>1</span>件商品</div>
@@ -95,49 +95,33 @@
                                 </svg>
                             </div>
                             <table className="product-table">
-                                <tr className="product-header">
-                                    <td className="product-header-cell"></td>
-                                    <td className="product-header-cell">商品名稱</td>
-                                    <td className="product-header-cell">單件價格</td>
-                                    <td className="product-header-cell">數量</td>
-                                    <td className="product-header-cell">小計</td>
-                                </tr>
-                                <tr className="product-row">
-                                    <td className="product-cell">
-                                        <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
-                                    </td>
-                                    <td className="product-cell">
-                                        <a href="#">
-                                            <div>商品 / 夏日風情果醬<br />Summer Jam</div>
-                                        </a>
-                                    </td>
-                                    <td className="product-cell">NT.299</td>
-                                    <td className="product-cell">
-                                        <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                            <path
-                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                fill="#F1F1F1" />
-                                        </svg>
-
-                                        <label htmlFor="quantity-input"></label>
-                                        <input type="text" className="quantity-input" name="quantity-input" value="1" />
-
-                                        <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                            <path
-                                                d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                fill="#F1F1F1" />
-                                            <path
-                                                d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
-                                                fill="#F1F1F1" />
-                                        </svg>
-
-                                    </td>
-                                    <td className="product-cell">NT.299</td>
-                                </tr>
+                                <thead className="product-header">
+                                    <tr className="product-header-box">
+                                        <td className="product-header-cell"></td>
+                                        <td className="product-header-cell">商品名稱</td>
+                                        <td className="product-header-cell">單件價格</td>
+                                        <td className="product-header-cell">數量</td>
+                                        <td className="product-header-cell">小計</td>
+                                    </tr>
+                                </thead>
+                                <tbody className="product-row">
+                                    <tr>
+                                        <td className="product-cell">
+                                            <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
+                                        </td>
+                                        <td className="product-cell">
+                                            <a href="#">
+                                                <div>商品 / 夏日風情果醬<br />Summer Jam</div>
+                                            </a>
+                                        </td>
+                                        <td className="product-cell">NT.299</td>
+                                        <td className="product-cell">
+                                            <label htmlFor="quantity-input"></label>
+                                            <input type="text" className="quantity-input" name="quantity-input" value="1" />
+                                        </td>
+                                        <td className="product-cell">NT.299</td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </section>
 
@@ -295,8 +279,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
-
                                 <div className="payment-info">
                                     <div className="payment-info-header">配送方式</div>
                                     <ul className="payment-info-row">
@@ -311,7 +293,7 @@
                                         <li className="payment-button">LINE PAY</li>
                                     </ul>
                                     <div className="payment-info-header">發票索取</div>
-                                    <ul className="invoice-info">
+                                    <ul>
                                         <li>
                                             <select name="invoiceType" id="invoiceType" className="invoice-select">
                                                 <option value="" disabled selected>請選擇發票類型</option>
@@ -337,6 +319,14 @@
                                 </div>
                             </div>
                         </section>
+                        <ButtonGroup
+                            preBtnSrc="./cart.html"
+                            preBtnClass="continue-shopping"
+                            preBtnName="上一步"
+                            nextBtnSrc="./confirmation.html"
+                            nextBtnClass="nextStep"
+                            nextbtnName="完成購買"
+                        />
                         <Footer />
                     </main>
                 </>

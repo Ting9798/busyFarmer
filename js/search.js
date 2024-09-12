@@ -4,7 +4,7 @@ function SearchItem(props) {
         <>
             <div className="search-suggestion-item">
                 <img src="../images/shopping/Search.svg" alt={props.searchTitle} />
-                <a href='#'>{props.searchTitle}</a>
+                <a href="../planting.html">{props.searchTitle}</a>
             </div>
         </>
     )
@@ -41,7 +41,7 @@ function Search() {
                         name="query"
                         className="productList-search-input"
                         id="productList-search-input"
-                        placeholder="找果乾、小農、農場、市集"
+                        placeholder="找果乾、小農、農場"
                         onFocus={onInput}
                     />
                     <div className={`search-suggestions ${isSearchVisible ? '' : 'hidden'}`}>
