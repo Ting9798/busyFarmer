@@ -1912,7 +1912,16 @@ body.fixed {
 }
 #vision .card {
   display: flex;
-  width: 70%;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+}
+#vision .card .mouse {
+  position: absolute;
+  left: 16%;
+  bottom: -11%;
+  transform: rotate(28deg) translate(11px, 0px);
+  animation: mouse 2s ease-in-out infinite;
 }
 #vision .card li {
   position: relative;
@@ -1931,19 +1940,43 @@ body.fixed {
 #vision .card li:nth-child(3) {
   background-color: #856a45;
 }
-#vision .card li .card-top {
+
+@keyframes mouse {
+  50% {
+    transform: rotate(28deg) translate(11px, -13px);
+  }
+  100% {
+    transform: rotate(28deg) translate(11px, 0px);
+  }
+}
+.card-top-box {
+  overflow: hidden;
+}
+.card-top-box:hover .text-box {
+  transform: translateY(0);
+}
+.card-top-box:hover .text-box .item {
+  opacity: 1;
+}
+.card-top-box .text-box {
+  transition: 0.35s ease-in-out all;
+  width: 100%;
+  height: 100%;
+  transform: translateY(3rem);
+}
+.card-top-box .text-box .card-top {
   height: 94px;
   padding-top: 27px;
   position: relative;
 }
-#vision .card li .card-top h4 {
+.card-top-box .text-box .card-top h4 {
   font-size: 28px;
   letter-spacing: 0.16em;
   font-family: "GenSenRounded TW-R", sans-serif;
   text-align: center;
   color: #F1F1F1;
 }
-#vision .card li .card-top .card-introduction {
+.card-top-box .text-box .card-top .card-introduction {
   padding-bottom: 6px;
   font-size: 16px;
   font-family: "GenSenRounded TW-R", sans-serif;
@@ -1953,11 +1986,14 @@ body.fixed {
   border-bottom: 3px solid;
   color: #F1F1F1;
 }
-#vision .card li .item {
+.card-top-box .text-box .item {
   margin: 24px;
   line-height: 1.6;
   letter-spacing: 0.12em;
   color: #F1F1F1;
+  text-align: center;
+  opacity: 0;
+  transition: 0.35s ease-in-out all;
 }
 
 #farmer-search {

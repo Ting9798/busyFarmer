@@ -17,11 +17,27 @@
 </head>
 
 <body>
-
-
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+        function VisionCard(props) {
+            return (
+                <li className="card-top-box">
+                    <div className="text-box">
+                        <div className="card-top">
+                            <h4>{props.visionTitle}</h4>
+                            <p className="card-introduction">
+                                {props.visionDescript}
+                            </p>
+                        </div>
+                        <div className="line"></div>
+                        <p className="item">
+                            {props.itemDescript}
+                        </p>
+                    </div>
+                </li>
+            )
+        }
         function App(props) {
 
             const [navProps, setNavProps] = useState({
@@ -137,43 +153,23 @@
                                 <p>在市場<b>機會點</b>上將小農優勢發揚光大協助擺脫困境蓬勃發展</p>
                                 <figure><img src="./images/philanthropy/seed-o.svg" alt="" /></figure>
                             </div>
-
                             <ul className="card">
-                                <li>
-                                    <div className="card-top">
-                                        <h4>產品層面</h4>
-                                        <p className="card-introduction">
-                                            若生產過剩、外貌不良
-                                        </p>
-                                    </div>
-                                    <div className="line"></div>
-                                    <p className="item">
-                                        協助加工，延長保存，賦予水果二次生命
-                                    </p>
-                                </li>
-                                <li>
-                                    <div className="card-top">
-                                        <h4>經營層面</h4>
-                                        <p className="card-introduction">
-                                            不善管理經營
-                                        </p>
-                                    </div>
-                                    <div className="item">
-                                        建立銷售平台與通路，並訂下比市場更高的比例回饋給小農
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="card-top">
-                                        <h4>市場層面</h4>
-                                        <div className="card-introduction">
-                                            建立民眾認知
-                                        </div>
-                                    </div>
-
-                                    <div className="item 03">
-                                        以休閒農遊體驗的形式擴大推廣認知，讓大眾認識小農有機與美好
-                                    </div>
-                                </li>
+                                <VisionCard
+                                    visionTitle="產品層面"
+                                    visionDescript="若生產過剩、外貌不良"
+                                    itemDescript="協助加工，延長保存，賦予水果二次生命"
+                                />
+                                <VisionCard
+                                    visionTitle="經營層面"
+                                    visionDescript="不善管理經營"
+                                    itemDescript="建立銷售平台與通路，並訂下比市場更高的比例回饋給小農"
+                                />
+                                <VisionCard
+                                    visionTitle="市場層面"
+                                    visionDescript="建立民眾認知"
+                                    itemDescript="以休閒農遊體驗的形式擴大推廣認知，讓大眾認識小農有機與美好"
+                                />
+                                <figure className="mouse"><img src="./images/shared/mouse.svg" alt="產品層面" /></figure>
                             </ul>
                             <div className="tit-box jcCenter">
                                 <a href="./joinUsForm.html" className="tit-btn">
