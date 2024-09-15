@@ -1,45 +1,49 @@
 const { useState, useEffect, useRef } = React;
 function FilterButton(props) {
-
-    const { filtertitle } = props;
+    const { filtertitle, onFilterClick } = props;
     const [filterOptions] = useState({
         區域: [
-            { id: 'north', name: '北部' },
-            { id: 'central', name: '中部' },
-            { id: 'south', name: '南部' },
-            { id: 'east', name: '東部' },
-            { id: 'outerIslands', name: '外島' }
+            { id: '北部', name: '北部' },
+            { id: '中部', name: '中部' },
+            { id: '南部', name: '南部' },
+            { id: '東部', name: '東部' },
+            { id: '外島', name: '外島' }
         ],
         水果: [
-            { id: 'banana', name: '香蕉' },
-            { id: 'guava', name: '芭樂' },
-            { id: 'apple', name: '蘋果' },
-            { id: 'citrus', name: '柑橘' },
-            { id: 'avocado', name: '酪梨' },
-            { id: 'grapefruit', name: '柚子' },
-            { id: 'watermelon', name: '西瓜' },
-            { id: 'lemon', name: '檸檬' },
-            { id: 'mango', name: '芒果' },
-            { id: 'pineapple', name: '鳳梨' },
-            { id: 'kiwi', name: '奇異果' },
-            { id: 'passionFruit', name: '百香果' },
-            { id: 'dragonFruit', name: '火龍果' },
-            { id: 'longan', name: '龍眼' },
+            { id: '香蕉', name: '香蕉' },
+            { id: '水梨', name: '水梨' },
+            { id: '荔枝', name: '荔枝' },
+            { id: '芭樂', name: '芭樂' },
+            { id: '蘋果', name: '蘋果' },
+            { id: '柑橘', name: '柑橘' },
+            { id: '西瓜', name: '西瓜' },
+            { id: '檸檬', name: '檸檬' },
+            { id: '芒果', name: '芒果' },
+            { id: '鳳梨', name: '鳳梨' },
+            { id: '香瓜', name: '香瓜' },
+            { id: '葡萄', name: '葡萄' },
+            { id: '楊桃', name: '楊桃' },
+            { id: '火龍果', name: '火龍果' },
+            { id: '釋迦', name: '釋迦' },
+            { id: '龍眼', name: '龍眼' },
         ],
         商品: [
-            { id: 'driedFruits', name: '果乾' },
-            { id: 'marmalade', name: '果醬' },
-            { id: 'fruitVinegar', name: '果醋' },
-            { id: 'wine', name: '果酒' },
+            { id: '果乾', name: '果乾' },
+            { id: '果醬', name: '果醬' },
+            { id: '果醋', name: '果醋' },
+            { id: '果酒', name: '果酒' },
         ],
         其他: [
-            { id: 'sightsee', name: '觀光' },
-            { id: 'fair', name: '市集' },
+            { id: '觀光', name: '觀光' },
+            { id: '市集', name: '市集' },
         ]
     });
-
+    const [activeId, setActiveId] = useState(null);
     const handleButtonClick = (id) => {
-        console.log(`Button with id ${id} clicked`);
+        if (onFilterClick) {
+            onFilterClick(id);
+        }
+        setActiveId(id);
     };
 
     const renderButtons = (items) => {
@@ -47,7 +51,7 @@ function FilterButton(props) {
             <button
                 key={item.id}
                 id={item.id}
-                className="filter-buttons"
+                className={`filter-buttons ${activeId === item.id ? 'active' : ''}`}
                 onClick={() => handleButtonClick(item.id)}
             >
                 {item.name}
@@ -69,5 +73,7 @@ function FilterButton(props) {
             </div>
         </div>
     )
-
 }
+
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

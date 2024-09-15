@@ -1,0 +1,14 @@
+@use 'variables' as *;
+.breadcrumbs-box{
+    display: flex;
+    margin: 0 5%;
+    justify-content: center;
+}
+.philant{
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+}
+.bread{
+    margin-top: 20px;
+}

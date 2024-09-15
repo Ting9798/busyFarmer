@@ -1,0 +1,62 @@
+@use '../variables/index' as *;
+
+@mixin col{
+    display: flex;
+    flex-direction: column;
+}
+@mixin border-r {
+    border-radius: 99px 0 0 99px;
+    border: 10px solid map-get($color, red);
+    animation: border 10s linear infinite;
+}
+
+@mixin border-l {
+    border-radius: 0 99px 99px 0;
+    border: 10px solid map-get($color, primaryO);
+    animation: border2 10s linear infinite;
+}
+
+@keyframes border {
+    0% {
+        clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+    }
+
+    30% {
+        clip-path: polygon(0 70%, 30% 70%, 30% 100%, 0 100%);
+    }
+
+    50% {
+        clip-path: polygon(0 0, 30% 0, 30% 30%, 0 30%);
+    }
+
+    80% {
+        clip-path: polygon(70% 0, 100% 0, 100% 30%, 70% 30%);
+    }
+
+    100% {
+        clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+    }
+}
+
+@keyframes border2 {
+    0% {
+        clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+    }
+
+    30% {
+        clip-path: polygon(70% 0, 100% 0, 100% 30%, 70% 30%);
+        
+    }
+
+    50% {
+        clip-path: polygon(0 0, 30% 0, 30% 30%, 0 30%);
+    }
+
+    80% {
+        clip-path: polygon(0 70%, 30% 70%, 30% 100%, 0 100%);
+    }
+
+    100% {
+        clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+    }
+}

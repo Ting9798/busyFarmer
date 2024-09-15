@@ -1,8 +1,10 @@
 @use 'reset';
 @use 'variables' as *;
+@use 'function' as *;
 @use 'Nav';
 @use 'Footer';
 @use 'FloatCart';
+@use 'Breadcrumbs';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
 
 @font-face {
@@ -182,14 +184,12 @@ body.fixed {
 // 篩選按鈕
 .filter-buttons-container {
     width: 70%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     margin-left: 1rem;
     overflow-y: auto;
 
     .filter-button-item {
-        display: flex;
-        flex-direction: column;
+        @include col;
         width: 100%;
         margin-bottom: 5%;
 
@@ -220,6 +220,11 @@ body.fixed {
                 background-color: map-get($color , orange-50);
                 transition: all .2s ease-in-out;
             }
+        }
+
+        .filter-buttons.active {
+            background-color: map-get($color , primaryO);
+            color: map-get($color , clr);
         }
     }
 }
@@ -320,6 +325,7 @@ body.fixed {
         font-weight: 500;
         font-size: 40px;
         letter-spacing: .2rem;
+        padding-left: 9%;
         color: map-get($color , primaryG);
     }
 
@@ -839,8 +845,7 @@ body.fixed {
 
     width: 100%;
 
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     overflow: visible;
 
@@ -858,8 +863,7 @@ body.fixed {
     }
 
     .farm-details-header {
-        display: flex;
-        flex-direction: column;
+        @include col;
         align-items: center;
         margin-top: 4.3%;
 
@@ -879,8 +883,7 @@ body.fixed {
         margin-top: 3%;
 
         .farm-details-group {
-            display: flex;
-            flex-direction: column;
+            @include col;
 
             .farm-details-item {
                 display: flex;
@@ -899,8 +902,7 @@ body.fixed {
                 }
 
                 .farm-details-item-text {
-                    display: flex;
-                    flex-direction: column;
+                    @include col;
 
                     .farm-details-item-text-box {
                         display: flex;
@@ -970,8 +972,7 @@ body.fixed {
     width: 100%;
     height: 100vh;
     z-index: 3;
-    display: flex;
-    flex-direction: column;
+    @include col;
     justify-content: center;
     align-items: center;
 
@@ -992,8 +993,7 @@ body.fixed {
     .news-text {
         width: 80%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
+        @include col;
         justify-content: center;
         align-items: flex-end;
         position: absolute;
@@ -1006,8 +1006,7 @@ body.fixed {
         .news-text-box {
             width: 100%;
             margin-right: 2%;
-            display: flex;
-            flex-direction: column;
+            @include col;
             justify-content: center;
             align-items: flex-end;
             position: absolute;
@@ -1077,8 +1076,7 @@ body.fixed {
     width: 100%;
     height: 100vh;
     z-index: 4;
-    display: flex;
-    flex-direction: column;
+    @include col;
     justify-content: center;
     align-items: center;
     overflow: visible;
@@ -1160,9 +1158,8 @@ body.fixed {
     }
 
     .philanthropyBanner-tit {
-        display: flex;
+        @include col;
         text-align: center;
-        flex-direction: column;
         justify-content: flex-end;
         position: relative;
         width: 100%;
@@ -1170,9 +1167,8 @@ body.fixed {
 
         .philanthropyBanner-tit-box {
             width: 100%;
-            display: flex;
+            @include col;
             justify-content: flex-end;
-            flex-direction: column;
             align-items: flex-end;
 
             h1 {
@@ -1221,8 +1217,7 @@ body.fixed {
 #philanthropy-productList {
     width: 100%;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include col;
     justify-content: space-between;
 
     &::before {
@@ -1241,14 +1236,12 @@ body.fixed {
     }
 
     .productList-tit {
-        display: flex;
-        flex-direction: column;
+        @include col;
         align-items: flex-end;
         width: 100%;
 
         .philanthropy-tit-box {
-            display: flex;
-            flex-direction: column;
+            @include col;
             text-align: center;
             margin-right: 28%;
 
@@ -1263,8 +1256,7 @@ body.fixed {
 
     .helpFarmers {
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        @include col;
         text-align: center;
 
         h6 {
@@ -1459,10 +1451,9 @@ body.fixed {
     width: 100%;
     height: 100vh;
     position: relative;
-    display: flex;
     align-items: center;
     justify-content: space-around;
-    flex-direction: column;
+    @include col;
 
     &::before {
         content: "";
@@ -1524,7 +1515,7 @@ body.fixed {
         width: 100%;
         justify-content: center;
         position: relative;
-        
+
         .mouse {
             position: absolute;
             left: 16%;
@@ -1567,66 +1558,71 @@ body.fixed {
     }
 }
 
-.card-top-box {
-    overflow: hidden;
+.card {
+    .card-top-box {
+        overflow: hidden;
 
-    &:hover {
+        &:hover {
+            .text-box {
+                transform: translateY(0);
+
+                .item {
+                    opacity: 1;
+                }
+            }
+        }
+
         .text-box {
-            transform: translateY(0);
+            transition: .35s ease-in-out all;
+            width: 100%;
+            height: 100%;
+            transform: translateY(3rem);
+
+            .card-top {
+                height: 94px;
+                padding-top: 27px;
+                position: relative;
+
+                h4 {
+                    font-size: 28px;
+                    letter-spacing: .16em;
+                    font-family: $GenSenRounded-R;
+                    text-align: center;
+                    color: map-get($color , white);
+                }
+
+                .card-introduction {
+                    padding-bottom: 6px;
+                    font-size: 16px;
+                    font-family: $GenSenRounded-R;
+                    text-align: center;
+                    margin: 0 22px;
+                    letter-spacing: .12em;
+                    border-bottom: 3px solid map-get($color , lightGreenwhite);
+                    color: map-get($color , white);
+                }
+            }
 
             .item {
-                opacity: 1;
-            }
-        }
-    }
-
-    .text-box {
-        transition: .35s ease-in-out all;
-        width: 100%;
-        height: 100%;
-        transform: translateY(3rem);
-
-        .card-top {
-            height: 94px;
-            padding-top: 27px;
-            position: relative;
-
-            h4 {
-                font-size: 28px;
-                letter-spacing: .16em;
-                font-family: $GenSenRounded-R;
-                text-align: center;
-                color: map-get($color , white);
-            }
-
-            .card-introduction {
-                padding-bottom: 6px;
-                font-size: 16px;
-                font-family: $GenSenRounded-R;
-                text-align: center;
-                margin: 0 22px;
+                margin: 24px;
+                line-height: 1.6;
                 letter-spacing: .12em;
-                border-bottom: 3px solid map-get($color , lightGreenwhite);
                 color: map-get($color , white);
+                text-align: center;
+                opacity: 0;
+                transition: .35s ease-in-out all;
             }
         }
-
-        .item {
-            margin: 24px;
-            line-height: 1.6;
-            letter-spacing: .12em;
-            color: map-get($color , white);
-            text-align: center;
-            opacity: 0;
-            transition: .35s ease-in-out all;
-        }
     }
+
+
 }
+
+
 
 // --關於小農
 #farmer-search {
-    display: flex;
-    flex-direction: column;
+    @include col;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -1640,8 +1636,7 @@ body.fixed {
         .farmer-search-buttons {
             width: 100%;
             height: auto;
-            display: flex;
-            flex-direction: column;
+            @include col;
 
             .farmer-search-buttons-category {
                 width: 100%;
@@ -1690,35 +1685,64 @@ body.fixed {
                 .map-display {
                     position: absolute;
                     width: 100%;
-                    height: 90%;
+                    height: 85%;
                     z-index: 1;
-                }
-
-                .map-display.active {
-                    display: none;
                 }
 
                 .farmer-display {
                     width: 100%;
-                    height: 90%;
-                    background-color: map-get($color , primaryO);
-                }
+                    height: 85%;
+                    background-color: map-get($color , lightGreen);
+                    overflow-x: hidden;
+                    scrollbar-color: map-get($color , primaryG) transparent;
+                    @include col;
 
-                .farmer-display.active {
-                    display: none;
+                    .cooperationFamer-box {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 10px;
+                        margin: 10px 20px;
+
+                        .cooperationFamer {
+                            @include col;
+                            align-items: center;
+                            border-radius: 16px;
+                            font-family: $GenSenRounded-R;
+                            font-size: 14 px;
+                            letter-spacing: .1rem;
+                            cursor: pointer;
+
+                            &:hover {
+                                background-color: #FFEABD;
+                            }
+
+                            figure {
+                                width: 50%;
+                                margin-top: 5px;
+                                border-radius: 50%;
+                                background-color: map-get($color , green-50);
+
+                                img {
+                                    border-radius: 50%;
+                                    padding: .8em;
+                                }
+                            }
+
+                            div {
+                                margin: 5px auto;
+                            }
+                        }
+                    }
                 }
             }
         }
-
     }
 }
 
 // --小農介紹
 .detailed-introduction {
     width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
 
     .section-title {
@@ -1741,12 +1765,10 @@ body.fixed {
 
     .introduction-container {
         width: 90%;
-        height: 100%;
         display: flex;
 
         .planting-images {
-            display: flex;
-            flex-direction: column;
+            @include col;
             width: 100%;
             flex: 1;
 
@@ -1757,7 +1779,7 @@ body.fixed {
             .main-product-image {
                 position: relative;
                 width: 100%;
-                height: 56%;
+                height: 100%;
                 margin-bottom: 3%;
 
                 img {
@@ -1774,10 +1796,18 @@ body.fixed {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                cursor: pointer;
 
                 .thumbnail {
                     margin-right: 2%;
                     width: 40%;
+                    border-radius: 50px;
+                    border: 5px solid transparent;
+
+                    &:hover {
+                        border-radius: 50px;
+                        border: 5px solid map-get($color , primaryG);
+                    }
 
                     img {
                         width: 100%;
@@ -1789,15 +1819,13 @@ body.fixed {
         }
 
         .planting-content {
-            display: flex;
-            flex-direction: column;
+            @include col;
             width: 100%;
             flex: 1;
             margin-left: 3%;
 
             .planting-philosophy {
-                display: flex;
-                flex-direction: column;
+                @include col;
             }
 
             .products-gallery {
@@ -1813,6 +1841,10 @@ body.fixed {
                     border-radius: 99px;
                     border: 2px solid map-get($color , primaryO);
                     padding-right: 0.5rem;
+
+                    &:hover {
+                        background-color: map-get($color , orange-50);
+                    }
 
                     .product-image {
                         padding: 3%;
@@ -1837,8 +1869,7 @@ body.fixed {
             }
 
             .contact-info {
-                display: flex;
-                flex-direction: column;
+                @include col;
             }
 
             .social-media-links {
@@ -1855,6 +1886,10 @@ body.fixed {
                     a {
                         display: inline-flex;
                         align-items: center;
+
+                        &:hover {
+                            scale: 1.1;
+                        }
                     }
 
                     img {
@@ -1870,6 +1905,14 @@ body.fixed {
         width: 90%;
         display: flex;
         justify-content: space-between;
+        margin: 1em 0;
+
+        .pagination-prev,
+        .pagination-next {
+            &:hover {
+                scale: 1.1;
+            }
+        }
     }
 
 
@@ -1878,6 +1921,14 @@ body.fixed {
     .contact-info,
     .social-media-links {
         padding: 2% 0 3% 0;
+    }
+}
+
+.coTit {
+    @include col;
+    justify-content: center;
+    .coTit-box{
+        display: flex;
     }
 }
 
@@ -1902,8 +1953,17 @@ body.fixed {
             .Opportunity {
                 background-position: 0 60%;
                 border-radius: 99px 0 0 99px;
-                border-bottom: 10px solid map-get($color , primaryG);
-                border-left: 10px solid map-get($color , primaryG);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    box-sizing: border-box;
+                    @include border-r;
+                }
             }
 
             &:nth-child(2) {
@@ -1915,8 +1975,17 @@ body.fixed {
             .productPromotion {
                 background-position: bottom;
                 border-radius: 0 99px 99px 0;
-                border-bottom: 10px solid map-get($color , primaryG);
-                border-right: 10px solid map-get($color , primaryG);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    box-sizing: border-box;
+                    @include border-l;
+                }
             }
 
             &:nth-child(3) {
@@ -1928,8 +1997,17 @@ body.fixed {
             .craftWorkshop {
                 background-position: bottom;
                 border-radius: 99px 0 0 99px;
-                border-bottom: 10px solid map-get($color , primaryG);
-                border-left: 10px solid map-get($color , primaryG);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    box-sizing: border-box;
+                    @include border-r;
+                }
             }
 
             &:nth-child(4) {
@@ -1941,14 +2019,28 @@ body.fixed {
             .marketingPromotion {
                 background-position: 0 28%;
                 border-radius: 0 99px 99px 0;
-                border-bottom: 10px solid map-get($color , primaryG);
-                border-right: 10px solid map-get($color , primaryG);
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    height: 100%;
+                    width: 100%;
+                    box-sizing: border-box;
+                    @include border-l;
+                }
             }
 
             .promotion-intro-text {
                 flex: 1;
                 display: block;
                 text-align: center;
+
+                h4 {
+                    width: 57%;
+                    margin: 0 auto;
+                }
             }
 
             .promotion-item-img {
@@ -1956,6 +2048,65 @@ body.fixed {
                 background-size: cover;
                 background-repeat: no-repeat;
                 height: 100%;
+                width: 100%;
+                position: relative;
+
+                // span {
+                //     position: absolute;
+                //     width: 0%;
+                //     height: 100%;
+                //     width: 100%;
+                //     display: block;
+                //     box-sizing: border-box;
+
+                //     &:nth-child(1) {
+                //         transform: rotate(0deg);
+
+                //         &:before {
+                //             content: '';
+                //             position: absolute;
+                //             top: 0;
+                //             left: 10%;
+                //             height: 10px;
+                //             width: 100%;
+                //             background: map-get($color , primaryG);
+                //             animation: animate 4s linear infinite;
+                //         }
+                //     }
+                //     &:nth-child(2) {
+                //         transform: rotate(90deg);
+                //         height: auto;
+                //         width: 100%;
+                //         position: absolute;
+                //         top: -49.3%;
+                //         right: -50%;
+
+                //         &:before {
+                //             content: '';
+                //             position: absolute;
+                //             top: 0;
+                //         right: 0;
+                //             height: 10px;
+                //             width: 33.3%;
+                //             background: map-get($color , primaryG);
+                //             animation: animate 4s linear infinite;
+                //         }
+                //     }
+                //     &:nth-child(3) {
+                //         transform: rotate(0deg);
+
+                //         &:before {
+                //             content: '';
+                //             position: absolute;
+                //             bottom: 0;
+                //             left: 10%;
+                //             height: 10px;
+                //             width: 100%;
+                //             background: map-get($color , primaryG);
+                //             animation: animate2 4s linear infinite;
+                //         }
+                //     }
+                // }
             }
 
             h4 {
@@ -1966,19 +2117,80 @@ body.fixed {
 
             .promotion-item-details {
                 flex: 1;
-                display: flex;
-                flex-direction: column;
+                @include col;
                 margin: 0 2%;
+                position: relative;
 
                 p {
                     font-family: $GenSenRounded-R;
                     font-size: 16px;
                     letter-spacing: .1rem;
                 }
+
+                svg {
+                    position: absolute;
+                    scale: .8;
+                }
+
+                .svg1 {
+                    right: 19%;
+                    top: -100%;
+                }
+
+                .svg2 {
+                    right: 19%;
+                    top: 87%;
+                }
             }
         }
     }
 }
+
+
+
+// @keyframes animate {
+//     0% {
+//         transform: scaleX(0);
+//         transform-origin: left;
+//     }
+
+//     50% {
+//         transform: scaleX(1);
+//         transform-origin: left;
+//     }
+
+//     50.1% {
+//         transform: scaleX(1);
+//         transform-origin: right;
+//     }
+
+//     100% {
+//         transform: scaleX(0);
+//         transform-origin: right;
+//     }
+// }
+
+// @keyframes animate2 {
+//     0% {
+//         transform: scaleX(0);
+//         transform-origin: right;
+//     }
+
+//     50% {
+//         transform: scaleX(1);
+//         transform-origin: right;
+//     }
+
+//     50.1% {
+//         transform: scaleX(1);
+//         transform-origin: left;
+//     }
+
+//     100% {
+//         transform: scaleX(0);
+//         transform-origin: left;
+//     }
+// }
 
 // --加入我們表單
 #joinUs-form {
@@ -1996,8 +2208,7 @@ body.fixed {
             display: flex;
 
             .list-container {
-                display: flex;
-                flex-direction: column;
+                @include col;
 
                 .list-container-box {
                     border-left: 5px solid map-get($color , primaryG);
@@ -2029,15 +2240,13 @@ body.fixed {
 
             .form {
                 flex: 1;
-                display: flex;
-                flex-direction: column;
+                @include col;
                 align-items: center;
 
                 .form-container {
                     width: 100%;
                     height: 100%;
-                    display: flex;
-                    flex-direction: column;
+                    @include col;
                     align-items: center;
 
                     .section-title {
@@ -2047,13 +2256,11 @@ body.fixed {
                     }
 
                     .form-basic-info {
-                        display: flex;
-                        flex-direction: column;
+                        @include col;
                         align-items: center;
 
                         .form-group {
-                            display: flex;
-                            flex-direction: column;
+                            @include col;
                             align-items: center;
 
                             .form-group-title {
@@ -2093,8 +2300,7 @@ body.fixed {
                         }
 
                         .form-group-sec {
-                            display: flex;
-                            flex-direction: column;
+                            @include col;
                             align-items: center;
                             width: 100%;
 
@@ -2144,8 +2350,7 @@ body.fixed {
 
 
                         .form-group-other {
-                            display: flex;
-                            flex-direction: column;
+                            @include col;
                             width: 100%;
                             justify-content: center;
                             align-items: center;
@@ -2197,8 +2402,7 @@ optgroup {
     height: 100vh;
     position: relative;
 
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: space-around;
 
@@ -2221,8 +2425,7 @@ optgroup {
         display: flex;
 
         .productList-tit-box {
-            display: flex;
-            flex-direction: column;
+            @include col;
             text-align: center;
 
             h3 {
@@ -2244,8 +2447,7 @@ optgroup {
     width: 60%;
 
     .productList-item-box {
-        display: flex;
-        flex-direction: column;
+        @include col;
         text-align: center;
 
         img {
@@ -2301,8 +2503,7 @@ optgroup {
     }
 
     .features-secret {
-        display: flex;
-        flex-direction: column;
+        @include col;
         justify-content: flex-end;
         width: 35%;
         height: 100%;
@@ -2393,9 +2594,8 @@ optgroup {
     }
 
     .shoppingBanner-tit {
-        display: flex;
+        @include col;
         text-align: center;
-        flex-direction: column;
         justify-content: flex-end;
         width: 33%;
         height: 100%;
@@ -2456,8 +2656,7 @@ optgroup {
     width: 100%;
     height: 120vh;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: space-around;
 
@@ -2481,15 +2680,13 @@ optgroup {
         display: flex;
 
         .productList-tit-box {
-            display: flex;
-            flex-direction: column;
+            @include col;
             text-align: center;
 
             .season-productList-tit {
                 position: relative;
                 height: 180px;
-                display: flex;
-                flex-direction: column;
+                @include col;
                 justify-content: center;
                 color: map-get($color , lightText);
                 margin-bottom: 16px;
@@ -2549,8 +2746,7 @@ optgroup {
                 margin-top: 22px;
 
                 .season-productList-text-name {
-                    display: flex;
-                    flex-direction: column;
+                    @include col;
                     justify-content: space-between;
 
                     h4 {
@@ -2589,7 +2785,7 @@ optgroup {
 #product {
     display: flex;
     justify-content: center;
-    padding: 150px 10% 150px 10%;
+    padding: 60px 10% 150px 10%;
     height: auto;
 
     .product-tabs {
@@ -2650,16 +2846,14 @@ optgroup {
     }
 
     .product-part {
-        display: flex;
-        flex-direction: column;
+        @include col;
         justify-content: space-between;
         width: 100%;
         padding-left: 4rem;
 
         .product-part-text {
             height: 26.25vw;
-            display: flex;
-            flex-direction: column;
+            @include col;
             justify-content: space-between;
             margin-bottom: 1.4vw;
 
@@ -2709,8 +2903,7 @@ optgroup {
         }
 
         .product-part-ToBuy {
-            display: flex;
-            flex-direction: column;
+            @include col;
             justify-content: space-between;
             height: 7.5vw;
 
@@ -2779,8 +2972,7 @@ optgroup {
 // 搭配介紹
 #introduce {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     text-align: center;
 
@@ -2850,8 +3042,7 @@ optgroup {
 #picking {
     width: 100%;
     position: relative;
-    display: flex;
-    flex-direction: column;
+    @include col;
 
     &::before {
         content: "";
@@ -2930,8 +3121,7 @@ optgroup {
             }
 
             .fruitInf {
-                display: flex;
-                flex-direction: column;
+                @include col;
                 width: 160px;
                 margin-left: 20px;
 
@@ -2985,8 +3175,7 @@ optgroup {
 
 // 進度條
 #progressBar-box {
-    display: flex;
-    flex-direction: column;
+    @include col;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -3073,8 +3262,7 @@ optgroup {
 #product-section {
     width: 100%;
     height: auto;
-    display: flex;
-    flex-direction: column;
+    @include col;
     justify-content: center;
     align-items: center;
 
@@ -3172,8 +3360,7 @@ optgroup {
     margin-bottom: 2.5rem;
 
     .gift-option {
-        display: flex;
-        flex-direction: column;
+        @include col;
         align-items: center;
         justify-content: center;
         margin-right: 5%;
@@ -3227,8 +3414,7 @@ optgroup {
             }
 
             .gift-option-price-discount {
-                display: flex;
-                flex-direction: column;
+                @include col;
 
                 .discounted-price {
                     color: map-get($color , red);
@@ -3258,8 +3444,7 @@ optgroup {
 
 #gift-section {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: center;
 
@@ -3280,8 +3465,7 @@ optgroup {
 
 #extra-section {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: center;
 
@@ -3313,8 +3497,7 @@ optgroup {
 
 #reminder-section {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: center;
 
@@ -3376,8 +3559,7 @@ optgroup {
 
 #checkout-summary {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: center;
 
@@ -3511,8 +3693,7 @@ optgroup {
             }
 
             li {
-                display: flex;
-                flex-direction: column;
+                @include col;
                 padding-bottom: 1rem;
             }
 
@@ -3611,8 +3792,7 @@ optgroup {
     }
 
     .payment-info-col {
-        display: flex;
-        flex-direction: column;
+        @include col;
     }
 
     .user-input,
@@ -3637,14 +3817,12 @@ optgroup {
 
 #confirmation-section {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include col;
     align-items: center;
     justify-content: center;
 
     .confirmation-message {
-        display: flex;
-        flex-direction: column;
+        @include col;
         align-items: center;
         justify-content: center;
 

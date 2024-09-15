@@ -75,18 +75,10 @@
                     img {
                         animation: shoppingBtnIn .35s forwards;
                     }
-
-                    div {
-                        font-size: 28px;
-                    }
                 }
 
                 &:not(:hover) img {
                     animation: shoppingBtnOut 0.35s forwards;
-
-                    div {
-                        font-size: 20px;
-                    }
                 }
 
                 a {

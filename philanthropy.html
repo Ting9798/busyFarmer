@@ -11,12 +11,15 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/Breadcrumbs.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
 <body>
+
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -38,23 +41,69 @@
                 </li>
             )
         }
-        function App(props) {
+        const useScrollNumberInterval = (target, increment, startScrollY = 272) => {
+            const [number, setNumber] = useState(1);
+            const [timerActive, setTimerActive] = useState(false);
 
+            useEffect(() => {
+                const handleScroll = () => {
+                    if (window.scrollY >= startScrollY && !timerActive) {
+                        setTimerActive(true);
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll);
+
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                };
+            }, [startScrollY, timerActive]);
+
+            useEffect(() => {
+                const timer = setInterval(() => {
+                    setNumber(prevNumber => {
+                        if (prevNumber >= target) {
+                            clearInterval(timer);
+                            return target;
+                        }
+                        return prevNumber + increment;
+                    });
+                }, 30); // 控制更新速度
+
+                return () => clearInterval(timer);
+            }, [number, target, increment, timerActive]);
+
+            return number;
+        };
+        function App(props) {
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
                 textColor: 'green'
             });
+
+            useAdjustMargin(navProps.headerClassName);
+
+            const paths = [
+                { name: '首頁', href: './index.html' },
+                { name: '公益理念', href: './philanthropy.html'}
+            ];
+
+            const number = useScrollNumberInterval(77, 1);
+            const number2 = useScrollNumberInterval(777, 10);
+            const number3 = useScrollNumberInterval(177, 3);
+
             return (
                 <>
                     {/* 導覽列*/}
-                    <Nav
-                        headerClassName={navProps.headerClassName}
+                    <Nav headerClassName={navProps.headerClassName}
                         logoImg={navProps.logoImg}
-                        textColor={navProps.textColor}
-                    />
+                        textColor={navProps.textColor} />
                     <main>
                         <section id="philanthropyBanner">
+                            <div id="title" className='philant'>
+                                <Breadcrumbs paths={paths} />
+                            </div>
                             <div className="philanthropyBanner-tit">
                                 <div className="philanthropyBanner-tit-box">
                                     <h1>傳遞小農天然與珍貴</h1><br />
@@ -80,17 +129,17 @@
                                 <h6>這些年我們幫助了...</h6>
                                 <div className="philanthropy-list">
                                     <li>
-                                        <h4>77</h4>
+                                        <h4>{number}</h4>
                                         <p>個</p>
                                         <h3>鄉鎮</h3>
                                     </li>
                                     <li>
-                                        <h4>77</h4>
+                                        <h4>{number2}</h4>
                                         <p>位</p>
                                         <h3>小農</h3>
                                     </li>
                                     <li>
-                                        <h4>177</h4>
+                                        <h4>{number3}</h4>
                                         <div>
                                             <div className="philanthropy-list-right-top">
                                                 <figure><img src="./images/philanthropy/seed-o.svg" alt="" /></figure>
@@ -154,29 +203,18 @@
                                 <figure><img src="./images/philanthropy/seed-o.svg" alt="" /></figure>
                             </div>
                             <ul className="card">
-                                <VisionCard
-                                    visionTitle="產品層面"
-                                    visionDescript="若生產過剩、外貌不良"
-                                    itemDescript="協助加工，延長保存，賦予水果二次生命"
-                                />
-                                <VisionCard
-                                    visionTitle="經營層面"
-                                    visionDescript="不善管理經營"
-                                    itemDescript="建立銷售平台與通路，並訂下比市場更高的比例回饋給小農"
-                                />
-                                <VisionCard
-                                    visionTitle="市場層面"
-                                    visionDescript="建立民眾認知"
-                                    itemDescript="以休閒農遊體驗的形式擴大推廣認知，讓大眾認識小農有機與美好"
-                                />
+                                <VisionCard visionTitle="產品層面" visionDescript="若生產過剩、外貌不良" itemDescript="協助加工，延長保存，賦予水果二次生命" />
+                                <VisionCard visionTitle="經營層面" visionDescript="不善管理經營" itemDescript="建立銷售平台與通路，並訂下比市場更高的比例回饋給小農" />
+                                <VisionCard visionTitle="市場層面" visionDescript="建立民眾認知"
+                                    itemDescript="以休閒農遊體驗的形式擴大推廣認知，讓大眾認識小農有機與美好" />
                                 <figure className="mouse"><img src="./images/shared/mouse.svg" alt="產品層面" /></figure>
                             </ul>
                             <div className="tit-box jcCenter">
                                 <a href="./joinUsForm.html" className="tit-btn">
                                     <div className="tit-btn-box">
                                         <h3>加入我們</h3>
-                                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                            className="tit-btn-icon">
+                                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" className="tit-btn-icon">
                                             <path
                                                 d="M26.25 7.94995C26.25 7.12152 25.5784 6.44995 24.75 6.44995C23.9216 6.44995 23.25 7.12152 23.25 7.94995V39.95C23.25 40.7784 23.9216 41.45 24.75 41.45C25.5784 41.45 26.25 40.7784 26.25 39.95V7.94995Z"
                                                 fill="currentColor" />
@@ -189,13 +227,14 @@
                             </div>
                         </section>
                         <Footer />
-                    </main >
+                    </main>
                 </>
             )
         }
         ReactDOM
             .createRoot(document.getElementById('root'))
-            .render(<App />);
+            .render(
+                <App />);
     </script>
 
 </body>

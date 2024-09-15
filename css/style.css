@@ -112,6 +112,40 @@ select {
   font-size: 16px;
 }
 
+@keyframes border {
+  0% {
+    clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+  }
+  30% {
+    clip-path: polygon(0 70%, 30% 70%, 30% 100%, 0 100%);
+  }
+  50% {
+    clip-path: polygon(0 0, 30% 0, 30% 30%, 0 30%);
+  }
+  80% {
+    clip-path: polygon(70% 0, 100% 0, 100% 30%, 70% 30%);
+  }
+  100% {
+    clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+  }
+}
+@keyframes border2 {
+  0% {
+    clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+  }
+  30% {
+    clip-path: polygon(70% 0, 100% 0, 100% 30%, 70% 30%);
+  }
+  50% {
+    clip-path: polygon(0 0, 30% 0, 30% 30%, 0 30%);
+  }
+  80% {
+    clip-path: polygon(0 70%, 30% 70%, 30% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
+  }
+}
 .topbar {
   position: fixed;
   z-index: 999;
@@ -175,14 +209,8 @@ select {
 .topbar .nav-content .shopping-btn-box .shopping-btn:hover img {
   animation: shoppingBtnIn 0.35s forwards;
 }
-.topbar .nav-content .shopping-btn-box .shopping-btn:hover div {
-  font-size: 28px;
-}
 .topbar .nav-content .shopping-btn-box .shopping-btn:not(:hover) img {
   animation: shoppingBtnOut 0.35s forwards;
-}
-.topbar .nav-content .shopping-btn-box .shopping-btn:not(:hover) img div {
-  font-size: 20px;
 }
 .topbar .nav-content .shopping-btn-box .shopping-btn a {
   color: #F1F1F1;
@@ -402,6 +430,7 @@ footer #footer-content .footer-content-box .footer-map {
 footer #footer-content .footer-content-box .footer-map a {
   border-bottom: none;
   transition: 0.35s ease-in-out;
+  border-bottom: 1px solid transparent;
 }
 footer #footer-content .footer-content-box .footer-map a:hover {
   border-bottom: 1px solid #514535;
@@ -643,6 +672,22 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   right: 1rem;
 }
 
+.breadcrumbs-box {
+  display: flex;
+  margin: 0 5%;
+  justify-content: center;
+}
+
+.philant {
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+}
+
+.bread {
+  margin-top: 20px;
+}
+
 @font-face {
   font-family: "GenSenRounded TW-L";
   src: url(../webfonts/GenSenRounded2-L.ttc);
@@ -823,6 +868,10 @@ body.fixed {
   background-color: rgba(235, 155, 40, 0.5);
   transition: all 0.2s ease-in-out;
 }
+.filter-buttons-container .filter-button-item .filter-buttons.active {
+  background-color: #eb9b28;
+  color: #fff;
+}
 
 .jcEnd {
   justify-content: flex-end !important;
@@ -904,6 +953,7 @@ body.fixed {
   font-weight: 500;
   font-size: 40px;
   letter-spacing: 0.2rem;
+  padding-left: 9%;
   color: #6c8c42;
 }
 .tit-box .tit-box-text {
@@ -1602,8 +1652,8 @@ body.fixed {
 }
 #philanthropyBanner .philanthropyBanner-tit {
   display: flex;
-  text-align: center;
   flex-direction: column;
+  text-align: center;
   justify-content: flex-end;
   position: relative;
   width: 100%;
@@ -1612,8 +1662,8 @@ body.fixed {
 #philanthropyBanner .philanthropyBanner-tit .philanthropyBanner-tit-box {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 #philanthropyBanner .philanthropyBanner-tit .philanthropyBanner-tit-box h1 {
@@ -1857,9 +1907,9 @@ body.fixed {
   width: 100%;
   height: 100vh;
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: space-around;
+  display: flex;
   flex-direction: column;
 }
 #vision::before {
@@ -1949,34 +1999,34 @@ body.fixed {
     transform: rotate(28deg) translate(11px, 0px);
   }
 }
-.card-top-box {
+.card .card-top-box {
   overflow: hidden;
 }
-.card-top-box:hover .text-box {
+.card .card-top-box:hover .text-box {
   transform: translateY(0);
 }
-.card-top-box:hover .text-box .item {
+.card .card-top-box:hover .text-box .item {
   opacity: 1;
 }
-.card-top-box .text-box {
+.card .card-top-box .text-box {
   transition: 0.35s ease-in-out all;
   width: 100%;
   height: 100%;
   transform: translateY(3rem);
 }
-.card-top-box .text-box .card-top {
+.card .card-top-box .text-box .card-top {
   height: 94px;
   padding-top: 27px;
   position: relative;
 }
-.card-top-box .text-box .card-top h4 {
+.card .card-top-box .text-box .card-top h4 {
   font-size: 28px;
   letter-spacing: 0.16em;
   font-family: "GenSenRounded TW-R", sans-serif;
   text-align: center;
   color: #F1F1F1;
 }
-.card-top-box .text-box .card-top .card-introduction {
+.card .card-top-box .text-box .card-top .card-introduction {
   padding-bottom: 6px;
   font-size: 16px;
   font-family: "GenSenRounded TW-R", sans-serif;
@@ -1986,7 +2036,7 @@ body.fixed {
   border-bottom: 3px solid;
   color: #F1F1F1;
 }
-.card-top-box .text-box .item {
+.card .card-top-box .text-box .item {
   margin: 24px;
   line-height: 1.6;
   letter-spacing: 0.12em;
@@ -2055,24 +2105,53 @@ body.fixed {
 #farmer-search .farmer-search-container .farmer-search-display .map-display-bg .map-display {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 85%;
   z-index: 1;
-}
-#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .map-display.active {
-  display: none;
 }
 #farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display {
   width: 100%;
-  height: 90%;
-  background-color: #eb9b28;
+  height: 85%;
+  background-color: #FAFFF1;
+  overflow-x: hidden;
+  scrollbar-color: #6c8c42 transparent;
+  display: flex;
+  flex-direction: column;
 }
-#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display.active {
-  display: none;
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 10px 20px;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box .cooperationFamer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 14 px;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box .cooperationFamer:hover {
+  background-color: #FFEABD;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box .cooperationFamer figure {
+  width: 50%;
+  margin-top: 5px;
+  border-radius: 50%;
+  background-color: rgba(108, 140, 66, 0.5);
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box .cooperationFamer figure img {
+  border-radius: 50%;
+  padding: 0.8em;
+}
+#farmer-search .farmer-search-container .farmer-search-display .map-display-bg .farmer-display .cooperationFamer-box .cooperationFamer div {
+  margin: 5px auto;
 }
 
 .detailed-introduction {
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2095,7 +2174,6 @@ body.fixed {
 }
 .detailed-introduction .introduction-container {
   width: 90%;
-  height: 100%;
   display: flex;
 }
 .detailed-introduction .introduction-container .planting-images {
@@ -2110,7 +2188,7 @@ body.fixed {
 .detailed-introduction .introduction-container .planting-images .main-product-image {
   position: relative;
   width: 100%;
-  height: 56%;
+  height: 100%;
   margin-bottom: 3%;
 }
 .detailed-introduction .introduction-container .planting-images .main-product-image img {
@@ -2125,10 +2203,17 @@ body.fixed {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 }
 .detailed-introduction .introduction-container .planting-images .thumbnail-gallery .thumbnail {
   margin-right: 2%;
   width: 40%;
+  border-radius: 50px;
+  border: 5px solid transparent;
+}
+.detailed-introduction .introduction-container .planting-images .thumbnail-gallery .thumbnail:hover {
+  border-radius: 50px;
+  border: 5px solid #6c8c42;
 }
 .detailed-introduction .introduction-container .planting-images .thumbnail-gallery .thumbnail img {
   width: 100%;
@@ -2159,6 +2244,9 @@ body.fixed {
   border-radius: 99px;
   border: 2px solid #eb9b28;
   padding-right: 0.5rem;
+}
+.detailed-introduction .introduction-container .planting-content .products-gallery .product-item:hover {
+  background-color: rgba(235, 155, 40, 0.5);
 }
 .detailed-introduction .introduction-container .planting-content .products-gallery .product-item .product-image {
   padding: 3%;
@@ -2196,6 +2284,9 @@ body.fixed {
   display: inline-flex;
   align-items: center;
 }
+.detailed-introduction .introduction-container .planting-content .social-media-links .social-media-icons a:hover {
+  scale: 1.1;
+}
 .detailed-introduction .introduction-container .planting-content .social-media-links .social-media-icons img {
   width: 3rem;
   height: auto;
@@ -2204,12 +2295,26 @@ body.fixed {
   width: 90%;
   display: flex;
   justify-content: space-between;
+  margin: 1em 0;
+}
+.detailed-introduction .pagination .pagination-prev:hover,
+.detailed-introduction .pagination .pagination-next:hover {
+  scale: 1.1;
 }
 .detailed-introduction .planting-philosophy,
 .detailed-introduction .agricultural-products,
 .detailed-introduction .contact-info,
 .detailed-introduction .social-media-links {
   padding: 2% 0 3% 0;
+}
+
+.coTit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.coTit .coTit-box {
+  display: flex;
 }
 
 #joinUs {
@@ -2228,8 +2333,18 @@ body.fixed {
 #joinUs .promotion-sections .promotion-item .Opportunity {
   background-position: 0 60%;
   border-radius: 99px 0 0 99px;
-  border-bottom: 10px solid #6c8c42;
-  border-left: 10px solid #6c8c42;
+}
+#joinUs .promotion-sections .promotion-item .Opportunity::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 99px 0 0 99px;
+  border: 10px solid #eb6328;
+  animation: border 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item:nth-child(2) .promotion-item-img {
   background-image: url(../images/joinUs/productPromotion.jpg);
@@ -2237,8 +2352,18 @@ body.fixed {
 #joinUs .promotion-sections .promotion-item .productPromotion {
   background-position: bottom;
   border-radius: 0 99px 99px 0;
-  border-bottom: 10px solid #6c8c42;
-  border-right: 10px solid #6c8c42;
+}
+#joinUs .promotion-sections .promotion-item .productPromotion::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0 99px 99px 0;
+  border: 10px solid #eb9b28;
+  animation: border2 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item:nth-child(3) .promotion-item-img {
   background-image: url(../images/joinUs/craftWorkshop.jpg);
@@ -2246,8 +2371,18 @@ body.fixed {
 #joinUs .promotion-sections .promotion-item .craftWorkshop {
   background-position: bottom;
   border-radius: 99px 0 0 99px;
-  border-bottom: 10px solid #6c8c42;
-  border-left: 10px solid #6c8c42;
+}
+#joinUs .promotion-sections .promotion-item .craftWorkshop::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 99px 0 0 99px;
+  border: 10px solid #eb6328;
+  animation: border 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item:nth-child(4) .promotion-item-img {
   background-image: url(../images/joinUs/marketingPromotion.jpg);
@@ -2255,19 +2390,35 @@ body.fixed {
 #joinUs .promotion-sections .promotion-item .marketingPromotion {
   background-position: 0 28%;
   border-radius: 0 99px 99px 0;
-  border-bottom: 10px solid #6c8c42;
-  border-right: 10px solid #6c8c42;
+}
+#joinUs .promotion-sections .promotion-item .marketingPromotion::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 0 99px 99px 0;
+  border: 10px solid #eb9b28;
+  animation: border2 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item .promotion-intro-text {
   flex: 1;
   display: block;
   text-align: center;
 }
+#joinUs .promotion-sections .promotion-item .promotion-intro-text h4 {
+  width: 57%;
+  margin: 0 auto;
+}
 #joinUs .promotion-sections .promotion-item .promotion-item-img {
   flex: 1;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
+  width: 100%;
+  position: relative;
 }
 #joinUs .promotion-sections .promotion-item h4 {
   font-family: "GenSenRounded TW-M", sans-serif;
@@ -2279,11 +2430,24 @@ body.fixed {
   display: flex;
   flex-direction: column;
   margin: 0 2%;
+  position: relative;
 }
 #joinUs .promotion-sections .promotion-item .promotion-item-details p {
   font-family: "GenSenRounded TW-R", sans-serif;
   font-size: 16px;
   letter-spacing: 0.1rem;
+}
+#joinUs .promotion-sections .promotion-item .promotion-item-details svg {
+  position: absolute;
+  scale: 0.8;
+}
+#joinUs .promotion-sections .promotion-item .promotion-item-details .svg1 {
+  right: 19%;
+  top: -100%;
+}
+#joinUs .promotion-sections .promotion-item .promotion-item-details .svg2 {
+  right: 19%;
+  top: 87%;
 }
 
 #joinUs-form .joinUs-form-container {
@@ -2628,8 +2792,8 @@ optgroup label {
 }
 #shoppingBanner .shoppingBanner-tit {
   display: flex;
-  text-align: center;
   flex-direction: column;
+  text-align: center;
   justify-content: flex-end;
   width: 33%;
   height: 100%;
@@ -2794,7 +2958,7 @@ optgroup label {
 #product {
   display: flex;
   justify-content: center;
-  padding: 150px 10% 150px 10%;
+  padding: 60px 10% 150px 10%;
   height: auto;
 }
 #product .product-tabs {

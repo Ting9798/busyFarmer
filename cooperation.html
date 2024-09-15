@@ -12,10 +12,15 @@
 
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/Breadcrumbs.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
     <script type="text/babel" src="./js/Search.js"></script>
     <script type="text/babel" src="./js/FilterButton.js"></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -23,6 +28,75 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+        function CoFarmer(props) {
+            return (
+                <li>
+                    <a href="./planting.html" className="cooperationFamer">
+                        <figure><img src={props.coIcon} alt={props.coName} /></figure>
+                        <div>{props.coName}</div>
+                    </a>
+                </li>
+            )
+        }
+
+        const locations = [
+            {
+                id: 1,
+                coords: [25.18292265221555, 121.54506060827659],
+                label: '蘋果',
+                farmerName: '北投鍾家農場',
+                filter: '北部、蘋果、果乾、市集',
+                icon: './images/cooperation/zhong.png'
+            },
+            {
+                id: 2,
+                coords: [22.93247821624703, 121.0763758900566],
+                label: '柑橘、釋迦、鳳梨',
+                farmerName: '張美阿姨橘子園',
+                filter: '東部、柑橘、釋迦、鳳梨、果乾、果醬',
+                icon: './images/cooperation/orange.png'
+            },
+            {
+                id: 3,
+                coords: [23.578269626253224, 119.66066180228646],
+                label: '香瓜、西瓜、火龍果',
+                farmerName: '香瓜ㄉ鄉',
+                filter: '外島、香瓜、西瓜、火龍果、果乾、果醬',
+                icon: './images/cooperation/cantaloupe.png'
+            },
+            {
+                id: 4,
+                coords: [22.9620670171951, 120.48945769974527],
+                label: '芭樂、龍眼、檸檬',
+                farmerName: '酥芭樂嘻果園',
+                filter: '南部、芭樂、龍眼、檸檬、果乾、果醋',
+                icon: './images/cooperation/guava.png'
+            },
+            {
+                id: 5,
+                coords: [24.327804743672683, 120.82772896266843],
+                label: '葡萄、楊桃、柑桔、水梨',
+                farmerName: '萄汁夭夭觀光果園',
+                filter: '中部、葡萄、楊桃、柑桔、水梨、果乾、果醋、果醬、果酒、市集',
+                icon: './images/cooperation/grape.png'
+            },
+            {
+                id: 6,
+                coords: [22.701902886550716, 120.43414587443915],
+                label: '荔枝、香蕉、芒果',
+                farmerName: '荔爭上游農莊',
+                filter: '南部、荔枝、香蕉、芒果、果醬、果酒、觀光',
+                icon: './images/cooperation/lichi.png'
+            },
+            {
+                id: 7,
+                coords: [24.44412896740089, 121.77164001415775],
+                label: '農場待更新',
+                farmerName: '農場待更新',
+                filter: '農場待更新',
+                icon: './images/cooperation/logo.svg'
+            }
+        ];
         function App(props) {
 
             const [navProps, setNavProps] = useState({
@@ -32,6 +106,103 @@
             });
 
             useAdjustMargin(navProps.headerClassName);
+
+            const paths = [
+                { name: '首頁', href: './index.html' },
+                { name: '關於小農', href: './cooperation.html' },
+            ];
+
+            const mapRef = useRef(null);
+            const [map, setMap] = useState(null);
+            const [markers, setMarkers] = useState(null);
+            const [filteredFarmers, setFilteredFarmers] = useState(locations); // 新增狀態
+
+            const customIcon = L.icon({
+                iconUrl: './images/shared/icon2_sign.svg',
+                iconSize: [48, 48],
+                iconAnchor: [24, 48],
+                popupAnchor: [0, -48]
+            });
+
+            useEffect(() => {
+                if (mapRef.current && !map) {
+                    const mapInstance = L.map(mapRef.current).setView([23.889818108243148, 120.97020831352467], 7);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(mapInstance);
+
+                    const markersLayer = L.layerGroup();
+                    locations.forEach(location => {
+                        const marker = L.marker(location.coords, { icon: customIcon }).addTo(markersLayer);
+                        marker.bindPopup(`
+                    <div>
+                        <b>${location.farmerName}</b><br>${location.label}
+                        <a href="./planting.html">看更多</a>
+                    </div>
+                `);
+                    });
+
+                    markersLayer.addTo(mapInstance);
+                    setMap(mapInstance);
+                    setMarkers(markersLayer);
+
+                    setTimeout(() => {
+                        mapInstance.invalidateSize();
+                    }, 0);
+                }
+            }, [map, mapRef]);
+
+            const handleFilterClick = (id) => {
+                if (markers) {
+                    markers.clearLayers();
+
+                    const filteredLocations = id === '全部'
+                        ? locations
+                        : locations.filter(location => location.filter && location.filter.includes(id));
+
+                    filteredLocations.forEach(location => {
+                        L.marker(location.coords, { icon: customIcon })
+                            .bindPopup
+                            (`
+                            <div>
+                                <b>${location.farmerName}</b><br>${location.label}
+                                <a href="./planting.html">看更多</a>
+                            </div>
+                            `)
+                            .addTo(markers);
+                    });
+
+                    setFilteredFarmers(filteredLocations); // 更新過濾後的小農資訊
+                }
+            };
+
+            const showMap = () => {
+                document.getElementById('map-display').classList.remove('hidden');
+                document.getElementById('farmer-display').classList.add('hidden');
+                document.getElementById('map-search-btn').classList.add('active');
+                document.getElementById('farmer-search-btn').classList.remove('active');
+            };
+
+            const showFarmer = () => {
+                document.getElementById('map-display').classList.add('hidden');
+                document.getElementById('farmer-display').classList.remove('hidden');
+                document.getElementById('map-search-btn').classList.remove('active');
+                document.getElementById('farmer-search-btn').classList.add('active');
+            };
+
+            useEffect(() => {
+                document.getElementById('map-search-btn').addEventListener('click', showMap);
+                document.getElementById('farmer-search-btn').addEventListener('click', showFarmer);
+
+                return () => {
+                    document.getElementById('map-search-btn').removeEventListener('click', showMap);
+                    document.getElementById('farmer-search-btn').removeEventListener('click', showFarmer);
+                };
+            }, []);
+
+            useEffect(() => {
+                showMap();
+            }, []);
             return (
                 <>
                     {/* 導覽列*/}
@@ -43,6 +214,7 @@
                     <main>
                         <section id="farmer-search">
                             <header id="title" className="search-center">
+                                <Breadcrumbs paths={paths} />
                                 {/*搜尋*/}
                                 <Search />
                             </header>
@@ -102,22 +274,27 @@
                             {/*內容區*/}
                             <div className="farmer-search-container">
                                 <div className="farmer-search-buttons">
-                                    {/*分類按鈕*/}
                                     <div className="farmer-search-buttons-category">
-                                        {/*地圖*/}
                                         <div id="map-search-btn" className="search-options">依地圖搜尋</div>
-                                        {/*小農*/}
                                         <div id="farmer-search-btn" className="search-options">依小農搜尋</div>
                                     </div>
-                                    <FilterButton />
+                                    <FilterButton onFilterClick={handleFilterClick} />
                                 </div>
                                 {/* 顯示畫面 */}
                                 <div className="farmer-search-display">
                                     <div className="map-display-bg">
-                                        {/*地圖*/}
-                                        <div id="map-display" className="map-display"></div>
-                                        {/*小農*/}
-                                        <div id="farmer-display" className="farmer-display"></div>
+                                        <div id="map-display" className="map-display hidden" ref={mapRef}></div>
+                                        <div id="farmer-display" className="farmer-display hidden">
+                                            <ul className="cooperationFamer-box">
+                                                {filteredFarmers.map(location => (
+                                                    <CoFarmer
+                                                        key={location.id}
+                                                        coName={location.farmerName}
+                                                        coIcon={location.icon}
+                                                    />
+                                                ))}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +308,8 @@
             .createRoot(document.getElementById('root'))
             .render(<App />);
     </script>
-    <script src="./js/busyJs.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
 </body>
 
