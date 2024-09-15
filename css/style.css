@@ -110,6 +110,7 @@ select {
 
 ::placeholder {
   font-size: 16px;
+  text-align: center;
 }
 
 @keyframes border {
@@ -2477,6 +2478,7 @@ body.fixed {
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .list-container .list-container-box .form-list .list-title {
   font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 600;
   font-size: 1rem;
   letter-spacing: 0.2rem;
   padding-bottom: 0.3rem;
@@ -2488,11 +2490,19 @@ body.fixed {
   color: #B1AAA1;
   padding-bottom: 0.2rem;
 }
+#joinUs-form .joinUs-form-container .joinUs-form-container-box .list-container .list-container-box .form-list .list-content .filled {
+  color: #eb6328;
+  font-weight: 500;
+}
+#joinUs-form .joinUs-form-container .joinUs-form-container-box .list-container .list-container-box .form-list .list-content .filled::after {
+  content: "✓";
+}
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 85px;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container {
   width: 100%;
@@ -2504,7 +2514,7 @@ body.fixed {
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .section-title {
   font-family: "GenSenRounded TW-M", sans-serif;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info {
   display: flex;
@@ -2515,15 +2525,6 @@ body.fixed {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-#joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group .form-group-title {
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  color: #6c8c42;
-  margin-bottom: 1rem;
-  display: block;
-  text-align: center;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group .form-group-box {
   border: 5px solid #6c8c42;
@@ -2564,11 +2565,12 @@ body.fixed {
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group-sec .farm-region {
   background-color: #6c8c42;
   border-radius: 99px;
-  padding: 5px;
+  padding: 0.3em 0.7em;
+  letter-spacing: 0.1rem;
   position: relative;
   cursor: pointer;
   font-size: 16px;
-  color: #F1F1F1;
+  color: #f1f1f1;
   text-align: center;
   margin-bottom: 3%;
 }
@@ -2618,6 +2620,15 @@ body.fixed {
   background-color: #6c8c42;
   color: #F1F1F1;
   transition: 0.35s ease-in-out;
+}
+#joinUs-form .form-group-title {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  color: #514535;
+  margin-bottom: 1rem;
+  display: block;
+  text-align: center;
 }
 
 optgroup label {

@@ -24,6 +24,56 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
+
+        const REGION_OPTIONS = [
+            {
+                label: '北部',
+                options: [
+                    { label: '臺北市' },
+                    { label: '新北市' },
+                    { label: '基隆市' },
+                    { label: '宜蘭縣' },
+                    { label: '桃園市' },
+                    { label: '新竹縣' },
+                    { label: '新竹市' },
+                ],
+            },
+            {
+                label: '中部',
+                options: [
+                    { label: '苗栗縣' },
+                    { label: '臺中市' },
+                    { label: '彰化縣' },
+                    { label: '南投縣' },
+                    { label: '雲林縣' },
+                ],
+            },
+            {
+                label: '南部',
+                options: [
+                    { label: '嘉義縣' },
+                    { label: '嘉義市' },
+                    { label: '台南市' },
+                    { label: '高雄市' },
+                    { label: '屏東縣' },
+                ],
+            },
+            {
+                label: '東部',
+                options: [
+                    { label: '花蓮縣' },
+                    { label: '台東縣' },
+                ],
+            },
+            {
+                label: '離島',
+                options: [
+                    { label: '澎湖縣' },
+                    { label: '金門縣' },
+                    { label: '連江縣' },
+                ],
+            },
+        ];
         function App(props) {
 
             const [navProps, setNavProps] = useState({
@@ -40,6 +90,101 @@
                 { name: '表單填寫', href: './joinUsForm.html' }
             ];
 
+            const [name, setName] = useState('');
+            const [gender, setGender] = useState('');
+            const [contactMethod, setContactMethod] = useState('');
+            const [inputValue, setInputValue] = useState('');
+            const [selectedRegion, setSelectedRegion] = useState('');
+            const [farmName, setFarmName] = useState('');
+            const [fruitType, setFruitType] = useState('');
+            const [comments, setComments] = useState('');
+            const [formFilled, setFormFilled] = useState({
+                name: false,
+                contactMethod: false,
+                farmName: false,
+                farmRegion: false,
+                fruitType: false,
+                productType: false,
+                comments: false
+            });
+
+            const handleNameChange = (e) => {
+                setName(e.target.value);
+                setFormFilled(prev => ({ ...prev, name: e.target.value !== '' }));
+            };
+
+            const handleGenderChange = (e) => {
+                setGender(e.target.value);
+            };
+
+            const handleContactMethodChange = (e) => {
+                setContactMethod(e.target.value);
+                setFormFilled(prev => ({ ...prev, contactMethod: e.target.value !== '' }));
+            };
+
+            const handleInputChange = (e) => {
+                setInputValue(e.target.value);
+            };
+            const handleFarmNameChange = (e) => {
+                setFarmName(e.target.value);
+                setFormFilled(prev => ({ ...prev, farmName: e.target.value.trim() !== '' }));
+            };
+            const handleFruitTypeChange = (e) => {
+                setFruitType(e.target.value);
+                setFormFilled(prev => ({ ...prev, fruitType: e.target.value.trim() !== '' }));
+            };
+
+            const handleRegionChange = (e) => {
+                setSelectedRegion(e.target.value);
+                setFormFilled(prev => ({ ...prev, farmRegion: e.target.value !== '' }));
+            };
+            const handleCommentsChange = (e) => {
+                setComments(e.target.value);
+                setFormFilled(prev => ({ ...prev, comments: e.target.value !== '' }));
+            };
+
+            const handleFormChange = (e) => {
+                const { name, value } = e.target;
+                setFormFilled(prev => ({ ...prev, [name]: value !== '' }));
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault(); // 防止表單的默認提交行為
+
+                // 檢查是否有任何必填欄位未填寫
+                const allFieldsFilled = Object.values(formFilled).every(field => {
+                    if (Array.isArray(field)) return field.length > 0; // 檢查複選框是否選擇了至少一個
+                    return field !== '' && field !== false;
+                });
+
+                if (!allFieldsFilled) {
+                    alert('請確保所有必填欄位都已填寫！');
+                    return;
+                }
+
+                if (window.confirm('確定要送出表單嗎？')) {
+                    alert('表單已送出！');
+
+                    // 重置表單狀態
+                    setName('');
+                    setGender('');
+                    setContactMethod('');
+                    setInputValue('');
+                    setSelectedRegion('');
+                    setFruitType('');
+                    setComments('');
+                    setFarmName('');
+                    setFormFilled({
+                        name: false,
+                        contactMethod: false,
+                        farmName: false,
+                        farmRegion: false,
+                        fruitType: false,
+                        productType: [],
+                        comments: false
+                    });
+                }
+            };
             return (
                 <>
                     {/* 導覽列*/}
@@ -107,25 +252,26 @@
                                             <div className="form-list">
                                                 <h5 className="list-title">基本資料</h5>
                                                 <div className="list-content">
-                                                    <h6 className="list-name">姓名</h6>
-                                                    <h6 className="list-phone">手機</h6>
-                                                    <h6 className="list-contact">聯絡方式</h6>
+                                                    <h6 className={`list-name ${formFilled.name ? 'filled' : ''}`}>姓名</h6>
+                                                    <h6 className={`list-phone ${formFilled.contactMethod ? 'filled' : ''}`}>手機</h6>
+                                                    <h6 className={`list-contact ${formFilled.contactMethod ? 'filled' : ''}`}>聯絡方式</h6>
                                                 </div>
                                             </div>
+
                                             <div className="form-list">
                                                 <h5 className="list-title">農場資訊</h5>
                                                 <div className="list-content">
-                                                    <h6 className="field-farm-name">農場名稱</h6>
-                                                    <h6 className="field-farm-location">農場地區</h6>
-                                                    <h6 className="field-fruit-type">水果種類</h6>
-                                                    <h6 className="field-product-type">商品種類</h6>
+                                                    <h6 className={`field-farm-name ${formFilled.farmName ? 'filled' : ''}`}>農場名稱</h6>
+                                                    <h6 className={`field-farm-location ${formFilled.farmRegion ? 'filled' : ''}`}>農場地區</h6>
+                                                    <h6 className={`field-fruit-type ${formFilled.fruitType ? 'filled' : ''}`}>水果種類</h6>
+                                                    <h6 className={`field-product-type ${formFilled.productType ? 'filled' : ''}`}>商品種類</h6>
                                                 </div>
                                             </div>
 
                                             <div className="form-list">
                                                 <h5 className="list-title">其他</h5>
                                                 <div className="list-content">
-                                                    <h6 className="field-comments">有話要說</h6>
+                                                    <h6 className={`field-comments ${formFilled.comments ? 'filled' : ''}`}>有話要說</h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,95 +280,172 @@
                                     <div className="form">
                                         <div className="form-container">
                                             <div className="section-title">基本資料</div>
-                                            <form className="form-basic-info">
+                                            <form className="form-basic-info" onSubmit={handleSubmit}>
                                                 <div className="form-group">
                                                     <label htmlFor="name" className="form-group-title">姓名</label>
                                                     <div className="form-group-box">
-                                                        <input type="text" id="name" name="name" className="name" placeholder="請輸入姓名" required />
-                                                        <select name="gender" id="gender" className="gender" required>
-                                                            <option value="" disabled selected>稱呼</option>
+                                                        <input
+                                                            type="text"
+                                                            id="name"
+                                                            name="name"
+                                                            className="name"
+                                                            placeholder="請輸入姓名"
+                                                            required
+                                                            value={name}
+                                                            onChange={handleNameChange}
+                                                        />
+                                                        <select
+                                                            name="gender"
+                                                            id="gender"
+                                                            className="gender"
+                                                            value={gender}
+                                                            onChange={handleGenderChange}
+                                                            required
+                                                        >
+                                                            <option value="" disabled>稱呼</option>
                                                             <option value="Mr.">先生</option>
                                                             <option value="Ms.">女士</option>
                                                         </select>
                                                     </div>
                                                 </div>
+
                                                 <div className="form-group-sec">
-                                                    <label htmlFor="contact-method" className="form-group-title">聯絡方式</label>
-                                                    <select id="contact-method" name="contact-method" className="contact-method"
-                                                        aria-placeholder="請選擇聯絡方式" required>
-                                                        <option value="" selected>請選擇</option>
-                                                        <option value="phone">手機</option>
-                                                        <option value="email">電子郵件</option>
-                                                    </select>
-                                                    <input type="text" id="inputField" placeholder="請輸入手機或email" required />
+                                                    <div className="form-group">
+                                                        <label htmlFor="contact-method" className="form-group-title">聯絡方式</label>
+                                                        <select
+                                                            id="contact-method"
+                                                            name="contactMethod"
+                                                            className="contact-method"
+                                                            value={contactMethod}
+                                                            onChange={handleContactMethodChange}
+                                                            required
+                                                        >
+                                                            <option value="" disabled>聯絡方式</option>
+                                                            <option value="phone">手機</option>
+                                                            <option value="email">電子郵件</option>
+                                                        </select>
+
+                                                        <input
+                                                            type="text"
+                                                            id="inputField"
+                                                            placeholder={contactMethod === '' ? '請選擇聯絡方式' : (contactMethod === 'phone' ? '請輸入手機號碼' : '請輸入電子郵件地址')}
+                                                            value={inputValue}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+
                                                     <div className="section-title">農場資訊</div>
+
                                                     <label htmlFor="farm-name" className="form-group-title">農場名稱</label>
-                                                    <input type="text" id="farm-name" name="farm-name" className="farm-name" placeholder="請輸入農場名稱" />
+                                                    <input
+                                                        type="text"
+                                                        id="farm-name"
+                                                        name="farmName"
+                                                        className="farm-name"
+                                                        placeholder="請輸入農場名稱"
+                                                        value={farmName}
+                                                        onChange={handleFarmNameChange}
+                                                        required
+                                                    />
+
                                                     <label htmlFor="farm-region" className="form-group-title">農場地區</label>
-                                                    <select id="farm-region" name="farm-region" className="farm-region">
-                                                        <optgroup label=""></optgroup>
-                                                        <option value="" selected>請選擇</option>
-                                                        <optgroup label="北部">
-                                                            <option value="north">臺北市</option>
-                                                            <option value="north">新北市</option>
-                                                            <option value="north">基隆市</option>
-                                                            <option value="north">宜蘭縣</option>
-                                                            <option value="north">桃園市</option>
-                                                            <option value="north">新竹縣</option>
-                                                            <option value="north">新竹市</option>
-                                                        </optgroup>
-                                                        <optgroup label="中部">
-                                                            <option value="central">苗栗縣</option>
-                                                            <option value="central">臺中市</option>
-                                                            <option value="central">彰化縣</option>
-                                                            <option value="central">南投縣</option>
-                                                            <option value="central">雲林縣</option>
-                                                        </optgroup>
-                                                        <optgroup label="南部">
-                                                            <option value="South">嘉義縣</option>
-                                                            <option value="South">嘉義市</option>
-                                                            <option value="South">台南市</option>
-                                                            <option value="South">高雄市</option>
-                                                            <option value="South">屏東縣</option>
-                                                        </optgroup>
-                                                        <optgroup label="東部">
-                                                            <option value="east">花蓮縣</option>
-                                                            <option value="east">台東縣</option>
-                                                        </optgroup>
-                                                        <optgroup label="離島">
-                                                            <option value="Island">澎湖縣</option>
-                                                            <option value="Island">金門縣</option>
-                                                            <option value="Island">連江縣</option>
-                                                        </optgroup>
+                                                    <select
+                                                        id="farm-region"
+                                                        name="farmRegion"
+                                                        className="farm-region"
+                                                        value={selectedRegion}
+                                                        onChange={handleRegionChange}
+                                                        required
+                                                    >
+                                                        <option value="" disabled>請選擇</option>
+                                                        {REGION_OPTIONS.map((group) => (
+                                                            <optgroup label={group.label} key={group.label}>
+                                                                {group.options.map((option) => (
+                                                                    <option
+                                                                        value={option.label}
+                                                                        key={option.label}>
+                                                                        {option.label}
+                                                                    </option>
+                                                                ))}
+                                                            </optgroup>
+                                                        ))}
                                                     </select>
+
                                                     <label htmlFor="fruit-type" className="form-group-title">種植水果</label>
-                                                    <input type="text" id="fruit-type" name="fruit-type" className="fruit-type" />
-                                                    <div className="form-group-title">商品種類(可複選)</div>
+                                                    <input
+                                                        type="text"
+                                                        id="fruit-type"
+                                                        name="fruitType"
+                                                        placeholder="請填寫種植水果種類"
+                                                        value={fruitType}
+                                                        onChange={handleFruitTypeChange}
+                                                        required
+                                                    />
+
+                                                    <label className="form-group-title">商品種類(可複選)</label>
                                                     <div className="product-type-box">
                                                         <div>
-                                                            <input type="checkbox" id="driedFruit" name="productType" value="driedFruit" />
+                                                            <input
+                                                                type="checkbox"
+                                                                id="driedFruit"
+                                                                name="productType"
+                                                                value="driedFruit"
+                                                                onChange={handleFormChange}
+                                                            />
                                                             <label htmlFor="driedFruit">果乾</label>
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox" id="fruitJam" name="productType" value="fruitJam" />
+                                                            <input
+                                                                type="checkbox"
+                                                                id="fruitJam"
+                                                                name="productType"
+                                                                value="fruitJam"
+                                                                onChange={handleFormChange}
+                                                            />
                                                             <label htmlFor="fruitJam">果醬</label>
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox" id="fruitVinegar" name="productType" value="fruitVinegar" />
+                                                            <input
+                                                                type="checkbox"
+                                                                id="fruitVinegar"
+                                                                name="productType"
+                                                                value="fruitVinegar"
+                                                                onChange={handleFormChange}
+                                                            />
                                                             <label htmlFor="fruitVinegar">果醋</label>
                                                         </div>
                                                         <div>
-                                                            <input type="checkbox" id="fruitWine" name="productType" value="fruitWine" />
+                                                            <input
+                                                                type="checkbox"
+                                                                id="fruitWine"
+                                                                name="productType"
+                                                                value="fruitWine"
+                                                                onChange={handleFormChange}
+                                                            />
                                                             <label htmlFor="fruitWine">果酒</label>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                                <div className="section-title">其他</div>
-                                                <div className="form-group-other">
-                                                    <label htmlFor="comments" className="form-group-title">有話要說</label>
-                                                    <input type="text" id="comments" name="comments" className='comments' placeholder="期待與您進一步交流！" />
-                                                    <input type="button" value="送出" className="form-submit" />
+                                                    <div className="section-title">其他</div>
+                                                    <div className="form-group-other">
+                                                        <label htmlFor="comments" className="form-group-title">有話要說</label>
+                                                        <textarea
+                                                            id="comments"
+                                                            name="comments"
+                                                            className="comments"
+                                                            placeholder="期待與您進一步交流！"
+                                                            value={comments}
+                                                            onChange={handleCommentsChange}
+                                                            required
+                                                        ></textarea>
+
+                                                        <input
+                                                            type="submit"
+                                                            value="送出"
+                                                            className="form-submit"
+                                                        />
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>

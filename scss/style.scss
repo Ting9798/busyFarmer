@@ -1927,7 +1927,8 @@ body.fixed {
 .coTit {
     @include col;
     justify-content: center;
-    .coTit-box{
+
+    .coTit-box {
         display: flex;
     }
 }
@@ -2146,52 +2147,6 @@ body.fixed {
     }
 }
 
-
-
-// @keyframes animate {
-//     0% {
-//         transform: scaleX(0);
-//         transform-origin: left;
-//     }
-
-//     50% {
-//         transform: scaleX(1);
-//         transform-origin: left;
-//     }
-
-//     50.1% {
-//         transform: scaleX(1);
-//         transform-origin: right;
-//     }
-
-//     100% {
-//         transform: scaleX(0);
-//         transform-origin: right;
-//     }
-// }
-
-// @keyframes animate2 {
-//     0% {
-//         transform: scaleX(0);
-//         transform-origin: right;
-//     }
-
-//     50% {
-//         transform: scaleX(1);
-//         transform-origin: right;
-//     }
-
-//     50.1% {
-//         transform: scaleX(1);
-//         transform-origin: left;
-//     }
-
-//     100% {
-//         transform: scaleX(0);
-//         transform-origin: left;
-//     }
-// }
-
 // --加入我們表單
 #joinUs-form {
     .joinUs-form-container {
@@ -2220,6 +2175,7 @@ body.fixed {
 
                         .list-title {
                             font-family: $GenSenRounded-R;
+                            font-size: 600;
                             font-size: 1rem;
                             letter-spacing: .2rem;
                             padding-bottom: .3rem;
@@ -2233,6 +2189,15 @@ body.fixed {
                                 color: map-get($color , grey);
                                 padding-bottom: .2rem;
                             }
+
+                            .filled {
+                                color: map-get($color , red);
+                                font-weight: 500;
+
+                                &::after {
+                                    content: '✓';
+                                }
+                            }
                         }
                     }
                 }
@@ -2242,6 +2207,7 @@ body.fixed {
                 flex: 1;
                 @include col;
                 align-items: center;
+                margin-right: 85px;
 
                 .form-container {
                     width: 100%;
@@ -2252,7 +2218,7 @@ body.fixed {
                     .section-title {
                         font-family: $GenSenRounded-M;
                         font-size: 1.5rem;
-                        margin-bottom: 1rem;
+                        margin-bottom: .5rem;
                     }
 
                     .form-basic-info {
@@ -2262,16 +2228,6 @@ body.fixed {
                         .form-group {
                             @include col;
                             align-items: center;
-
-                            .form-group-title {
-                                font-family: $GenSenRounded-R;
-                                font-size: 1rem;
-                                letter-spacing: .1rem;
-                                color: map-get($color , primaryG);
-                                margin-bottom: 1rem;
-                                display: block;
-                                text-align: center;
-                            }
 
                             .form-group-box {
                                 border: 5px solid map-get($color , primaryG);
@@ -2315,13 +2271,14 @@ body.fixed {
 
                             .contact-method,
                             .farm-region {
-                                background-color: map-get($color , primaryG);
+                                background-color: #6c8c42;
                                 border-radius: 99px;
-                                padding: 5px;
+                                padding: 0.3em 0.7em;
+                                letter-spacing: .1rem;
                                 position: relative;
                                 cursor: pointer;
                                 font-size: 16px;
-                                color: map-get($color , white);
+                                color: #f1f1f1;
                                 text-align: center;
                                 margin-bottom: 3%;
                             }
@@ -2388,6 +2345,15 @@ body.fixed {
         }
     }
 
+    .form-group-title {
+        font-family: $GenSenRounded-R;
+        font-size: 1rem;
+        letter-spacing: .1rem;
+        color: map-get($color , text);
+        margin-bottom: 1rem;
+        display: block;
+        text-align: center;
+    }
 }
 
 optgroup {
