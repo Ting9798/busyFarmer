@@ -99,7 +99,7 @@
             useEffect(() => {
                 const intervalId = setInterval(() => {
                     setIndex((prevIndex) => (prevIndex + 1) % (slideRef.current.children.length + 1));
-                }, 10000); // 每 3 秒切換一次幻燈片
+                }, 5000); // 每 5 秒切換一次幻燈片
                 return () => clearInterval(intervalId); // 清除定時器
             }, []);
 
@@ -130,7 +130,7 @@
                                 <div className="carousel-slide" ref={slideRef}>
                                     <div className="shoppingBanner" style={{ backgroundImage: 'url(./images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png)' }}>
                                         <div>
-                                            <div className="shoppingBanner-tit-box">
+                                            <div className="shoppingBanner-tit-box" >
                                                 <h1>夏日風情果醬<br />口碑推出</h1>
                                             </div>
                                             <div className="shoppingBanner-tit-ornament-box">
@@ -148,6 +148,22 @@
                                         <div>
                                             <div className="shoppingBanner-tit-box">
                                                 <h1 className="white-text">獨家果乾<br />打造獨一無二的風味</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="shoppingBanner" style={{ backgroundImage: 'url(./images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png)' }}>
+                                        <div>
+                                            <div className="shoppingBanner-tit-box">
+                                                <h1>夏日風情果醬<br />口碑推出</h1>
+                                            </div>
+                                            <div className="shoppingBanner-tit-ornament-box">
+                                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168" stroke="#6C8C42" strokeWidth="1" strokeLinecap="round" />
+                                                </svg>
+                                                <svg width="119" height="107" viewBox="0 0 119 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.22354 104.72C-11.3865 36.8726 49.6058 34.018 49.0255 58.383C48.5286 79.2496 7.61724 51.9356 26.6576 18.3674C45.6979 -15.2008 101.94 5.31494 117.367 44.9168" stroke="#6C8C42" strokeWidth="1.5" strokeLinecap="round" />
+                                                </svg>
                                             </div>
                                         </div>
                                     </div>

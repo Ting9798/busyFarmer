@@ -40,6 +40,56 @@
                 { name: '購物車', href: 'cart.html' }
             ];
 
+            const [cart, setCart] = useState([]);
+
+            // 讀取本地存儲中的購物車資料
+            useEffect(() => {
+                const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                setCart(storedCart);
+            }, []);
+
+            // 更新購物車的函數，並同步更新本地存儲
+            useEffect(() => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }, [cart]);
+
+            const [isTableVisible, setIsTableVisible] = useState(true);
+            const [isButtonRotated, setIsButtonRotated] = useState(false);
+            const handleToggleTable = () => {
+                setIsTableVisible(prevState => !prevState);
+                setIsButtonRotated(prevState => !prevState);
+            };
+
+            // 商品總價
+            const totalPrice = cart.reduce((total, item) => {
+                // 檢查discountPrice是否存在 不存在就用price
+                const priceToUse = item.discountPrice || item.price;
+                return total + priceToUse * item.quantity;
+            }, 0);
+
+            // 運費
+            const shippingCost = totalPrice >= 1000 ? 0 : 50;
+
+            // 運費+商品總價
+            const grandTotal = totalPrice + shippingCost;
+
+            // 回饋
+            const feedback = Math.floor((grandTotal * 50) / 100);
+
+            useEffect(() => {
+                // 設置卸載事件處理程序
+                const handleBeforeUnload = () => {
+                    localStorage.clear(); // 清除 localStorage
+                };
+
+                window.addEventListener('beforeunload', handleBeforeUnload);
+
+                // 清理事件處理程序
+                return () => {
+                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                };
+            }, []);
+
             return (
                 <>
                     {/* 導覽列*/}
@@ -99,17 +149,17 @@
                         <section id="confirmation-section">
                             <div className="confirmation-message">
                                 <p>您的訂單已經成功完成了，我們真心感謝您的支持！</p>
-                                <p>這次<span className="order-amount">349</span>元的訂單中，有50%（<span className="farmer-contribution-amount">174</span>元）將會回饋給辛勤的小農們。</p>
+                                <p>這次<span className="order-amount">{grandTotal}</span>元的訂單中，有50%（<span className="farmer-contribution-amount">{feedback}</span>元）將會回饋給辛勤的小農們。</p>
                                 <p>他們的努力讓我們能夠為您提供這些優質的產品，而<span>您的支持正是他們繼續前行的動力。</span></p>
                                 <p>希望您對商品感到滿意！如果有任何問題或需要幫助，請隨時聯繫我們。</p>
                                 <p>我們一直在這裡為您服務！</p>
                                 <p>再次感謝您的支持，祝您每一天都快樂愉快！</p>
                             </div>
                             <ButtonGroup
-                                nextBtnSrc="./shopping.html"
-                                nextBtnClass="nextStep"
-                                nextbtnName="返回商城"
-                            />
+                            nextBtnSrc="./shopping.html"
+                            nextBtnClass="nextStep"
+                            nextbtnName="返回商城"
+                        />
                         </section>
 
                         <Footer />

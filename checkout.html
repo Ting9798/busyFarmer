@@ -25,26 +25,155 @@
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
-        function App(props) {
+        const AddressSelect = ({ value, onChange }) => (
+            <select value={value} onChange={onChange} className="form-select">
+                <option value="" disabled>縣市</option>
+                <optgroup label="北部">
+                    <option value="臺北市">臺北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="桃園市">桃園市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="新竹市">新竹市</option>
+                </optgroup>
+                <optgroup label="中部">
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="臺中市">臺中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="雲林縣">雲林縣</option>
+                </optgroup>
+                <optgroup label="南部">
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="台南市">台南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                </optgroup>
+                <optgroup label="東部">
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="台東縣">台東縣</option>
+                </optgroup>
+                <optgroup label="離島">
+                    <option value="澎湖縣">澎湖縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="連江縣">連江縣</option>
+                </optgroup>
+            </select>
+        );
+        const App = React.forwardRef((props, ref) => {
 
             const [navProps, setNavProps] = useState({
-                headerClassName: 'greenTopbar',
+                headerclassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
                 textColor: 'green'
             });
 
-            useAdjustMargin(navProps.headerClassName);
+            useAdjustMargin(navProps.headerclassName);
 
             const paths = [
                 { name: '首頁', href: './index.html' },
                 { name: '購物車', href: './cart.html' }
             ];
 
+            const [cart, setCart] = useState([]);
+
+            // 讀取本地存儲中的購物車資料
+            useEffect(() => {
+                const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                setCart(storedCart);
+            }, []);
+
+            // 更新購物車的函數，並同步更新本地存儲
+            useEffect(() => {
+                localStorage.setItem('cart', JSON.stringify(cart));
+            }, [cart]);
+
+            const [isTableVisible, setIsTableVisible] = useState(true);
+            const [isButtonRotated, setIsButtonRotated] = useState(false);
+            const handleToggleTable = () => {
+                setIsTableVisible(prevState => !prevState);
+                setIsButtonRotated(prevState => !prevState);
+            };
+
+            // 商品總價
+            const totalPrice = cart.reduce((total, item) => {
+                // 檢查discountPrice是否存在 不存在就用price
+                const priceToUse = item.discountPrice || item.price;
+                return total + priceToUse * item.quantity;
+            }, 0);
+
+            // 運費
+            const shippingCost = totalPrice >= 1000 ? 0 : 50;
+
+            // 運費+商品總價
+            const grandTotal = totalPrice + shippingCost;
+
+            // 表單功能
+            const [formData, setFormData] = useState({
+                orderGender: '',
+                orderName: '',
+                orderEmail: '',
+                orderMobile: '',
+                orderPhone: '',
+                orderAddress: '',
+                postalCode: '',
+                addressDetail: '',
+                recipientGender: '',
+                recipientName: '',
+                recipientEmail: '',
+                recipientMobile: '',
+                recipientPhone: '',
+                recipientAddress: '',
+                recipientPostalCode: '',
+                recipientAddressDetail: '',
+                recipientCity: ''
+            });
+            const [isSameOrder, setIsSameOrder] = useState('');
+            const [invoiceType, setInvoiceType] = useState('');
+            const [companyName, setCompanyName] = useState('');
+            const [taxId, setTaxId] = useState('');
+            const [mobileBarcode, setMobileBarcode] = useState('');
+            const [consent, setConsent] = useState(false);
+
+            const handleInputChange = (e) => {
+                const { name, value, type, checked } = e.target;
+
+                if (type === 'checkbox') {
+                    setFormData(prev => ({ ...prev, [name]: checked }));
+                } else if (type === 'radio') {
+                    setFormData(prev => ({ ...prev, [name]: value }));
+                } else {
+                    setFormData(prev => ({ ...prev, [name]: value }));
+                }
+            };
+
+            const handleCheckboxChange = (e) => {
+                setIsSameOrder(e.target.checked);
+            };
+
+            const handleConsentChange = (e) => {
+                setConsent(e.target.checked);
+            };
+
+            // 設置狀態來跟蹤選擇的配送方式
+            const [selectedOption, setSelectedOption] = useState(null);
+
+            const handleSelect = (option) => {
+                setSelectedOption(option);
+            };
+
+            const [paymentOption, setPaymentOption] = useState(null);
+            const handlePayment = (option) => {
+                setPaymentOption(option);
+            };
+
             return (
                 <>
                     {/* 導覽列*/}
                     <Nav
-                        headerClassName={navProps.headerClassName}
+                        headerClassName={navProps.headerclassName}
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
@@ -99,250 +228,429 @@
 
                         {/*商品收合確認欄*/}
                         <section id="product-section">
-                            <div id="closeProduct">
-                                <div>共<span>1</span>件商品</div>
-                                <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 1L3.5 5L1 1" stroke="#514535" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </div>
-                            <table className="product-table">
-                                <thead className="product-header">
-                                    <tr className="product-header-box">
-                                        <td className="product-header-cell"></td>
-                                        <td className="product-header-cell">商品名稱</td>
-                                        <td className="product-header-cell">單件價格</td>
-                                        <td className="product-header-cell">數量</td>
-                                        <td className="product-header-cell">小計</td>
-                                    </tr>
-                                </thead>
-                                <tbody className="product-row">
-                                    <tr>
-                                        <td className="product-cell">
-                                            <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
-                                        </td>
-                                        <td className="product-cell">
-                                            <a href="#">
-                                                <div>商品 / 夏日風情果醬<br />Summer Jam</div>
-                                            </a>
-                                        </td>
-                                        <td className="product-cell">NT.299</td>
-                                        <td className="product-cell">
-                                            <label htmlFor="quantity-input"></label>
-                                            <input type="text" className="quantity-input" name="quantity-input" value="1" />
-                                        </td>
-                                        <td className="product-cell">NT.299</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div className="grandTotal">本次消費總計<span>{`NT.${grandTotal}`}</span></div>
+                            <button id="closeProduct" onClick={handleToggleTable}>
+                                <div>{`共${cart.reduce((total, item) => total + item.quantity, 0)}項商品`}</div>
+                                <div className={isButtonRotated ? 'rotate' : ''}>
+                                    <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6 1L3.5 5L1 1" stroke="#514535" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </div>
+                            </button>
+                            {isTableVisible && (
+                                <table className="product-table">
+                                    <thead className="product-header">
+                                        <tr className="product-header-box">
+                                            <td className="product-header-cell"></td>
+                                            <td className="product-header-cell">商品名稱</td>
+                                            <td className="product-header-cell">單件價格</td>
+                                            <td className="product-header-cell">數量</td>
+                                            <td className="product-header-cell">小計</td>
+                                            <td className="product-header-cell"></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="product-row">
+                                        {cart.map(item => (
+                                            <tr key={item.id}>
+                                                <td className="product-cell">
+                                                    <a href="./product.html">
+                                                        <img src={item.src} alt={item.name} />
+                                                    </a>
+                                                </td>
+                                                <td className="product-cell">
+                                                    <a href="./product.html">
+                                                        <div>{item.name}<br />{item.egName}</div>
+                                                    </a>
+                                                    {item.notes && (
+                                                        <div className="item-notes">
+                                                            <div>備註:<br /> {item.notes}</div>
+                                                        </div>
+                                                    )}
+                                                </td>
+                                                <td className="product-cell">
+                                                    {item.discountPrice ? `NT.${item.discountPrice}` : `NT.${item.price}`}
+                                                </td>
+                                                <td className="product-cell">
+                                                    <input type="text" className="quantity-input" value={item.quantity} readOnly />
+                                                </td>
+                                                <td className="product-cell">{
+                                                    item.discountPrice ? `NT.${item.discountPrice * item.quantity}` : `NT.${item.price * item.quantity}`
+                                                }
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
                         </section>
 
                         <section id="order-form">
                             <div className="order-form-box">
-                                <div className="order-info">
-                                    <ul>
-                                        <li className="payment-info-header">訂購人與收件人資訊填寫</li>
-                                        <li className="ordering-person">
-                                            <span>訂購人資訊</span>
-                                            <div className="gender-selection">
-                                                <label>訂購人姓名</label>
-                                                <label>
-                                                    <input type="radio" className="user-gender" name="userGender" value="male" />
-                                                    先生
-                                                </label>
-                                                <label>
-                                                    <input type="radio" className="user-gender" name="userGender" value="female" />
-                                                    女士
-                                                </label>
+                                <form>
+                                    <div className="order-info">
+                                        <div className="form-header">訂購人與收件人資訊填寫</div>
+                                        <fieldset>
+                                            <legend className="order-info-header">訂購人資訊</legend>
+                                            <div className="ordering-person">
+                                                <div className="gender-selection">
+                                                    <div>
+                                                        <label htmlFor="orderName">訂購人姓名</label>
+                                                        <label>
+                                                            <input
+                                                                type="radio"
+                                                                name="orderGender"
+                                                                value="male"
+                                                                checked={formData.orderGender === 'male'}
+                                                                onChange={handleInputChange}
+                                                                required
+                                                            />
+                                                            先生
+                                                        </label>
+                                                        <label>
+                                                            <input
+                                                                type="radio"
+                                                                name="orderGender"
+                                                                value="female"
+                                                                checked={formData.orderGender === 'female'}
+                                                                onChange={handleInputChange}
+                                                                required
+                                                            />
+                                                            女士
+                                                        </label>
+                                                    </div>
+                                                    <input
+                                                        type="text"
+                                                        id="orderName"
+                                                        name="orderName"
+                                                        className="user-input"
+                                                        placeholder="姓名"
+                                                        value={formData.orderName}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                </div>
+                                                <label htmlFor="orderEmail">電子信箱</label>
+                                                <input
+                                                    type="email"
+                                                    id="orderEmail"
+                                                    name="orderEmail"
+                                                    className="user-input"
+                                                    placeholder="E-mail"
+                                                    value={formData.orderEmail}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                />
+                                                <label htmlFor="orderMobile">手機號碼</label>
+                                                <input
+                                                    type="tel"
+                                                    id="orderMobile"
+                                                    name="orderMobile"
+                                                    className="user-input"
+                                                    placeholder="0912345678"
+                                                    value={formData.orderMobile}
+                                                    onChange={handleInputChange}
+                                                    required
+                                                />
+                                                <label htmlFor="orderPhone">室內電話</label>
+                                                <input
+                                                    type="tel"
+                                                    id="orderPhone"
+                                                    name="orderPhone"
+                                                    className="user-input"
+                                                    placeholder="0222123456"
+                                                    value={formData.orderPhone}
+                                                    onChange={handleInputChange}
+                                                />
+                                                <label className="recipient-address-header">訂購人地址</label>
+                                                <AddressSelect
+                                                    value={formData.orderAddress}
+                                                    onChange={(e) => setFormData({ ...formData, orderAddress: e.target.value })}
+                                                    required
+                                                />
+                                                <div className="address-details">
+                                                    <label htmlFor="postalCode"></label>
+                                                    <input
+                                                        type="text"
+                                                        id="postalCode"
+                                                        name="postalCode"
+                                                        className="postal-code"
+                                                        placeholder="郵遞區號"
+                                                        value={formData.postalCode}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                    <label htmlFor="addressDetail"></label>
+                                                    <input
+                                                        type="text"
+                                                        id="addressDetail"
+                                                        name="addressDetail"
+                                                        className="address-detail"
+                                                        placeholder="收件地址"
+                                                        value={formData.addressDetail}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                </div>
                                             </div>
-                                            <input type="text" className="user-input" placeholder="姓名" />
-                                        </li>
-                                        <li className="user-email">
-                                            <label htmlFor="userEmail">電子信箱</label>
-                                            <input type="email" id="userEmail" className="user-input" placeholder="E-mail" />
-                                        </li>
-                                        <li className="user-mobile">
-                                            <label htmlFor="userMobile">手機號碼</label>
-                                            <input type="tel" id="userMobile" className="user-input" placeholder="0912345678" />
-                                        </li>
-                                        <li className="user-phone">
-                                            <label htmlFor="userPhone">室內電話</label>
-                                            <input type="tel" id="userPhone" className="user-input" placeholder="0222123456" />
-                                        </li>
-                                        <label className="recipient-address-header">收件地址</label>
-                                        <li className="recipient-address">
-                                            <select id="userAddress" name="userAddress" className="address-select">
-                                                <optgroup label=""></optgroup>
-                                                <option value="" disabled selected>縣市</option>
-                                                <optgroup label="北部">
-                                                    <option value="taipei">臺北市</option>
-                                                    <option value="new-taipei">新北市</option>
-                                                    <option value="keelung">基隆市</option>
-                                                    <option value="ilan">宜蘭縣</option>
-                                                    <option value="taoyuan">桃園市</option>
-                                                    <option value="hsinchu-county">新竹縣</option>
-                                                    <option value="hsinchu-city">新竹市</option>
-                                                </optgroup>
-                                                <optgroup label="中部">
-                                                    <option value="miaoli">苗栗縣</option>
-                                                    <option value="taichung">臺中市</option>
-                                                    <option value="changhua">彰化縣</option>
-                                                    <option value="nantou">南投縣</option>
-                                                    <option value="yunlin">雲林縣</option>
-                                                </optgroup>
-                                                <optgroup label="南部">
-                                                    <option value="chiayi-county">嘉義縣</option>
-                                                    <option value="chiayi-city">嘉義市</option>
-                                                    <option value="tainan">台南市</option>
-                                                    <option value="kaohsiung">高雄市</option>
-                                                    <option value="pingtung">屏東縣</option>
-                                                </optgroup>
-                                                <optgroup label="東部">
-                                                    <option value="hualien">花蓮縣</option>
-                                                    <option value="taitung">台東縣</option>
-                                                </optgroup>
-                                                <optgroup label="離島">
-                                                    <option value="penghu">澎湖縣</option>
-                                                    <option value="kinmen">金門縣</option>
-                                                    <option value="lienchiang">連江縣</option>
-                                                </optgroup>
-                                            </select>
-                                        </li>
-                                        <li className="address-details">
-                                            <input type="text" className="postal-code" placeholder="郵遞區號" />
-                                            <input type="text" className="address-detail" placeholder="收件地址" />
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li className="payment-info-header"></li>
-                                        <li className="ordering-person">
-                                            <span>收件人資訊</span>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend className="order-info-header">收件人資訊</legend>
                                             <div>
-                                                <input type="checkbox" name="sameOrder" id="sameOrder" />
+                                                <input
+                                                    type="checkbox"
+                                                    id="sameOrder"
+                                                    name="sameOrder"
+                                                    checked={isSameOrder}
+                                                    onChange={handleCheckboxChange}
+                                                />
                                                 <label htmlFor="sameOrder">與訂購人相同</label>
                                             </div>
-                                            <div className="gender-selection">
-                                                <label>收件人姓名</label>
-                                                <label>
-                                                    <input type="radio" className="user-gender" name="userGender" value="male" />
-                                                    先生
-                                                </label>
-                                                <label>
-                                                    <input type="radio" className="user-gender" name="userGender" value="female" />
-                                                    女士
-                                                </label>
+                                            {!isSameOrder && (
+                                                <div className="ordering-person">
+                                                    <div className="gender-selection">
+                                                        <div>
+                                                            <label htmlFor="recipientName">收件人姓名</label>
+                                                            <label>
+                                                                <input
+                                                                    type="radio"
+                                                                    name="recipientGender"
+                                                                    value="male"
+                                                                    checked={formData.recipientGender === 'male'}
+                                                                    onChange={handleInputChange}
+                                                                    required
+                                                                />
+                                                                先生
+                                                            </label>
+                                                            <label>
+                                                                <input
+                                                                    type="radio"
+                                                                    name="recipientGender"
+                                                                    value="female"
+                                                                    checked={formData.recipientGender === 'female'}
+                                                                    onChange={handleInputChange}
+                                                                    required
+                                                                />
+                                                                女士
+                                                            </label>
+                                                        </div>
+                                                        <input
+                                                            type="text"
+                                                            id="recipientName"
+                                                            name="recipientName"
+                                                            className="user-input"
+                                                            placeholder="姓名"
+                                                            value={formData.recipientName}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                    <label htmlFor="recipientEmail">電子信箱</label>
+                                                    <input
+                                                        type="email"
+                                                        id="recipientEmail"
+                                                        name="recipientEmail"
+                                                        className="user-input"
+                                                        placeholder="E-mail"
+                                                        value={formData.recipientEmail}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                    <label htmlFor="recipientMobile">手機號碼</label>
+                                                    <input
+                                                        type="tel"
+                                                        id="recipientMobile"
+                                                        name="recipientMobile"
+                                                        className="user-input"
+                                                        placeholder="0912345678"
+                                                        value={formData.recipientMobile}
+                                                        onChange={handleInputChange}
+                                                        required
+                                                    />
+                                                    <label htmlFor="recipientPhone">室內電話</label>
+                                                    <input
+                                                        type="tel"
+                                                        id="recipientPhone"
+                                                        name="recipientPhone"
+                                                        className="user-input"
+                                                        placeholder="0222123456"
+                                                        value={formData.recipientPhone}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                    <label className="recipient-address-header">收件地址</label>
+                                                    <AddressSelect
+                                                        value={formData.recipientAddress}
+                                                        onChange={(e) => setFormData({ ...formData, recipientAddress: e.target.value })}
+                                                        required
+                                                    />
+                                                    <div className="address-details">
+                                                        <label htmlFor="recipientPostalCode"></label>
+                                                        <input
+                                                            type="text"
+                                                            id="recipientPostalCode"
+                                                            name="recipientPostalCode"
+                                                            className="postal-code"
+                                                            placeholder="郵遞區號"
+                                                            value={formData.recipientPostalCode}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                        />
+                                                        <label htmlFor="recipientAddressDetail"></label>
+                                                        <input
+                                                            type="text"
+                                                            id="recipientAddressDetail"
+                                                            name="recipientAddressDetail"
+                                                            className="address-detail"
+                                                            placeholder="收件地址"
+                                                            value={formData.recipientAddressDetail}
+                                                            onChange={handleInputChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </fieldset>
+                                    </div>
+
+                                    <div className="payment-info">
+                                        <fieldset>
+                                            <legend className="form-header">配送方式</legend>
+                                            <div className="payment-info-row">
+                                                <div className="delivery-options">
+                                                    <div
+                                                        className={`payment-button ${selectedOption === '宅配' ? 'selected' : ''}`}
+                                                        onClick={() => handleSelect('宅配')}
+                                                    >
+                                                        宅配
+                                                    </div>
+                                                    <div
+                                                        className={`payment-button ${selectedOption === '超商取貨' ? 'selected' : ''}`}
+                                                        onClick={() => handleSelect('超商取貨')}
+                                                    >
+                                                        超商取貨
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <input type="text" className="user-input" placeholder="姓名" />
-                                        </li>
-                                        <li className="user-email">
-                                            <label htmlFor="userEmail">電子信箱</label>
-                                            <input type="email" id="userEmail" className="user-input" placeholder="E-mail" />
-                                        </li>
-                                        <li className="user-mobile">
-                                            <label htmlFor="userMobile">手機號碼</label>
-                                            <input type="tel" id="userMobile" className="user-input" placeholder="0912345678" />
-                                        </li>
-                                        <li className="user-phone">
-                                            <label htmlFor="userPhone">室內電話</label>
-                                            <input type="tel" id="userPhone" className="user-input" placeholder="0222123456" />
-                                        </li>
-                                        <label className="recipient-address-header">收件地址</label>
-                                        <li className="recipient-address">
-                                            <select id="userAddress" name="userAddress" className="address-select">
-                                                <optgroup label=""></optgroup>
-                                                <option value="" disabled selected>縣市</option>
-                                                <optgroup label="北部">
-                                                    <option value="taipei">臺北市</option>
-                                                    <option value="new-taipei">新北市</option>
-                                                    <option value="keelung">基隆市</option>
-                                                    <option value="ilan">宜蘭縣</option>
-                                                    <option value="taoyuan">桃園市</option>
-                                                    <option value="hsinchu-county">新竹縣</option>
-                                                    <option value="hsinchu-city">新竹市</option>
-                                                </optgroup>
-                                                <optgroup label="中部">
-                                                    <option value="miaoli">苗栗縣</option>
-                                                    <option value="taichung">臺中市</option>
-                                                    <option value="changhua">彰化縣</option>
-                                                    <option value="nantou">南投縣</option>
-                                                    <option value="yunlin">雲林縣</option>
-                                                </optgroup>
-                                                <optgroup label="南部">
-                                                    <option value="chiayi-county">嘉義縣</option>
-                                                    <option value="chiayi-city">嘉義市</option>
-                                                    <option value="tainan">台南市</option>
-                                                    <option value="kaohsiung">高雄市</option>
-                                                    <option value="pingtung">屏東縣</option>
-                                                </optgroup>
-                                                <optgroup label="東部">
-                                                    <option value="hualien">花蓮縣</option>
-                                                    <option value="taitung">台東縣</option>
-                                                </optgroup>
-                                                <optgroup label="離島">
-                                                    <option value="penghu">澎湖縣</option>
-                                                    <option value="kinmen">金門縣</option>
-                                                    <option value="lienchiang">連江縣</option>
-                                                </optgroup>
-                                            </select>
-                                        </li>
-                                        <li className="address-details">
-                                            <input type="text" className="postal-code" placeholder="郵遞區號" />
-                                            <input type="text" className="address-detail" placeholder="收件地址" />
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="payment-info">
-                                    <div className="payment-info-header">配送方式</div>
-                                    <ul className="payment-info-row">
-                                        <li className="payment-button">宅配</li>
-                                        <li className="payment-button">超商取貨</li>
-                                    </ul>
-                                    <div className="payment-info-header">付款方式</div>
-                                    <ul className="payment-info-row">
-                                        <li className="payment-button">貨到付款</li>
-                                        <li className="payment-button">信用卡</li>
-                                        <li className="payment-button">ATM付款</li>
-                                        <li className="payment-button">LINE PAY</li>
-                                    </ul>
-                                    <div className="payment-info-header">發票索取</div>
-                                    <ul>
-                                        <li>
-                                            <select name="invoiceType" id="invoiceType" className="invoice-select">
-                                                <option value="" disabled selected>請選擇發票類型</option>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <legend className="form-header">付款方式</legend>
+                                            <div className="payment-info-row">
+                                                <div
+                                                    className={`payment-button ${paymentOption === '貨到付款' ? 'selected' : ''}`}
+                                                    onClick={() => handlePayment('貨到付款')}
+                                                >
+                                                    貨到付款
+                                                </div>
+                                                <div
+                                                    className={`payment-button ${paymentOption === '信用卡' ? 'selected' : ''}`}
+                                                    onClick={() => handlePayment('信用卡')}
+                                                >
+                                                    信用卡
+                                                </div>
+                                                <div
+                                                    className={`payment-button ${paymentOption === 'ATM付款' ? 'selected' : ''}`}
+                                                    onClick={() => handlePayment('ATM付款')}
+                                                >
+                                                    ATM付款
+                                                </div>
+                                                <div
+                                                    className={`payment-button ${paymentOption === 'LINE PAY' ? 'selected' : ''}`}
+                                                    onClick={() => handlePayment('LINE PAY')}
+                                                >
+                                                    LINE PAY
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset className="invoice-info">
+                                            <legend className="form-header">發票索取</legend>
+                                            <label htmlFor="invoiceType">請選擇發票類型</label>
+                                            <select
+                                                name="invoiceType"
+                                                id="invoiceType"
+                                                className="form-select"
+                                                value={invoiceType}
+                                                onChange={(e) => setInvoiceType(e.target.value)}
+                                            >
+                                                <option value="" disabled>請選擇發票類型</option>
                                                 <option value="electronic">電子發票</option>
                                                 <option value="mobile-barcode">手機條碼</option>
                                                 <option value="donation">捐贈發票</option>
                                                 <option value="company">公司戶發票(統一發票)</option>
                                             </select>
-                                        </li>
-                                        <li className="payment-info-col">
-                                            <label htmlFor="companyName">公司抬頭</label>
-                                            <input type="text" id="companyName" className="user-input" placeholder="小農好忙有限公司" />
-                                        </li>
-                                        <li className="payment-info-col">
-                                            <label htmlFor="taxId">統一編號</label>
-                                            <input type="text" id="taxId" className="user-input" placeholder="11322133" />
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="consent" className="consent-checkbox" />
-                                            <label htmlFor="consent">我同意辦理退/換貨時，由本公司代為處理銷售憑證(發票處理/銷售折讓)以加速作業流程</label>
-                                        </li>
-                                    </ul>
-                                </div>
+
+                                            {invoiceType === 'mobile-barcode' && (
+                                                <div className="mobileBarcode-box">
+                                                    <label htmlFor="mobileBarcode"></label>
+                                                    <input
+                                                        type="text"
+                                                        id="mobileBarcode"
+                                                        name="mobileBarcode"
+                                                        className="user-input"
+                                                        placeholder="請輸入手機條碼"
+                                                        value={mobileBarcode}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+                                            )}
+
+                                            {invoiceType === 'company' && (
+                                                <div className="companyName-box">
+                                                    <label htmlFor="companyName">公司抬頭</label>
+                                                    <input
+                                                        type="text"
+                                                        id="companyName"
+                                                        name="companyName"
+                                                        className="user-input"
+                                                        placeholder="小農好忙有限公司"
+                                                        value={companyName}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                    <label htmlFor="taxId">統一編號</label>
+                                                    <input
+                                                        type="text"
+                                                        id="taxId"
+                                                        name="taxId"
+                                                        className="user-input"
+                                                        placeholder="11322133"
+                                                        value={taxId}
+                                                        onChange={handleInputChange}
+                                                    />
+                                                </div>
+                                            )}
+
+                                            <div className="consent-box">
+                                                <input
+                                                    type="checkbox"
+                                                    id="consent"
+                                                    name="consent"
+                                                    className="consent-checkbox"
+                                                    checked={consent}
+                                                    onChange={handleConsentChange}
+                                                />
+                                                <label htmlFor="consent">
+                                                    我同意辦理退/換貨時，由本公司代為處理銷售憑證(發票處理/銷售折讓)以加速作業流程
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </form>
                             </div>
                         </section>
                         <ButtonGroup
                             preBtnSrc="./cart.html"
                             preBtnClass="continue-shopping"
-                            preBtnName="上一步"
+                            preBtnName="返回上一步"
                             nextBtnSrc="./confirmation.html"
                             nextBtnClass="nextStep"
-                            nextbtnName="完成購買"
+                            nextbtnName="完成訂購"
                         />
                         <Footer />
                     </main>
                 </>
-            )
-        }
+            );
+        });
         ReactDOM
             .createRoot(document.getElementById('root'))
             .render(<App />);

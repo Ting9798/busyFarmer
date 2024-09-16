@@ -9,6 +9,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
 
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
@@ -20,39 +21,63 @@
 </head>
 
 <body>
-
-
     <div id="root"></div>
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
-        function Option(props) {
-            const { optionSrc, optionTitle, optionName, optionEgName, optionPrice, discountPrice } = props;
+        const { useState, useEffect, forwardRef, useImperativeHandle } = React;
+        function Option({
+            optionSrc,
+            optionTitle,
+            optionName,
+            optionEgName,
+            optionPrice,
+            discountPrice,
+            onAddToCart
+        }) {
+            const handleAddToCart = () => {
+                const newItem = {
+                    id: new Date().getTime(),
+                    src: optionSrc,
+                    title: optionTitle,
+                    name: optionName,
+                    egName: optionEgName,
+                    price: optionPrice,
+                    discountPrice: discountPrice || optionPrice,
+                    quantity: 1
+                };
+
+                if (onAddToCart) {
+                    onAddToCart(newItem);
+                }
+            };
+
             return (
                 <div className="gift-option">
                     <div className="gift-option-Surrounding">
-                        <div className="gift-option-Surrounding-btn"><span>加入<br />購物車</span></div>
-                        <figure><img src={props.optionSrc} alt={props.optionTitle} /></figure>
+                        <div className="gift-option-Surrounding-btn" onClick={handleAddToCart}>
+                            <span>加入<br />購物車</span>
+                        </div>
+                        <figure><img src={optionSrc} alt={optionTitle} /></figure>
                     </div>
                     <div>
-                        <div className="gift-option-text">{props.optionTitle} / {props.optionName}</div>
-                        <div className="gift-option-text">{props.optionEgName}</div>
+                        <div className="gift-option-text">{optionTitle} / {optionName}</div>
+                        <div className="gift-option-text">{optionEgName}</div>
                         <div className="gift-option-text">
                             {discountPrice ? (
                                 <div className="gift-option-price-discount">
-                                    <span className="discounted-price">NT.{props.discountPrice}</span>
-                                    <span className="original-price">NT.{props.optionPrice}</span>
+                                    <span className="discounted-price">NT.{discountPrice}</span>
+                                    <span className="original-price">NT.{optionPrice}</span>
                                 </div>
                             ) : (
                                 <div className="gift-option-price-normal">
-                                    NT.{props.optionPrice}
+                                    NT.{optionPrice}
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
-            )
+            );
         }
-        function App(props) {
+        const App = React.forwardRef((props, ref) => {
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
@@ -65,6 +90,104 @@
                 { name: '首頁', href: './index.html' },
                 { name: '購物車', href: './cart.html' },
             ];
+
+            const [cart, setCart] = useState([]);
+            const [cardContent, setCardContent] = useState('');
+
+            // 讀取本地存儲中的購物車資料
+            useEffect(() => {
+                const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                setCart(storedCart);
+            }, []);
+
+            // 更新購物車的函數，並同步更新本地存儲
+            const updateCart = (newCart) => {
+                setCart(newCart);
+                localStorage.setItem('cart', JSON.stringify(newCart));
+            };
+
+            // 處理從 Option 組件添加商品到購物車
+            const handleAddToCart = (newItem) => {
+                // 如果是小卡
+                if (newItem.title === '送禮首選' && newItem.name === '暖心小卡') {
+                    if (!cardContent.trim()) {
+                        alert('請填寫小卡內容');
+                        return;
+                    }
+                    newItem.notes = cardContent; // Add notes for giftCard
+                }
+                setCart(prevCart => {
+                    const existingItem = prevCart.find(item => item.id === newItem.id);
+                    const updatedCart = existingItem
+                        ? prevCart.map(item =>
+                            item.id === newItem.id
+                                ? { ...item, quantity: item.quantity + newItem.quantity }
+                                : item
+                        )
+                        : [...prevCart, newItem];
+                    updateCart(updatedCart);
+                    return updatedCart;
+                });
+            };
+
+            // 將值傳送
+            useImperativeHandle(ref, () => ({
+                addItemToCart: handleAddToCart
+            }));
+
+            // 增加數量
+            const handleIncrement = (itemId) => {
+                setCart(prevCart => {
+                    const updatedCart = prevCart.map(item =>
+                        item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+                    );
+                    updateCart(updatedCart);
+                    return updatedCart;
+                });
+            };
+
+            // 減少數量
+            const handleDecrement = (itemId) => {
+                setCart(prevCart => {
+                    const updatedCart = prevCart.map(item =>
+                        item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
+                    );
+                    updateCart(updatedCart);
+                    return updatedCart;
+                });
+            };
+
+            // 刪除商品
+            const handleDeleteItem = (itemId) => {
+                setCart(prevCart => {
+                    const updatedCart = prevCart.filter(item => item.id !== itemId);
+                    updateCart(updatedCart);
+                    return updatedCart;
+                });
+            };
+
+            // 卡片是否填寫
+            const handleCardContentChange = (e) => {
+                setCardContent(e.target.value);
+            };
+
+            // 商品總價
+            const totalPrice = cart.reduce((total, item) => {
+                // 檢查discountPrice是否存在 不存在就用price
+                const priceToUse = item.discountPrice || item.price;
+                return total + priceToUse * item.quantity;
+            }, 0);
+
+            // 運費
+            const shippingCost = totalPrice >= 1000 ? 0 : 50;
+
+            // 運費+商品總價
+            const grandTotal = totalPrice + shippingCost;
+
+            // 免運門檻提醒
+            const FREE_SHIPPING_THRESHOLD = 1000;
+            const amountLeftForFreeShipping = Math.max(0, FREE_SHIPPING_THRESHOLD - totalPrice);
+
             return (
                 <>
                     {/* 導覽列*/}
@@ -135,62 +258,61 @@
                                     </tr>
                                 </thead>
                                 <tbody className="product-row">
-                                    <tr>
-                                        <td className="product-cell">
-                                            <a href="#"><img src="./images/shopping/2-elena-leya-unsplash.png" alt="夏日風情果醬" /></a>
-                                        </td>
-                                        <td className="product-cell">
-                                            <a href="#">
-                                                <div>商品 / 夏日風情果醬<br />Summer Jam</div>
-                                            </a>
-                                        </td>
-                                        <td className="product-cell">NT.299</td>
-                                        <td className="product-cell">
-                                            <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                                <path
-                                                    d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                    fill="#F1F1F1" />
-                                            </svg>
-
-                                            <label htmlFor="quantity-input"></label>
-                                            <input type="text" className="quantity-input" name="quantity-input" value="1" />
-
-                                            <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                                <path
-                                                    d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                                    fill="#F1F1F1" />
-                                                <path
-                                                    d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
-                                                    fill="#F1F1F1" />
-                                            </svg>
-
-                                        </td>
-                                        <td className="product-cell">NT.299</td>
-                                        <td className="product-cell">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g clipPath="url(#clip0_1166_7209)">
-                                                    <rect x="20" y="20" width="20" height="20" rx="10" transform="rotate(-180 20 20)"
-                                                        fill="#6C8C42" />
-                                                    <path
-                                                        d="M13.8125 7.12505C13.9851 6.95246 13.9851 6.67264 13.8125 6.50005C13.6399 6.32746 13.3601 6.32746 13.1875 6.50005L6.52077 13.1668C6.34818 13.3394 6.34818 13.6192 6.52077 13.7918C6.69336 13.9644 6.97319 13.9644 7.14578 13.7918L13.8125 7.12505Z"
-                                                        fill="#F1F1F1" />
-                                                    <path
-                                                        d="M13.1875 13.7918C13.3601 13.9644 13.6399 13.9644 13.8125 13.7918C13.9851 13.6192 13.9851 13.3394 13.8125 13.1668L7.14577 6.50005C6.97318 6.32746 6.69336 6.32746 6.52077 6.50005C6.34818 6.67264 6.34818 6.95247 6.52077 7.12506L13.1875 13.7918Z"
-                                                        fill="#F1F1F1" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_1166_7209">
-                                                        <rect x="20" y="20" width="20" height="20" rx="10" transform="rotate(-180 20 20)"
-                                                            fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </td>
-                                    </tr>
+                                    {cart.map(item => (
+                                        <tr key={item.id}>
+                                            <td className="product-cell">
+                                                <a href="./product.html">
+                                                    <img src={item.src} alt={item.name} />
+                                                </a>
+                                            </td>
+                                            <td className="product-cell">
+                                                <a href="./product.html">
+                                                    <div>{item.name}<br />{item.egName}</div>
+                                                </a>
+                                                {item.notes && (
+                                                    <div className="item-notes">
+                                                        <div>備註:<br /> {item.notes}</div>
+                                                    </div>
+                                                )}
+                                            </td>
+                                            <td className="product-cell">
+                                                {item.discountPrice ? `NT.${item.discountPrice}` : `NT.${item.price}`}
+                                            </td>
+                                            <td className="product-cell">
+                                                <button className="decrement" onClick={() => handleDecrement(item.id)}>
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                                        <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                                    </svg>
+                                                </button>
+                                                <input type="text" className="quantity-input" value={item.quantity} readOnly />
+                                                <button className="increment" onClick={() => handleIncrement(item.id)}>
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                                        <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                                        <path d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z" fill="#F1F1F1" />
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                            <td className="product-cell">{item.discountPrice ? `NT.${item.discountPrice * item.quantity}` : `NT.${item.price * item.quantity}`}</td>
+                                            <td className="product-cell">
+                                                <button className="delItem" onClick={() => handleDeleteItem(item.id)}>
+                                                    <svg width="16" height="16" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <g clipPath="url(#clip0_1915_6560)">
+                                                            <rect x="8" y="8" width="8" height="8" rx="4" transform="rotate(-180 8 8)" fill="#6C8C42" />
+                                                            <path d="M5.75874 2.65465C5.83908 2.57431 5.83908 2.44406 5.75874 2.36372C5.67841 2.28339 5.54816 2.28339 5.46782 2.36372L2.36463 5.46691C2.28429 5.54725 2.28429 5.6775 2.36463 5.75784C2.44497 5.83817 2.57522 5.83817 2.65555 5.75784L5.75874 2.65465Z" fill="#F1F1F1" />
+                                                            <path d="M5.46596 5.75777C5.54629 5.8381 5.67655 5.8381 5.75688 5.75777C5.83722 5.67743 5.83722 5.54718 5.75688 5.46684L2.65369 2.36365C2.57336 2.28332 2.44311 2.28332 2.36277 2.36365C2.28243 2.44399 2.28243 2.57424 2.36277 2.65458L5.46596 5.75777Z" fill="#F1F1F1" />
+                                                        </g>
+                                                        <defs>
+                                                            <clipPath id="clip0_1915_6560">
+                                                                <rect x="8" y="8" width="8" height="8" rx="4" transform="rotate(-180 8 8)" fill="white" />
+                                                            </clipPath>
+                                                        </defs>
+                                                    </svg>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </section>
@@ -228,22 +350,34 @@
                             </div>
                             <div className="gift-options">
                                 <Option
+                                    key="giftCard"
                                     optionSrc="./images/cart/giftCard.jpeg"
                                     optionTitle="送禮首選"
                                     optionName="暖心小卡"
                                     optionEgName="Heart-warming Card"
                                     optionPrice={20}
+                                    onAddToCart={handleAddToCart}
                                 />
                                 <Option
+                                    key="giftBag"
                                     optionSrc="./images/cart/giftBag.jpeg"
                                     optionTitle="送禮首選"
                                     optionName="精美提袋"
                                     optionEgName="Exquisite Bag"
                                     optionPrice={10}
+                                    onAddToCart={handleAddToCart}
                                 />
                                 <div className="gift-option content">
                                     <label htmlFor="card-content"></label>
-                                    <input type="text" id="card-content" className="card-content" name="card-content" placeholder="暖心小卡內容" />
+                                    <input
+                                        type="text"
+                                        id="card-content"
+                                        className="card-content"
+                                        name="card-content"
+                                        placeholder="暖心小卡內容"
+                                        value={cardContent}
+                                        onChange={handleCardContentChange}
+                                    />
                                 </div>
                             </div>
                         </section>
@@ -279,47 +413,49 @@
                                     </div>
                                 </div>
                             </div>
-                            <div className="extra-product-tip">再消費<span>NT.701</span>免運費</div>
+                            <div className="extra-product-tip">再消費<span>{`NT.${amountLeftForFreeShipping}`}</span>免運費</div>
                             <div className="gift-options">
                                 <Option
+                                    key="Purple-Bliss"
                                     optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
                                     optionTitle="最新商品"
                                     optionName="甜蜜紫漾"
                                     optionEgName="Purple Bliss"
-                                    optionPrice={10}
-                                    discountPrice={5}
+                                    optionPrice={399}
+                                    discountPrice={280}
+                                    onAddToCart={handleAddToCart}
                                 />
                                 <Option
                                     optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
                                     optionTitle="最新商品"
                                     optionName="甜蜜紫漾"
                                     optionEgName="Purple Bliss"
-                                    optionPrice={10}
-                                    discountPrice={5}
+                                    optionPrice={399}
+                                    discountPrice={280}
                                 />
                                 <Option
                                     optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
                                     optionTitle="最新商品"
                                     optionName="甜蜜紫漾"
                                     optionEgName="Purple Bliss"
-                                    optionPrice={10}
-                                    discountPrice={5}
+                                    optionPrice={399}
+                                    discountPrice={280}
                                 />
                                 <Option
                                     optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
                                     optionTitle="最新商品"
                                     optionName="甜蜜紫漾"
                                     optionEgName="Purple Bliss"
-                                    optionPrice={10}
-                                    discountPrice={5}
+                                    optionPrice={399}
+                                    discountPrice={280}
                                 />
                                 <Option
                                     optionSrc="./images/cart/barbara-chowaniec-zG_Mm1XS25I-unsplash.jpg"
                                     optionTitle="最新商品"
                                     optionName="甜蜜紫漾"
                                     optionEgName="Purple Bliss"
-                                    optionPrice={10}
-                                    discountPrice={5}
+                                    optionPrice={399}
+                                    discountPrice={280}
                                 />
                             </div>
                         </section>
@@ -350,19 +486,19 @@
                             <table className="summary-table">
                                 <tbody>
                                     <tr className="summary-row">
-                                        <td className="item-count-cell">共1項</td>
+                                        <td className="item-count-cell">{`共${cart.reduce((total, item) => total + item.quantity, 0)}項`}</td>
                                         <td className="product-total-cell">產品金額</td>
-                                        <td><span className="amount">NT.299</span></td>
+                                        <td><span className="amount">{`NT.${totalPrice}`}</span></td>
                                     </tr>
                                     <tr className="summary-row">
                                         <td className="free-shipping-cell">消費滿 $1000 免運費，未滿則酌收50元運費。</td>
                                         <td className="shipping-total-cell">運費小計</td>
-                                        <td><span className="amount">NT.50</span></td>
+                                        <td><span className="amount">{`NT.${shippingCost}`}</span></td>
                                     </tr>
                                     <tr className="grand-total-row">
                                         <td></td>
                                         <td className="grand-total-cell">總計</td>
-                                        <td><span id="total-amount" className="total-amount">NT.349</span></td>
+                                        <td><span id="total-amount" className="total-amount">{`NT.${grandTotal}`}</span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -374,12 +510,14 @@
                             nextBtnSrc="./checkout.html"
                             nextBtnClass="nextStep"
                             nextbtnName="下一步"
+                            cart={cart}
+                            shouldCheckCart={true}
                         />
                         <Footer />
                     </main>
                 </>
-            )
-        }
+            );
+        });
         ReactDOM
             .createRoot(document.getElementById('root'))
             .render(<App />);

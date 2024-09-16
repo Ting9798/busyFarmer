@@ -118,7 +118,7 @@
         }
 
         const CartContext = React.createContext();
-        function App(props) {
+        const App = (props) => {
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
@@ -153,7 +153,7 @@
                 setProductAlt(alt);
             };
 
-            const cartRef = useRef(null);
+            const cartRef = useRef(null); // Create a ref for FloatCart
             const [selectedFruits, setSelectedFruits] = useState({});
 
             useEffect(() => {
@@ -165,7 +165,6 @@
                 }
             }, []);
 
-            // 水果選擇
             const handleFruitChange = (cardId, selectedFruit) => {
                 setSelectedFruits(prevState => ({
                     ...prevState,
@@ -173,7 +172,6 @@
                 }));
             };
 
-            // 是否都選了
             const areAllFruitsSelected = () => {
                 const requiredSelections = ['base-1', 'base-2', 'base-3', 'flavor-1', 'flavor-2'];
                 return requiredSelections.every(id => selectedFruits[id]);
@@ -189,33 +187,40 @@
             const handleAddToCart = (e) => {
                 e.preventDefault();
                 if (areAllFruitsSelected()) {
-                    const itemsToAdd = [{
+                    const cartItem = {
                         id: 'custom-package',
+                        src: './images/customized/tabs-1-svitlana-unsplash.jpg',
                         name: '客製化果乾包',
-                        image: './images/customized/tabs-1-svitlana-unsplash.jpg',
+                        egName: 'custom-package',
                         price: 599,
                         quantity: 1,
                         notes: `${getSelectedFruitNames()}`
-                    }];
+                    };
 
                     // 本地端儲存
                     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-                    itemsToAdd.forEach(item => {
-                        cart.push(item);
-                    });
+
+                    // 確保不重複添加相同商品
+                    const itemIndex = cart.findIndex(item => item.id === cartItem.id);
+                    if (itemIndex >= 0) {
+                        // 如果已經存在，則更新數量
+                        cart[itemIndex].quantity += cartItem.quantity;
+                    } else {
+                        // 如果不存在，則添加新商品
+                        cart.push(cartItem);
+                    }
+
                     localStorage.setItem('cart', JSON.stringify(cart));
 
-                    itemsToAdd.forEach(item => {
-                        if (cartRef.current) {
-                            cartRef.current.addItemToCart(item);
-                        }
-                    });
+                    // 更新購物車組件
+                    if (cartRef.current) {
+                        cartRef.current.addItemToCart(cartItem);
+                    }
                 } else {
                     alert('請選擇所有水果');
                 }
             };
 
-            // 下一步之前檢查包裝按鈕
             const handleNextStepClick = (e) => {
                 e.preventDefault();
                 const selectedOption = document.querySelector('input[name="pack"]:checked');
@@ -230,8 +235,7 @@
 
             return (
                 <>
-                    {/* 導覽列*/}
-                    < Nav
+                    <Nav
                         headerClassName={navProps.headerClassName}
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
@@ -254,7 +258,7 @@
                                     <li onClick={() => tagOnclick(imageSources.img1, altSources.alt1)}><img src={imageSources.img1} alt={altSources.alt1} /></li>
                                     <li onClick={() => tagOnclick(imageSources.img2, altSources.alt2)}><img src={imageSources.img2} alt={altSources.alt2} /></li>
                                     <li onClick={() => tagOnclick(imageSources.img3, altSources.alt3)}><img src={imageSources.img3} alt={altSources.alt3} /></li>
-                                    <li onClick={() => tagOnclick(imageSources.img2, altSources.alt4)}><img src={imageSources.img2} alt={altSources.alt4} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img4, altSources.alt4)}><img src={imageSources.img4} alt={altSources.alt4} /></li>
                                 </ul>
                             </div>
                             <div className="product-part">
@@ -363,10 +367,10 @@
                         {/*特色*/}
                         <Features />
                         <Footer />
-                    </main >
+                    </main>
                 </>
-            )
-        }
+            );
+        };
         ReactDOM
             .createRoot(document.getElementById('root'))
             .render(<App />);

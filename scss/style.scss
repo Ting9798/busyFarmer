@@ -760,14 +760,26 @@ body.fixed {
     }
 }
 
-.shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(1) .shoppingBanner-tit-box {
-    top: 38%;
-    left: 11%;
-}
+.shoppingBanner-container {
+    .carousel-slide {
+        .shoppingBanner {
 
-.shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(2) .shoppingBanner-tit-box {
-    bottom: 34%;
-    right: 2%;
+            &:nth-child(1),
+            &:nth-child(3) {
+                .shoppingBanner-tit-box {
+                    top: 38%;
+                    left: 11%;
+                }
+            }
+
+            &:nth-child(2) {
+                .shoppingBanner-tit-box {
+                    bottom: 34%;
+                    right: 2%;
+                }
+            }
+        }
+    }
 }
 
 .white-text {
@@ -2552,7 +2564,7 @@ optgroup {
         left: 0;
         width: 100%;
         height: 140%;
-        background-image: url('../images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png');
+        background-image: url(../images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -3264,7 +3276,6 @@ optgroup {
 
                     &:nth-child(2) {
                         text-align: left;
-                        padding-left: 2rem;
                     }
 
                     &:nth-child(6) {
@@ -3281,6 +3292,15 @@ optgroup {
             .product-cell {
                 text-align: center;
                 vertical-align: middle;
+
+                .delItem {
+                    position: static;
+                }
+
+                .item-notes {
+                    font-size: 12px;
+                    margin-top: 1em;
+                }
 
                 &:nth-child(2) {
                     text-align: left;
@@ -3317,6 +3337,13 @@ optgroup {
             }
         }
     }
+
+    .grandTotal {
+        span {
+            padding-left: .2em;
+            color: map-get($color , red);
+        }
+    }
 }
 
 .gift-options {
@@ -3348,6 +3375,7 @@ optgroup {
                 border: 3px solid map-get($color , white);
                 border-radius: 50%;
                 text-align: center;
+                cursor: pointer;
 
                 span {
                     color: map-get($color , white);
@@ -3609,9 +3637,21 @@ optgroup {
 #closeProduct {
     display: flex;
     align-items: center;
+    font-family: $GenSenRounded-R;
     font-size: 12px;
     letter-spacing: .1rem;
     line-height: 1.5;
+    margin: 1em 0 1.5em 0;
+    transform: rotate(0deg);
+    transition: .35s;
+
+    &:hover {
+        scale: 1.1;
+    }
+}
+
+.rotate {
+    transform: rotate(-90deg);
 }
 
 #order-form {
@@ -3619,165 +3659,152 @@ optgroup {
     display: flex;
     justify-content: center;
 
-    label {
-        font-family: $GenSenRounded-R;
-        font-size: 14px;
-        letter-spacing: .1rem;
-        margin-bottom: .3rem;
-    }
-
     .order-form-box {
         width: 80%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: relative;
 
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: -1rem;
-            width: 100%;
-            border-bottom: 3px solid map-get($color , primaryG);
-        }
+        form {
+            display: flex;
 
-        .order-info {
-            width: 100%;
-            height: 100%;
+            .form-header {
+                font-family: $GenSenRounded-M;
+                font-size: 24px;
+                width: 100%;
+                letter-spacing: .2rem;
+                margin-bottom: 0.3em;
+                position: relative;
 
-            ul {
-                padding-right: 2.5rem;
-
-                span {
-                    font-family: $GenSenRounded-R;
-                    font-size: 16px;
-                    letter-spacing: .1rem;
-                    line-height: 2;
-                    padding-right: .8rem;
+                &::after {
+                    content: '';
+                    position: absolute;
+                    width: 80%;
+                    bottom: -.15em;
+                    left: 0;
+                    border-bottom: 5px solid map-get($color , primaryG);
                 }
             }
 
-            li {
-                @include col;
-                padding-bottom: 1rem;
-            }
+            input {
+                border: 2px solid map-get($color , primaryG);
+                border-radius: 12px;
+                box-sizing: border-box;
+                padding: .2em;
+                margin: .2em 0;
+                max-width: 445px;
 
-            .recipient-address {
-                width: 15%;
-
-                .address-select {
-                    width: 100%;
-                    border-radius: 16px;
-                    letter-spacing: .2rem;
-                    padding: .5rem 1rem;
-                    margin: .2rem 0;
-
-                    font-family: $GenSenRounded-R;
+                &::placeholder {
+                    text-align: left;
                     font-size: 14px;
-                    color: map-get($color , white);
-                    background-color: map-get($color , primaryG);
-                    background-image: url('../images/shared/arrow-w.svg');
-                    background-size: 15%;
+                    line-height: 5;
                 }
             }
-        }
 
-        .payment-info {
-            width: 70%;
-            height: 100%;
-
-            label {
+            .form-select {
+                width: 100%;
+                max-width: 445px;
+                border: 2px solid map-get($color , primaryG);
+                border-radius: 12px;
+                box-sizing: border-box;
+                padding: .3em;
+                margin: .2em 0;
                 font-family: $GenSenRounded-R;
-                font-size: 14px;
-                letter-spacing: .1rem;
-                margin-bottom: .3rem;
+                color: map-get($color , primaryG);
+                letter-spacing: .2rem;
+                text-align: center
             }
 
-            .payment-info-row {
-                display: flex;
-                align-items: center;
+            .order-info {
+                @include col;
+                width: 100%;
 
-                .payment-button {
-                    font-family: $GenSenRounded-R;
-                    font-size: 14px;
-                    letter-spacing: .1rem;
-                    color: map-get($color , primaryG);
-                    text-align: center;
+                fieldset {
+                    @include col;
+
+                    .order-info-header {
+                        font-family: $GenSenRounded-R;
+                        font-size: 16px;
+                        letter-spacing: .1rem;
+                    }
+
+                    .ordering-person {
+                        @include col;
+
+                        .gender-selection {
+                            label {
+                                margin-right: 5px;
+                            }
+
+                            >input {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    .address-details {
+                        display: flex;
+
+                        .postal-code {
+                            max-width: 80px;
+                            margin-right: 12px;
+                        }
+
+                        .address-detail {
+                            max-width: 356px;
+                        }
+                    }
+
+                }
+            }
+
+            .payment-info {
+                @include col;
+                width: 100%;
+
+                .payment-info-row {
+                    display: flex;
                     cursor: pointer;
 
-                    border: 3px solid map-get($color , primaryG);
-                    margin: 1rem 0;
-                    padding: .8rem 1rem;
-                    border-radius: 16px;
-                    margin: .5rem .8rem .5rem 0;
-                    text-wrap: nowrap;
+                    .delivery-options {
+                        display: flex;
+                    }
+
+                    .payment-button {
+                        font-family: $GenSenRounded-R;
+                        font-size: 14px;
+                        color: map-get($color , primaryG);
+                        border: 2px solid map-get($color , primaryG);
+                        border-radius: 10px;
+                        letter-spacing: .1rem;
+                        text-align: center;
+                        padding: 10px;
+                        margin: 1rem .5rem 1rem 0;
+                        transition: .35s;
+
+                        &:hover {
+                            background-color: map-get($color , primaryG);
+                            color: map-get($color , white);
+                        }
+                    }
+
+                    .payment-button.selected {
+                        background-color: map-get($color , primaryG);
+                        color: map-get($color , white);
+                    }
+                }
+            }
+
+            .invoice-info {
+                @include col;
+                .mobileBarcode-box{
+                    display: flex;
+                }
+                .companyName-box{
+                    @include col;
+                }
+                .consent-box{
+                    font-size: 12px;
                 }
             }
         }
-
-        .payment-info-header {
-            font-family: $GenSenRounded-M;
-            font-size: 24px;
-            letter-spacing: .2rem;
-
-            position: relative;
-
-            margin: .8rem 0;
-            padding-bottom: 1rem;
-
-            color: black;
-
-            &::after {
-                content: '';
-                position: absolute;
-                left: 0;
-                bottom: -.3rem;
-                width: 100%;
-                border-bottom: 3px solid map-get($color , primaryG);
-            }
-        }
-    }
-
-    .invoice-select {
-        width: 100%;
-        text-align: center;
-        border: 3px solid map-get($color , primaryG);
-        border-radius: 16px;
-        letter-spacing: .2rem;
-        padding: 1rem;
-        margin: .2rem 0;
-
-        option {
-            background-color: map-get($color , lightGreen);
-        }
-
-        font-family: $GenSenRounded-R;
-        font-size: 16px;
-        color: map-get($color , primaryG);
-    }
-
-    .payment-info-col {
-        @include col;
-    }
-
-    .user-input,
-    .address-details input {
-        border: 3px solid map-get($color , primaryG);
-        border-radius: 16px;
-        padding: 0.5rem;
-        width: 100%;
-    }
-
-    .address-details {
-        flex-direction: row !important;
-        width: 100%;
-    }
-
-    .postal-code {
-        display: block;
-        margin-right: 1rem;
-        flex: 0 0 100px;
     }
 }
 

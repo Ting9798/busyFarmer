@@ -113,6 +113,10 @@ select {
   text-align: center;
 }
 
+fieldset {
+  border: none;
+}
+
 @keyframes border {
   0% {
     clip-path: polygon(70% 70%, 100% 70%, 100% 100%, 70% 100%);
@@ -1309,11 +1313,10 @@ body.fixed {
   right: 10px;
 }
 
-.shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(1) .shoppingBanner-tit-box {
+.shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(1) .shoppingBanner-tit-box, .shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(3) .shoppingBanner-tit-box {
   top: 38%;
   left: 11%;
 }
-
 .shoppingBanner-container .carousel-slide .shoppingBanner:nth-child(2) .shoppingBanner-tit-box {
   bottom: 34%;
   right: 2%;
@@ -2795,7 +2798,7 @@ optgroup label {
   left: 0;
   width: 100%;
   height: 140%;
-  background-image: url("../images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png");
+  background-image: url(../images/shopping/marian-hearne-I35_JP2Stwg-unsplash.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -3403,7 +3406,6 @@ optgroup label {
 }
 #product-section .product-table .product-header .product-header-box .product-header-cell:nth-child(2) {
   text-align: left;
-  padding-left: 2rem;
 }
 #product-section .product-table .product-header .product-header-box .product-header-cell:nth-child(6) {
   width: 10%;
@@ -3415,6 +3417,13 @@ optgroup label {
 #product-section .product-table .product-row .product-cell {
   text-align: center;
   vertical-align: middle;
+}
+#product-section .product-table .product-row .product-cell .delItem {
+  position: static;
+}
+#product-section .product-table .product-row .product-cell .item-notes {
+  font-size: 12px;
+  margin-top: 1em;
 }
 #product-section .product-table .product-row .product-cell:nth-child(2) {
   text-align: left;
@@ -3443,6 +3452,10 @@ optgroup label {
 }
 #product-section .product-table .product-row .product-cell img {
   border-radius: 16px;
+}
+#product-section .grandTotal span {
+  padding-left: 0.2em;
+  color: #eb6328;
 }
 
 .gift-options {
@@ -3475,6 +3488,7 @@ optgroup label {
   border: 3px solid #F1F1F1;
   border-radius: 50%;
   text-align: center;
+  cursor: pointer;
 }
 .gift-options .gift-option .gift-option-Surrounding .gift-option-Surrounding-btn span {
   color: #F1F1F1;
@@ -3698,9 +3712,20 @@ optgroup label {
 #closeProduct {
   display: flex;
   align-items: center;
+  font-family: "GenSenRounded TW-R", sans-serif;
   font-size: 12px;
   letter-spacing: 0.1rem;
   line-height: 1.5;
+  margin: 1em 0 1.5em 0;
+  transform: rotate(0deg);
+  transition: 0.35s;
+}
+#closeProduct:hover {
+  scale: 1.1;
+}
+
+.rotate {
+  transform: rotate(-90deg);
 }
 
 #order-form {
@@ -3708,141 +3733,133 @@ optgroup label {
   display: flex;
   justify-content: center;
 }
-#order-form label {
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.1rem;
-  margin-bottom: 0.3rem;
-}
 #order-form .order-form-box {
   width: 80%;
+}
+#order-form .order-form-box form {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
 }
-#order-form .order-form-box::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -1rem;
-  width: 100%;
-  border-bottom: 3px solid #6c8c42;
-}
-#order-form .order-form-box .order-info {
-  width: 100%;
-  height: 100%;
-}
-#order-form .order-form-box .order-info ul {
-  padding-right: 2.5rem;
-}
-#order-form .order-form-box .order-info ul span {
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.1rem;
-  line-height: 2;
-  padding-right: 0.8rem;
-}
-#order-form .order-form-box .order-info li {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 1rem;
-}
-#order-form .order-form-box .order-info .recipient-address {
-  width: 15%;
-}
-#order-form .order-form-box .order-info .recipient-address .address-select {
-  width: 100%;
-  border-radius: 16px;
-  letter-spacing: 0.2rem;
-  padding: 0.5rem 1rem;
-  margin: 0.2rem 0;
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 14px;
-  color: #F1F1F1;
-  background-color: #6c8c42;
-  background-image: url("../images/shared/arrow-w.svg");
-  background-size: 15%;
-}
-#order-form .order-form-box .payment-info {
-  width: 70%;
-  height: 100%;
-}
-#order-form .order-form-box .payment-info label {
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.1rem;
-  margin-bottom: 0.3rem;
-}
-#order-form .order-form-box .payment-info .payment-info-row {
-  display: flex;
-  align-items: center;
-}
-#order-form .order-form-box .payment-info .payment-info-row .payment-button {
-  font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 14px;
-  letter-spacing: 0.1rem;
-  color: #6c8c42;
-  text-align: center;
-  cursor: pointer;
-  border: 3px solid #6c8c42;
-  margin: 1rem 0;
-  padding: 0.8rem 1rem;
-  border-radius: 16px;
-  margin: 0.5rem 0.8rem 0.5rem 0;
-  text-wrap: nowrap;
-}
-#order-form .order-form-box .payment-info-header {
+#order-form .order-form-box form .form-header {
   font-family: "GenSenRounded TW-M", sans-serif;
   font-size: 24px;
+  width: 100%;
   letter-spacing: 0.2rem;
+  margin-bottom: 0.3em;
   position: relative;
-  margin: 0.8rem 0;
-  padding-bottom: 1rem;
-  color: black;
 }
-#order-form .order-form-box .payment-info-header::after {
+#order-form .order-form-box form .form-header::after {
   content: "";
   position: absolute;
+  width: 80%;
+  bottom: -0.15em;
   left: 0;
-  bottom: -0.3rem;
-  width: 100%;
-  border-bottom: 3px solid #6c8c42;
+  border-bottom: 5px solid #6c8c42;
 }
-#order-form .invoice-select {
+#order-form .order-form-box form input {
+  border: 2px solid #6c8c42;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.2em;
+  margin: 0.2em 0;
+  max-width: 445px;
+}
+#order-form .order-form-box form input::placeholder {
+  text-align: left;
+  font-size: 14px;
+  line-height: 5;
+}
+#order-form .order-form-box form .form-select {
   width: 100%;
-  text-align: center;
-  border: 3px solid #6c8c42;
-  border-radius: 16px;
-  letter-spacing: 0.2rem;
-  padding: 1rem;
-  margin: 0.2rem 0;
+  max-width: 445px;
+  border: 2px solid #6c8c42;
+  border-radius: 12px;
+  box-sizing: border-box;
+  padding: 0.3em;
+  margin: 0.2em 0;
   font-family: "GenSenRounded TW-R", sans-serif;
-  font-size: 16px;
   color: #6c8c42;
+  letter-spacing: 0.2rem;
+  text-align: center;
 }
-#order-form .invoice-select option {
-  background-color: #FAFFF1;
+#order-form .order-form-box form .order-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
-#order-form .payment-info-col {
+#order-form .order-form-box form .order-info fieldset {
   display: flex;
   flex-direction: column;
 }
-#order-form .user-input,
-#order-form .address-details input {
-  border: 3px solid #6c8c42;
-  border-radius: 16px;
-  padding: 0.5rem;
+#order-form .order-form-box form .order-info fieldset .order-info-header {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.1rem;
+}
+#order-form .order-form-box form .order-info fieldset .ordering-person {
+  display: flex;
+  flex-direction: column;
+}
+#order-form .order-form-box form .order-info fieldset .ordering-person .gender-selection label {
+  margin-right: 5px;
+}
+#order-form .order-form-box form .order-info fieldset .ordering-person .gender-selection > input {
   width: 100%;
 }
-#order-form .address-details {
-  flex-direction: row !important;
+#order-form .order-form-box form .order-info fieldset .address-details {
+  display: flex;
+}
+#order-form .order-form-box form .order-info fieldset .address-details .postal-code {
+  max-width: 80px;
+  margin-right: 12px;
+}
+#order-form .order-form-box form .order-info fieldset .address-details .address-detail {
+  max-width: 356px;
+}
+#order-form .order-form-box form .payment-info {
+  display: flex;
+  flex-direction: column;
   width: 100%;
 }
-#order-form .postal-code {
-  display: block;
-  margin-right: 1rem;
-  flex: 0 0 100px;
+#order-form .order-form-box form .payment-info .payment-info-row {
+  display: flex;
+  cursor: pointer;
+}
+#order-form .order-form-box form .payment-info .payment-info-row .delivery-options {
+  display: flex;
+}
+#order-form .order-form-box form .payment-info .payment-info-row .payment-button {
+  font-family: "GenSenRounded TW-R", sans-serif;
+  font-size: 14px;
+  color: #6c8c42;
+  border: 2px solid #6c8c42;
+  border-radius: 10px;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  padding: 10px;
+  margin: 1rem 0.5rem 1rem 0;
+  transition: 0.35s;
+}
+#order-form .order-form-box form .payment-info .payment-info-row .payment-button:hover {
+  background-color: #6c8c42;
+  color: #F1F1F1;
+}
+#order-form .order-form-box form .payment-info .payment-info-row .payment-button.selected {
+  background-color: #6c8c42;
+  color: #F1F1F1;
+}
+#order-form .order-form-box form .invoice-info {
+  display: flex;
+  flex-direction: column;
+}
+#order-form .order-form-box form .invoice-info .mobileBarcode-box {
+  display: flex;
+}
+#order-form .order-form-box form .invoice-info .companyName-box {
+  display: flex;
+  flex-direction: column;
+}
+#order-form .order-form-box form .invoice-info .consent-box {
+  font-size: 12px;
 }
 
 #confirmation-section {

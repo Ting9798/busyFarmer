@@ -3,107 +3,99 @@ const { useState, useEffect, forwardRef, useImperativeHandle } = React;
 
 const FloatCart = forwardRef((props, ref) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [items, setItems] = useState([]);
-
-    // 讀取本地存儲中的購物車資料
-    useEffect(() => {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        setItems(cart);
-    }, []);
-
-    // 更新購物車的函數，並同步更新本地存儲
-    const updateCart = (newItems) => {
-        setItems(newItems);
-        localStorage.setItem('cart', JSON.stringify(newItems));
-    };
-
-    // 從 JSON 文件加載商品
-    useEffect(() => {
-        const loadItems = async () => {
-            try {
-                const data = await response.json();
-                setItems(prevItems => {
-                    const newItems = [...prevItems, ...data];
-                    // 去重
-                    const uniqueItems = Array.from(new Set(newItems.map(item => item.id)))
-                        .map(id => {
-                            return newItems.find(item => item.id === id);
-                        });
-                    localStorage.setItem('cart', JSON.stringify(uniqueItems));
-                    return uniqueItems;
-                });
-            }
-            catch (error) {
-                console.error('Failed to load items:', error);
-            }
-        };
-        loadItems();
-    }, []);
-
-    // 將值傳送
-    useImperativeHandle(ref, () => ({
-        addItemToCart: (newItem) => {
-            setItems(prevItems => {
-                const existingItem = prevItems.find(item => item.id === newItem.id);
-                let updatedItems;
-                if (existingItem) {
-                    updatedItems = prevItems.map(item =>
-                        item.id === newItem.id
-                            ? { ...item, quantity: item.quantity + newItem.quantity }
-                            : item
-                    );
-                } else {
-                    updatedItems = [...prevItems, newItem];
-                }
-                updateCart(updatedItems);
-                return updatedItems;
-            });
+    const [cart, setCart] = useState([
+        {
+            id: 'unique-item-id',
+            src: '商品圖片URL',
+            title: '商品標題',
+            name: '商品名稱',
+            egName: '商品英文名稱',
+            price: 100,
+            discountPrice: 80,
+            quantity: 1,
+            notes: '備註信息'
         }
-    }));
+    ]);
 
-    // 購物車收合
+    // 切換購物車顯示狀態
     const toggleCart = () => {
         setIsOpen(prevState => !prevState);
     };
 
+    // 讀取本地存儲中的購物車資料
+    useEffect(() => {
+        const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCart(storedCart);
+    }, []);
+
+    // 更新購物車的函數，並同步更新本地存儲
+    const updateCart = (newCart) => {
+        setCart(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+    };
+
+    // 處理從 Option 組件添加商品到購物車
+    const handleAddToCart = (newItem) => {
+        setCart(prevCart => {
+            const existingItem = prevCart.find(item => item.id === newItem.id);
+            const updatedCart = existingItem
+                ? prevCart.map(item =>
+                    item.id === newItem.id
+                        ? { ...item, quantity: item.quantity + newItem.quantity }
+                        : item
+                )
+                : [...prevCart, newItem];
+            updateCart(updatedCart);
+            return updatedCart;
+        });
+    };
+
+    // 將值傳送
+    useImperativeHandle(ref, () => ({
+        addItemToCart: handleAddToCart
+    }));
+
     // 增加數量
     const handleIncrement = (itemId) => {
-        setItems(prevItems => {
-            const updatedItems = prevItems.map(item =>
+        setCart(prevCart => {
+            const updatedCart = prevCart.map(item =>
                 item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
             );
-            localStorage.setItem('cart', JSON.stringify(updatedItems));
-            return updatedItems;
+            updateCart(updatedCart);
+            return updatedCart;
         });
     };
 
     // 減少數量
     const handleDecrement = (itemId) => {
-        setItems(prevItems => {
-            const updatedItems = prevItems.map(item =>
+        setCart(prevCart => {
+            const updatedCart = prevCart.map(item =>
                 item.id === itemId ? { ...item, quantity: Math.max(1, item.quantity - 1) } : item
             );
-            localStorage.setItem('cart', JSON.stringify(updatedItems));
-            return updatedItems;
+            updateCart(updatedCart);
+            return updatedCart;
         });
     };
 
     // 刪除商品
     const handleDeleteItem = (itemId) => {
-        const updatedItems = items.filter(item => item.id !== itemId);
-        updateCart(updatedItems);
+        setCart(prevCart => {
+            const updatedCart = prevCart.filter(item => item.id !== itemId);
+            updateCart(updatedCart);
+            return updatedCart;
+        });
     };
 
     // 計算總金額
-    const totalPrice = items.reduce((total, item) => total + item.price * item.quantity, 0);
+    const totalPrice = cart.reduce((total, item) => {
+        // 檢查discountPrice是否存在 不存在就用price
+        const priceToUse = item.discountPrice || item.price;
+        return total + priceToUse * item.quantity;
+    }, 0);
 
-    // 當物品有更新時更新本地端
-    useEffect(() => {
-        localStorage.setItem('cart', JSON.stringify(items));
-    }, [items]);
     return (
         <div className={`floating-cart ${isOpen ? 'open' : ''}`}>
-            <div className="shoppingDot"><span>{items.length}</span></div>
+            <div className="shoppingDot"><span>{cart.length}</span></div>
             <div className="cart-header" onClick={toggleCart} >
                 <figure className="cart-icon">
                     <img src="./images/shared/icon2_cart-w.svg" alt="購物車" />
@@ -111,7 +103,7 @@ const FloatCart = forwardRef((props, ref) => {
                 <span className="cart-title">購物車</span>
             </div>
             <div className="cart-content">
-                {items.length === 0 ? (
+                {cart.length === 0 ? (
                     <div className="empty-cart">
                         目前購物車是空的喔！
                     </div>
@@ -119,14 +111,14 @@ const FloatCart = forwardRef((props, ref) => {
                     <>
                         <ul className="cart-items-box">
                             {/* 商品列表 */}
-                            {items.map(item => (
+                            {cart.map(item => (
                                 <li key={item.id} className="cart-items">
-                                    <figure><img src={item.image} alt={item.name} /></figure>
+                                    <figure><img src={item.src} alt={item.name} /></figure>
                                     <div className="item-info">
                                         <div className="item-header">
                                             <h2 className="item-name">
                                                 <div>商品 / {item.name}</div>
-                                                <div>{item.nameEg}</div>
+                                                <div>{item.egName}</div>
                                             </h2>
                                             <button className="delItem" onClick={() => handleDeleteItem(item.id)}>
                                                 <svg width="16" height="16" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +136,7 @@ const FloatCart = forwardRef((props, ref) => {
                                             </button>
                                         </div>
                                         <div className="quantity-controls">
-                                            <div className="quantity-controls-price">NT.{item.price}</div>
+                                            <div className="quantity-controls-price">{item.discountPrice ? `NT.${item.discountPrice}` : `NT.${item.price}`}</div>
                                             <div className="quantity-controls-buttons">
                                                 <button className="decrement" onClick={() => handleDecrement(item.id)}>
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -152,10 +144,8 @@ const FloatCart = forwardRef((props, ref) => {
                                                         <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
                                                     </svg>
                                                 </button>
-
                                                 <label htmlFor={`quantity-input-${item.id}`}></label>
                                                 <input type="text" className="quantity-input" id={`quantity-input-${item.id}`} value={item.quantity} readOnly />
-
                                                 <button className="increment" onClick={() => handleIncrement(item.id)}>
                                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="16" height="16" rx="4" fill="#6C8C42" />
