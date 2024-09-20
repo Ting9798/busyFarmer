@@ -50,7 +50,7 @@ function Search() {
                         <SearchItem searchTitle="台北農場" />
                     </div>
                     <button type="submit" className="search-button">
-                        <img src="../images/shopping/Search.svg" alt="點擊搜尋" />
+                        <img src="./images/shopping/Search.svg" alt="點擊搜尋" />
                     </button>
                 </form>
             </div>
