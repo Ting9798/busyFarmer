@@ -20,7 +20,7 @@ function Footer() {
                                         <div>傳真：+886-2-1234-5679</div>
                                     </address>
                                 </div>
-                                <div className="company"><img src="../images/shared/company-right.svg" alt="小農logo" /></div>
+                                <div className="company"><img src="./images/shared/company-right.svg" alt="小農logo" /></div>
                             </div>
                             <div className="footer-map">
                                 <a href="./index.html">首頁</a>
@@ -34,8 +34,8 @@ function Footer() {
                         </div>
                     </div>
                     <div className="footerBg">
-                        <img className="footer-pre" src="../images/shared/footer-pre.png" alt="" />
-                        <img className="footer-back" src="../images/shared/footer-back.png" alt="" />
+                        <img className="footer-pre" src="./images/shared/footer-pre.png" alt="footer" />
+                        <img className="footer-back" src="./images/shared/footer-back.png" alt="footer" />
                     </div>
                 </div>
                 <div id="footer2">
