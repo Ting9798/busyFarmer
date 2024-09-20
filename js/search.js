@@ -31,7 +31,6 @@ function Search() {
             document.removeEventListener('click', outInput);
         };
     }, []);
-
     return (
         <>
             <div className="productList-search">
