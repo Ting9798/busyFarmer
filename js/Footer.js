@@ -8,9 +8,9 @@ function Footer() {
                             <div className="footer-contact">
                                 <div className="footer-contact-box">
                                     <div className="media">
-                                        <a href="#"><img src="../images/shared/line.svg" alt="連接到line官方" /></a>
-                                        <a href="#"><img src="../images/shared/facebook.svg" alt="連接到facebook官方" /></a>
-                                        <a href="#"><img src="../images/shared/instagram.svg" alt="連接到instagram官方" /></a>
+                                        <a href="#"><img src="./images/shared/line.svg" alt="連接到line官方" /></a>
+                                        <a href="#"><img src="./images/shared/facebook.svg" alt="連接到facebook官方" /></a>
+                                        <a href="#"><img src="./images/shared/instagram.svg" alt="連接到instagram官方" /></a>
                                     </div>
 
                                     <address className="information">
