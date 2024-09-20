@@ -66,7 +66,7 @@ body.fixed {
         transition: all .35s;
         cursor: pointer;
 
-        padding: 10px 30px;
+        padding: .5em 30px;
         margin: 3% 0;
 
         .buttonArrow-text {
@@ -76,7 +76,7 @@ body.fixed {
 
         &:hover {
             background-color: map-get($color , white-80);
-            padding: 12px 35px;
+            padding: .5em 35px;
         }
     }
 
@@ -1604,24 +1604,24 @@ body.fixed {
                 }
 
                 .card-introduction {
-                    padding-bottom: 6px;
                     font-size: 16px;
                     font-family: $GenSenRounded-R;
                     text-align: center;
                     margin: 0 22px;
                     letter-spacing: .12em;
-                    border-bottom: 3px solid map-get($color , lightGreenwhite);
                     color: map-get($color , white);
                 }
             }
 
             .item {
-                margin: 24px;
+                margin: 12px;
                 line-height: 1.6;
                 letter-spacing: .12em;
                 color: map-get($color , white);
                 text-align: center;
                 opacity: 0;
+                padding-top: 6px;
+                border-top: 3px solid map-get($color , lightGreenwhite);
                 transition: .35s ease-in-out all;
             }
         }

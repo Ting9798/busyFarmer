@@ -742,7 +742,7 @@ body.fixed {
   line-height: 3rem;
   transition: all 0.35s;
   cursor: pointer;
-  padding: 10px 30px;
+  padding: 0.5em 30px;
   margin: 3% 0;
 }
 .buttonArrow-box .buttonArrow .buttonArrow-text {
@@ -750,7 +750,7 @@ body.fixed {
 }
 .buttonArrow-box .buttonArrow:hover {
   background-color: rgba(241, 241, 241, 0.8);
-  padding: 12px 35px;
+  padding: 0.5em 35px;
 }
 .buttonArrow-box .arrowBtnWhite {
   color: #514535;
@@ -2031,22 +2031,22 @@ body.fixed {
   color: #F1F1F1;
 }
 .card .card-top-box .text-box .card-top .card-introduction {
-  padding-bottom: 6px;
   font-size: 16px;
   font-family: "GenSenRounded TW-R", sans-serif;
   text-align: center;
   margin: 0 22px;
   letter-spacing: 0.12em;
-  border-bottom: 3px solid;
   color: #F1F1F1;
 }
 .card .card-top-box .text-box .item {
-  margin: 24px;
+  margin: 12px;
   line-height: 1.6;
   letter-spacing: 0.12em;
   color: #F1F1F1;
   text-align: center;
   opacity: 0;
+  padding-top: 6px;
+  border-top: 3px solid;
   transition: 0.35s ease-in-out all;
 }
 
