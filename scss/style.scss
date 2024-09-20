@@ -3952,7 +3952,7 @@ optgroup {
 
 
     #news .news-text {
-        width: 95%;
+        width: 80%;
     }
 
     .iconBox {
@@ -4030,10 +4030,10 @@ optgroup {
     }
 
     #news {
-        height: 68vh;
+        height: 80vh;
 
         .news-text {
-            height: 60vh;
+            height: 90vh;
             top: 0;
         }
     }
@@ -4053,6 +4053,21 @@ optgroup {
 }
 
 @media (max-width:576px) {
+    
+    #hero  {
+        .ornament{
+            display: none;
+        }
+        .mountain-2 {
+            transform: translateY(65%);
+        }
+        .heroLogo {
+            img {
+                width: 65%;
+            }
+        }
+    }
+
     #cooperation .cooperation-tit svg:nth-child(1) {
         display: none;
     }

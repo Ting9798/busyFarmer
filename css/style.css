@@ -3959,7 +3959,7 @@ optgroup label {
     scale: 0.8;
   }
   #news .news-text {
-    width: 95%;
+    width: 80%;
   }
   .iconBox {
     inset: 0.725rem;
@@ -4021,10 +4021,10 @@ optgroup label {
     background-size: cover;
   }
   #news {
-    height: 68vh;
+    height: 80vh;
   }
   #news .news-text {
-    height: 60vh;
+    height: 90vh;
     top: 0;
   }
   .cooperation-ornament-box {
@@ -4038,6 +4038,15 @@ optgroup label {
   }
 }
 @media (max-width: 576px) {
+  #hero .ornament {
+    display: none;
+  }
+  #hero .mountain-2 {
+    transform: translateY(65%);
+  }
+  #hero .heroLogo img {
+    width: 65%;
+  }
   #cooperation .cooperation-tit svg:nth-child(1) {
     display: none;
   }
