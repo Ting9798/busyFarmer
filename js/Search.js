@@ -3,8 +3,8 @@ function SearchItem(props) {
     return (
         <>
             <div className="search-suggestion-item">
-                <img src="../images/shopping/Search.svg" alt={props.searchTitle} />
-                <a href="../planting.html">{props.searchTitle}</a>
+                <img src="./images/shopping/Search.svg" alt={props.searchTitle} />
+                <a href="./planting.html">{props.searchTitle}</a>
             </div>
         </>
     )
