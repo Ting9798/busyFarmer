@@ -3,7 +3,7 @@ function SearchItem(props) {
     return (
         <>
             <div className="search-suggestion-item">
-                <img src="./images/shopping/Search.svg" alt={props.searchTitle} />
+               
                 <a href="./planting.html">{props.searchTitle}</a>
             </div>
         </>
@@ -31,7 +31,7 @@ function Search() {
             document.removeEventListener('click', outInput);
         };
     }, []);
-    
+
     return (
         <>
             <div className="productList-search">
