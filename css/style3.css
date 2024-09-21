@@ -1,0 +1,153 @@
+body {
+    font-family: var(--GenSenRounded-M);
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+/* .activity img {
+    width: 40%;
+    border-radius: 25px;
+    margin-right: 20px;
+}
+.activity-2 img {
+    width: 50%;
+    border-radius: 25px;
+    margin-right: 20px;
+} */
+
+/* .activity:nth-child(even) {
+    flex-direction: row-reverse;
+}
+.activity:nth-child(even) img {
+    margin-right: 20px;
+    margin-left: 0px;
+} */
+.description {
+    flex: 1;
+    display: block;
+    /* background-color: var(--white); */
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: var(--shadow);
+}
+
+/* 文字陰影 */
+.description {
+    position: relative;
+    display: inline-block;
+    /* font-size: 24px; */
+    color: black;
+    background-image: url('../images/activity/shadow-1.png');
+    /* 替換為你的圖片路徑 */
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    padding: 100px 50px 100px 150px;
+    /* 根據圖片大小調整 */
+    background-position: 30% center;
+    overflow: visible;
+}
+
+.description p {
+    display: block;
+    width: 50%;
+    font-family: var(--GenSenRounded-R);
+    /* font-size: 20px; */
+    letter-spacing: .15rem;
+    /* line-height: 3rem; */
+}
+
+
+
+#picking {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
+        justify-content: space-around;
+         */
+}
+
+#picking::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    background-image: url('../images/philanthropy/mountain-w-XL.png');
+    background-size: cover;
+    /* background-position: center; 上方會被切掉*/
+    /* background-repeat: no-repeat; */
+    filter: var(--shadow);
+    z-index: -1;
+    transform: translateY(5%) rotateY(180deg);
+}
+
+
+
+.activity-1 {
+    display: flex;
+    justify-content: space-between;
+    /* 使文字和圖片分開 */
+    align-items: center;
+    /* 確保它們垂直對齊 */
+    gap: 20px;
+    /* 控制它們之間的間距 */
+}
+
+.description-2 {
+    flex: 1;
+    /* 控制文字區塊的樣式 */
+}
+
+.image-container {
+    width: 500px;
+    /* 控制圖片的大小 */
+    height: auto;
+    margin: 30px;
+}
+
+.activity-1:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.description-2 {
+    position: relative;
+    display: inline-block;
+    /* font-size: 24px; */
+    color: black;
+    background-image: url('../images/activity/shadow-1.png');
+    /* 替換為你的圖片路徑 */
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+    padding: 100px 0px 100px 150px;
+    /* 根據圖片大小調整 */
+    background-position: 30% center;
+    overflow: visible;
+}
+
+.description-2 p {
+    display: block;
+    width: 40%;
+    font-family: var(--GenSenRounded-R);
+    /* font-size: 20px; */
+    letter-spacing: .15rem;
+    /* line-height: 3rem; */
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+p {
+    font-size: 1.1rem;
+}
