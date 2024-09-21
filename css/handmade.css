@@ -1,0 +1,583 @@
+
+
+.hero-content {
+    max-width: 1300px;
+    margin: 50px 0 50px 170px;
+    padding: auto;
+}
+
+.image-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.image-text-container img {
+    width: 50%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.text-content {
+    width: 70%;
+    text-align: left;
+    padding: 20px;
+}
+
+/* .section-title {
+    font-family: var(--GenSenRounded-M);
+    font-size: 24px;
+    letter-spacing: .2rem;
+    width: auto;
+    text-wrap:nowrap;
+    margin: 0;
+} */
+.text-content h3 {
+    font-family: var(--GenSenRounded-M);
+    font-size: 28px;
+    letter-spacing: .15rem;
+    width: auto;
+    text-wrap: nowrap;
+    margin-bottom: 20px;
+}
+
+/* .description {
+    display: block;
+    width: 80%;
+    font-family: var(--GenSenRounded-R);
+    font-size: 16px;
+    letter-spacing: .15rem;
+    margin: 1% 0;
+} */
+
+.text-content p {
+    display: block;
+    width: 110%;
+    font-family: var(--GenSenRounded-R);
+    font-size: 16px;
+    letter-spacing: .15rem;
+    margin-bottom: 15px;
+    padding-right: 70px;
+}
+
+.hero-content img {
+    width: 70%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* .activity-plans {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.activity-plans h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.plan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.plan img {
+    width: 150px;
+    margin-right: 20px;
+}
+
+.plan-info {
+    text-align: left;
+}
+
+.plan-info h3 {
+    font-size: 24px;
+}
+
+.plan-info p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.plan-info button {
+    padding: 10px 20px;
+    background-color: #FFB347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.activity-info {
+    background-color: #F5F5F5;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.info-item {
+    margin-bottom: 20px;
+}
+
+.location {
+    padding: 50px 20px;
+    background-color: #D9D9D9;
+    text-align: center;
+}
+
+.map img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .plan {
+        flex-direction: column;
+    }
+
+    .plan img {
+        margin-bottom: 20px;
+    }
+} */
+
+.activity-section {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fff;
+}
+
+.activity-section h2 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--primaryO);
+    padding: 10px;
+    font-weight: 500;
+}
+
+.activity-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.activity-plan {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid #F79E3C;
+    border-radius: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-plan img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.activity-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-left: 20px;
+}
+
+.activity-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.activity-text h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    /* color: #333; */
+    font-weight: 500;
+    font-family: var(--GenSenRounded-R);
+}
+
+.activity-text p {
+    font-size: 14px;
+    color: #666;
+}
+
+.activity-price-button {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.activity-price-button button {
+    margin-left: 10px;
+    background-color: var(--primaryO);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.activity-price-button button:hover {
+    background-color: #e58e2e;
+}
+
+/* RWD for smaller screens */
+@media (max-width: 768px) {
+    .activity-container {
+        flex-direction: column;
+    }
+
+    .activity-plan {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .activity-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .activity-price-button {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .activity-price-button button {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #FFA500;
+    /* 文字的顏色 */
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+}
+
+/* .section-title::before{
+    content: "";
+    flex: ;
+    border-bottom: 2px solid #FFA500; /* 橫槓的顏色
+    margin: 0 20px 10px 50px; /* 控制橫槓與文字的間距 */
+/* .section-title::after {
+    content: "";
+    flex: 1;
+    border-bottom: 2px solid #FFA500; /* 橫槓的顏色 */
+/* margin 0 20px; */
+/* 控制橫槓與文字的間距 */
+
+.activity-experience {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 24px;
+    color: #83b943;
+    /* 綠色標題 */
+    position: relative;
+    font-weight: bold;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    display: inline-block;
+    width: 50px;
+    height: 1px;
+    background-color: #83b943;
+    margin: 0 10px;
+}
+
+.activity-content {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+/* 整個區塊的樣式 */
+.activity-explanation {
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* 活動說明標題樣式 */
+.activity-explanation-header h2 {
+    font-size: 24px;
+    color: #6AB344;
+    /* 綠色字體 */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* 加上兩邊的橫線 */
+.activity-explanation-header h2:before,
+.activity-explanation-header h2:after {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 2px;
+    background-color: #6AB344;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+/* 每個體驗內容區塊的樣式 */
+.activity-explanation-content {
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+}
+
+/* 標題的橘色圓角矩形樣式 */
+.activity-header {
+    background-color: var(--primaryO);
+    /* 橘色 */
+    border-radius: 25px;
+    /* 圓角 */
+    width: 210px;
+    /* 寬度 */
+    height: 60px;
+    /* 高度 */
+    padding: 10px 0;
+    /* 上下內距 */
+    margin-bottom: 20px;
+    display: flex;
+    /* 將內容置中 */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* 以正常文檔流為基礎移動 */
+    top: 20px;
+    /* 往下移動 */
+    left: 125px;
+    /* 往右移動 */
+    z-index: 2;
+}
+
+.activity-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 20px;
+}
+
+/* 內文的白色圓角矩形樣式 */
+.activity-body {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 35px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* 陰影效果 */
+    width: 200px;
+    /* 調整寬度 */
+    height: 180px;
+    /* 調整高度 */
+    position: relative;
+    /* 這裡也可以用 absolute 視情況而定 */
+    left: 130px;
+    /* 往右移動 */
+    bottom: 10px;
+    /* 往下移動 */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.activity-body p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+}
+
+
+/* 項目符號樣式 */
+.bullet-list {
+    list-style-type: disc;
+    /* 設定項目符號為圓點 */
+    padding-left: 10px;
+    /* 調整符號與文字間距 */
+}
+
+.bullet-list li {
+    text-align: left;
+    /* 文字靠左對齊 */
+    margin-bottom: 5px;
+    /* 項目之間的距離 */
+}
+
+
+/* 購票須知 */
+.ticket-info-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    gap: 300px;
+}
+
+/* 橘色不規則形狀 */
+.orange-shape {
+    background: url('/images/handmade/Vector.png') no-repeat center/cover;
+    /* 橘色形狀的背景圖片 */
+    padding: 80px 50px;
+    position: relative;
+    width: 300px;
+    /* 根據形狀大小進行調整 */
+    height: 300px;
+    /* 根據形狀大小進行調整 */
+    border-radius: 10px;
+    left: 300px;
+    background-size: contain;
+}
+
+.orange-shape p {
+    color: white;
+    font-size: 16px;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    /* 根據需要調整文字在形狀中的位置 */
+    left: 50%;
+    transform: translate(-50%, -60%);
+    /* 讓文字居中 */
+    width: 200px;
+}
+
+/* 綠色不規則形狀 */
+.green-shape {
+    background: url('/images/handmade/Vector2.png') no-repeat center/cover;
+    /* 綠色形狀的背景圖片 */
+    padding: 80px 50px;
+    position: relative;
+    width: 300px;
+    /* 根據形狀大小進行調整 */
+    height: 300px;
+    /* 根據形狀大小進行調整 */
+    border-radius: 10px;
+    left: -300px;
+    background-size: contain;
+}
+
+.green-list {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 16px;
+    color: white;
+    text-align: left;
+    position: absolute;
+    top: 55%;
+    /* 根據需要調整文字在形狀中的位置 */
+    left: 50%;
+    transform: translate(-50%, -60%);
+    /* 讓文字居中 */
+    width: 200px;
+}
+
+.green-list li {
+    margin-bottom: 10px;
+}
+
+/* 裝飾圖片 */
+.orange-decor {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    width: 90px;
+    /* 根據裝飾大小進行調整 */
+}
+
+.green-decor {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    width: 100px;
+    /* 根據裝飾大小進行調整 */
+}
+
+/* Map */
+.location-section {
+    display: flex;
+    background-color: #856a45;
+    padding: 20px 80px;
+    /* border-radius: 15px; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-info {
+    flex: 1;
+    color: #fff;
+    font-size: 18px;
+}
+
+.location-icon {
+    margin-bottom: 20px;
+}
+
+.location-icon img {
+    width: 40px;
+    /* 根據圖示大小調整 */
+}
+
+.location-details {
+    line-height: 2;
+}
+
+.location-map {
+    flex: 2;
+    margin-left: 20px;
+}
+
+.location-map iframe {
+    border-radius: 20px;
+    /* 地圖的圓角 */
+    width: 100%;
+    height: 450px;
+    /* 調整地圖高度 */
+}
+
+.background-section {
+    position: relative; /* 確保內部元素可以定位 */
+    width: 100%;
+    min-height: 400px;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover; /* 確保圖片不會變形 */
+    z-index: -1; /* 讓圖片在背景，內容在上層 */
+    
+}
+
+.content {
+    position: relative;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}

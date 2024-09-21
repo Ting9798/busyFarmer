@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO遊趣-小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/Breadcrumbs.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function Plan(props) {
+            return (
+                <div className="handmade-plan-item">
+                    <div>
+                        <img src={`./images/handmade/${props.planImg}.png`} alt={props.planTitle} />
+                        <div className="handmade-plan-item-text">
+                            <h3>{props.planTitle}</h3>
+                            <p>{props.planDescribe}</p>
+                        </div>
+                    </div>
+                    <div className="handmade-plan-item-priceBtn">
+                        <div>{`NT$${props.planPrice} / 人`}</div>
+                        <a href="./register.html">選擇</a>
+                    </div>
+                </div>
+            )
+        }
+        function Tip(props) {
+            return (
+                <div className="handmade-tip-item">
+                    <h3 className="handmade-tip-item-title">{props.tipTitle}</h3>
+                    <div className="handmade-tip-item-describe">
+                        <ul>
+                            <li>{props.tip1}</li>
+                            <li>{props.tip2}</li>
+                        </ul>
+                        <p>{props.remark}</p>
+                    </div>
+                </div>
+            )
+        }
+        function App(props) {
+
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            useAdjustMargin(navProps.headerClassName);
+
+            const paths = [
+                { name: '首頁', href: './index.html' },
+                { name: 'GO遊趣', href: './customized.html' },
+                { name: '手工果醬/果乾製作體驗', href: './handmade.html' }
+            ];
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <FloatCart />
+                    <main>
+                        <div id="title">
+                            <Breadcrumbs paths={paths} />
+                        </div>
+                        <section className="handmade-top">
+                            <div className="handmade-top-content">
+                                <img src="./images/handmade/main.png" alt="果醬製作體驗" />
+                                <div className="text-content">
+                                    <h3>手工果醬 / 農產品製作體驗</h3>
+                                    <p>張美阿姨橘子園，擁有天然湧泉及肥沃土壤，是水果生長的絕佳環境，是知名的「水果之鄉」。</p>
+                                    <p>手工製作果乾、果醬的原因是協助農民解決水果生產過剩問題。古早手工製作方式，與材料單純，不加色素、不加香精、不加防腐劑的三不堅持，因而讓果乾、果醬打出鮮亮名號。</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="handmade-plan">
+                            <h2 className="handmadeTitle">活動方案</h2>
+                            <div className="handmade-plan-container">
+                                <Plan
+                                    planImg="Thumbnail"
+                                    planTitle="手工果醬製作體驗"
+                                    planDescribe="(1人成行，平假日皆可使用)"
+                                    planPrice="200"
+                                />
+                                <Plan
+                                    planImg="Thumbnail2"
+                                    planTitle="手工果醬製作體驗"
+                                    planDescribe="(1人成行，平假日皆可使用)"
+                                    planPrice="200"
+                                />
+                            </div>
+                        </section>
+
+                        <section className="handmade-tip">
+                            <div className="handmade-tip-box">
+                                <h2 className="handmadeTitle tit2">活動說明</h2>
+                                <div className="handmade-tip-content">
+                                    <Tip
+                                        tipTitle="手工果乾製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果乾製作體驗"
+                                        remark="(以上行程為 200 元/人，平假日皆可使用)" />
+                                    <Tip
+                                        tipTitle="手工果醬製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果醬製作體驗"
+                                        remark="(以上行程為200元/人，平假日皆可使用)" />
+                                </div>
+                            </div>
+                            <div className="handmade-tip-box">
+                                <h2 className="handmadeTitle tit2">購票須知</h2>
+                                <div className="handmade-tip-content">
+                                    <Tip
+                                        tipTitle="手工果乾製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果乾製作體驗"
+                                        remark="(以上行程為 200 元/人，平假日皆可使用)" />
+                                    <Tip
+                                        tipTitle="手工果醬製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果醬製作體驗"
+                                        remark="(以上行程為200元/人，平假日皆可使用)" />
+                                </div>
+                            </div>
+                        </section>
+                        <Footer />
+                    </main>
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+</body>
+
+</html>

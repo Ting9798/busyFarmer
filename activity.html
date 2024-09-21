@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>活動體驗-小農好忙</title>
+    <title>GO遊趣-小農好忙</title>
     <link rel="icon" href="./favicon.ico">
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
     <script type="text/babel" src="./js/Navbar.js"></script>
     <script type="text/babel" src="./js/useAdjustMargin.js"></script>
     <script type="text/babel" src="./js/Breadcrumbs.js"></script>
@@ -60,6 +62,7 @@
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
+                    <FloatCart />
                     <div id="title" className="container">
                         <Breadcrumbs paths={paths} />
                         <div className="contact-titBox">
