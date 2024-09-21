@@ -3877,11 +3877,24 @@ optgroup {
         margin: 2.5em 0;
         height: 100%;
 
+        &:hover {
+            img {
+                scale: 1.1;
+            }
+
+            .description {
+                scale: 1.01;
+                color: map-get($color , red);
+            }
+        }
+
         img {
+            transition: .35s;
             filter: $blurOL;
         }
 
         .description {
+            transition: .35s;
             position: relative;
             display: flex;
             z-index: 1;

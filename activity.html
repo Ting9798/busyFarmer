@@ -15,7 +15,6 @@
     <script type="text/babel" src="./js/Breadcrumbs.js"></script>
     <script type="text/babel" src="./js/Footer.js"></script>
 
-    <!-- <link rel="stylesheet" href="./css/style3.css"> -->
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -34,9 +33,9 @@
         function SectionImg(props) {
             return (
                 <div>
-                    <a href="./handmade.html">
+                    <div>
                         <img src={`./images/activity/activity-${props.imgNum}.png`} alt={props.sectionTheme} />
-                    </a>
+                    </div>
                 </div>
             )
         }
@@ -71,38 +70,38 @@
                     </div>
                     <main>
                         <section id="activity">
-                            <div className="activity">
+                            <a href="./handmade.html" className="activity">
                                 <SectionImg
                                     imgNum="1"
                                     sectionTheme="手工果醬/果乾製作體驗" />
                                 <SectionText
                                     sectionTheme="手工果醬/果乾製作體驗"
                                     sectionDescribe="透過手作果醬、果乾製作，享受自製健康食品的樂趣。" />
-                            </div>
-                            <div className="activity">
+                            </a>
+                            <a href="./handmade.html" className="activity">
                                 <SectionText
                                     sectionTheme="一日農夫採果體驗"
                                     sectionDescribe="親自採摘新鮮水果，感受田園生活的樂趣與豐收的喜悅。" />
                                 <SectionImg
                                     imgNum="2"
                                     sectionTheme="一日農夫採果體驗" />
-                            </div>
-                            <div className="activity">
+                            </a>
+                            <a href="./handmade.html" className="activity">
                                 <SectionImg
                                     imgNum="3"
                                     sectionTheme="果乾花圈手作體驗" />
                                 <SectionText
                                     sectionTheme="果乾花圈手作體驗"
                                     sectionDescribe="使用果乾、天然植物，製作美麗的花圈裝飾品。" />
-                            </div>
-                            <div className="activity">
+                            </a>
+                            <a href="./handmade.html" className="activity">
                                 <SectionText
                                     sectionTheme="農村體驗一日遊"
                                     sectionDescribe="參觀農場，體驗農村生活，學習農業知識。" />
                                 <SectionImg
                                     imgNum="4"
                                     sectionTheme="農村體驗一日遊" />
-                            </div>
+                            </a>
                         </section>
                         <Footer />
                     </main >

@@ -3922,10 +3922,19 @@ optgroup label {
   margin: 2.5em 0;
   height: 100%;
 }
+#activity .activity:hover img {
+  scale: 1.1;
+}
+#activity .activity:hover .description {
+  scale: 1.01;
+  color: #eb6328;
+}
 #activity .activity img {
+  transition: 0.35s;
   filter: drop-shadow(3.5em 1.7em 2px rgb(241, 185, 105));
 }
 #activity .activity .description {
+  transition: 0.35s;
   position: relative;
   display: flex;
   z-index: 1;
