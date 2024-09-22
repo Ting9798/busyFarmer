@@ -682,6 +682,12 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   margin: 0 5%;
   justify-content: center;
 }
+.breadcrumbs-box a {
+  transition: 0.35s;
+}
+.breadcrumbs-box a:hover {
+  color: #eb9b28;
+}
 
 .philant {
   position: absolute;

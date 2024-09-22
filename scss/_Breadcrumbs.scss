@@ -1,14 +1,24 @@
 @use 'variables' as *;
-.breadcrumbs-box{
+
+.breadcrumbs-box {
     display: flex;
     margin: 0 5%;
     justify-content: center;
+
+    a {
+        transition: .35s;
+        &:hover {
+            color: map-get($color , primaryO);
+        }
+    }
 }
-.philant{
+
+.philant {
     position: absolute;
     width: 100%;
     z-index: 99;
 }
-.bread{
+
+.bread {
     margin-top: 20px;
 }
