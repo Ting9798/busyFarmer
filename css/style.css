@@ -1089,10 +1089,9 @@ body.fixed {
   transform: translateX(320%) translateY(25%);
   animation: rotateFruit2 2s ease-in-out 4;
 }
-#hero .ornament .ornament-left-box .ornament-left:nth-child(3) svg {
-  width: 53%;
-  height: 100%;
-  transform: translateX(159%) translateY(-74%) rotate(77deg);
+#hero .ornament .ornament-left-box .ornament-left:nth-child(3) img:nth-child(2) {
+  transform: translateX(131%) translateY(-174%) rotate(180deg);
+  scale: 0.4;
 }
 #hero .ornament .ornament-left-box .ornament-left:nth-child(4) {
   width: 23%;
@@ -1113,22 +1112,20 @@ body.fixed {
 }
 #hero .ornament .ornament-left-box .ornament-left:nth-child(7) {
   width: 18%;
-  transform: translateX(8%) translateY(197%);
+  transform: translateX(8%) translateY(109%);
 }
-#hero .ornament .ornament-left-box .ornament-left:nth-child(7) svg {
-  width: 37%;
-  height: 100%;
-  transform: translateX(17%) translateY(51%) rotate(87deg);
+#hero .ornament .ornament-left-box .ornament-left:nth-child(7) img:nth-child(1) {
+  transform: translateX(-50%) translateY(154%) rotate(184deg);
+  scale: 0.3;
 }
 #hero .ornament .ornament-left-box .ornament-left:nth-child(8) {
   width: 22%;
-  transform: translateX(95%) translateY(196%);
+  transform: translateX(95%) translateY(118%);
   animation: rotateFruit3 2s ease-in-out 4;
 }
-#hero .ornament .ornament-left-box .ornament-left:nth-child(8) svg {
-  width: 20%;
-  height: 100%;
-  transform: translateY(-524%) translateX(171%) rotate(94deg);
+#hero .ornament .ornament-left-box .ornament-left:nth-child(8) img:nth-child(2) {
+  transform: translateX(17%) translateY(-664%) rotate(196deg);
+  scale: 0.2;
 }
 #hero .ornament .ornament-left-box .ornament-left:nth-child(9) {
   width: 50%;
@@ -1156,14 +1153,13 @@ body.fixed {
   transform: translateY(44%) translateX(125%);
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(2) {
-  width: 20%;
-  transform: translateX(305%) translateY(68%);
+  width: 18%;
+  transform: translateX(365%) translateY(44%) rotate(0deg);
   animation: rotateFruit4 2s ease-in-out 4;
 }
-#hero .ornament .ornament-right-box .ornament-right:nth-child(2) svg {
-  width: 34%;
-  height: 100%;
-  transform: translateX(220%) translateY(-352%) rotate(16deg);
+#hero .ornament .ornament-right-box .ornament-right:nth-child(2) img:nth-child(2) {
+  transform: translateX(143%) translateY(-469%) rotate(116deg);
+  scale: 0.3;
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(3) {
   width: 16%;
@@ -1176,21 +1172,19 @@ body.fixed {
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(5) {
   width: 22%;
-  transform: translateX(241%) translateY(111%);
+  transform: translateX(241%) translateY(33%);
 }
-#hero .ornament .ornament-right-box .ornament-right:nth-child(5) svg {
-  width: 23%;
-  height: 100%;
-  transform: translateX(54%) translateY(72%) rotate(90deg);
+#hero .ornament .ornament-right-box .ornament-right:nth-child(5) img:nth-child(1) {
+  transform: translateX(-69%) translateY(154%) rotate(180deg);
+  scale: 0.3;
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(6) {
   width: 23%;
-  transform: translateX(331%) translateY(148%);
+  transform: translateX(331%) translateY(62%);
 }
-#hero .ornament .ornament-right-box .ornament-right:nth-child(6) svg {
-  width: 35%;
-  height: 100%;
-  transform: translateX(135%) translateY(48%) rotate(-32deg);
+#hero .ornament .ornament-right-box .ornament-right:nth-child(6) img:nth-child(1) {
+  transform: translateX(45%) translateY(150%) rotate(62deg);
+  scale: 0.3;
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(7) {
   width: 15%;
@@ -1203,19 +1197,18 @@ body.fixed {
 #hero .ornament .ornament-right-box .ornament-right:nth-child(9) {
   width: 30%;
   animation: rotateFruit6 2s ease-in-out 4;
-  transform: translateY(132%) translateX(99%);
+  transform: translateY(61%) translateX(99%);
 }
-#hero .ornament .ornament-right-box .ornament-right:nth-child(9) svg {
-  width: 30%;
-  height: 100%;
-  transform: translateY(78%) translateX(10%) rotate(-46deg);
+#hero .ornament .ornament-right-box .ornament-right:nth-child(9) img:nth-child(1) {
+  transform: translateX(-82%) translateY(191%) rotate(50deg);
+  scale: 0.3;
 }
 #hero .ornament .ornament-right-box .ornament-right:nth-child(9) img:nth-child(3) {
   width: 32%;
   height: 100%;
   transform: translateY(-137%) translateX(321%) rotate(65deg);
 }
-#hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
+img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   width: 50%;
   z-index: -5;
   transform: translateX(29%) translateY(224%);
@@ -1328,6 +1321,9 @@ body.fixed {
 }
 
 @keyframes rotateFruit1 {
+  0% {
+    transform: translateY(34%) rotate(0deg);
+  }
   50% {
     transform: translateY(34%) rotate(30deg);
   }
@@ -1336,6 +1332,9 @@ body.fixed {
   }
 }
 @keyframes rotateFruit2 {
+  0% {
+    transform: translateX(320%) translateY(25%) rotate(0deg);
+  }
   50% {
     transform: translateX(320%) translateY(25%) rotate(-30deg);
   }
@@ -1344,19 +1343,25 @@ body.fixed {
   }
 }
 @keyframes rotateFruit3 {
+  0% {
+    transform: translateX(95%) translateY(118%) rotate(0deg);
+  }
   50% {
-    transform: translateX(95%) translateY(196%) rotate(45deg);
+    transform: translateX(95%) translateY(118%) rotate(45deg);
   }
   100% {
-    transform: translateX(95%) translateY(196%) rotate(0deg);
+    transform: translateX(95%) translateY(118%) rotate(0deg);
   }
 }
 @keyframes rotateFruit4 {
+  0% {
+    transform: translateX(365%) translateY(44%) rotate(0deg);
+  }
   50% {
-    transform: translateX(305%) translateY(68%) rotate(-35deg);
+    transform: translateX(365%) translateY(44%) rotate(-35deg);
   }
   100% {
-    transform: translateX(305%) translateY(68%) rotate(0deg);
+    transform: translateX(365%) translateY(44%) rotate(0deg);
   }
 }
 @keyframes rotateFruit5 {
@@ -1368,11 +1373,14 @@ body.fixed {
   }
 }
 @keyframes rotateFruit6 {
+  0% {
+    transform: translateY(61%) translateX(99%) rotate(0deg);
+  }
   50% {
-    transform: translateY(132%) translateX(99%) rotate(30deg);
+    transform: translateY(61%) translateX(99%) rotate(30deg);
   }
   100% {
-    transform: translateY(132%) translateX(99%) rotate(0deg);
+    transform: translateY(61%) translateX(99%) rotate(0deg);
   }
 }
 #farm-details {
@@ -4154,13 +4162,13 @@ optgroup label {
 }
 .handmade-tip .handmade-tip-content {
   display: flex;
+  gap: 17em;
 }
 .handmade-tip .handmade-tip-content .handmade-tip-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 1.5em 5em;
   position: relative;
 }
 .handmade-tip .handmade-tip-content .handmade-tip-item::before {
@@ -4173,11 +4181,20 @@ optgroup label {
   border-radius: 24px;
   background-color: #fff;
 }
+.handmade-tip .handmade-tip-content .handmade-tip-item:nth-of-type(1) .handmade-tip-item-title::after {
+  content: "";
+  position: absolute;
+  background-image: url("../images/index/spring-green.svg");
+  width: 100%;
+  height: 132%;
+  background-repeat: no-repeat;
+}
 .handmade-tip .handmade-tip-content .handmade-tip-item .handmade-tip-item-title {
   background-color: #eb9b28;
   color: #F1F1F1;
   padding: 1em 1.2em;
   border-radius: 1.8em;
+  position: relative;
 }
 .handmade-tip .handmade-tip-content .handmade-tip-item .handmade-tip-item-describe {
   display: flex;
@@ -4200,10 +4217,22 @@ optgroup label {
 }
 .handmade-tip .handmade-tip-content .handmade-notice {
   width: 100%;
+  height: 11em;
   color: #F1F1F1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(3em);
 }
-.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(1)::before {
+.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(1)::after, .handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(2)::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(1)::before, .handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(2)::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -4215,6 +4244,61 @@ optgroup label {
   background-repeat: no-repeat;
   inset: 0;
   aspect-ratio: 16/12.7;
+  transform: translateX(-1em);
+  scale: 1.3;
+}
+.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(1)::after {
+  background-image: url("../images/handmade/orange.svg");
+  transform: translateX(65%);
+  scale: 0.8;
+}
+.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(2)::after {
+  background-image: url("../images/handmade/symbol.svg");
+  transform: translate(65%, -37%);
+  scale: 0.8;
+}
+.handmade-tip .handmade-tip-content .handmade-notice:nth-of-type(2)::before {
+  background-image: url(../images/handmade/Vector2.png);
+  aspect-ratio: 16/11.9;
+}
+
+.location-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  gap: 10em;
+}
+.location-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 120%;
+  transform: translateY(12%);
+  background-color: #856a45;
+}
+.location-section .location-info {
+  color: #F1F1F1;
+}
+.location-section .location-info img {
+  width: 30%;
+}
+.location-section .location-info .location-details {
+  margin: 2em 0;
+}
+.location-section .location-info .location-details p {
+  margin: 2em 0;
+  letter-spacing: 0.1rem;
+}
+.location-section iframe {
+  border-radius: 45px;
+  border: 0;
+  flex: 1;
+  width: clamp(393px, 40vw + 100px, 800px);
+  height: clamp(220px, (40vw + 100px) * 9 / 16, 450px);
 }
 
 @media (max-width: 1440px) {

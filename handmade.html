@@ -4,213 +4,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手工果醬/果乾製作體驗</title>
-    
-    <link rel="stylesheet" href="./css/handmade.css">
+    <title>GO遊趣-小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/Breadcrumbs.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
-<!-- 導覽列-綠-不要修改謝謝 -->
-<header class="topbar greenTopbar">
-    <h1 class="logo">
-        <a href="./index.html"><img src="./images/shared/logo-02.svg" alt="小農好忙Logo"></a>
-    </h1>
-    <nav class="nav-content">
-        <!-- 按鈕區 -->
-        <ul class="nav-links green">
-            <li><a href="./philanthropy.html">公益理念</a></li>
-            <li><a href="./cooperation.html">關於小農</a></li>
-            <li><a href="./customized.html">客製果乾</a></li>
-            <li><a href="./activity.html">GO 遊趣</a></li>
-        </ul>
 
-        <!-- 小農商城 -->
-        <ul>
-            <h2 class="shopping-btn">
-                <a href="./shopping.html" class="shopping-txt">
-                    <img src="./images/shared/bambooHat.png" alt="進入小農商城">
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function Plan(props) {
+            return (
+                <div className="handmade-plan-item">
                     <div>
-                        <div>小農</div>
-                        <div class="shopping-txtl">商城</div>
+                        <img src={`./images/handmade/${props.planImg}.png`} alt={props.planTitle} />
+                        <div className="handmade-plan-item-text">
+                            <h3>{props.planTitle}</h3>
+                            <p>{props.planDescribe}</p>
+                        </div>
                     </div>
-
-                </a>
-            </h2>
-        </ul>
-    </nav>
-</header>
-
-
-<body>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="image-text-container">
-                <img src="./images/handmade/main.png" alt="果醬製作體驗" />
-                <div class="text-content">
-                    <h3>手工果醬 / 農產品製作體驗</h3>
-                    <p>張美阿姨橘子園，擁有天然湧泉及肥沃土壤，是水果生長的絕佳環境，是知名的「水果之鄉」。</p>
-                    <p>手工製作果乾、果醬的原因是協助農民解決水果生產過剩問題。古早手工製作方式，與材料單純，不加色素、不加香精、不加防腐劑的三不堅持，因而讓果乾、果醬打出鮮亮名號。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
-    <section class="activity-section">
-        <h2>—   活動方案  —</h2>
-        <div class="activity-container">
-            <div class="activity-plan">
-                <img src="./images/handmade/Thumbnail.png" alt="手工果乾製作體驗">
-                <div class="activity-details">
-                    <div class="activity-text">
-                        <h3>手工果乾製作體驗</h3>
-                        <p>(1人成行，平假日皆可使用)</p>
-                    </div>
-                    <div class="activity-price-button">
-                        NT$200 / 人
-                        <a href="./register.html">
-                        <button class="select-button">選擇</button>
-                        </a>
+                    <div className="handmade-plan-item-priceBtn">
+                        <div>{`NT$${props.planPrice} / 人`}</div>
+                        <a href="./register.html">選擇</a>
                     </div>
                 </div>
-            </div>
-    
-            <div class="activity-plan">
-                <img src="./images/handmade/Thumbnail2.png" alt="手工果醬製作體驗">
-                <div class="activity-details">
-                    <div class="activity-text">
-                        <h3>手工果醬製作體驗</h3>
-                        <p>(1人成行，平假日皆可使用)</p>
-                    </div>
-                    <div class="activity-price-button">
-                        NT$200 / 人
-                        <button class="select-button">選擇</button>
+            )
+        }
+        function Tip(props) {
+            return (
+                <div className="handmade-tip-item">
+                    <h3 className="handmade-tip-item-title">{props.tipTitle}</h3>
+                    <div className="handmade-tip-item-describe">
+                        <ul>
+                            <li>{props.tip1}</li>
+                            <li>{props.tip2}</li>
+                        </ul>
+                        <p>{props.remark}</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section> 
-    <section class="background-section">
-        <img class="background-image"src="./images/product/mountain-w-L.png" alt="background">
-    <section class="activity-explanation">
-        <div class="activity-explanation-header">
-            <h2>活動說明</h2>
-        </div>
-        <div class="activity-explanation-content">
-            <div class="activity-header">
-                <h3>手工果乾製作體驗</h3>
-            </div>
-            <div class="activity-body">
-                <ul class="bullet-list">
-                <li>解說與注意事項說明</li>
-                <li>手工果乾製作體驗</li>
+            )
+        }
+        function Notice(props) {
+            return (
+                <ul className="handmade-notice">
+                    <li>{props.paragraph1}</li>
+                    <li>{props.paragraph2}</li>
+                    <li>{props.paragraph3 || ""}</li>
                 </ul>
-                <p>(以上行程為 200 元/人，平假日皆可使用)</p>
-            </div>
-            
-            <!-- <div class="activity-body">
-                <h4>解說與注意事項說明</h4>
-                <h4>手工果乾製作體驗</h4>
-                <p>(以上行程為200元/人，平假日皆可使用)</p>
-            </div> -->
-        </div>
-        <div class="activity-explanation-content">
-            <div class="activity-header">
-                <h3>手工果醬製作體驗</h3>
-            </div>
-            <div class="activity-body">
-                <ul class="bullet-list">
-                <li>解說與注意事項說明</li>
-                <li>手工果醬製作體驗</li>
-                </ul>
-                <p>(以上行程為200元/人，平假日皆可使用)</p>
-            </div>
-        </div>
-    </section>
-    
-    <section class="activity-explanation">
-        <div class="activity-explanation-header">
-            <h2>購票須知</h2>                                                                                                                                                                                                                                                                                                                                                                                                                                             
-        </div>
-    <div class="ticket-info-section">
-        <div class="orange-shape">
-        <p>需前三天預約。<br>
-        因水果產季關係，製作的果乾、果醬口味隨之不同。</p>
-        <img src="./images/handmade/orange.svg" alt="橘色裝飾" class="orange-decor">
-        </div>
-    
-        <div class="green-shape">
-        <ul class="green-list">
-            <li>其他資訊：</li>
-            <li>無障礙空間：全區</li>
-            <li>寵物友善空間：限室外區域</li>
-        </ul>
-        <img src="./images/handmade/symbol.svg" alt="綠色裝飾" class="green-decor">
-        </div>
-    </div>
-</section>
+            )
+        }
+        function App(props) {
 
-<section class="location-section">
-    <div class="location-info">
-        <div class="location-icon">
-        <img src="./images/handmade/navigation 1.svg" alt="Location Icon">
-        </div>
-        <div class="location-details">
-        <p>地點：<br>張美阿嬤椪柑子園</p>
-        <p>地址：<br>台中市南區文心路100號</p>
-        </div>
-    </div>
-    <div class="location-map">
-        <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.888858536473!2d120.673839!3d24.137133!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d2b5098b4a9%3A0x1ddde96dd0de50ec!2z5p2t6IGU5oKY5p6X6aCG6YOo5bGx6aCG6Zmi!5e0!3m2!1szh-TW!2stw!4v1694491829191!5m2!1szh-TW!2stw"
-        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-</section>
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
 
-</body>
+            useAdjustMargin(navProps.headerClassName);
 
-<!-- footer -->
-<footer>
-    <div id="footer-content">
-        <div class="footer-content-box">
-            <div class="footer-contact">
-                <div class="footer-contact-box">
-                    <div class="media">
-                        <a href="#"><img src="../images/shared/line.svg" alt="連接到line官方"></a>
-                        <a href="#"><img src="../images/shared/facebook.svg" alt="連接到facebook官方"></a>
-                        <a href="#"><img src="../images/shared/instagram.svg" alt="連接到instagram官方"></a>
-                    </div>
+            const paths = [
+                { name: '首頁', href: './index.html' },
+                { name: 'GO遊趣', href: './customized.html' },
+                { name: '手工果醬/果乾製作體驗', href: './handmade.html' }
+            ];
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <FloatCart />
+                    <main>
+                        <div id="title">
+                            <Breadcrumbs paths={paths} />
+                        </div>
+                        <section className="handmade-top">
+                            <div className="handmade-top-content">
+                                <img src="./images/handmade/main.png" alt="果醬製作體驗" />
+                                <div className="text-content">
+                                    <h3>手工果醬 / 農產品製作體驗</h3>
+                                    <p>張美阿姨橘子園，擁有天然湧泉及肥沃土壤，是水果生長的絕佳環境，是知名的「水果之鄉」。</p>
+                                    <p>手工製作果乾、果醬的原因是協助農民解決水果生產過剩問題。古早手工製作方式，與材料單純，不加色素、不加香精、不加防腐劑的三不堅持，因而讓果乾、果醬打出鮮亮名號。</p>
+                                </div>
+                            </div>
+                        </section>
 
-                    <address class="information">
-                        <div>地址：台北市中正區農村路123號</div>
-                        <div>電話：+886-2-1234-5678</div>
-                        <div>電子郵件：info@farmersbusy.com</div>
-                        <div>傳真：+886-2-1234-5679</div>
-                    </address>
-                </div>
-                <div class="company"><img src="../images/shared/company-right.svg" alt="小農logo"></div>
-            </div>
-            <div class="footer-map">
-                <a href="#">首頁</a>
-                <a href="#">公益理念</a>
-                <a href="#">關於小農</a>
-                <a href="#">小農商城</a>
-                <a href="#">客製果乾</a>
-                <a href="#">GO遊趣</a>
-                <a href="#">小農精選</a>
-            </div>
-            <div class="copyright">©小農好忙有限公司</div>
-        </div>
-    </div>
+                        <section className="handmade-plan">
+                            <h2 className="handmadeTitle">活動方案</h2>
+                            <div className="handmade-plan-container">
+                                <Plan
+                                    planImg="Thumbnail"
+                                    planTitle="手工果醬製作體驗"
+                                    planDescribe="(1人成行，平假日皆可使用)"
+                                    planPrice="200"
+                                />
+                                <Plan
+                                    planImg="Thumbnail2"
+                                    planTitle="手工果醬製作體驗"
+                                    planDescribe="(1人成行，平假日皆可使用)"
+                                    planPrice="200"
+                                />
+                            </div>
+                        </section>
 
-    <!-- 背景 -->
-    <div>
-        <img class="footer-pre" src="../images/shared/footer-pre.png" alt="">
-        <img class="footer-back" src="../images/shared/footer-back.png" alt="">
-    </div>
-</footer>
-<script src="./busyJs.js"></script>
-<body>
+                        <section className="handmade-tip">
+                            <div className="handmade-tip-box">
+                                <h2 className="handmadeTitle tit2">活動說明</h2>
+                                <div className="handmade-tip-content">
+                                    <Tip
+                                        tipTitle="手工果乾製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果乾製作體驗"
+                                        remark="(以上行程為 200 元/人，平假日皆可使用)" />
+                                    <Tip
+                                        tipTitle="手工果醬製作體驗"
+                                        tip1="解說與注意事項說明"
+                                        tip2="手工果醬製作體驗"
+                                        remark="(以上行程為200元/人，平假日皆可使用)" />
+                                </div>
+                            </div>
+                            <div className="handmade-tip-box">
+                                <h2 className="handmadeTitle tit2">購票須知</h2>
+                                <div className="handmade-tip-content">
+                                    <Notice
+                                        paragraph1="需前三天預約。"
+                                        paragraph2="因水果產季關係，"
+                                        paragraph3="製作的果乾、果醬口味隨之不同。" />
+                                    <Notice
+                                        paragraph1="其他資訊："
+                                        paragraph2="無障礙空間：全區"
+                                        paragraph3="寵物友善空間：限室外區域" />
+                                </div>
+                            </div>
+                        </section>
+                        <section className="location-section">
+                            <div className="location-info">
+                                <img src="./images/handmade/navigation1.svg" alt="地址" />
+                                <div className="location-details">
+                                    <p>地點：<br />張美阿姨橘子園</p>
+                                    <p>地址：<br />台東縣延平鄉永康村</p>
+                                </div>
+                            </div>
+                            <div className="location-map">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3674.481760931808!2d121.0763759!3d22.932478199999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjLCsDU1JzU2LjkiTiAxMjHCsDA0JzM1LjAiRQ!5e0!3m2!1szh-TW!2stw!4v1727004978553!5m2!1szh-TW!2stw"
+
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </section>
+                        <Footer />
+                    </main>
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
 
 </body>
 
