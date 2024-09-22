@@ -57,6 +57,15 @@
                 </div>
             )
         }
+        function Notice(props) {
+            return (
+                <ul className="handmade-notice">
+                    <li>{props.paragraph1}</li>
+                    <li>{props.paragraph2}</li>
+                    <li>{props.paragraph3 || ""}</li>
+                </ul>
+            )
+        }
         function App(props) {
 
             const [navProps, setNavProps] = useState({
@@ -133,16 +142,14 @@
                             <div className="handmade-tip-box">
                                 <h2 className="handmadeTitle tit2">購票須知</h2>
                                 <div className="handmade-tip-content">
-                                    <Tip
-                                        tipTitle="手工果乾製作體驗"
-                                        tip1="解說與注意事項說明"
-                                        tip2="手工果乾製作體驗"
-                                        remark="(以上行程為 200 元/人，平假日皆可使用)" />
-                                    <Tip
-                                        tipTitle="手工果醬製作體驗"
-                                        tip1="解說與注意事項說明"
-                                        tip2="手工果醬製作體驗"
-                                        remark="(以上行程為200元/人，平假日皆可使用)" />
+                                    <Notice
+                                        paragraph1="需前三天預約。"
+                                        paragraph2="因水果產季關係，製作的果乾、果醬口味隨之不同。"
+                                    />
+                                    <Notice
+                                        paragraph1="其他資訊："
+                                        paragraph2="無障礙空間：全區"
+                                        paragraph3="寵物友善空間：限室外區域" />
                                 </div>
                             </div>
                         </section>

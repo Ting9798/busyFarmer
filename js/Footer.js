@@ -42,9 +42,9 @@ function Footer() {
                     <div className="copyright">
                         <div>©小農好忙有限公司</div>
                         <div className="media">
-                            <a href="#"><img src="../images/shared/line.svg" alt="連接到line官方" /></a>
-                            <a href="#"><img src="../images/shared/facebook.svg" alt="連接到facebook官方" /></a>
-                            <a href="#"><img src="../images/shared/instagram.svg" alt="連接到instagram官方" /></a>
+                            <a href="#"><img src="./images/shared/line.svg" alt="連接到line官方" /></a>
+                            <a href="#"><img src="./images/shared/facebook.svg" alt="連接到facebook官方" /></a>
+                            <a href="#"><img src="./images/shared/instagram.svg" alt="連接到instagram官方" /></a>
                         </div>
                     </div>
                 </div>
