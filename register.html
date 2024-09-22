@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO遊趣-小農好忙</title>
+    <link rel="icon" href="./favicon.ico">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel" src="./js/FloatCart.js"></script>
+    <script type="text/babel" src="./js/ButtonGroup.js"></script>
+    <script type="text/babel" src="./js/Navbar.js"></script>
+    <script type="text/babel" src="./js/useAdjustMargin.js"></script>
+    <script type="text/babel" src="./js/Breadcrumbs.js"></script>
+    <script type="text/babel" src="./js/Footer.js"></script>
+
+    <link rel="stylesheet" href="./css/register.css">
+    <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        function App(props) {
+
+            const [navProps, setNavProps] = useState({
+                headerClassName: 'greenTopbar',
+                logoImg: './images/shared/logo-02.svg',
+                textColor: 'green'
+            });
+
+            useAdjustMargin(navProps.headerClassName);
+
+            const paths = [
+                { name: '首頁', href: './index.html' },
+                { name: 'GO遊趣', href: './customized.html' },
+                { name: '手工果醬/果乾製作體驗', href: './handmade.html' },
+                { name: '活動體驗報名', href: './register.html' }
+            ];
+            return (
+                <>
+                    {/* 導覽列*/}
+                    <Nav
+                        headerClassName={navProps.headerClassName}
+                        logoImg={navProps.logoImg}
+                        textColor={navProps.textColor}
+                    />
+                    <main>
+                        <div id="title" class="container">
+                            <Breadcrumbs paths={paths} />
+                            <div className="contact-titBox jcCenter">
+                                <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="活動體驗報名" /></figure>
+                                <h3>活動體驗報名</h3>
+                                <figure><img src="./images/philanthropy/spring-tit-2.svg" alt="活動體驗報名" /></figure>
+                            </div>
+                        </div>
+                        <section className="activity-info">
+                            <div className="activity-info-header">
+                                <h3>活動資訊</h3>
+                            </div>
+                            <div className="activity-content">
+                                <img src="./images/handmade/Thumbnail.png" alt="水果乾" className="activity-image" />
+                                <div className="activity-details">
+                                    <h3>手工果乾製作體驗</h3>
+                                    <ul>
+                                        <li>1人成行，平假日皆可使用</li>
+                                        <li>因水果產季關係，製作的果乾、果醬口味隨之不同。</li>
+                                    </ul>
+                                </div>
+                                <img src="./images/philanthropy/seed-o.svg" alt="裝飾圖案" className="decoration-icon" />
+                            </div>
+                        </section>
+
+                        <section class="participant-count">
+                            <div class="activity-info-header">
+                                <h3>報名人數</h3>
+                            </div>
+                            <div class="count-controls">
+                                <h3><span>NT$ 200</span></h3>
+                                <div class="quantity-controls-buttons">
+                                    <svg class="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                        <path
+                                            d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
+                                            fill="#F1F1F1" />
+                                    </svg>
+
+                                    <label for="quantity-input"></label>
+                                    <input type="text" class="quantity-input" name="quantity-input" value="1" />
+
+                                    <svg class="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                        <path
+                                            d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
+                                            fill="#F1F1F1" />
+                                        <path
+                                            d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
+                                            fill="#F1F1F1" />
+                                    </svg>
+                                </div>
+                                <p>人</p>
+                            </div>
+                        </section>
+                        <section class="contact-info">
+                            <h2>聯絡資訊</h2>
+                            <form>
+                                <label for="name">聯絡人姓名：</label>
+                                <input type="text" id="name" required />
+
+                                <label for="phone">聯絡電話：</label>
+                                <input type="tel" id="phone" required />
+
+                                <label for="email">電子郵件：</label>
+                                <input type="email" id="email" required />
+
+                                <label for="address">地址：</label>
+                                <input type="text" id="address" required />
+                            </form>
+                        </section>
+                        <section class="registration-dates">
+                            <h2>報名日期</h2>
+                            <form>
+                                <label for="date">活動日期：</label>
+                                <select id="date">
+                                    <option value="2024-10-01">2024-10-01</option>
+                                    <option value="2024-10-02">2024-10-02</option>
+                                    <option value="2024-10-03">2024-10-03</option>
+                                    <option value="2024-10-04">2024-10-04</option>
+                                </select>
+
+                                <label for="time">入場時段：</label>
+                                <select id="time">
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
+                                </select>
+
+                                <label for="remark">備註：</label>
+                                <input type="text" id="remark" />
+                            </form>
+                        </section>
+                        <section class="add-to-cart">
+                            <button>加入購物車</button>
+                        </section>
+                        <Footer />
+                    </main >
+                </>
+            )
+        }
+        ReactDOM
+            .createRoot(document.getElementById('root'))
+            .render(<App />);
+    </script>
+
+</body>
+
+</html>

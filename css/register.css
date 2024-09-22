@@ -1,0 +1,177 @@
+    /* 活動體驗報名 */
+    /* 全域樣式 */
+    body {
+        /* font-family: Arial, sans-serif; */
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    
+    .title {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: var(--primaryO);
+        padding: 10px;
+    }
+    .contact-titBox {
+        justify-content: center;
+        margin: 100px 0 0px 0; 
+    }
+    
+    section {
+        background-color: white;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 800px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h2 {
+        text-align: center;
+        color: #8e8e8e;
+        font-size: 1.2rem;
+    }
+    h3{
+        font-size: 20px;
+    }
+    
+    .activity-description {
+        text-align: left;
+    }
+    
+    .activity-description h3 {
+        /* font-size: rem; */
+        color:var(--primaryO);
+    }
+    
+    .participant-count .count-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;color: var(--primaryO);
+    }
+    
+    .participant-count .counter {
+        display: flex;
+        align-items: center;
+    }
+    
+    .participant-count button {
+        width: 30px;
+        height: 30px;
+        background-color: #8cc63f;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    
+    .participant-count input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0 10px;
+    }
+    
+    .contact-info label,
+    .registration-dates label {
+        display: block;
+        margin: 10px 0 5px 0;
+        text-align: left;
+    }
+    
+    input, select {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+    .add-to-cart button {
+        background-color: var(--primaryG);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    
+    .add-to-cart button:hover {
+        background-color: #73a62f;
+    }
+
+    .bullet-list {
+        list-style-type: disc;
+        /* 設定項目符號為圓點 */
+        padding-left: 10px;
+        /* 調整符號與文字間距 */
+        padding-top: 5px;
+    }
+
+    /* 設定外框的樣式 */
+.activity-info-container {
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* 標題樣式 */
+.activity-info-header h3 {
+    font-size: 24px;
+    color: #6c8c42; /* 綠色字體 */
+    margin-bottom: 10px;
+    border-bottom: 1px solid #6c8c42; /* 下方細線 */
+    text-align: left;
+}
+
+/* 內容區塊的排版樣式 */
+.activity-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 左側的活動圖片 */
+.activity-image {
+    width: 130px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* 中間的活動詳細資訊 */
+.activity-details {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.activity-details h3 {
+    font-size: 20px;
+    color: var(--primaryO); /* 橙色字體 */
+    text-align: left;
+}
+
+.activity-details ul {
+    list-style-type: disc;
+    padding: 0;
+    margin: 10px 10px 10px 20px;
+}
+
+.activity-details ul li {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+/* 右側的裝飾圖案 */
+.decoration-icon {
+    width: 60px;
+    height: auto;
+    transform: rotate(30deg); /* 圖片旋轉 30 度 */
+}
