@@ -3,15 +3,15 @@ function Nav(props) {
 
     // 手機板icon
     const [isNavVisible, setNavVisible] = useState(false);
-    const [imageSrc, setImageSrc] = useState('../images/shared/icon2_home.svg');
+    const [imageSrc, setImageSrc] = useState('./images/shared/icon2_home.svg');
 
     // 處理點擊事件的函數
     const handleHamburgerClick = () => {
         setNavVisible(prevState => !prevState);
         setImageSrc(prevSrc =>
-            prevSrc === '../images/shared/icon2_home.svg'
-                ? '../images/shared/icon2_home-w.svg'
-                : '../images/shared/icon2_home.svg'
+            prevSrc === './images/shared/icon2_home.svg'
+                ? './images/shared/icon2_home-w.svg'
+                : './images/shared/icon2_home.svg'
         );
 
     };
