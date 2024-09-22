@@ -1,6 +1,6 @@
 const { useState, useEffect, useRef } = React;
 function FilterButton(props) {
-    const { filtertitle, onFilterClick } = props;
+    const { onFilterClick } = props;
     const [filterOptions] = useState({
         區域: [
             { id: '北部', name: '北部' },
