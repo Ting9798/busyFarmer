@@ -51,8 +51,9 @@
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
+                    <FloatCart />
                     <main>
-                        <div id="title" class="container">
+                        <div id="title" className="container">
                             <Breadcrumbs paths={paths} />
                             <div className="contact-titBox jcCenter">
                                 <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="活動體驗報名" /></figure>
@@ -77,14 +78,14 @@
                             </div>
                         </section>
 
-                        <section class="participant-count">
-                            <div class="activity-info-header">
+                        <section className="participant-count">
+                            <div className="activity-info-header">
                                 <h3>報名人數</h3>
                             </div>
-                            <div class="count-controls">
+                            <div className="count-controls">
                                 <h3><span>NT$ 200</span></h3>
-                                <div class="quantity-controls-buttons">
-                                    <svg class="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                <div className="quantity-controls-buttons">
+                                    <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="16" height="16" rx="4" fill="#6C8C42" />
                                         <path
@@ -92,10 +93,10 @@
                                             fill="#F1F1F1" />
                                     </svg>
 
-                                    <label for="quantity-input"></label>
-                                    <input type="text" class="quantity-input" name="quantity-input" value="1" />
+                                    <label htmlFor="quantity-input"></label>
+                                    <input type="text" className="quantity-input" name="quantity-input" defaultValue="1" />
 
-                                    <svg class="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                    <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <rect width="16" height="16" rx="4" fill="#6C8C42" />
                                         <path
@@ -109,46 +110,46 @@
                                 <p>人</p>
                             </div>
                         </section>
-                        <section class="contact-info">
+                        <section className="contact-info">
                             <h2>聯絡資訊</h2>
                             <form>
-                                <label for="name">聯絡人姓名：</label>
+                                <label htmlFor="name">聯絡人姓名：</label>
                                 <input type="text" id="name" required />
 
-                                <label for="phone">聯絡電話：</label>
+                                <label htmlFor="phone">聯絡電話：</label>
                                 <input type="tel" id="phone" required />
 
-                                <label for="email">電子郵件：</label>
+                                <label htmlFor="email">電子郵件：</label>
                                 <input type="email" id="email" required />
 
-                                <label for="address">地址：</label>
+                                <label htmlFor="address">地址：</label>
                                 <input type="text" id="address" required />
                             </form>
                         </section>
-                        <section class="registration-dates">
+                        <section className="registration-dates">
                             <h2>報名日期</h2>
                             <form>
-                                <label for="date">活動日期：</label>
+                                <label htmlFor="date">活動日期：</label>
                                 <select id="date">
-                                    <option value="2024-10-01">2024-10-01</option>
-                                    <option value="2024-10-02">2024-10-02</option>
-                                    <option value="2024-10-03">2024-10-03</option>
-                                    <option value="2024-10-04">2024-10-04</option>
+                                    <option defaultValue="2024-10-01">2024-10-01</option>
+                                    <option defaultValue="2024-10-02">2024-10-02</option>
+                                    <option defaultValue="2024-10-03">2024-10-03</option>
+                                    <option defaultValue="2024-10-04">2024-10-04</option>
                                 </select>
 
-                                <label for="time">入場時段：</label>
+                                <label htmlFor="time">入場時段：</label>
                                 <select id="time">
-                                    <option value="09:00">09:00</option>
-                                    <option value="10:00">10:00</option>
-                                    <option value="11:00">11:00</option>
-                                    <option value="12:00">12:00</option>
+                                    <option defaultValue="09:00">09:00</option>
+                                    <option defaultValue="10:00">10:00</option>
+                                    <option defaultValue="11:00">11:00</option>
+                                    <option defaultValue="12:00">12:00</option>
                                 </select>
 
-                                <label for="remark">備註：</label>
+                                <label htmlFor="remark">備註：</label>
                                 <input type="text" id="remark" />
                             </form>
                         </section>
-                        <section class="add-to-cart">
+                        <section className="add-to-cart">
                             <button>加入購物車</button>
                         </section>
                         <Footer />
