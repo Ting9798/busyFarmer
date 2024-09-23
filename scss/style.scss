@@ -3870,13 +3870,14 @@ optgroup {
     }
 }
 
-.firework{
+.firework {
     position: absolute;
     left: 10%;
     width: 500px;
     height: 500px;
 }
-.firework2{
+
+.firework2 {
     position: absolute;
     right: 10%;
     width: 500px;
@@ -4475,12 +4476,154 @@ optgroup {
     justify-content: space-between;
     align-items: center;
     color: var(--primaryO);
+
     input {
         width: 50px;
         text-align: center;
         border: 1px solid #ccc;
         border-radius: 5px;
         margin: 0 10px;
+    }
+}
+
+// --活動體驗報名
+.register {
+    width: 100%;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 105%;
+        top: -5%;
+        background-color: #f3f3f3;
+    }
+
+    section {
+        background-color: white;
+        margin: 20px auto;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 800px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+        &:nth-of-type(5) {
+            background-color: transparent;
+            box-shadow: none;
+            padding: 0;
+        }
+    }
+
+    h2 {
+        text-align: center;
+        color: #8e8e8e;
+        font-size: 1.2rem;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    input,
+    select {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .participant-count {
+        .count-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primaryO);
+        }
+
+        input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+    }
+
+    .activity-info-header {
+        h3 {
+            font-size: 24px;
+            color: #6c8c42;
+            /* 綠色字體 */
+            margin-bottom: 10px;
+            border-bottom: 1px solid #6c8c42;
+            /* 下方細線 */
+            text-align: left;
+        }
+    }
+
+    .activity-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .activity-image {
+            width: 130px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .activity-details {
+            flex-grow: 1;
+            margin-left: 20px;
+
+            h3 {
+                font-size: 20px;
+                color: var(--primaryO);
+                text-align: left;
+            }
+
+            ul {
+                list-style-type: disc;
+                padding: 0;
+                margin: 10px 10px 10px 20px;
+
+                li {
+                    font-size: 16px;
+                    color: #666;
+                    margin-bottom: 5px;
+                    text-align: left;
+                }
+            }
+
+        }
+
+        .decoration-icon {
+            width: 60px;
+            height: auto;
+            transform: rotate(30deg);
+        }
+    }
+
+    .add-to-cart button {
+        background-color: var(--primaryG);
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+
+        &:hover {
+            background-color: #73a62f;
+        }
+    }
+
+    .button-group-box {
+        .button {
+            background-color: map-get($color , primaryG);
+        }
     }
 }
 

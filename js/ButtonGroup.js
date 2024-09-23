@@ -9,7 +9,8 @@ function ButtonGroup(props) {
         preBtnName,
         onClick,
         cart,
-        shouldCheckCart = false
+        shouldCheckCart = false,
+        isButton = false // 新增屬性
     } = props;
 
     const handleClick = (e) => {
@@ -22,14 +23,16 @@ function ButtonGroup(props) {
         }
     };
 
+    const Wrapper = isButton ? 'button' : 'div'; // 根據 isButton 判斷包裝器
+
     return (
-        <div className={`button-group ${btnPosition || ''}`} onClick={handleClick}>
-            <div className={`button-group-box ${btnPosition || ''}`}>
+        <di className={`button-group ${btnPosition || ''}`} onClick={handleClick}>
+            <Wrapper className={`button-group-box ${btnPosition || ''}`}>
                 {preBtnClass &&
                     (<a href={preBtnSrc || ''} className={`button ${preBtnClass || ''}`}>{preBtnName || ''}</a>)
                 }
                 <a href={nextBtnSrc || ''} className={`button ${nextBtnClass || ''}`}>{nextbtnName}</a>
-            </div>
-        </div>
+            </Wrapper>
+        </di>
     );
 }

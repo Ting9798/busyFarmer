@@ -17,7 +17,6 @@
     <script type="text/babel" src="https://ting9798.github.io/busyFarmer/js/Breadcrumbs.js"></script>
     <script type="text/babel" src="https://ting9798.github.io/busyFarmer/js/Footer.js"></script>
 
-    <link rel="stylesheet" href="./css/register.css">
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
 
@@ -26,16 +25,13 @@
 
     <div id="root"></div>
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useCallback } = React;
         function App(props) {
-
             const [navProps, setNavProps] = useState({
                 headerClassName: 'greenTopbar',
                 logoImg: './images/shared/logo-02.svg',
                 textColor: 'green'
             });
-
-            useAdjustMargin(navProps.headerClassName);
 
             const paths = [
                 { name: '首頁', href: './index.html' },
@@ -43,16 +39,92 @@
                 { name: '手工果醬/果乾製作體驗', href: './handmade.html' },
                 { name: '活動體驗報名', href: './register.html' }
             ];
+
+            useAdjustMargin(navProps.headerClassName);
+
+            const [quantity, setQuantity] = useState(1);
+            const [dates, setDates] = useState([]);
+            const [notes, setNotes] = useState('');
+            const [selectedDate, setSelectedDate] = useState('');
+            const [selectedTime, setSelectedTime] = useState('');
+            const cartRef = useRef(null);
+
+            const product = {
+                id: 'handmade-dried-fruit',
+                src: './images/handmade/Thumbnail.png',
+                name: '手工果乾製作體驗',
+                price: 200,
+            };
+
+            useEffect(() => {
+                const today = new Date();
+                const newDates = [];
+                for (let i = 1; i <= 14; i++) {
+                    const date = new Date(today);
+                    date.setDate(today.getDate() + i);
+                    newDates.push(date.toISOString().split('T')[0]);
+                }
+                setDates(newDates);
+            }, []);
+
+            useEffect(() => {
+                const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                savedCart.forEach(item => {
+                    if (cartRef.current) {
+                        cartRef.current.addItemToCart(item);
+                    }
+                });
+            }, []);
+
+            const handleIncrement = useCallback(() => {
+                setQuantity(prev => prev + 1);
+            }, []);
+
+            const handleDecrement = useCallback(() => {
+                setQuantity(prev => Math.max(1, prev - 1));
+            }, []);
+
+            const handleAddToCart = (e) => {
+                e.preventDefault();
+                if (!selectedDate || !selectedTime) {
+                    alert('請選擇活動日期和入場時段');
+                    return;
+                }
+                const notes = `日期: ${selectedDate}, 時段: ${selectedTime}`;
+
+                const cartItem = {
+                    id: product.id,
+                    src: product.src,
+                    name: product.name,
+                    price: product.price,
+                    quantity,
+                    notes,
+                };
+
+                if (cartRef.current) {
+                    cartRef.current.addItemToCart(cartItem);
+                }
+
+                // 更新本地存儲
+                const updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingIndex = updatedCart.findIndex(item => item.id === cartItem.id);
+                if (existingIndex >= 0) {
+                    updatedCart[existingIndex].quantity += cartItem.quantity;
+                } else {
+                    updatedCart.push(cartItem);
+                }
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+            };
+
             return (
                 <>
-                    {/* 導覽列*/}
                     <Nav
                         headerClassName={navProps.headerClassName}
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
-                    <FloatCart />
-                    <main>
+                    <FloatCart ref={cartRef} />
+                    <main className="register">
                         <div id="title" className="container">
                             <Breadcrumbs paths={paths} />
                             <div className="contact-titBox jcCenter">
@@ -66,46 +138,37 @@
                                 <h3>活動資訊</h3>
                             </div>
                             <div className="activity-content">
-                                <img src="./images/handmade/Thumbnail.png" alt="水果乾" className="activity-image" />
+                                <img src={product.src} alt={product.name} className="activity-image" />
                                 <div className="activity-details">
-                                    <h3>手工果乾製作體驗</h3>
+                                    <h3>{product.name}</h3>
                                     <ul>
                                         <li>1人成行，平假日皆可使用</li>
                                         <li>因水果產季關係，製作的果乾、果醬口味隨之不同。</li>
                                     </ul>
                                 </div>
-                                <img src="./images/philanthropy/seed-o.svg" alt="裝飾圖案" className="decoration-icon" />
                             </div>
                         </section>
-
                         <section className="participant-count">
                             <div className="activity-info-header">
                                 <h3>報名人數</h3>
                             </div>
                             <div className="count-controls">
-                                <h3><span>NT$ 200</span></h3>
+                                <h3><span>NT. {product.price}</span></h3>
                                 <div className="quantity-controls-buttons">
-                                    <svg className="decrement" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                        <path
-                                            d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                            fill="#F1F1F1" />
-                                    </svg>
-
-                                    <label htmlFor="quantity-input"></label>
-                                    <input type="text" className="quantity-input" name="quantity-input" defaultValue="1" />
-
-                                    <svg className="increment" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="16" height="16" rx="4" fill="#6C8C42" />
-                                        <path
-                                            d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z"
-                                            fill="#F1F1F1" />
-                                        <path
-                                            d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z"
-                                            fill="#F1F1F1" />
-                                    </svg>
+                                    <button className="decrement" onClick={handleDecrement}>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                            <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                        </svg>
+                                    </button>
+                                    <input type="text" className="quantity-input" value={quantity} readOnly />
+                                    <button className="increment" onClick={handleIncrement}>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                            <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                            <path d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z" fill="#F1F1F1" />
+                                        </svg>
+                                    </button>
                                 </div>
                                 <p>人</p>
                             </div>
@@ -115,13 +178,10 @@
                             <form>
                                 <label htmlFor="name">聯絡人姓名：</label>
                                 <input type="text" id="name" required />
-
                                 <label htmlFor="phone">聯絡電話：</label>
                                 <input type="tel" id="phone" required />
-
                                 <label htmlFor="email">電子郵件：</label>
                                 <input type="email" id="email" required />
-
                                 <label htmlFor="address">地址：</label>
                                 <input type="text" id="address" required />
                             </form>
@@ -130,32 +190,44 @@
                             <h2>報名日期</h2>
                             <form>
                                 <label htmlFor="date">活動日期：</label>
-                                <select id="date">
-                                    <option defaultValue="2024-10-01">2024-10-01</option>
-                                    <option defaultValue="2024-10-02">2024-10-02</option>
-                                    <option defaultValue="2024-10-03">2024-10-03</option>
-                                    <option defaultValue="2024-10-04">2024-10-04</option>
+                                <select id="date" onChange={(e) => setSelectedDate(e.target.value)} required>
+                                    <option value="">請選擇日期</option>
+                                    {dates.map((date) => (
+                                        <option key={date} value={date}>
+                                            {date}
+                                        </option>
+                                    ))}
                                 </select>
-
                                 <label htmlFor="time">入場時段：</label>
-                                <select id="time">
-                                    <option defaultValue="09:00">09:00</option>
-                                    <option defaultValue="10:00">10:00</option>
-                                    <option defaultValue="11:00">11:00</option>
-                                    <option defaultValue="12:00">12:00</option>
+                                <select id="time" onChange={(e) => setSelectedTime(e.target.value)} required>
+                                    <option value="">請選擇時段</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="12:00">12:00</option>
                                 </select>
-
                                 <label htmlFor="remark">備註：</label>
-                                <input type="text" id="remark" />
+                                <input
+                                    type="text"
+                                    placeholder="備註"
+                                    value={notes}
+                                    onChange={(e) => setNotes(e.target.value)}
+                                />
                             </form>
                         </section>
-                        <section className="add-to-cart">
-                            <button>加入購物車</button>
+                        <section>
+                            <ButtonGroup
+                                elementType="button"
+                                btnPosition="jcEnd"
+                                nextBtnClass="fruitCardBtn"
+                                nextbtnName="加入購物車"
+                                onClick={handleAddToCart}
+                            />
                         </section>
                         <Footer />
-                    </main >
+                    </main>
                 </>
-            )
+            );
         }
         ReactDOM
             .createRoot(document.getElementById('root'))
