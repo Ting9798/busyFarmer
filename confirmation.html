@@ -9,6 +9,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
 
     <script type="text/babel" src="https://ting9798.github.io/busyFarmer/js/Navbar.js"></script>
     <script type="text/babel" src="https://ting9798.github.io/busyFarmer/js/useAdjustMargin.js"></script>
@@ -20,8 +21,6 @@
 </head>
 
 <body>
-
-
     <div id="root"></div>
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
@@ -89,6 +88,21 @@
                     window.removeEventListener('beforeunload', handleBeforeUnload);
                 };
             }, []);
+            const animationContainer = useRef(null);
+
+            useEffect(() => {
+                // 初始化 Lottie 動畫
+                const animation = lottie.loadAnimation({
+                    container: animationContainer.current, // DOM 元素
+                    renderer: 'svg', // 使用 SVG 渲染
+                    loop: true, // 是否循環
+                    autoplay: true, // 是否自動播放
+                    path: 'https://ting9798.github.io/busyFarmer/images/cart/Animation-1727058184841.json' // 動畫文件的路徑
+                });
+
+                // 清理函數以避免記憶體泄漏
+                return () => animation.destroy();
+            }, []);
 
             return (
                 <>
@@ -155,11 +169,12 @@
                                 <p>我們一直在這裡為您服務！</p>
                                 <p>再次感謝您的支持，祝您每一天都快樂愉快！</p>
                             </div>
+                            <div ref={animationContainer} style={{ width: 300, height: 300 }} />
                             <ButtonGroup
-                            nextBtnSrc="./shopping.html"
-                            nextBtnClass="nextStep"
-                            nextbtnName="返回商城"
-                        />
+                                nextBtnSrc="./shopping.html"
+                                nextBtnClass="nextStep"
+                                nextbtnName="返回商城"
+                            />
                         </section>
 
                         <Footer />
