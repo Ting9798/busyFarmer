@@ -88,20 +88,30 @@
                     window.removeEventListener('beforeunload', handleBeforeUnload);
                 };
             }, []);
-            const animationContainer = useRef(null);
+            const animationContainer1 = useRef(null);
+            const animationContainer2 = useRef(null);
 
             useEffect(() => {
-                // 初始化 Lottie 動畫
-                const animation = lottie.loadAnimation({
-                    container: animationContainer.current, // DOM 元素
-                    renderer: 'svg', // 使用 SVG 渲染
-                    loop: true, // 是否循環
-                    autoplay: true, // 是否自動播放
-                    path: 'https://ting9798.github.io/busyFarmer/images/cart/Animation-1727058184841.json' // 動畫文件的路徑
+                const animation1 = lottie.loadAnimation({
+                    container: animationContainer1.current,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'https://ting9798.github.io/busyFarmer/images/cart/DNE9GynKEr.json',
                 });
 
-                // 清理函數以避免記憶體泄漏
-                return () => animation.destroy();
+                const animation2 = lottie.loadAnimation({
+                    container: animationContainer2.current,
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'https://ting9798.github.io/busyFarmer/images/cart/Animation-1727058184841.json',
+                });
+
+                return () => {
+                    animation1.destroy();
+                    animation2.destroy();
+                };
             }, []);
 
             return (
@@ -169,7 +179,8 @@
                                 <p>我們一直在這裡為您服務！</p>
                                 <p>再次感謝您的支持，祝您每一天都快樂愉快！</p>
                             </div>
-                            <div ref={animationContainer} style={{ width: 300, height: 300 }} />
+                            <div className="firework" ref={animationContainer1} />
+                            <div className="firework2" ref={animationContainer2} />
                             <ButtonGroup
                                 nextBtnSrc="./shopping.html"
                                 nextBtnClass="nextStep"

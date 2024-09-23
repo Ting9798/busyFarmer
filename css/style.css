@@ -550,7 +550,7 @@ footer #footer-content .footer-content-box .footer-map a:hover {
   left: 0;
   width: 25px;
   height: 25px;
-  background-color: #eb6328;
+  background-color: #eb6228;
   border-radius: 50%;
   border: 2px solid #fff;
   text-align: center;
@@ -776,7 +776,7 @@ body.fixed {
   background-color: #eb9b28;
 }
 .buttonArrow-box .arrowBtnOrange:hover {
-  background-color: #eb6328;
+  background-color: #eb6228;
   color: #F1F1F1;
 }
 
@@ -2361,7 +2361,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   width: 100%;
   box-sizing: border-box;
   border-radius: 99px 0 0 99px;
-  border: 10px solid #eb6328;
+  border: 10px solid #eb6228;
   animation: border 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item:nth-child(2) .promotion-item-img {
@@ -2399,7 +2399,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   width: 100%;
   box-sizing: border-box;
   border-radius: 99px 0 0 99px;
-  border: 10px solid #eb6328;
+  border: 10px solid #eb6228;
   animation: border 10s linear infinite;
 }
 #joinUs .promotion-sections .promotion-item:nth-child(4) .promotion-item-img {
@@ -2508,7 +2508,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   padding-bottom: 0.2rem;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .list-container .list-container-box .form-list .list-content .filled {
-  color: #eb6328;
+  color: #eb6228;
   font-weight: 500;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .list-container .list-container-box .form-list .list-content .filled::after {
@@ -3066,7 +3066,7 @@ optgroup label {
 #product .product-part .product-part-text h6 {
   font-size: clamp(28px, 1.5vw + 1rem, 32px);
   letter-spacing: 0.1em;
-  color: #eb6328;
+  color: #eb6228;
   padding: 10px 0;
   margin-bottom: 15px;
   background-color: #FAFFF1;
@@ -3469,7 +3469,7 @@ optgroup label {
 }
 #product-section .grandTotal span {
   padding-left: 0.2em;
-  color: #eb6328;
+  color: #eb6228;
 }
 
 .gift-options {
@@ -3532,7 +3532,7 @@ optgroup label {
   flex-direction: column;
 }
 .gift-options .gift-option .gift-option-text .gift-option-price-discount .discounted-price {
-  color: #eb6328;
+  color: #eb6228;
 }
 .gift-options .gift-option .gift-option-text .gift-option-price-discount .original-price {
   text-decoration: line-through;
@@ -3595,7 +3595,7 @@ optgroup label {
   margin-bottom: 1%;
 }
 #extra-section .extra-product-tip span {
-  color: #eb6328;
+  color: #eb6228;
 }
 
 #reminder-section {
@@ -3707,7 +3707,7 @@ optgroup label {
 }
 .grand-total-row .total-amount {
   font-size: 20px;
-  color: #eb6328;
+  color: #eb6228;
 }
 
 .contact-titBox {
@@ -3908,6 +3908,20 @@ optgroup label {
   font-weight: 400;
 }
 
+.firework {
+  position: absolute;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+}
+
+.firework2 {
+  position: absolute;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -3941,7 +3955,7 @@ optgroup label {
 }
 #activity .activity:hover .description {
   scale: 1.01;
-  color: #eb6328;
+  color: #eb6228;
 }
 #activity .activity img {
   transition: 0.35s;
@@ -4129,7 +4143,7 @@ optgroup label {
   transition: 0.35s all ease-in-out;
 }
 .handmade-plan .handmade-plan-container .handmade-plan-item .handmade-plan-item-priceBtn a:hover {
-  background-color: #eb6328;
+  background-color: #eb6228;
   font-size: 1.3rem;
 }
 

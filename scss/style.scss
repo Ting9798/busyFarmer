@@ -3870,6 +3870,19 @@ optgroup {
     }
 }
 
+.firework{
+    position: absolute;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+}
+.firework2{
+    position: absolute;
+    right: 10%;
+    width: 300px;
+    height: 300px;
+}
+
 // --GO遊趣
 .container {
     @include col;
