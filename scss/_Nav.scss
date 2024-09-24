@@ -70,6 +70,8 @@
                 flex-shrink: 0;
                 margin-left: 20px;
                 transition: all .35s forwards;
+                position: relative;
+                top: -7px;
 
                 &:hover {
                     img {
@@ -85,6 +87,7 @@
                     color: map-get($color, white);
                     display: flex;
                     align-items: center;
+                    line-height: 1.2;
 
                     img {
                         width: 54px;
@@ -105,7 +108,7 @@
 }
 
 .whiteTopbar {
-    background: $gradient-w;
+    background: transparent;
 }
 
 .greenTopbar {
