@@ -25,7 +25,7 @@
 
     <div id="root"></div>
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useCallback } = React;
         function App(props) {
 
             const [navProps, setNavProps] = useState({
@@ -42,6 +42,92 @@
                 { name: '季節商品', href: './shopping-season.html' },
                 { name: '夏日風情果醬', href: './product.html' }
             ];
+            const imageSources = {
+                img1: './images/product/tabs-1-elena-leya-unsplash.jpg',
+                img2: './images/product/tabs-2-fernando-andrade-unsplash.jpg',
+                img3: './images/product/tabs-4-rens-d-unsplash.jpg',
+                img4: './images/product/tabs-3-ju-lianna-unsplash.jpg'
+            };
+            const altSources = {
+                alt1: '夏日風情果醬1',
+                alt2: '夏日風情果醬2',
+                alt3: '夏日風情果醬3',
+                alt4: '夏日風情果醬4'
+            };
+            const [productImg, setProductImg] = useState(imageSources.img1);
+            const [productAlt, setProductAlt] = useState(altSources.alt1);
+
+            const tagOnclick = (imgSrc, alt) => {
+                setProductImg(imgSrc);
+                setProductAlt(alt);
+            };
+
+            const product = {
+                id: 'Customized-dried-fruits',
+                src: './images/product/tabs-1-elena-leya-unsplash.jpg',
+                name: '夏日風情果醬',
+                price: 399,
+            };
+            const [quantity, setQuantity] = useState(1);
+            const cartRef = useRef(null);
+
+            useEffect(() => {
+                let savedCart = [];
+                try {
+                    savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch (e) {
+                    console.error("Error parsing cart data:", e);
+                }
+
+                savedCart.forEach(item => {
+                    if (cartRef.current) {
+                        cartRef.current.addItemToCart(item);
+                    }
+                });
+            }, []);
+
+            const handleIncrement = useCallback(() => {
+                setQuantity(prev => prev + 1);
+            }, []);
+
+            const handleDecrement = useCallback(() => {
+                setQuantity(prev => Math.max(1, prev - 1));
+            }, []);
+
+            const handleAddToCart = (e) => {
+                e.preventDefault();
+
+                const cartItem = {
+                    id: product.id,
+                    src: product.src,
+                    name: product.name,
+                    price: product.price,
+                    quantity,
+                };
+
+                if (cartRef.current) {
+                    cartRef.current.addItemToCart(cartItem);
+                } else {
+                    console.error("Cart reference is not set.");
+                }
+
+                // 更新本地存儲
+                let updatedCart = [];
+                try {
+                    updatedCart = JSON.parse(localStorage.getItem('cart')) || [];
+                } catch (e) {
+                    console.error("Error parsing cart data:", e);
+                }
+
+                const existingIndex = updatedCart.findIndex(item => item.id === cartItem.id);
+                if (existingIndex >= 0) {
+                    updatedCart[existingIndex].quantity += cartItem.quantity;
+                } else {
+                    updatedCart.push(cartItem);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(updatedCart));
+            };
             return (
                 <>
                     {/* 導覽列*/}
@@ -50,74 +136,70 @@
                         logoImg={navProps.logoImg}
                         textColor={navProps.textColor}
                     />
-                    <FloatCart />
+                    <FloatCart ref={cartRef} />
+                    <div id="title">
+                        <Breadcrumbs paths={paths} />
+                    </div>
                     <main>
-                        <div className="title">
-                            <Breadcrumbs paths={paths} />
-                        </div>
                         {/* 夏日風情果醬 - 商品說明 */}
                         <section id="product">
                             {/* 商品櫥窗 */}
                             <div className="product-tabs">
-                                {/* 商品櫥窗-頁籤內容 */}
+                                {/*商品預覽-大*/}
                                 <div className="product-tabs-window">
-                                    <div id="tabs-1">
-                                        <div className="tabs-box"><img id="cusFruitImage" src="" alt="商品櫥窗" /></div>
-                                    </div>
-
+                                    <figure className="tabs-box"><img src={productImg} alt={productAlt} /></figure>
                                 </div>
-                                {/* 商品櫥窗-頁籤按鈕 */}
+                                {/*頁籤按鈕*/}
                                 <ul className="product-tabs-btn">
-                                    <li><a value="tabs1"><img src="./images/product/tabs-1-elena-leya-unsplash.jpg" alt="夏日風情果醬1" /></a></li>
-                                    <li><a value="tabs2"><img src="./images/product/tabs-2-fernando-andrade-unsplash.jpg" alt="夏日風情果醬2" /></a>
-                                    </li>
-                                    <li><a value="tabs3"><img src="./images/product/tabs-3-ju-lianna-unsplash.jpg" alt="夏日風情果醬3" /></a></li>
-                                    <li><a value="tabs4"><img src="./images/product/tabs-4-rens-d-unsplash.jpg" alt="夏日風情果醬4" /></a>
-                                    </li>
+                                    <li onClick={() => tagOnclick(imageSources.img1, altSources.alt1)}><img src={imageSources.img1} alt={altSources.alt1} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img2, altSources.alt2)}><img src={imageSources.img2} alt={altSources.alt2} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img3, altSources.alt3)}><img src={imageSources.img3} alt={altSources.alt3} /></li>
+                                    <li onClick={() => tagOnclick(imageSources.img4, altSources.alt4)}><img src={imageSources.img4} alt={altSources.alt4} /></li>
                                 </ul>
                             </div>
                             <div className="product-part">
-                                <div>
-                                    <div className="product-part-text">
-                                        <div>
-                                            <div className="titbox">
-                                                <h1>夏日風情果醬</h1>
-                                                <h2>Summer Flavor Jam</h2>
-                                            </div>
-                                            <h6>NT$399</h6>
-                                            <p>
-                                                夏日風情果醬融合桃子的酸甜、芒果的濃郁香氣與橘子的清爽微苦，帶來多層次的水果風味。每一口都讓你感受到熱帶陽光的溫暖與豐富果香。
-                                            </p>
-                                            <details>
-                                                <pre>
-                                                    {`
-• 保存方式：為了保持水果的最佳風味和品質，請將水果置於陰涼乾燥處，避免陽光直射。
-• 食用建議：開封後請盡快食用，水果在切開後易氧化變質，建議當日食用完畢。
-• 季節性供應：由於水果的季節性在特定時期可能供應有限，敬請提前預訂。
+                                <div className="product-part-text">
+                                    <div>
+                                        <div className="titbox">
+                                            <h1>{product.name}</h1>
+                                            <h2>Customized dried fruits</h2>
+                                        </div>
+                                        <h6>NT.{product.price}</h6>
+                                        <p>
+                                            夏日風情果醬融合桃子的酸甜、芒果的濃郁香氣與橘子的清爽微苦，帶來多層次的水果風味。每一口都讓你感受到熱帶陽光的溫暖與豐富果香。
+                                        </p>
+                                        <details>
+                                            <pre>{`
+ • 保存方式：為了保持水果的最佳風味和品質，請將水果置於陰涼乾燥處，避免陽光直射。
+ • 食用建議：開封後請盡快食用，水果在切開後易氧化變質，建議當日食用完畢。
+ • 季節性供應：由於水果的季節性在特定時期可能供應有限，敬請提前預訂。
 `}</pre>
-                                            </details>
-                                        </div>
+                                        </details>
                                     </div>
-                                    <div className="product-part-ToBuy">
-                                        <div className="choose-box">
-                                            <div className="choose">請先挑選樣式 style</div>
-                                            <div className="line"></div>
-                                        </div>
-                                        <form action="" method="" name="form-pack" id="form-pack" title="組裝表單">
-                                            <fieldset>
-                                                <div className="choose1">
-                                                    <input type="radio" name="pack" id="pack" value="分袋散裝" />
-                                                    <label htmlFor="pack-1">分袋散裝</label>
-                                                </div>
-                                                <div>
-                                                    <input type="radio" name="pack" id="pack-2" value="整袋合裝" />
-                                                    {/* <figure><img src="./images/shopping/productList-btn-1.svg" alt=""></figure> */}
-                                                    <label htmlFor="pack-2">整袋合裝</label>
-                                                </div>
-                                            </fieldset>
-                                            <div><a href="#introduce">下一步</a></div>
-                                        </form>
+                                </div>
+                                <div className="product-part-ToBuy product">
+                                    <div className="quantity-controls-buttons quantity">
+                                        <button className="decrement" onClick={handleDecrement}>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                                <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                            </svg>
+                                        </button>
+                                        <input type="text" className="quantity-input" value={quantity} readOnly />
+                                        <button className="increment" onClick={handleIncrement}>
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="16" height="16" rx="4" fill="#6C8C42" />
+                                                <path d="M12.6577 8.73405C12.9017 8.73405 13.0996 8.53618 13.0996 8.2921C13.0996 8.04802 12.9017 7.85016 12.6577 7.85016L3.22949 7.85016C2.98541 7.85016 2.78755 8.04802 2.78755 8.2921C2.78755 8.53618 2.98541 8.73405 3.22949 8.73405L12.6577 8.73405Z" fill="#F1F1F1" />
+                                                <path d="M7.50087 13.0062C7.50087 13.2503 7.69874 13.4481 7.94282 13.4481C8.1869 13.4481 8.38477 13.2503 8.38477 13.0062L8.38477 3.57801C8.38477 3.33393 8.1869 3.13607 7.94282 3.13607C7.69874 3.13607 7.50087 3.33393 7.50087 3.57801L7.50087 13.0062Z" fill="#F1F1F1" />
+                                            </svg>
+                                        </button>
                                     </div>
+                                    <ButtonGroup
+                                        btnPosition="aiEng jcEnd"
+                                        nextBtnClass="fruitCardBtn"
+                                        nextbtnName="加入購物車"
+                                        onClick={handleAddToCart}
+                                    />
                                 </div>
                             </div>
                         </section>
@@ -130,29 +212,39 @@
                             </div>
 
                             <p>
-                                <b>夏日風情果醬</b> 使用的水果由下方三位小農生產提供：<br />
-                                當您購買後我們會將<b>50%盈餘</b><br />
+                                <b>《夏日風情果醬》</b> 使用的水果由下方三位小農生產提供：<br />
+                                當您購買後我們會將<u>50%盈餘</u><br />
                                 回饋給小農，援助農場經營和環境改善
                             </p>
 
-                            <div className="producer">
-                                <div className="producer-img">
-                                    <div className="producter-fruit">蘋果</div>
+                            <div className="producer-box">
+                                <div className="producer">
+                                    <a href="./planting.html" className="producer-img producer-img-1">
+                                        <div className="producter-fruit producter-fruit-1">橘子</div>
+                                    </a>
+                                    <div className="producer-name">張美阿姨</div>
                                 </div>
-                                <div className="producer-name">北投鐘家</div>
+
+                                <div className="producer">
+                                    <a href="./planting.html" className="producer-img producer-img-2">
+                                        <div className="producter-fruit producter-fruit-2">香瓜</div>
+                                    </a>
+                                    <div className="producer-name">香瓜ㄉ鄉</div>
+                                </div>
+                                <div className="producer">
+                                    <a href="./planting.html" className="producer-img producer-img-3">
+                                        <div className="producter-fruit producter-fruit-3">蘋果</div>
+                                    </a>
+                                    <div className="producer-name">北投鐘家</div>
+                                </div>
                             </div>
 
-                            <div className="producer">
-                                <div className="producer-img">
-                                    <div className="producter-fruit">橘子</div>
-                                </div>
-                                <div className="producer-name">張美阿姨</div>
-                            </div>
-                            <div className="producer">
-                                <div className="producer-img">
-                                    <div className="producter-fruit">香瓜</div>
-                                </div>
-                                <div className="producer-name">香瓜ㄉ鄉</div>
+                            <div className="pro-ornament-box">
+                                <figure><img src="./images/product/product-picture-L-2.svg" alt="" /></figure>
+                                <figure><img src="./images/index/banner-tree.png" alt="" /></figure>
+                                <figure><img src="./images/product/product-picture-L.svg" alt="" /></figure>
+                                <figure><img src="./images/index/banner-tree.png" alt="" /></figure>
+                                <figure><img src="./images/product/product-picture-R.svg" alt="" /></figure>
                             </div>
                         </section>
                         {/* 夏日風情果乾 - 商品介紹 */}
@@ -163,23 +255,24 @@
                                 <figure><img src="./images/philanthropy/spring-tit-2.svg" alt="商品介紹" /></figure>
                             </div>
 
-                            <div className="product-introduce-L">
-                                <div className="product-introduce-box-1">
-                                    <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="商品圖" /></figure>
-                                    <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="商品圖" /></figure>
-                                </div>
+                            <div className="contact-intBox">
+                                <div className="product-introduce-L">
 
+                                    <figure><img src="./images/product/int-L-1.png" alt="" /></figure>
+                                    <figure><img src="./images/product/int-L-2.png" alt="" /></figure>
+
+                                </div>
                                 <div className="product-introduce-C">
                                     {/* 第一行 */}
                                     <div className="introduce-C-box">
                                         <div className="productbox-center-numBox">
-                                            <div className="productbox-center-num-L">1</div>
-                                            <div className="productbox-center-num-R">\</div>
+                                            <div className="num-L">1</div>
+                                            <div className="num-R">\</div>
                                         </div>
                                         <div className="productbox-center-texBox">
                                             <div>
                                                 <h4>天然無添加，健康美味</h4>
-                                                <figure><img src="" alt="" /></figure>
+
                                             </div>
                                             <p>每一瓶果醬都保留了水果的天然風味和營養價值，讓您在享受美味的同時，也能攝取豐富的維生素和抗氧化物質。</p>
                                         </div>
@@ -187,8 +280,8 @@
                                     {/* 第二行 */}
                                     <div className="introduce-C-box">
                                         <div className="productbox-center-numBox">
-                                            <div className="productbox-center-num-L">2</div>
-                                            <div className="productbox-center-num-R">\</div>
+                                            <div className="num-L">2</div>
+                                            <div className="num-R">\</div>
                                         </div>
                                         <div className="productbox-center-texBox">
                                             <h4>多重風味，完美融合</h4>
@@ -198,8 +291,8 @@
                                     {/* 第三行 */}
                                     <div className="introduce-C-box">
                                         <div className="productbox-center-numBox">
-                                            <div className="productbox-center-num-L">3</div>
-                                            <div className="productbox-center-num-R">\</div>
+                                            <div className="num-L">3</div>
+                                            <div className="num-R">\</div>
                                         </div>
                                         <div className="productbox-center-texBox">
                                             <h4>手工製作，品質保證</h4>
@@ -209,8 +302,17 @@
                                 </div>
 
                                 <div className="product-introduce-R">
-                                    <figure><img src="./images/philanthropy/spring-tit-1.svg" alt="" /></figure>
+                                    <figure><img src="./images/product/int-R-1.png" alt="" /></figure>
                                 </div>
+                            </div>
+                            <div className="pro-ornament-box">
+                                <figure><img src="./images/product/product-picture-L-2.svg" alt="" /></figure>
+                                <figure><img src="./images/index/seed-twin-orange.svg" alt="" /></figure>
+                                <figure><img src="./images/product/product-picture-L-2.svg" alt="" /></figure>
+                                <figure><img src="./images/product/product-picture-L-2.svg" alt="" /></figure>
+                                <figure><img src="./images/index/seed-twin-orange.svg" alt="" /></figure>
+                                <figure><img src="./images/product/product-picture-L-2.svg" alt="" /></figure>
+                                <figure><img src="./images/index/seed-twin-orange.svg" alt="" /></figure>
                             </div>
 
                             <div className="contact-titBox">

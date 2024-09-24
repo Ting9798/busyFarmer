@@ -417,7 +417,7 @@ body.fixed {
         top: 0;
         width: 100%;
         height: 130%;
-        background-image: radial-gradient(rgba(255, 234, 189,0.1) 11%, rgba(207, 170, 100, 0.4) 100%)
+        background-image: radial-gradient(rgba(255, 234, 189, 0.1) 11%, rgba(207, 170, 100, 0.4) 100%)
     }
 
     .mountain-1 {
@@ -679,6 +679,7 @@ body.fixed {
         position: absolute;
         overflow-x: hidden;
         top: -2%;
+
         .carousel-slide {
             display: flex;
             transition: transform 0.5s ease-in-out;
@@ -2250,6 +2251,7 @@ body.fixed {
                     height: 100%;
                     @include col;
                     align-items: center;
+                    max-width: 300px;
 
                     .section-title {
                         font-family: $GenSenRounded-M;
@@ -2264,6 +2266,7 @@ body.fixed {
                         .form-group {
                             @include col;
                             align-items: center;
+                            width: 100%;
 
                             .form-group-box {
                                 border: 5px solid map-get($color , primaryG);
@@ -2272,11 +2275,13 @@ body.fixed {
                                 margin-bottom: 1rem;
                                 text-align: center;
                                 width: 100%;
-                                display: inline-block;
+                                display: flex;
 
                                 input {
                                     text-align: center;
                                     background-color: transparent;
+                                    padding: 5px 20px;
+                                    line-height: 1.2;
                                 }
                             }
 
@@ -2303,6 +2308,7 @@ body.fixed {
                                 text-align: center;
                                 padding: 5px 20px;
                                 width: 100%;
+                                line-height: 1.2;
                             }
 
                             .contact-method,
@@ -2719,65 +2725,233 @@ optgroup {
             }
         }
     }
+}
+.season-productList-item {
+    display: flex;
+    justify-content: space-around;
+    width: 65%;
+    margin: 60px 0;
 
-    .season-productList-item {
-        display: flex;
-        justify-content: space-around;
-        width: 65%;
-        margin: 60px 0;
+    .season-productList-item-box {
+        margin: auto 15px;
 
-        .season-productList-item-box {
-            margin: auto 15px;
+        .season-productList-btn {
+            height: clamp(180px, 24vw, 250px);
+            width: clamp(180px, 24vw, 250px);
 
-            .season-productList-btn {
-                height: clamp(180px, 24vw, 250px);
-                width: clamp(180px, 24vw, 250px);
+            img {
+                width: 250px;
+                object-fit: cover;
+                height: 100%;
+                border-radius: 20px;
+            }
+        }
 
-                img {
-                    width: 250px;
-                    object-fit: cover;
-                    height: 100%;
-                    border-radius: 20px;
+        .season-productList-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 22px;
+
+            .season-productList-text-name {
+                @include col;
+                justify-content: space-between;
+
+                h4 {
+                    font-family: 'GenSenRounded TW', 'sans-serif';
+                    font-size: clamp(16px, 2vw, 20px);
+                    font-weight: 400;
+                    letter-spacing: .1em;
+                    line-height: 20px;
+                    color: map-get($color , text);
+                }
+
+                h5 {
+                    font-family: 'GenSenRounded TW', 'sans-serif';
+                    font-size: clamp(16px, 2vw, 20px);
+                    font-weight: 300;
+                    letter-spacing: .11em;
+                    color: map-get($color , text);
                 }
             }
 
-            .season-productList-text {
+            h3 {
+                margin-top: 6px;
+                font-family: 'GenSenRounded TW', 'sans-serif';
+                font-size: clamp(20px, 3vw, 29px);
+                letter-spacing: .12em;
+                color: map-get($color , lightText);
+                font-weight: 500;
+                transform: translateX(4px);
+            }
+        }
+    }
+}
+#product-introduce {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 140%;
+        background-image: url('../images/product/mountain-w-L.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+
+    h3 {
+        color: map-get($color , lightText);
+    }
+
+    .contact-intBox {
+        display: flex;
+        width: 88vw;
+        gap: 56px;
+        padding: 30px 0;
+
+        figure {
+            width: 21vw;
+        }
+    }
+
+    .product-introduce-L {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .product-introduce-C {
+        padding: 40px 0;
+
+        .introduce-C-box {
+            display: flex;
+            padding: 30px 0;
+
+            .productbox-center-numBox {
                 display: flex;
-                justify-content: space-between;
                 align-items: flex-end;
-                margin-top: 22px;
 
-                .season-productList-text-name {
-                    @include col;
-                    justify-content: space-between;
-
-                    h4 {
-                        font-family: 'GenSenRounded TW', 'sans-serif';
-                        font-size: clamp(16px, 2vw, 20px);
-                        font-weight: 400;
-                        letter-spacing: .1em;
-                        line-height: 20px;
-                        color: map-get($color , text);
-                    }
-
-                    h5 {
-                        font-family: 'GenSenRounded TW', 'sans-serif';
-                        font-size: clamp(16px, 2vw, 20px);
-                        font-weight: 300;
-                        letter-spacing: .11em;
-                        color: map-get($color , text);
-                    }
-                }
-
-                h3 {
-                    margin-top: 6px;
-                    font-family: 'GenSenRounded TW', 'sans-serif';
-                    font-size: clamp(20px, 3vw, 29px);
-                    letter-spacing: .12em;
-                    color: map-get($color , lightText);
+                .num-L {
+                    font-family: $NotoSans;
                     font-weight: 500;
-                    transform: translateX(4px);
+                    font-size: clamp(120px, 10vw + 1rem, 130px);
+                    color: map-get($color , text);
+                    line-height: 105px;
+                    padding-bottom: 10px;
                 }
+
+                .num-R {
+                    font-size: clamp(40px, 4vw + 1rem, 44px);
+                    font-family: $NotoSans;
+                    font-weight: 100;
+                    color: map-get($color , text);
+                    padding: 0 10px;
+                }
+            }
+
+            .productbox-center-texBox {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 5px 0;
+
+                h4 {
+                    font-family: 'GenSenRounded TW', 'sans-serif';
+                    font-size: clamp(24px, 2.3vw, 26px);
+                    font-weight: 400;
+                    letter-spacing: .2em;
+                    line-height: 20px;
+                    color: map-get($color , text);
+                    padding-bottom: 20px;
+                }
+
+                p {
+                    font-family: 'GenSenRounded TW', 'sans-serif';
+                    font-size: clamp(13px, 1.4vw, 15px);
+                    font-weight: 300;
+                    letter-spacing: .12em;
+                    line-height: 28px;
+                    color: map-get($color , text);
+                }
+            }
+
+        }
+
+        .product-introduce-R {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    .pro-ornament-box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+
+        figure {
+            &:nth-child(1) {
+                position: absolute;
+                z-index: 2;
+                width: 9%;
+                height: 15%;
+                transform: translateX(90%) translateY(85%) rotate(250deg);
+            }
+
+            &:nth-child(2) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 9%;
+                right: 0;
+                transform: translateX(-297%) translateY(159%);
+            }
+
+            &:nth-child(3) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 10%;
+                transform: translateX(560%) translateY(418%);
+            }
+
+            &:nth-child(4) {
+                position: absolute;
+                z-index: 2;
+                width: 8%;
+                height: 15%;
+                transform: translateX(1010%) translateY(462%) rotate(170deg);
+            }
+
+            &:nth-child(5) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 15%;
+                transform: translateX(52%) translateY(592%) rotate(157deg);
+            }
+
+            &:nth-child(6) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 15%;
+                transform: translateX(790%) translateY(144%) rotate(175deg);
+            }
+
+            &:nth-child(7) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 15%;
+                transform: translateX(28%) translateY(316%) rotate(165deg);
             }
         }
     }
@@ -2805,6 +2979,7 @@ optgroup {
                 display: flex;
                 width: 100%;
                 height: 100%;
+                aspect-ratio: 13 / 9;
 
                 img {
                     object-fit: cover;
@@ -2822,21 +2997,25 @@ optgroup {
             justify-content: space-between;
             padding-top: 1rem;
             max-width: 640px;
+            gap: 10px;
 
             li {
-                padding-right: 0.6rem;
+                display: flex;
+                justify-content: center;
+                flex: 1;
 
                 &:nth-child(4) {
                     padding-right: 0;
                 }
 
                 img {
-                    width: 100%;
+                    width: clamp(60px, 100%, 150px);
                     height: 100%;
                     object-fit: cover;
                     object-position: center;
                     border-radius: 1rem;
                     cursor: pointer;
+                    border: 2px solid transparent;
 
                     &:hover {
                         border: 2px solid map-get($color , primaryG);
@@ -2844,7 +3023,6 @@ optgroup {
                 }
             }
         }
-
     }
 
     .product-part {
@@ -2858,6 +3036,7 @@ optgroup {
             @include col;
             justify-content: space-between;
             margin-bottom: 1.4vw;
+            font-family: $GenSenRounded-L;
 
             .titbox {
                 font-family: $GenSenRounded-M;
@@ -2886,14 +3065,12 @@ optgroup {
             }
 
             p {
-                font-family: $GenSenRounded-L;
                 font-size: clamp(12px, 1.2vw + 1rem, 16px);
                 margin-bottom: 17px;
                 letter-spacing: .1em;
             }
 
             details {
-                font-family: $GenSenRounded-L;
                 font-size: clamp(10px, 1.2vw + 1rem, 14px);
                 color: map-get($color , grey);
 
@@ -2912,10 +3089,10 @@ optgroup {
             .choose-box {
                 display: flex;
                 justify-content: space-between;
+                font-family: $GenSenRounded-L;
 
                 .choose {
                     position: relative;
-                    font-family: $GenSenRounded-L;
                     font-size: clamp(20px, 1.3vw + 1rem, 22px);
                     line-height: 1.3;
                     letter-spacing: .1em;
@@ -2938,10 +3115,10 @@ optgroup {
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-end;
+                font-family: $GenSenRounded-L;
 
                 fieldset {
                     border: 0;
-                    font-family: $GenSenRounded-L;
                     font-size: clamp(20px, 1.3vw + 1rem, 22px);
                     letter-spacing: .2em;
                     color: map-get($color , primaryO);
@@ -2968,6 +3145,41 @@ optgroup {
             }
         }
 
+        .product {
+            justify-content: flex-end;
+            align-items: flex-end;
+
+            .quantity {
+                display: block;
+                position: relative;
+                right: 1.5%;
+                margin-bottom: 0.7em;
+
+                input {
+                    width: 80px;
+                    margin: 0 5px;
+                    text-align: center;
+                    border: 2px solid map-get($color , primaryG);
+                }
+            }
+        }
+    }
+}
+
+.producer {
+    .producer-img {
+        width: 22vw;
+        height: 22vw;
+        background-size: cover;
+        border-radius: 30px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        box-shadow: 0 4px 6px #49604133;
+
+        &:hover {
+            scale: 1.1;
+        }
     }
 }
 
@@ -3035,6 +3247,126 @@ optgroup {
                 width: 9%;
                 height: 9%;
                 transform: translateX(160%) translateY(100%) rotate(-35deg);
+            }
+        }
+    }
+
+    .producer-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 80vw;
+        margin: 60px 0;
+
+        .producer-img {
+            width: 22vw;
+            height: 22vw;
+            background-size: cover;
+            border-radius: 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            box-shadow: 0 4px 6px #49604133;
+
+            .producter-fruit {
+                width: 7vw;
+                height: 7vw;
+                border-radius: 99px;
+                border: clamp(12px, 3vw, 14px) solid #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: 'GenSenRounded TW', 'sans-serif';
+                font-size: clamp(20px, 2vw, 22px);
+                font-weight: 400;
+                letter-spacing: .1em;
+                line-height: 20px;
+                color: map-get($color , lightGreen);
+                margin: 10px;
+            }
+
+            .producter-fruit-1 {
+                background-color: map-get($color , primaryO);
+            }
+
+            .producter-fruit-2 {
+                background-color: #A1C25C;
+            }
+
+            .producter-fruit-3 {
+                background-color: map-get($color , red);
+            }
+        }
+
+        .producer-img-1 {
+            background-image: url('../images/index/farmer-JhangMeiAYi.png');
+        }
+
+        .producer-img-2 {
+            background-image: url('../images/index/farmer-SiangGuaSiang.png');
+        }
+
+        .producer-img-3 {
+            background-image: url('../images/index/farmer-BeiTouJhongJia.png');
+        }
+
+        .producer-name {
+            font-family: 'GenSenRounded TW', 'sans-serif';
+            font-size: clamp(20px, 2vw, 22px);
+            font-weight: 500;
+            letter-spacing: .2em;
+            line-height: 20px;
+            color: map-get($color , text);
+            margin: 38px;
+        }
+    }
+
+    .pro-ornament-box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: -1;
+        overflow: hidden;
+
+        figure {
+            &:nth-child(1) {
+                position: absolute;
+                z-index: 2;
+                width: 5%;
+                height: 15%;
+                transform: translateX(333%) translateY(222%);
+            }
+
+            &:nth-child(2) {
+                position: absolute;
+                z-index: 2;
+                width: 10%;
+                height: 9%;
+                transform: translateX(45%) translateY(253%);
+            }
+
+            &:nth-child(3) {
+                position: absolute;
+                z-index: 2;
+                width: 15%;
+                height: 15%;
+                transform: translateX(20%) translateY(246%);
+            }
+
+            &:nth-child(4) {
+                position: absolute;
+                z-index: 2;
+                width: 8%;
+                height: 15%;
+                transform: translateX(1110%) translateY(309%);
+            }
+
+            &:nth-child(5) {
+                position: absolute;
+                z-index: 2;
+                width: 32%;
+                height: 15%;
+                transform: translateX(220%) translateY(331%);
             }
         }
     }
@@ -4444,7 +4776,7 @@ optgroup {
 
         h3 {
             font-size: 20px;
-            color: var(--primaryO);
+            color: map-get($color , primaryO);
             /* 橙色字體 */
             text-align: left;
         }
@@ -4475,7 +4807,7 @@ optgroup {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--primaryO);
+    color: map-get($color , primaryO);
 
     input {
         width: 50px;
@@ -4539,7 +4871,7 @@ optgroup {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: var(--primaryO);
+            color: map-get($color , primaryO);
         }
 
         input {
@@ -4580,7 +4912,7 @@ optgroup {
 
             h3 {
                 font-size: 20px;
-                color: var(--primaryO);
+                color: map-get($color , primaryO);
                 text-align: left;
             }
 
@@ -4603,20 +4935,6 @@ optgroup {
             width: 60px;
             height: auto;
             transform: rotate(30deg);
-        }
-    }
-
-    .add-to-cart button {
-        background-color: var(--primaryG);
-        color: white;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 1rem;
-
-        &:hover {
-            background-color: #73a62f;
         }
     }
 

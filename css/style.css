@@ -110,7 +110,7 @@ select {
 
 ::placeholder {
   font-size: 16px;
-  text-align: center;
+  line-height: normal;
 }
 
 fieldset {
@@ -163,18 +163,24 @@ fieldset {
 .topbar .logo {
   width: 240px;
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: -7%;
+  z-index: 1;
 }
 .topbar .nav-content {
   display: flex;
   flex: 1;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
 }
 .topbar .nav-content .nav-links {
   display: flex;
   flex: 1;
   justify-content: flex-end;
   align-items: center;
+  position: relative;
+  top: 12px;
 }
 .topbar .nav-content .nav-links li {
   padding: 10px;
@@ -182,20 +188,20 @@ fieldset {
 .topbar .nav-content .nav-links.brown a {
   color: #514535;
   transition: 0.35s ease-in-out all;
+  border-bottom: 5px dashed transparent;
 }
 .topbar .nav-content .nav-links.brown a:hover {
-  font-size: 20px;
   border-bottom: 5px dashed #514535;
-  transform: scale(1.1);
+  scale: 1.1;
 }
 .topbar .nav-content .nav-links.green a {
   color: #F1F1F1;
   transition: 0.35s ease-in-out all;
-  transform: scale(1.1);
+  border-bottom: 5px dashed transparent;
 }
 .topbar .nav-content .nav-links.green a:hover {
-  font-size: 20px;
   border-bottom: 5px dashed #eb9b28;
+  scale: 1.1;
 }
 .topbar .nav-content .shopping-btn-box {
   display: flex;
@@ -211,7 +217,7 @@ fieldset {
   margin-left: 20px;
   transition: all 0.35s forwards;
   position: relative;
-  top: -7px;
+  top: 0;
 }
 .topbar .nav-content .shopping-btn-box .shopping-btn:hover img {
   animation: shoppingBtnIn 0.35s forwards;
@@ -2531,6 +2537,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 300px;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .section-title {
   font-family: "GenSenRounded TW-M", sans-serif;
@@ -2546,6 +2553,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group .form-group-box {
   border: 5px solid #6c8c42;
@@ -2553,11 +2561,13 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   margin-bottom: 1rem;
   text-align: center;
   width: 100%;
-  display: inline-block;
+  display: flex;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group .form-group-box input {
   text-align: center;
   background-color: transparent;
+  padding: 5px 20px;
+  line-height: 1.2;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group .gender {
   border-radius: 0px 45px 45px 0px;
@@ -2581,6 +2591,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   text-align: center;
   padding: 5px 20px;
   width: 100%;
+  line-height: 1.2;
 }
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group-sec .contact-method,
 #joinUs-form .joinUs-form-container .joinUs-form-container-box .form .form-container .form-basic-info .form-group-sec .farm-region {
@@ -2932,37 +2943,38 @@ optgroup label {
   height: 100%;
   transform: translateX(-140%) translateY(39%) rotate(-37deg) scale(-1);
 }
-#season-productList .season-productList-item {
+
+.season-productList-item {
   display: flex;
   justify-content: space-around;
   width: 65%;
   margin: 60px 0;
 }
-#season-productList .season-productList-item .season-productList-item-box {
+.season-productList-item .season-productList-item-box {
   margin: auto 15px;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-btn {
+.season-productList-item .season-productList-item-box .season-productList-btn {
   height: clamp(180px, 24vw, 250px);
   width: clamp(180px, 24vw, 250px);
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-btn img {
+.season-productList-item .season-productList-item-box .season-productList-btn img {
   width: 250px;
   object-fit: cover;
   height: 100%;
   border-radius: 20px;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-text {
+.season-productList-item .season-productList-item-box .season-productList-text {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-top: 22px;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name {
+.season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name h4 {
+.season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name h4 {
   font-family: "GenSenRounded TW", "sans-serif";
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 400;
@@ -2970,14 +2982,14 @@ optgroup label {
   line-height: 20px;
   color: #514535;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name h5 {
+.season-productList-item .season-productList-item-box .season-productList-text .season-productList-text-name h5 {
   font-family: "GenSenRounded TW", "sans-serif";
   font-size: clamp(16px, 2vw, 20px);
   font-weight: 300;
   letter-spacing: 0.11em;
   color: #514535;
 }
-#season-productList .season-productList-item .season-productList-item-box .season-productList-text h3 {
+.season-productList-item .season-productList-item-box .season-productList-text h3 {
   margin-top: 6px;
   font-family: "GenSenRounded TW", "sans-serif";
   font-size: clamp(20px, 3vw, 29px);
@@ -2985,6 +2997,151 @@ optgroup label {
   color: #856a45;
   font-weight: 500;
   transform: translateX(4px);
+}
+
+#product-introduce {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#product-introduce::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-image: url("../images/product/mountain-w-L.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+#product-introduce h3 {
+  color: #856a45;
+}
+#product-introduce .contact-intBox {
+  display: flex;
+  width: 88vw;
+  gap: 56px;
+  padding: 30px 0;
+}
+#product-introduce .contact-intBox figure {
+  width: 21vw;
+}
+#product-introduce .product-introduce-L {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#product-introduce .product-introduce-C {
+  padding: 40px 0;
+}
+#product-introduce .product-introduce-C .introduce-C-box {
+  display: flex;
+  padding: 30px 0;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-numBox {
+  display: flex;
+  align-items: flex-end;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-numBox .num-L {
+  font-family: "Noto Sans TC", "sans-serif";
+  font-weight: 500;
+  font-size: clamp(120px, 10vw + 1rem, 130px);
+  color: #514535;
+  line-height: 105px;
+  padding-bottom: 10px;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-numBox .num-R {
+  font-size: clamp(40px, 4vw + 1rem, 44px);
+  font-family: "Noto Sans TC", "sans-serif";
+  font-weight: 100;
+  color: #514535;
+  padding: 0 10px;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-texBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5px 0;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-texBox h4 {
+  font-family: "GenSenRounded TW", "sans-serif";
+  font-size: clamp(24px, 2.3vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 20px;
+  color: #514535;
+  padding-bottom: 20px;
+}
+#product-introduce .product-introduce-C .introduce-C-box .productbox-center-texBox p {
+  font-family: "GenSenRounded TW", "sans-serif";
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  line-height: 28px;
+  color: #514535;
+}
+#product-introduce .product-introduce-C .product-introduce-R {
+  display: flex;
+  align-items: center;
+}
+#product-introduce .pro-ornament-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+#product-introduce .pro-ornament-box figure:nth-child(1) {
+  position: absolute;
+  z-index: 2;
+  width: 9%;
+  height: 15%;
+  transform: translateX(90%) translateY(85%) rotate(250deg);
+}
+#product-introduce .pro-ornament-box figure:nth-child(2) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 9%;
+  right: 0;
+  transform: translateX(-297%) translateY(159%);
+}
+#product-introduce .pro-ornament-box figure:nth-child(3) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 10%;
+  transform: translateX(560%) translateY(418%);
+}
+#product-introduce .pro-ornament-box figure:nth-child(4) {
+  position: absolute;
+  z-index: 2;
+  width: 8%;
+  height: 15%;
+  transform: translateX(1010%) translateY(462%) rotate(170deg);
+}
+#product-introduce .pro-ornament-box figure:nth-child(5) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 15%;
+  transform: translateX(52%) translateY(592%) rotate(157deg);
+}
+#product-introduce .pro-ornament-box figure:nth-child(6) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 15%;
+  transform: translateX(790%) translateY(144%) rotate(175deg);
+}
+#product-introduce .pro-ornament-box figure:nth-child(7) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 15%;
+  transform: translateX(28%) translateY(316%) rotate(165deg);
 }
 
 #product {
@@ -3008,6 +3165,7 @@ optgroup label {
   display: flex;
   width: 100%;
   height: 100%;
+  aspect-ratio: 13/9;
 }
 #product .product-tabs .product-tabs-window .tabs-box img {
   object-fit: cover;
@@ -3022,20 +3180,24 @@ optgroup label {
   justify-content: space-between;
   padding-top: 1rem;
   max-width: 640px;
+  gap: 10px;
 }
 #product .product-tabs .product-tabs-btn li {
-  padding-right: 0.6rem;
+  display: flex;
+  justify-content: center;
+  flex: 1;
 }
 #product .product-tabs .product-tabs-btn li:nth-child(4) {
   padding-right: 0;
 }
 #product .product-tabs .product-tabs-btn li img {
-  width: 100%;
+  width: clamp(60px, 100%, 150px);
   height: 100%;
   object-fit: cover;
   object-position: center;
   border-radius: 1rem;
   cursor: pointer;
+  border: 2px solid transparent;
 }
 #product .product-tabs .product-tabs-btn li img:hover {
   border: 2px solid #6c8c42;
@@ -3053,6 +3215,7 @@ optgroup label {
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 1.4vw;
+  font-family: "GenSenRounded TW-L", sans-serif;
 }
 #product .product-part .product-part-text .titbox {
   font-family: "GenSenRounded TW-M", sans-serif;
@@ -3077,13 +3240,11 @@ optgroup label {
   border-radius: 0.6vw;
 }
 #product .product-part .product-part-text p {
-  font-family: "GenSenRounded TW-L", sans-serif;
   font-size: clamp(12px, 1.2vw + 1rem, 16px);
   margin-bottom: 17px;
   letter-spacing: 0.1em;
 }
 #product .product-part .product-part-text details {
-  font-family: "GenSenRounded TW-L", sans-serif;
   font-size: clamp(10px, 1.2vw + 1rem, 14px);
   color: #B1AAA1;
 }
@@ -3099,10 +3260,10 @@ optgroup label {
 #product .product-part .product-part-ToBuy .choose-box {
   display: flex;
   justify-content: space-between;
+  font-family: "GenSenRounded TW-L", sans-serif;
 }
 #product .product-part .product-part-ToBuy .choose-box .choose {
   position: relative;
-  font-family: "GenSenRounded TW-L", sans-serif;
   font-size: clamp(20px, 1.3vw + 1rem, 22px);
   line-height: 1.3;
   letter-spacing: 0.1em;
@@ -3122,10 +3283,10 @@ optgroup label {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  font-family: "GenSenRounded TW-L", sans-serif;
 }
 #product .product-part .product-part-ToBuy #form-pack fieldset {
   border: 0;
-  font-family: "GenSenRounded TW-L", sans-serif;
   font-size: clamp(20px, 1.3vw + 1rem, 22px);
   letter-spacing: 0.2em;
   color: #eb9b28;
@@ -3144,6 +3305,36 @@ optgroup label {
 }
 #product .product-part .product-part-ToBuy #form-pack fieldset div label {
   margin-left: 0 20px 0 10px;
+}
+#product .product-part .product {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+#product .product-part .product .quantity {
+  display: block;
+  position: relative;
+  right: 1.5%;
+  margin-bottom: 0.7em;
+}
+#product .product-part .product .quantity input {
+  width: 80px;
+  margin: 0 5px;
+  text-align: center;
+  border: 2px solid #6c8c42;
+}
+
+.producer .producer-img {
+  width: 22vw;
+  height: 22vw;
+  background-size: cover;
+  border-radius: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-shadow: 0 4px 6px rgba(73, 96, 65, 0.2);
+}
+.producer .producer-img:hover {
+  scale: 1.1;
 }
 
 #introduce {
@@ -3201,6 +3392,108 @@ optgroup label {
   width: 9%;
   height: 9%;
   transform: translateX(160%) translateY(100%) rotate(-35deg);
+}
+#introduce .producer-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 80vw;
+  margin: 60px 0;
+}
+#introduce .producer-box .producer-img {
+  width: 22vw;
+  height: 22vw;
+  background-size: cover;
+  border-radius: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-shadow: 0 4px 6px rgba(73, 96, 65, 0.2);
+}
+#introduce .producer-box .producer-img .producter-fruit {
+  width: 7vw;
+  height: 7vw;
+  border-radius: 99px;
+  border: clamp(12px, 3vw, 14px) solid #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "GenSenRounded TW", "sans-serif";
+  font-size: clamp(20px, 2vw, 22px);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 20px;
+  color: #FAFFF1;
+  margin: 10px;
+}
+#introduce .producer-box .producer-img .producter-fruit-1 {
+  background-color: #eb9b28;
+}
+#introduce .producer-box .producer-img .producter-fruit-2 {
+  background-color: #A1C25C;
+}
+#introduce .producer-box .producer-img .producter-fruit-3 {
+  background-color: #eb6228;
+}
+#introduce .producer-box .producer-img-1 {
+  background-image: url("../images/index/farmer-JhangMeiAYi.png");
+}
+#introduce .producer-box .producer-img-2 {
+  background-image: url("../images/index/farmer-SiangGuaSiang.png");
+}
+#introduce .producer-box .producer-img-3 {
+  background-image: url("../images/index/farmer-BeiTouJhongJia.png");
+}
+#introduce .producer-box .producer-name {
+  font-family: "GenSenRounded TW", "sans-serif";
+  font-size: clamp(20px, 2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 20px;
+  color: #514535;
+  margin: 38px;
+}
+#introduce .pro-ornament-box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+}
+#introduce .pro-ornament-box figure:nth-child(1) {
+  position: absolute;
+  z-index: 2;
+  width: 5%;
+  height: 15%;
+  transform: translateX(333%) translateY(222%);
+}
+#introduce .pro-ornament-box figure:nth-child(2) {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 9%;
+  transform: translateX(45%) translateY(253%);
+}
+#introduce .pro-ornament-box figure:nth-child(3) {
+  position: absolute;
+  z-index: 2;
+  width: 15%;
+  height: 15%;
+  transform: translateX(20%) translateY(246%);
+}
+#introduce .pro-ornament-box figure:nth-child(4) {
+  position: absolute;
+  z-index: 2;
+  width: 8%;
+  height: 15%;
+  transform: translateX(1110%) translateY(309%);
+}
+#introduce .pro-ornament-box figure:nth-child(5) {
+  position: absolute;
+  z-index: 2;
+  width: 32%;
+  height: 15%;
+  transform: translateX(220%) translateY(331%);
 }
 
 #picking {
@@ -4387,7 +4680,7 @@ optgroup label {
 }
 .activity-content .activity-details h3 {
   font-size: 20px;
-  color: var(--primaryO);
+  color: #eb9b28;
   /* 橙色字體 */
   text-align: left;
 }
@@ -4413,7 +4706,7 @@ optgroup label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--primaryO);
+  color: #eb9b28;
 }
 .count-controls input {
   width: 50px;
@@ -4468,7 +4761,7 @@ optgroup label {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--primaryO);
+  color: #eb9b28;
 }
 .register .participant-count input {
   width: 50px;
@@ -4502,7 +4795,7 @@ optgroup label {
 }
 .register .activity-content .activity-details h3 {
   font-size: 20px;
-  color: var(--primaryO);
+  color: #eb9b28;
   text-align: left;
 }
 .register .activity-content .activity-details ul {
@@ -4520,18 +4813,6 @@ optgroup label {
   width: 60px;
   height: auto;
   transform: rotate(30deg);
-}
-.register .add-to-cart button {
-  background-color: var(--primaryG);
-  color: white;
-  padding: 15px 30px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.register .add-to-cart button:hover {
-  background-color: #73a62f;
 }
 .register .button-group-box .button {
   background-color: #6c8c42;
