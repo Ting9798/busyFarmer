@@ -1242,6 +1242,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   height: 100vh;
   position: absolute;
   overflow-x: hidden;
+  top: -2%;
 }
 #shoppingBanner .shoppingBanner-container .carousel-slide {
   display: flex;
