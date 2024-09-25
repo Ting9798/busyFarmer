@@ -1207,6 +1207,7 @@ body.fixed {
             @include col;
             justify-content: flex-end;
             align-items: flex-end;
+            padding: 200px 100px;
 
             h1 {
                 font-family: $NotoSans;

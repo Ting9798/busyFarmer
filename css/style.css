@@ -1693,6 +1693,7 @@ img #hero .ornament .ornament-right-box .ornament-right:nth-child(10) {
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
+  padding: 200px 100px;
 }
 #philanthropyBanner .philanthropyBanner-tit .philanthropyBanner-tit-box h1 {
   font-family: "Noto Sans TC", "sans-serif";
