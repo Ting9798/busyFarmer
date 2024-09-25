@@ -3216,6 +3216,7 @@ optgroup label {
   justify-content: space-between;
   margin-bottom: 1.4vw;
   font-family: "GenSenRounded TW-L", sans-serif;
+  padding-left: 2em;
 }
 #product .product-part .product-part-text .titbox {
   font-family: "GenSenRounded TW-M", sans-serif;
