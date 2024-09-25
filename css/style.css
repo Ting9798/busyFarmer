@@ -3154,6 +3154,7 @@ optgroup label {
   display: grid;
   grid-template-rows: 70% 1fr 30%;
   width: 90%;
+  padding-right: 2em;
 }
 #product .product-tabs .product-tabs-window {
   grid-row: 1/2;
