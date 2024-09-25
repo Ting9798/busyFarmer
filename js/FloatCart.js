@@ -88,7 +88,6 @@ const FloatCart = forwardRef((props, ref) => {
 
     // 計算總金額
     const totalPrice = cart.reduce((total, item) => {
-        // 檢查discountPrice是否存在 不存在就用price
         const priceToUse = item.discountPrice || item.price;
         return total + priceToUse * item.quantity;
     }, 0);

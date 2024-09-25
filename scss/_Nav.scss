@@ -14,19 +14,25 @@
     .logo {
         width: 240px;
         height: 100%;
+        position: absolute;
+        left: 0;
+        top: -7%;
+        z-index: 1;
     }
 
     .nav-content {
         display: flex;
         flex: 1;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-start;
 
         .nav-links {
             display: flex;
             flex: 1;
             justify-content: flex-end;
             align-items: center;
+            position: relative;
+            top: 12px;
 
 
             li {
@@ -36,25 +42,24 @@
             &.brown a {
                 color: map-get($color, text);
                 transition: 0.35s ease-in-out all;
+                border-bottom: 5px dashed transparent;
 
                 &:hover {
-                    font-size: 20px;
                     border-bottom: 5px dashed map-get($color, text);
-                    transform: scale(1.1);
+                    scale: 1.1;
                 }
             }
 
             &.green a {
                 color: map-get($color, white);
                 transition: 0.35s ease-in-out all;
-                transform: scale(1.1);
+                border-bottom: 5px dashed transparent;
 
                 &:hover {
-                    font-size: 20px;
                     border-bottom: 5px dashed map-get($color, primaryO);
+                    scale: 1.1;
                 }
             }
-
         }
 
         .shopping-btn-box {
@@ -70,6 +75,8 @@
                 flex-shrink: 0;
                 margin-left: 20px;
                 transition: all .35s forwards;
+                position: relative;
+                top: 0;
 
                 &:hover {
                     img {
@@ -85,6 +92,7 @@
                     color: map-get($color, white);
                     display: flex;
                     align-items: center;
+                    line-height: 1.2;
 
                     img {
                         width: 54px;
@@ -105,7 +113,7 @@
 }
 
 .whiteTopbar {
-    background: $gradient-w;
+    background: transparent;
 }
 
 .greenTopbar {
